@@ -22,7 +22,10 @@ const Navbar = () => {
     </div>
       <nav className='w-full fixed px-5 lg:px-8 xl:px-[8%] py-4 flex items-center justify-between z-50'>
         <a href="#top">
-          <Image src={assets.logo} alt='logo' className='w-28 cursor-pointer mr-14'/>
+          {/* <Image src={assets.logo} alt='logo' className='w-28 cursor-pointer mr-14'/> */}
+          <p className='text-3xl font-bold tracking-wide text-black hover:opacity-80 transition cursor-pointer'>
+            Reymar<span className='text-primary'>.</span>
+          </p>
         </a>
         
         <ul className='hidden md:flex items-center gap-6 lg:gap-8 rounded-full px-12 py-3 bg-white shadow-sm bg-opacity-50'> 
