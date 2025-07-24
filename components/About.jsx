@@ -21,7 +21,7 @@ const About = () => {
           <ul className='grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl'>
             {infoList.map(({ icon, iconDark, title, description }) => (
               // bg-lightHover & hover:shadow-black isnt working
-              <li className='border-[0.5px] border-gray-400 rounded-xl p-6 cursor-pointer hover:bg-lightHover hover:-translate-y-1 duration-500 hover:shadow-black'
+              <li className='border-[0.5px] border-gray-400 rounded-xl p-6 cursor-pointer hover:lightHover hover:-translate-y-1 duration-500 hover:shadow-black'
               key={title}>
                 <Image src={icon} alt={`${title} icon`} className='w-7 mt-3' />
                 <h3>{title}</h3>

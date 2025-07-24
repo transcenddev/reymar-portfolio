@@ -2,10 +2,61 @@
 
 * {}
 
-.font-Ovo {
-  font-family: 'Ovo', sans-serif;
+/* Theme Extensions */
+@layer theme {
+  :root {
+    --color-lightHover: #fcf4ff;
+    --color-darkHover: #2a004a;
+    --color-darkTheme: #11001f;
+
+    --font-Outfit: 'Outfit', sans-serif;
+    --font-Ovo: 'Ovo', serif;
+
+    --shadow-black: 4px 4px 0 #000;
+    --shadow-white: 4px 4px 0 #fff;
+  }
 }
 
-.font-Outfit {
-  font-family: 'Outfit', sans-serif;
+/* Utility Extensions */
+@layer utilities {
+  .font-Outfit {
+    font-family: var(--font-Outfit);
+  }
+
+  .font-Ovo {
+    font-family: var(--font-Ovo);
+  }
+
+  /* Hover variants */
+  .hover\:lightHover:hover {
+    background-color: var(--color-lightHover);
+  }
+
+  .hover\:darkHover:hover {
+    background-color: var(--color-darkHover);
+  }
+
+  .darkTheme {
+    background-color: var(--color-darkTheme);
+  }
+
+  .shadow-black {
+    box-shadow: var(--shadow-black);
+  }
+
+  .hover\:shadow-black:hover {
+    box-shadow: var(--shadow-black);
+  }
+
+  .shadow-white {
+    box-shadow: var(--shadow-white);
+  }
+
+  .hover\:shadow-white:hover {
+    box-shadow: var(--shadow-white);
+  }
+
+  .grid-cols-auto {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
 }
