@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.section {
+  @apply py-24 md:py-32 lg:py-40;
+}
+
+.line {
+  @apply overflow-hidden;
+}
+
+.word {
+  @apply translate-y-full;
+}
+
+/* .word {
+  @apply inline-block translate-y-full opacity-0;
+} */
