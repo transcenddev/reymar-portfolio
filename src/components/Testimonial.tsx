@@ -40,17 +40,34 @@ const Testimonial = (
 
   useEffect(() => {
     if (isPresent) {
-      const quotePromise = quoteEntranceAnimation?.() || Promise.resolve();
-      quotePromise.then(() => {
-        citeEntranceAnimation?.();
-      });
+      // Handle entrance animations
+      const animate = async () => {
+        try {
+          if (quoteEntranceAnimation) {
+            await quoteEntranceAnimation();
+            if (citeEntranceAnimation) {
+              await citeEntranceAnimation();
+            }
+          }
+        } catch (error) {
+          console.error("Entrance animation error:", error);
+        }
+      };
+      animate();
     } else {
-      Promise.all([
-        quoteExitAnimation?.() || Promise.resolve(),
-        citeExitAnimation?.() || Promise.resolve(),
-      ]).then(() => {
-        safeToRemove();
-      });
+      // Handle exit animations
+      const animate = async () => {
+        try {
+          await Promise.all([
+            quoteExitAnimation?.() || Promise.resolve(),
+            citeExitAnimation?.() || Promise.resolve(),
+          ]);
+          safeToRemove?.();
+        } catch (error) {
+          console.error("Exit animation error:", error);
+        }
+      };
+      animate();
     }
   }, [
     isPresent,
