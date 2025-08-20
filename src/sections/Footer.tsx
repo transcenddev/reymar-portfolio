@@ -68,7 +68,7 @@ const Footer: FC = () => {
               >
                 Enough talk. Let&apos;s make something great together.
               </h2>
-              <div className="flex flex-col lg:flex-row gap-4 ">
+              <div className="flex flex-col lg:flex-row gap-4">
                 <a
                   href="mailto:2049rare@gmail.com"
                   className="w-full lg:w-auto"
@@ -117,7 +117,7 @@ const Footer: FC = () => {
                 <div className="w-full lg:w-auto">
                   <Button
                     variant="secondary"
-                    className="mt-4"
+                    className="mt-8"
                     onClick={() =>
                       window.open(
                         "https://calendly.com/2049rare/30min",
