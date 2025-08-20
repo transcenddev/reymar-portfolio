@@ -1,6 +1,7 @@
 "use client";
 import Button from "@/components/Button";
 import { FC, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, useAnimate } from "motion/react";
 // import { a, div, nav } from "motion/react-client";
 
@@ -33,6 +34,7 @@ const Header: FC = () => {
   const [topLineScope, topLineAnimate] = useAnimate();
   const [bottomLineScope, bottomLineAnimate] = useAnimate();
   const [navScope, navAnimate] = useAnimate();
+  const router = useRouter();
 
   useEffect(() => {
     if (isOpen) {
@@ -117,22 +119,35 @@ const Header: FC = () => {
     navAnimate,
     navScope,
   ]);
-  const handleClickMobileNavItem = (e: MouseEvent<HTMLAnchorElement>) => {
+
+  const navigateToHash = (hash: string) => {
+    if (!hash) return;
+    const target = typeof document !== "undefined" ? document.querySelector(hash) : null;
+    if (target) {
+      (target as HTMLElement).scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+    router.push(`/${hash}`);
+  };
+
+  const handleClickMobileNavItem = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     setIsOpen(false);
-
     const url = new URL(e.currentTarget.href);
     const hash = url.hash;
-
-    const target = document.querySelector(hash);
-
-    if (!target) return;
-    target.scrollIntoView({ behavior: "smooth" });
-
-    // console.log(hash);
+    navigateToHash(hash);
   };
+
+  const handleClickDesktopNavItem = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const url = new URL(e.currentTarget.href);
+    const hash = url.hash;
+    navigateToHash(hash);
+  };
+
   return (
     <header className="">
+      {/* Mobile Navigation Overlay */}
       <div
         className="fixed top-0 left-0 w-full h-0 overflow-hidden bg-stone-900 z-10"
         ref={navScope}
@@ -169,6 +184,8 @@ const Header: FC = () => {
           ))}
         </nav>
       </div>
+
+      {/* Main Header */}
       <div className="fixed top-0 left-0 w-full mix-blend-difference backdrop-blur-md z-10">
         <div className="container !max-w-full">
           <div className="flex justify-between h-20 items-center">

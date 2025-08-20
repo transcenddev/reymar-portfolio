@@ -22,6 +22,7 @@ const config: Config = {
         },
       },
       colors: {
+        primary: "#5928e5",
         "red-orange": {
           500: 'color-mix(in srgb, theme("colors.red.500") 50%, theme("colors.orange.500") 50%)', // Add dark mode colors
           dark: {

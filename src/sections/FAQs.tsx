@@ -7,26 +7,37 @@ import { twMerge } from "tailwind-merge";
 /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 const faqs = [
   {
-    question: "How long does it take to build a website?",
+    question: "How long does it take to design and develop a website?",
     answer:
-      "It depends on the complexity of the website and the scope of the project.",
+      "Timelines vary depending on complexity, but most projects range from 2 to 6 weeks. I focus on creating clean, functional, and responsive websites that align with your brand and goals."
   },
   {
-    question: "What is your development process like?",
+    question: "Do you also handle content creation and video editing?",
     answer:
-      "I follow a hands-on approach starting with project planning, building out the core features, and regular check-ins to make sure everything matches your needs.",
+      "Yes — I provide full content support including short-form videos, branded edits, and visuals optimized for social platforms, ensuring your website and marketing campaigns have engaging media."
+  },
+  {
+    question: "Can you help with brand design and graphics?",
+    answer:
+      "Absolutely. I create cohesive brand identities including logos, style guides, and marketing assets so your online presence looks professional and consistent."
+  },
+  {
+    question: "Do you offer digital marketing and personal branding?",
+    answer:
+      "Yes. I help individuals and businesses build their online presence through strategy, storytelling, and optimized content distribution to grow their audience and authority."
+  },
+  {
+    question: "How do you use AI and automation in your work?",
+    answer:
+      "I integrate AI tools and workflow automations to save time, improve efficiency, and enhance creative output — from content generation to task automation."
   },
   {
     question: "Do you work with international clients?",
     answer:
-      "Yes, I work with clients globally and can accommodate different time zones for meetings and communication.",
-  },
-  {
-    question: "What industries do you specialize in?",
-    answer:
-      "I have experience across various industries including technology, retail, hospitality, and professional services, bringing fresh perspectives to each project.",
-  },
+      "Yes, I work with clients worldwide and can adapt to different time zones for smooth communication and collaboration."
+  }
 ];
+
 
 const FAQs: FC = () => {
   const [selectedIndex, setSelectIndex] = useState<number | null>(null);

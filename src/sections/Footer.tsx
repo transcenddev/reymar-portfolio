@@ -68,10 +68,55 @@ const Footer: FC = () => {
               >
                 Enough talk. Let&apos;s make something great together.
               </h2>
-              <a href="mailto:2049rare@gmail.com">
+              <div className="flex gap-4">
+                <a href="mailto:2049rare@gmail.com">
+                  <Button
+                    variant="secondary"
+                    className="mt-8"
+                    iconAfter={
+                      <div className="size-6 overflow-hidden">
+                        <div className="w-12 h-6 flex transition-all duration-300 group-hover/button:-translate-x-1/2">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className="size-6"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
+                            />
+                          </svg>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className="size-6"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    }
+                  >
+                    2049rare@gmail.com
+                  </Button>
+                </a>
                 <Button
                   variant="secondary"
                   className="mt-8"
+                  onClick={() =>
+                    window.open("https://calendly.com/2049rare/30min", "_blank")
+                  }
                   iconAfter={
                     <div className="size-6 overflow-hidden">
                       <div className="w-12 h-6 flex transition-all duration-300 group-hover/button:-translate-x-1/2">
@@ -86,7 +131,7 @@ const Footer: FC = () => {
                           <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
+                            d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
                           />
                         </svg>
                         <svg
@@ -100,16 +145,16 @@ const Footer: FC = () => {
                           <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
+                            d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
                           />
                         </svg>
                       </div>
                     </div>
                   }
                 >
-                  2049rare@gmail.com
+                  Book a call
                 </Button>
-              </a>
+              </div>
             </div>
             <div>
               <nav className="flex flex-col md:items-end gap-8 mt-16 md:mt-0">
@@ -124,9 +169,10 @@ const Footer: FC = () => {
             </div>
           </div>
         </div>
-        <p className="py-16 text-white/30 text-sm">
-          Copyright &copy; Reymar Mirante &bull; All rights reserved
-        </p>
+        <div className="py-16 text-white/30 text-sm flex flex-col gap-2">
+          <p>Reymar Mirante - &copy; 2025</p>
+          <p>Built with code, creativity, and way too much coffee</p>
+        </div>
       </div>
     </footer>
   );

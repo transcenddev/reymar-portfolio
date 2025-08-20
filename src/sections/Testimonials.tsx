@@ -81,7 +81,7 @@ const Testimonials: FC = () => {
           Some nice words from my past clients
         </motion.span>
         <motion.span
-          className="whitespace-nowrap self-end text-red-orange-500"
+          className="whitespace-nowrap self-end text-primary"
           style={{
             x: transformBottom,
           }}

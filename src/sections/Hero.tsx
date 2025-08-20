@@ -41,14 +41,24 @@ const Hero: FC = () => {
         <div className="md:col-span-7 flex flex-col justify-center">
           <div className="container !max-w-full">
             <motion.h1
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-5xl md:text-6xl lg:text-7xl mt-40 md:mt-0 "
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-5xl md:text-6xl lg:text-7xl mt-40 md:mt-0 mb-4"
               ref={scope}
             >
-              Crafting digital experiences through code and creative design
+              Hi, I'm Reymar — multidisciplinary software engineer.
             </motion.h1>
-            <div className="flex flex-col md:flex-row md:items-center mt-10 items-start gap-6">
+            {/* <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg font-semibold text-gray-600 mt-4 md:mt-0"
+              ref={scope}
+            >
+            I help people through strategic digital solutions — building websites that convert, content that engages, brands that resonate, and AI automation that optimizes processes, saves time & reduces costs.
+            </motion.p> */}
+            <div className="flex flex-row items-center mt-10 gap-6">
               <motion.div
                 initial={{ opacity: 0, y: "100%" }}
                 animate={{ opacity: 1, y: "0%" }}
@@ -101,7 +111,20 @@ const Hero: FC = () => {
                 animate={{ opacity: 1, y: "0%" }}
                 transition={{ duration: 0.5, delay: 2.2 }}
               >
-                <Button variant="text">Let&apos;s Talk</Button>
+                {/* <Button variant="text">Let&apos;s Talk</Button> */}
+                <a
+                  href="https://calendly.com/2049rare/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block"
+                >
+                  <Button
+                    variant="text"
+                    className="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:[background-color:#5928e5] after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100"
+                  >
+                    Let&apos;s Talk
+                  </Button>
+                </a>
               </motion.div>
             </div>
           </div>

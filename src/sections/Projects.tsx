@@ -1,30 +1,39 @@
+"use client";
+
 import { FC } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import image1 from "@/assets/images/project-1.jpg";
 import image2 from "@/assets/images/project-2.jpg";
 import image3 from "@/assets/images/project-3.jpg";
 import image4 from "@/assets/images/project-4.jpg";
 import image5 from "@/assets/images/project-5.jpg";
+import ProjectDetail from "@/components/ProjectDetail";
 
 /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 const projects = [
   {
+    id: "artisan-brew-co",
     name: "Artisan Brew Co.",
     image: image1,
   },
   {
+    id: "wavelength-studios",
     name: "Wavelength Studios",
     image: image2,
   },
   {
+    id: "nova-fitness",
     name: "Nova Fitness",
     image: image3,
   },
   {
+    id: "urban-plates",
     name: "Urban Plates",
     image: image4,
   },
   {
+    id: "bloom-botanicals",
     name: "Bloom Botanicals",
     image: image5,
   },
@@ -35,11 +44,11 @@ const Projects: FC = () => {
       <div className="container">
         <h2 className="text-4xl md:text-7xl lg:text-8xl">Selected Works</h2>
         <div className="mt-10 md:mt-16 lg:mt-20">
-          {projects.map(({ name, image }) => (
-            <a
-              href="#"
+          {projects.map(({ id, name, image }) => (
+            <Link
+              href={`/projects/${id}`}
               key={name}
-              className="border-t last:border-b border-stone-400 border-dotted py-6 md:py-8 lg:py-10 flex flex-col relative group/project"
+              className="text-left border-t last:border-b border-stone-400 border-dotted py-6 md:py-8 lg:py-10 flex flex-col relative group/project w-full"
             >
               <div className="absolute bottom-0 left-0 w-full h-0 group-hover/project:h-full transition-all duration-700 bg-stone-300"></div>
               <div className="relative">
@@ -102,7 +111,7 @@ transition-all duration-500 z-10"
                   </div>
                 </div>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
