@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { HTMLAttributes, useEffect } from "react";
 import { twMerge } from "tailwind-merge";
 import { usePresence, motion } from "motion/react";
@@ -11,7 +11,7 @@ const Testimonial = (
     role: string;
     company: string;
     imagePositionY: number;
-    image: string | StaticImport;
+    image: string | StaticImageData;
     className?: string;
   } & HTMLAttributes<HTMLDivElement>
 ) => {
@@ -40,11 +40,14 @@ const Testimonial = (
 
   useEffect(() => {
     if (isPresent) {
-      quoteEntranceAnimation().then(() => {
-        citeEntranceAnimation();
+      quoteEntranceAnimation?.().then(() => {
+        citeEntranceAnimation?.();
       });
     } else {
-      Promise.all([quoteExitAnimation(), citeExitAnimation()]).then(() => {
+      Promise.all([
+        quoteExitAnimation?.() || Promise.resolve(),
+        citeExitAnimation?.() || Promise.resolve()
+      ]).then(() => {
         safeToRemove();
       });
     }
