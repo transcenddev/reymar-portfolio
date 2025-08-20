@@ -4,7 +4,8 @@ import { FC, useEffect, useRef } from "react";
 import heroImage from "@/assets/images/hero-image.jpg";
 import Image from "next/image";
 import Button from "@/components/Button";
-import { motion, useTransform, useScroll, MouseEvent } from "motion/react";
+import { motion, useTransform, useScroll } from "motion/react";
+import type { MouseEvent } from "react";
 import useTextRevealAnimation from "@/hooks/useTextRevealAnimation";
 
 const Hero: FC = () => {
