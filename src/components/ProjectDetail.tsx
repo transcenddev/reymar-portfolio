@@ -1,6 +1,7 @@
 "use client";
 
 import React, { FC, useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import Button from "@/components/Button";
 
 type ProjectData = {
@@ -21,7 +22,11 @@ type ProjectDetailProps = {
   onBack: () => void;
 };
 
-const ProjectDetail: FC<ProjectDetailProps> = ({ project, onProjectChange, onBack }) => {
+const ProjectDetail: FC<ProjectDetailProps> = ({
+  project,
+  onProjectChange,
+  onBack,
+}) => {
   const [isSwitching, setIsSwitching] = useState(false);
 
   const safeImages = useMemo(() => {
@@ -51,7 +56,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({ project, onProjectChange, onBac
     if (isSwitching) {
       setIsSwitching(false);
     }
-  }, [project.id]);
+  }, [project.id, isSwitching]);
 
   const handleRelatedClick = (projectId: string) => {
     setIsSwitching(true);
@@ -68,15 +73,15 @@ const ProjectDetail: FC<ProjectDetailProps> = ({ project, onProjectChange, onBac
             {project.description}
           </p>
           <div className="mt-8">
-            <Button
-              asChild
-              variant="primary"
-              className="md:inline-flex"
+            <a
+              href={project.liveUrl || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <a href={project.liveUrl || "#"} target="_blank" rel="noopener noreferrer">
+              <Button variant="primary" className="md:inline-flex">
                 Live project
-              </a>
-            </Button>
+              </Button>
+            </a>
           </div>
         </div>
 
@@ -106,10 +111,11 @@ const ProjectDetail: FC<ProjectDetailProps> = ({ project, onProjectChange, onBac
                 className="relative w-full aspect-[4/3] bg-stone-300 overflow-hidden"
               >
                 {imgSrc ? (
-                  <img
+                  <Image
                     src={imgSrc}
                     alt={`${project.title} image ${index + 1}`}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="object-cover"
+                    fill
                   />
                 ) : null}
               </div>
@@ -119,11 +125,15 @@ const ProjectDetail: FC<ProjectDetailProps> = ({ project, onProjectChange, onBac
 
         {/* Recent projects (masonry) */}
         <div className="mt-16 md:mt-24">
-          <h3 className="text-3xl md:text-5xl max-w-3xl">Check out some of my recent projects</h3>
+          <h3 className="text-3xl md:text-5xl max-w-3xl">
+            Check out some of my recent projects
+          </h3>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
             {masonryItems.map((id, idx) => {
-              const tone = ["bg-stone-300", "bg-stone-200", "bg-stone-400"][idx % 3];
+              const tone = ["bg-stone-300", "bg-stone-200", "bg-stone-400"][
+                idx % 3
+              ];
               return (
                 <button
                   key={`${id}-${idx}`}
@@ -131,7 +141,9 @@ const ProjectDetail: FC<ProjectDetailProps> = ({ project, onProjectChange, onBac
                   className={`relative w-full ${tone} aspect-[4/3] transition-all duration-300 hover:brightness-95`}
                   aria-label={`Open ${id}`}
                 >
-                  <span className="absolute bottom-2 left-2 text-xs text-stone-700/80">{id}</span>
+                  <span className="absolute bottom-2 left-2 text-xs text-stone-700/80">
+                    {id}
+                  </span>
                 </button>
               );
             })}
@@ -141,7 +153,9 @@ const ProjectDetail: FC<ProjectDetailProps> = ({ project, onProjectChange, onBac
           {bottomRowItems.length > 0 && (
             <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
               {bottomRowItems.map((id, idx) => {
-                const tone = ["bg-stone-300", "bg-stone-200", "bg-stone-400"][idx % 3];
+                const tone = ["bg-stone-300", "bg-stone-200", "bg-stone-400"][
+                  idx % 3
+                ];
                 return (
                   <button
                     key={`${id}-bottom-${idx}`}
@@ -149,7 +163,9 @@ const ProjectDetail: FC<ProjectDetailProps> = ({ project, onProjectChange, onBac
                     className={`relative w-full ${tone} aspect-[4/3] transition-all duration-300 hover:brightness-95`}
                     aria-label={`Open ${id}`}
                   >
-                    <span className="absolute bottom-2 left-2 text-xs text-stone-700/80">{id}</span>
+                    <span className="absolute bottom-2 left-2 text-xs text-stone-700/80">
+                      {id}
+                    </span>
                   </button>
                 );
               })}
@@ -176,5 +192,3 @@ const ProjectDetail: FC<ProjectDetailProps> = ({ project, onProjectChange, onBac
 };
 
 export default ProjectDetail;
-
-

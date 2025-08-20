@@ -122,7 +122,8 @@ const Header: FC = () => {
 
   const navigateToHash = (hash: string) => {
     if (!hash) return;
-    const target = typeof document !== "undefined" ? document.querySelector(hash) : null;
+    const target =
+      typeof document !== "undefined" ? document.querySelector(hash) : null;
     if (target) {
       (target as HTMLElement).scrollIntoView({ behavior: "smooth" });
       return;
@@ -133,13 +134,6 @@ const Header: FC = () => {
   const handleClickMobileNavItem = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     setIsOpen(false);
-    const url = new URL(e.currentTarget.href);
-    const hash = url.hash;
-    navigateToHash(hash);
-  };
-
-  const handleClickDesktopNavItem = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
     const url = new URL(e.currentTarget.href);
     const hash = url.hash;
     navigateToHash(hash);

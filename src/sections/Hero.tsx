@@ -47,7 +47,7 @@ const Hero: FC = () => {
               className="text-5xl md:text-6xl lg:text-7xl mt-40 md:mt-0 mb-4"
               ref={scope}
             >
-              Hi, I'm Reymar — multidisciplinary software engineer.
+              Hi, I&apos;m Reymar — multidisciplinary software engineer.
             </motion.h1>
             {/* <motion.p
               initial={{ opacity: 0, y: 20 }}
