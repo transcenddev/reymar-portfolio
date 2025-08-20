@@ -40,13 +40,14 @@ const Testimonial = (
 
   useEffect(() => {
     if (isPresent) {
-      quoteEntranceAnimation?.().then(() => {
+      const quotePromise = quoteEntranceAnimation?.() || Promise.resolve();
+      quotePromise.then(() => {
         citeEntranceAnimation?.();
       });
     } else {
       Promise.all([
         quoteExitAnimation?.() || Promise.resolve(),
-        citeExitAnimation?.() || Promise.resolve()
+        citeExitAnimation?.() || Promise.resolve(),
       ]).then(() => {
         safeToRemove();
       });
