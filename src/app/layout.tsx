@@ -10,8 +10,22 @@ const archivo = Archivo({
 });
 
 export const metadata: Metadata = {
-  title: "Reymar Portfolio",
-  description: "Created with Reymar",
+  title: "Reymar Mirante | Web Design, Content & AI",
+  description:
+    "Reymar Mirante's portfolio showcasing expertise in Web Design & Development, Content Creation & Video Editing, Graphic & Brand Design, Digital Marketing, Personal Branding, and AI & Automation.",
+  keywords: [
+    "Reymar Mirante",
+    "Web Design",
+    "Web Development",
+    "Content Creation",
+    "Video Editing",
+    "Graphic Design",
+    "Brand Design",
+    "Digital Marketing",
+    "Personal Branding",
+    "AI",
+    "Automation",
+  ],
 };
 
 export default function RootLayout({
