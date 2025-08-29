@@ -9,7 +9,7 @@ import { motion, useAnimate } from "motion/react";
 const navItems = [
   {
     label: "About",
-    href: "#intro",
+    href: "/about",
   },
   {
     label: "Selected Works",
@@ -120,23 +120,27 @@ const Header: FC = () => {
     navScope,
   ]);
 
-  const navigateToHash = (hash: string) => {
-    if (!hash) return;
-    const target =
-      typeof document !== "undefined" ? document.querySelector(hash) : null;
-    if (target) {
-      (target as HTMLElement).scrollIntoView({ behavior: "smooth" });
-      return;
+  const navigateToHashOrRoute = (href: string) => {
+    if (!href) return;
+    if (href.startsWith("#")) {
+      const target =
+        typeof document !== "undefined" ? document.querySelector(href) : null;
+      if (target) {
+        (target as HTMLElement).scrollIntoView({ behavior: "smooth" });
+        return;
+      }
+    } else if (href.startsWith("/")) {
+      router.push(href);
     }
-    router.push(`/${hash}`);
   };
 
-  const handleClickMobileNavItem = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleClickMobileNavItem = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
     e.preventDefault();
     setIsOpen(false);
-    const url = new URL(e.currentTarget.href);
-    const hash = url.hash;
-    navigateToHash(hash);
+    navigateToHashOrRoute(href);
   };
 
   return (
@@ -152,7 +156,7 @@ const Header: FC = () => {
               href={href}
               key={label}
               className="text-stone-200 border-t border-stone-800 last:border-b py-8 group/nav-item relative isolate"
-              onClick={handleClickMobileNavItem}
+              onClick={(e) => handleClickMobileNavItem(e, href)}
             >
               <div className="container !max-w-full flex items-center justify-between">
                 <span className="text-3xl group-hover/nav-item:pl-4 transition-all duration-500">
