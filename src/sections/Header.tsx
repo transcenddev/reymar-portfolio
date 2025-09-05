@@ -12,6 +12,10 @@ const navItems = [
     href: "/about",
   },
   {
+    label: "Play",
+    href: "/play",
+  },
+  {
     label: "Selected Works",
     href: "#projects",
   },
@@ -147,7 +151,7 @@ const Header: FC = () => {
     <header className="">
       {/* Mobile Navigation Overlay */}
       <div
-        className="fixed top-0 left-0 w-full h-0 overflow-hidden bg-stone-900 z-10"
+        className="fixed top-0 left-0 w-full h-0 overflow-hidden bg-stone-900 z-20"
         ref={navScope}
       >
         <nav className="mt-20 flex flex-col ">
@@ -177,14 +181,14 @@ const Header: FC = () => {
                   />
                 </svg>
               </div>
-              <div className="absolute w-full h-0 bg-stone-800 group-hover/nav-item:h-full transition-all duration-500 bottom-0 -z-10"></div>
+              <div className="absolute w-full h-0 bg-stone-800 group-hover/nav-item:h-full transition-all duration-500 bottom-0 -z-20"></div>
             </a>
           ))}
         </nav>
       </div>
 
       {/* Main Header */}
-      <div className="fixed top-0 left-0 w-full mix-blend-difference backdrop-blur-md z-10">
+      <div className="fixed top-0 left-0 w-full mix-blend-difference backdrop-blur-md z-20">
         <div className="container !max-w-full">
           <div className="flex justify-between h-20 items-center">
             <div>
@@ -199,7 +203,7 @@ const Header: FC = () => {
       </div>
 
       {/* Menu button */}
-      <div className="fixed top-0 left-0 w-full z-10">
+      <div className="fixed top-0 left-0 w-full z-20">
         <div className="container !max-w-full">
           <div className="flex justify-end h-20 items-center">
             <div className="flex items-center gap-4">

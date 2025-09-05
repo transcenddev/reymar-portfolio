@@ -8,144 +8,356 @@ import Footer from "@/sections/Footer";
 import Header from "@/sections/Header";
 
 // Hero Section
+// const HeroSection = () => (
+//   <AnimatedSection className="container mx-auto pt-16 pb-10 flex flex-col items-left">
+//     <figure
+//       className="w-full max-w-3xl h-56 md:h-72 bg-stone-300 rounded-xl mb-10 mt-20"
+//       aria-label="Portrait placeholder"
+//     />
+//     <h1
+//       className="text-left max-w-2xl mx-auto mb-6 font-serif text-black"
+//       style={{ fontSize: "clamp(2.2rem, 5vw, 3.2rem)", lineHeight: 1.15 }}
+//     >
+//       <span className="italic font-light">
+//         I&apos;m passionate about transforming complex problems into{" "}
+//         <span className="font-serif italic font-semibold">simple</span>{" "}
+//         solutions.
+//       </span>
+//     </h1>
+//     <div className="max-w-xl mx-auto text-base md:text-lg text-black/80 leading-relaxed text-left">
+//       <p>
+//         I&apos;m Reymar, a multidisciplinary Computer Science student at Cavite
+//         State University, blending design, code, and storytelling to craft
+//         digital experiences.
+//         <br />
+//         <br />
+//         I&apos;ve worked as a UI/UX & Low-Code Developer Intern at SP Madrid &
+//         Associates, designed and developed the Read AI website using Figma &
+//         Bubble.io, and collaborated with brands and entrepreneurs. I&apos;m
+//         actively building my portfolio in web development, AI, and content
+//         creation, and I&apos;m looking for opportunities to collaborate,
+//         freelance, and grow as a hybrid creative-developer.
+//         <br />
+//         <br />
+//         Outside work, I stay active, travel, and capture life through photos and
+//         videos while enjoying my{" "}
+//         <a href="#favourites" className="underline text-primary font-semibold">
+//           current favourites
+//         </a>
+//         .
+//       </p>
+//     </div>
+//   </AnimatedSection>
+// );
 const HeroSection = () => (
-  <AnimatedSection className="container mx-auto pt-16 pb-10 flex flex-col items-center">
-    <figure
-      className="w-full max-w-3xl h-56 md:h-72 bg-stone-300 rounded-xl mb-10"
-      aria-label="Portrait placeholder"
-    />
-    <h1
-      className="text-center max-w-2xl mx-auto mb-6 font-serif text-black"
-      style={{ fontSize: "clamp(2.2rem, 5vw, 3.2rem)", lineHeight: 1.15 }}
-    >
-      <span className="italic font-light">
-        I&apos;m passionate about transforming complex problems into{" "}
-        <span className="font-serif italic font-semibold">simple</span>{" "}
-        solutions.
-      </span>
-    </h1>
-    <div className="max-w-xl mx-auto text-base md:text-lg text-black/80 leading-relaxed text-center">
-      <p>
-        I&apos;m Reymar, a multidisciplinary Computer Science student at Cavite
-        State University, blending design, code, and storytelling to craft
-        digital experiences.
-        <br />
-        <br />
-        I&apos;ve worked as a UI/UX & Low-Code Developer Intern at SP Madrid &
-        Associates, designed and developed the Read AI website using Figma &
-        Bubble.io, and collaborated with brands and entrepreneurs. I&apos;m
-        actively building my portfolio in web development, AI, and content
-        creation, and I&apos;m looking for opportunities to collaborate,
-        freelance, and grow as a hybrid creative-developer.
-        <br />
-        <br />
-        Outside work, I stay active, travel, and capture life through photos and
-        videos while enjoying my{" "}
-        <a href="#favourites" className="underline text-primary font-semibold">
-          current favourites
-        </a>
-        .
-      </p>
+  <AnimatedSection className="container mx-auto pt-16 pb-16">
+    <div className="max-w-4xl mx-auto">
+      {/* Portrait - smaller and more integrated */}
+      <figure
+        className="w-32 h-32 md:w-40 md:h-40 bg-stone-300 rounded-full mb-12 mt-12"
+        aria-label="Portrait placeholder"
+      />
+
+      {/* Main headline with similar typography treatment */}
+      <h1 className="mb-12 font-serif text-black text-left">
+        <span
+          className="block text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-2"
+          style={{ letterSpacing: "-0.02em" }}
+        >
+          {/* <em className="font-serif italic">I</em>'m passionate about */}
+          I'm passionate about
+        </span>
+        <span
+          className="block text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-2"
+          style={{ letterSpacing: "-0.02em" }}
+        >
+          transforming complex problems
+        </span>
+        <span
+          className="block text-4xl md:text-5xl lg:text-6xl leading-tight"
+          style={{ letterSpacing: "-0.02em" }}
+        >
+          into <em className="font-serif italic">simple</em>{" "}
+          solutions.
+        </span>
+      </h1>
+
+      <div className="max-w-3xl text-base md:text-lg text-black/80 leading-relaxed text-left space-y-4">
+        <p>
+          I'm Reymar, a multidisciplinary Computer Science student at Cavite
+          State University, blending design, code, and storytelling to craft
+          digital experiences.
+        </p>
+
+        <p>
+          Currently building my portfolio in web design & development, AI,
+          automation and content creation while seeking opportunities to
+          collaborate and grow as a creative-developer. Outside work, I capture
+          life through photos and videos while enjoying my{" "}
+          <a
+            href="#favourites"
+            className="underline text-primary"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("favourites")?.scrollIntoView({
+                behavior: "smooth",
+              });
+            }}
+          >
+            current favourites
+          </a>
+          .
+        </p>
+      </div>
     </div>
   </AnimatedSection>
 );
 
-// Education & Experience Section
+// // Education & Experience Section
+// const EducationExperience = () => (
+//   <AnimatedSection className="container mx-auto pb-10" delay={0.1}>
+//     <div className="max-w-4xl mx-auto">
+//       {/* Education */}
+//       <div className="mb-10">
+//         <h2
+//           className="font-semibold text-black mb-6"
+//           style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)" }}
+//         >
+//           EDUCATION
+//         </h2>
+//         <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-2">
+//           <div>
+//             <div className="font-bold text-base md:text-lg">
+//               Cavite State University
+//             </div>
+//             <div className="text-base md:text-lg">
+//               Bachelor of Science in Computer Science
+//             </div>
+//             <ul className="list-disc ml-5 mt-2 text-black/80 text-sm md:text-base">
+//               <li>
+//                 I built a strong foundation in software development and
+//                 problem-solving, with a strategic mindset for tackling complex
+//                 challenges.
+//               </li>
+//               <li>
+//                 My coursework has given me a focus on exploring and implementing
+//                 emerging technologies in my projects.
+//               </li>
+//             </ul>
+//           </div>
+//           <div className="mt-2 md:mt-0 text-black/60 text-sm">
+//             Sept 2021 - Present
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Experience */}
+//       <div className="mb-10">
+//         <h2
+//           className="font-semibold text-black mb-6"
+//           style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)" }}
+//         >
+//           EXPERIENCE
+//         </h2>
+//         <div className="space-y-8">
+//           <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-2">
+//             <div>
+//               <div className="font-bold text-base md:text-lg">
+//                 Artificial Intelligence Specialist
+//               </div>
+//               <div className="text-base md:text-lg">
+//                 SP Madrid & Associates Law Firm
+//               </div>
+//               <ul className="list-disc ml-5 mt-2 text-black/80 text-sm md:text-base">
+//                 <li>
+//                   Led an AI-driven multimedia project that successfully
+//                   revitalized brand content and helped secure new partnerships.
+//                 </li>
+//                 <li>
+//                   Leveraged AI tools to enhance and animate images, creating a
+//                   dynamic visual presentation that demonstrated AI&apos;s
+//                   potential in storytelling and digital restoration.
+//                 </li>
+//                 <li>
+//                   Collaborated directly with the CEO and a cross-functional team
+//                   to deliver the project&apos;s vision.
+//                 </li>
+//               </ul>
+//             </div>
+//             <div className="mt-2 md:mt-0 text-black/60 text-sm">
+//               Jul 2024 - Sept 2024
+//             </div>
+//           </div>
+
+//           <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-2">
+//             <div>
+//               <div className="font-bold text-base md:text-lg">
+//                 UI/UX Designer & Low-Code Developer Intern
+//               </div>
+//               <div className="text-base md:text-lg">
+//                 SP Madrid & Associates Law Firm
+//               </div>
+//               <ul className="list-disc ml-5 mt-2 text-black/80 text-sm md:text-base">
+//                 <li>
+//                   Designed and developed the Read AI website using Figma and
+//                   Bubble.io, focusing on a user-centered interface.
+//                 </li>
+//                 <li>
+//                   Conducted user research and collaborated on key features to
+//                   ensure an intuitive user experience.
+//                 </li>
+//               </ul>
+//             </div>
+//             <div className="mt-2 md:mt-0 text-black/60 text-sm">
+//               Jul 2024 - Aug 2024
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   </AnimatedSection>
+// );
+
+// // Community & Leadership Section
+// const CommunityLeadership = () => (
+//   <AnimatedSection className="container mx-auto pb-10" delay={0.15}>
+//     <div className="max-w-4xl mx-auto">
+//       <h2
+//         className="font-semibold text-black mb-6"
+//         style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)" }}
+//       >
+//         COMMUNITY & LEADERSHIP
+//       </h2>
+//       <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-2">
+//         <div>
+//           <div className="font-bold text-base md:text-lg">Staff Member</div>
+//           <div className="text-base md:text-lg">Arc Community</div>
+//           <ul className="list-disc ml-5 mt-2 text-black/80 text-sm md:text-base">
+//             <li>
+//               Drove community engagement by facilitating meetups and fostering
+//               connections among like-minded individuals.{" "}
+//               <a
+//                 href="https://www.instagram.com/2049rae/reel/DMcbSU7zbby/?hl=en"
+//                 className="underline text-primary"
+//                 target="_blank"
+//                 rel="noopener noreferrer"
+//               >
+//                 See a video of our latest meetup here.
+//               </a>
+//             </li>
+//             <li>
+//               Managed and resolved community issues, ensuring a safe and
+//               productive environment for all participants.
+//             </li>
+//             <li>
+//               Developed and enforced community guidelines, demonstrating a
+//               proactive approach to governance and safety.
+//             </li>
+//           </ul>
+//         </div>
+//         <div className="mt-2 md:mt-0 text-black/60 text-sm">
+//           Dec 2024 - Present
+//         </div>
+//       </div>
+//     </div>
+//   </AnimatedSection>
+// );
+
 const EducationExperience = () => (
-  <AnimatedSection className="container mx-auto pb-10" delay={0.1}>
+  <AnimatedSection className="container mx-auto px-4 pb-16" delay={0.1}>
     <div className="max-w-4xl mx-auto">
       {/* Education */}
-      <div className="mb-10">
+      <div className="mb-20">
         <h2
-          className="font-semibold text-black mb-6"
-          style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)" }}
+          className="font-normal text-black mb-12 uppercase tracking-wide"
+          style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
         >
           EDUCATION
         </h2>
-        <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-2">
+        <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-6">
           <div>
-            <div className="font-bold text-base md:text-lg">
+            <div className="text-2xl md:text-3xl font-serif italic text-black mb-3">
               Cavite State University
             </div>
-            <div className="text-base md:text-lg">
+            <div className="text-base md:text-lg text-black/70">
               Bachelor of Science in Computer Science
             </div>
-            <ul className="list-disc ml-5 mt-2 text-black/80 text-sm md:text-base">
-              <li>
+            <div className="text-sm md:text-base text-black/60 leading-relaxed space-y-4">
+              <p>
                 I built a strong foundation in software development and
                 problem-solving, with a strategic mindset for tackling complex
                 challenges.
-              </li>
-              <li>
+              </p>
+              <p>
                 My coursework has given me a focus on exploring and implementing
                 emerging technologies in my projects.
-              </li>
-            </ul>
+              </p>
+            </div>
           </div>
-          <div className="mt-2 md:mt-0 text-black/60 text-sm">
+          <div className="text-black/60 text-sm md:text-base">
             Sept 2021 - Present
           </div>
         </div>
       </div>
 
       {/* Experience */}
-      <div className="mb-10">
+      <div className="mb-0">
         <h2
-          className="font-semibold text-black mb-6"
-          style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)" }}
+          className="font-normal text-black mb-12 uppercase tracking-wide"
+          style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
         >
           EXPERIENCE
         </h2>
-        <div className="space-y-8">
-          <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-2">
+        <div className="space-y-16">
+          <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-6">
             <div>
-              <div className="font-bold text-base md:text-lg">
-                Artificial Intelligence Specialist
-              </div>
-              <div className="text-base md:text-lg">
+              <div className="text-2xl md:text-3xl font-serif italic text-black mb-3">
                 SP Madrid & Associates Law Firm
               </div>
-              <ul className="list-disc ml-5 mt-2 text-black/80 text-sm md:text-base">
-                <li>
+              <div className="text-base md:text-lg text-black/70 mb-4">
+                Artificial Intelligence Specialist
+              </div>
+              <div className="text-sm md:text-base text-black/60 leading-relaxed space-y-4">
+                <p>
                   Led an AI-driven multimedia project that successfully
                   revitalized brand content and helped secure new partnerships.
-                </li>
-                <li>
+                </p>
+                <p>
                   Leveraged AI tools to enhance and animate images, creating a
-                  dynamic visual presentation that demonstrated AI&apos;s
-                  potential in storytelling and digital restoration.
-                </li>
-                <li>
+                  dynamic visual presentation that demonstrated AI's potential
+                  in storytelling and digital restoration.
+                </p>
+                <p>
                   Collaborated directly with the CEO and a cross-functional team
-                  to deliver the project&apos;s vision.
-                </li>
-              </ul>
+                  to deliver the project's vision.
+                </p>
+              </div>
             </div>
-            <div className="mt-2 md:mt-0 text-black/60 text-sm">
+            <div className="text-black/60 text-sm md:text-base">
               Jul 2024 - Sept 2024
             </div>
           </div>
 
-          <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-2">
+          <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-6">
             <div>
-              <div className="font-bold text-base md:text-lg">
-                UI/UX Designer & Low-Code Developer Intern
-              </div>
-              <div className="text-base md:text-lg">
+              <div className="text-2xl md:text-3xl font-serif italic text-black mb-3">
                 SP Madrid & Associates Law Firm
               </div>
-              <ul className="list-disc ml-5 mt-2 text-black/80 text-sm md:text-base">
-                <li>
+              <div className="text-base md:text-lg text-black/70 mb-4">
+                UI/UX Designer & Low-Code Developer Intern
+              </div>
+              <div className="text-sm md:text-base text-black/60 leading-relaxed space-y-4">
+                <p>
                   Designed and developed the Read AI website using Figma and
                   Bubble.io, focusing on a user-centered interface.
-                </li>
-                <li>
+                </p>
+                <p>
                   Conducted user research and collaborated on key features to
                   ensure an intuitive user experience.
-                </li>
-              </ul>
+                </p>
+              </div>
             </div>
-            <div className="mt-2 md:mt-0 text-black/60 text-sm">
+            <div className="text-black/60 text-sm md:text-base">
               Jul 2024 - Aug 2024
             </div>
           </div>
@@ -157,42 +369,46 @@ const EducationExperience = () => (
 
 // Community & Leadership Section
 const CommunityLeadership = () => (
-  <AnimatedSection className="container mx-auto pb-10" delay={0.15}>
+  <AnimatedSection className="container mx-auto px-4 pb-16" delay={0.15}>
     <div className="max-w-4xl mx-auto">
       <h2
-        className="font-semibold text-black mb-6"
-        style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)" }}
+        className="font-normal text-black mb-12 uppercase tracking-wide"
+        style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
       >
         COMMUNITY & LEADERSHIP
       </h2>
-      <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-2">
+      <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-6">
         <div>
-          <div className="font-bold text-base md:text-lg">Staff Member</div>
-          <div className="text-base md:text-lg">Arc Community</div>
-          <ul className="list-disc ml-5 mt-2 text-black/80 text-sm md:text-base">
-            <li>
+          <div className="text-2xl md:text-3xl font-serif italic text-black mb-3">
+            Arc Community
+          </div>
+          <div className="text-base md:text-lg text-black/70 mb-4">
+            Staff Member
+          </div>
+          <div className="text-sm md:text-base text-black/60 leading-relaxed space-y-4">
+            <p>
               Drove community engagement by facilitating meetups and fostering
               connections among like-minded individuals.{" "}
               <a
                 href="https://www.instagram.com/2049rae/reel/DMcbSU7zbby/?hl=en"
-                className="underline"
+                className="underline text-primary hover:text-primary/80 transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 See a video of our latest meetup here.
               </a>
-            </li>
-            <li>
+            </p>
+            <p>
               Managed and resolved community issues, ensuring a safe and
               productive environment for all participants.
-            </li>
-            <li>
+            </p>
+            <p>
               Developed and enforced community guidelines, demonstrating a
               proactive approach to governance and safety.
-            </li>
-          </ul>
+            </p>
+          </div>
         </div>
-        <div className="mt-2 md:mt-0 text-black/60 text-sm">
+        <div className="text-black/60 text-sm md:text-base">
           Dec 2024 - Present
         </div>
       </div>
@@ -200,7 +416,6 @@ const CommunityLeadership = () => (
   </AnimatedSection>
 );
 
-// Favourites Section
 const Favourites = () => (
   <AnimatedSection
     className="container mx-auto pb-10"
@@ -209,43 +424,78 @@ const Favourites = () => (
   >
     <div className="max-w-2xl mx-auto mb-10">
       <h2
-        className="text-black font-normal mb-4"
+        className="text-black font-normal mb-6"
         style={{ fontSize: "clamp(2rem, 5vw, 3rem)" }}
       >
-        My current favourites
+        My current <em className="font-serif italic">favourites</em>
       </h2>
-      <p className="text-base md:text-lg text-black/80 mb-4">
-        When I&apos;m not working, you&apos;ll usually find me capturing moments
-        through photography and videography. I stay active with running,
-        calisthenics, and martial arts, but I also enjoy unwinding with a good
-        book, sunset, manhwa, anime, or movies. I love exploring new places
-        through travel. Here are some of my favorites:
+      <p className="text-base md:text-lg text-black/80 mb-8">
+        When I'm not coding or designing, you can catch me at a local coffee
+        shop with my camera, binge-watching anime until 3am, or perfecting my
+        handstand form. Here's what's currently on rotation:
       </p>
-      <div className="font-bold text-base text-black mb-4 leading-relaxed space-y-2">
+
+      <div className="space-y-4 text-base md:text-lg leading-relaxed">
         <div>
-          <span className="font-bold">Books:</span> Atomic Habits, Meditations,
-          Think and Grow Rich, The Way of the Superior Man, How to Win Friends
-          and Influence People
+          <span className="font-semibold text-black">Book:</span>
+          <span className="text-black/80">
+            {" "}
+            Atomic Habits, Meditations, Think and Grow Rich, The Way of the
+            Superior Man, How to Win Friends and Influence People
+          </span>
         </div>
+
         <div>
-          <span className="font-bold">Manhwa:</span> Solo Leveling, Lord of the
-          Mysteries, Tower of God, The God of High School
+          <span className="font-semibold text-black">Manhwa:</span>
+          <span className="text-black/80">
+            {" "}
+            Solo Leveling, Tower of God, The God of High
+            School
+          </span>
         </div>
+
         <div>
-          <span className="font-bold">Movies:</span> Blade Runner, The Matrix,
-          Fight Club, Dune, The Batman, American Assassin
+          <span className="font-semibold text-black">Movie:</span>
+          <span className="text-black/80">
+            {" "}
+            Blade Runner, The Matrix, Fight Club, Dune, The Batman, American
+            Assassin
+          </span>
         </div>
+
         <div>
-          <span className="font-bold">Shows:</span> Dark, Black Mirror, Breaking
-          Bad, Attack on Titan, Jujutsu Kaisen, Chainsaw Man
+          <span className="font-semibold text-black">TV Shows:</span>
+          <span className="text-black/80">
+            {" "}
+            Dark, Black Mirror, Breaking Bad, You, The 100, Attack on Titan,
+            Jujutsu Kaisen, Chainsaw Man, Lord of the Mysteries
+          </span>
         </div>
+
         <div>
-          <span className="font-bold">Clothing:</span> Gustavo, Wisdom Kaye,
-          Daniel Simmons, Giafratte, Jevon Henley
+          <span className="font-semibold text-black">Music:</span>
+          <span className="text-black/80">
+            {" "}
+            Currently vibing to lo-fi beats while working, it's the perfect
+            background noise
+          </span>
         </div>
+
         <div>
-          <span className="font-bold">Food:</span> Can&apos;t live without
-          Oatmeal, Adobong Manok, Kare-Kare, and Nilagang Baka
+          <span className="font-semibold text-black">Food:</span>
+          <span className="text-black/80">
+            {" "}
+            Can&apos;t live without Oatmeal, Adobong Manok, Kare-Kare, and
+            Nilagang Baka
+          </span>
+        </div>
+
+        <div>
+          <span className="font-semibold text-black">Clothing:</span>
+          <span className="text-black/80">
+            {" "}
+            Gustavo, Wisdom Kaye, Daniel Simmons, Giafratte, Jevon Henley
+          </span>
         </div>
       </div>
     </div>
@@ -417,19 +667,22 @@ const lifeImages = [
 
 const LifeGallery = () => {
   return (
-    <AnimatedSection className="container mx-auto px-4 pb-20" delay={0.3}>
-      <div className="max-w-2xl mx-auto mb-16">
+    <AnimatedSection className="container mx-auto pt-16 pb-10" delay={0.3}>
+      <div className="max-w-4xl mx-auto mb-16">
+        {/* <AnimatedSection className="container mx-auto px-4 pb-20" delay={0.3}>
+        <div className="max-w-2xl mx-auto mb-16"> */}
         <h2
-          className="text-black font-normal mb-6"
+          className="text-black font-normal mb-8 text-center sm:text-left"
           style={{ fontSize: "clamp(2rem, 5vw, 3rem)" }}
         >
-          Life Outside Work
+          Snippets of my <em className="font-serif italic">life</em> outside of
+          work
         </h2>
-        <p className="text-base md:text-lg text-black/80">
-          A visual journey through my interests, hobbies, and adventures. From
-          martial arts and fitness to exploring new places and capturing moments
-          through photography.
-        </p>
+        {/* <p className="text-base md:text-lg text-black/80">
+            A visual journey through my interests, hobbies, and adventures. From
+            martial arts and fitness to exploring new places and capturing moments
+            through photography.
+          </p> */}
       </div>
 
       <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4">
