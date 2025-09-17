@@ -12,28 +12,33 @@ import image5 from "@/assets/images/project-5.jpg";
 /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 const projects = [
   {
-    id: "artisan-brew-co",
-    name: "Artisan Brew Co.",
+    id: "sp-madrid-ai-multimedia",
+    name: "SP Madrid AI Multimedia Project",
+    narrative: "AI + storytelling + real-world impact.",
     image: image1,
   },
   {
-    id: "wavelength-studios",
-    name: "Wavelength Studios",
+    id: "read-ai-website",
+    name: "Read AI Website",
+    narrative: "UI/UX + no-code + product thinking.",
     image: image2,
   },
   {
-    id: "nova-fitness",
-    name: "Nova Fitness",
+    id: "personal-portfolio",
+    name: "Personal Portfolio Website",
+    narrative: "My brand hub, React + Tailwind showcase.",
     image: image3,
   },
   {
-    id: "urban-plates",
-    name: "Urban Plates",
+    id: "play-highlights",
+    name: "Play Highlights (Videography & Content Creation)",
+    narrative: "Creativity + editing workflow.",
     image: image4,
   },
   {
-    id: "bloom-botanicals",
-    name: "Bloom Botanicals",
+    id: "covid-health-declaration",
+    name: "COVID Health Declaration System",
+    narrative: "Functional, real-world system build.",
     image: image5,
   },
 ];

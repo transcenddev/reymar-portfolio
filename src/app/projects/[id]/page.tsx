@@ -16,69 +16,60 @@ const projectsData: Record<string, {
   liveUrl: string;
   relatedProjects: string[];
 }> = {
-  "artisan-brew-co": {
-    id: "artisan-brew-co",
-    title: "Artisan Brew Co.",
-    description:
-      "Landio is where bold ideas come to life, transforming concepts into stunning, functional designs.",
-    client: "iktaworks.co",
-    services: "Product design",
-    timeline: "2 weeks",
+  "sp-madrid-ai-multimedia": {
+    id: "sp-madrid-ai-multimedia",
+    title: "SP Madrid AI Multimedia Project",
+    description: "AI + storytelling + real-world impact.",
+    client: "SP Madrid",
+    services: "AI Development, Multimedia",
+    timeline: "3 months",
     images: [],
     liveUrl: "#",
-    relatedProjects: ["wavelength-studios", "nova-fitness", "urban-plates"],
+    relatedProjects: ["read-ai-website", "personal-portfolio", "play-highlights"],
   },
-  "wavelength-studios": {
-    id: "wavelength-studios",
-    title: "Wavelength Studios",
-    description:
-      "A creative studio platform with immersive visuals and a modular content system.",
-    client: "wavelength.io",
-    services: "Product design",
-    timeline: "3 weeks",
+  "read-ai-website": {
+    id: "read-ai-website",
+    title: "Read AI Website",
+    description: "UI/UX + no-code + product thinking.",
+    client: "Read AI",
+    services: "UI/UX Design, No-Code Development",
+    timeline: "2 months",
     images: [],
     liveUrl: "#",
-    relatedProjects: ["artisan-brew-co", "nova-fitness", "bloom-botanicals"],
+    relatedProjects: ["sp-madrid-ai-multimedia", "personal-portfolio", "covid-health-declaration"],
   },
-  "nova-fitness": {
-    id: "nova-fitness",
-    title: "Nova Fitness",
-    description:
-      "A modern fitness brand presence: crisp typography, bold imagery, and clear flows.",
-    client: "nova.fit",
-    services: "Web design",
-    timeline: "10 days",
+  "personal-portfolio": {
+    id: "personal-portfolio",
+    title: "Personal Portfolio Website",
+    description: "My brand hub, React + Tailwind showcase.",
+    client: "Self",
+    services: "Web Development, Branding",
+    timeline: "Ongoing",
     images: [],
     liveUrl: "#",
-    relatedProjects: ["artisan-brew-co", "wavelength-studios", "urban-plates"],
+    relatedProjects: ["read-ai-website", "play-highlights", "covid-health-declaration"],
   },
-  "urban-plates": {
-    id: "urban-plates",
-    title: "Urban Plates",
-    description:
-      "Restaurant landing and menu browsing experience with emphasis on photography.",
-    client: "urbanplates.com",
-    services: "UI/UX",
-    timeline: "2 weeks",
+  "play-highlights": {
+    id: "play-highlights",
+    title: "Play Highlights (Videography & Content Creation)",
+    description: "Creativity + editing workflow.",
+    client: "Various",
+    services: "Videography, Content Creation",
+    timeline: "1 year",
     images: [],
     liveUrl: "#",
-    relatedProjects: [
-      "artisan-brew-co",
-      "bloom-botanicals",
-      "wavelength-studios",
-    ],
+    relatedProjects: ["sp-madrid-ai-multimedia", "personal-portfolio", "covid-health-declaration"],
   },
-  "bloom-botanicals": {
-    id: "bloom-botanicals",
-    title: "Bloom Botanicals",
-    description:
-      "D2C brand experience focusing on product storytelling and conversion.",
-    client: "bloom.shop",
-    services: "Ecommerce design",
-    timeline: "4 weeks",
+  "covid-health-declaration": {
+    id: "covid-health-declaration",
+    title: "COVID Health Declaration System",
+    description: "Functional, real-world system build.",
+    client: "COVID",
+    services: "System Development",
+    timeline: "6 months",
     images: [],
     liveUrl: "#",
-    relatedProjects: ["artisan-brew-co", "nova-fitness", "urban-plates"],
+    relatedProjects: ["sp-madrid-ai-multimedia", "read-ai-website", "play-highlights"],
   },
 };
 
