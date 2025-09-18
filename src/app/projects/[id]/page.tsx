@@ -34,7 +34,12 @@ const projectsData: Record<string, {
     client: "Read AI",
     services: "UI/UX Design, No-Code Development",
     timeline: "2 months",
-    images: [],
+    images: [
+      "/assets/images/readai-figma1.png",
+      "/assets/images/readai-figma2.png",
+      "/assets/images/readai-figma3.png",
+      
+    ],
     liveUrl: "#",
     relatedProjects: ["sp-madrid-ai-multimedia", "personal-portfolio", "covid-health-declaration"],
   },

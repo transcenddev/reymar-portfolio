@@ -14,7 +14,6 @@ type ProjectData = {
   images: string[];
   liveUrl: string;
   relatedProjects: string[];
-  narrative: string; // Added narrative field
 };
 
 type ProjectDetailProps = {
@@ -72,9 +71,6 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
           <h2 className="text-4xl md:text-7xl lg:text-8xl">{project.title}</h2>
           <p className="mt-6 md:text-lg text-stone-700 max-w-3xl">
             {project.description}
-          </p>
-          <p className="mt-4 md:text-md text-stone-500 max-w-3xl">
-            {project.narrative} {/* Display narrative */}
           </p>
           <div className="mt-8">
             <a
