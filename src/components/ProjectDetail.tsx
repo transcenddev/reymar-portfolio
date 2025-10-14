@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useEffect, useMemo, useState } from "react";
+import React, { FC, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Button from "@/components/Button";
 
@@ -14,6 +14,9 @@ type ProjectData = {
   images: string[];
   liveUrl: string;
   relatedProjects: string[];
+  challenge?: string;
+  approach?: string;
+  impact?: string[];
 };
 
 type ProjectDetailProps = {
@@ -28,10 +31,13 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
   onBack,
 }) => {
   const [isSwitching, setIsSwitching] = useState(false);
+  const [autoplayEnabled, setAutoplayEnabled] = useState(true);
 
-  const safeImages = useMemo(() => {
-    const imgs = Array.isArray(project.images) ? project.images : [];
-    return [imgs[0], imgs[1], imgs[2]].filter(Boolean) as string[];
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  const safeMedia = useMemo(() => {
+    const media = Array.isArray(project.images) ? project.images : [];
+    return media.filter(Boolean) as string[];
   }, [project.images]);
 
   const related = useMemo(() => {
@@ -58,9 +64,36 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     }
   }, [project.id, isSwitching]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!autoplayEnabled) return;
+
+      videoRefs.current.forEach((video) => {
+        if (video) {
+          const rect = video.getBoundingClientRect();
+          const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+          if (isVisible) {
+            video.play();
+          } else {
+            video.pause();
+          }
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [autoplayEnabled]);
+
   const handleRelatedClick = (projectId: string) => {
     setIsSwitching(true);
     onProjectChange(projectId);
+  };
+
+  const toggleAutoplay = () => {
+    setAutoplayEnabled((prev) => !prev);
   };
 
   return (
@@ -101,27 +134,84 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
           </div>
         </div>
 
-        {/* Images */}
+        {/* Challenge Section */}
+        {project.challenge && (
+          <div className="mt-10 md:mt-16 lg:mt-20">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-6">
+              The Challenge
+            </h3>
+            <p className="text-stone-700 md:text-lg leading-relaxed max-w-4xl">
+              {project.challenge}
+            </p>
+          </div>
+        )}
+
+        {/* Approach Section */}
+        {project.approach && (
+          <div className="mt-10 md:mt-16 lg:mt-20">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-6">
+              The Approach
+            </h3>
+            <p className="text-stone-700 md:text-lg leading-relaxed max-w-4xl">
+              {project.approach}
+            </p>
+          </div>
+        )}
+
+        {/* Images and Videos */}
         <div className="mt-10 md:mt-16 lg:mt-20 space-y-8">
-          {[0, 1, 2].map((index) => {
-            const imgSrc = safeImages[index];
+          {safeMedia.map((mediaSrc, index) => {
+            const isVideo = mediaSrc.endsWith(".mp4");
             return (
               <div
                 key={index}
-                className="relative w-full aspect-[4/3] bg-stone-300 overflow-hidden"
+                className={`relative w-full bg-stone-300 overflow-hidden ${
+                  isVideo ? "aspect-[4/3]" : ""
+                }`}
               >
-                {imgSrc ? (
-                  <Image
-                    src={imgSrc}
-                    alt={`${project.title} image ${index + 1}`}
-                    className="object-cover"
-                    fill
+                {isVideo ? (
+                  <video
+                    ref={(el) => (videoRefs.current[index] = el)}
+                    src={mediaSrc}
+                    muted
+                    loop
+                    className="object-cover w-full h-full"
                   />
-                ) : null}
+                ) : (
+                  <Image
+                    src={mediaSrc}
+                    alt={`${project.title} media ${index + 1}`}
+                    className="w-full h-auto"
+                    width={1920}
+                    height={1080}
+                  />
+                )}
               </div>
             );
           })}
         </div>
+
+        {/* Impact Section */}
+        {project.impact && project.impact.length > 0 && (
+          <div className="mt-10 md:mt-16 lg:mt-20">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl mb-6 md:mb-8">
+              Key Results & Impact
+            </h3>
+            <ul className="space-y-4 max-w-4xl">
+              {project.impact.map((item, index) => (
+                <li
+                  key={index}
+                  className="flex items-start gap-4 text-stone-700 md:text-lg"
+                >
+                  <span className="text-primary text-xl mt-1 flex-shrink-0">
+                    •
+                  </span>
+                  <span className="leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {/* Recent projects (masonry) */}
         <div className="mt-16 md:mt-24">
@@ -173,10 +263,13 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
           )}
         </div>
 
-        {/* Back */}
-        <div className="mt-10">
+        {/* Back and Autoplay toggle */}
+        <div className="mt-10 flex justify-between items-center">
           <Button variant="secondary" onClick={onBack}>
             See all
+          </Button>
+          <Button variant="primary" onClick={toggleAutoplay}>
+            {autoplayEnabled ? "Disable Autoplay" : "Enable Autoplay"}
           </Button>
         </div>
 

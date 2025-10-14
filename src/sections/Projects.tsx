@@ -12,28 +12,28 @@ import image5 from "@/assets/images/project-5.jpg";
 /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 const projects = [
   {
-    id: "artisan-brew-co",
-    name: "Artisan Brew Co.",
+    id: "sp-madrid-ai-multimedia",
+    name: "Reviving Memories with AI",
     image: image1,
   },
   {
-    id: "wavelength-studios",
-    name: "Wavelength Studios",
+    id: "read-ai-website",
+    name: "Read AI",
     image: image2,
   },
   {
-    id: "nova-fitness",
-    name: "Nova Fitness",
+    id: "personal-portfolio",
+    name: "Personal Portfolio",
     image: image3,
   },
   {
-    id: "urban-plates",
-    name: "Urban Plates",
+    id: "play-highlights",
+    name: "Play Highlights",
     image: image4,
   },
   {
-    id: "bloom-botanicals",
-    name: "Bloom Botanicals",
+    id: "covid-health-declaration",
+    name: "COVID-19 Health Declaration System",
     image: image5,
   },
 ];
