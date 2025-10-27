@@ -2,175 +2,331 @@
 
 import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import Footer from "@/sections/Footer";
 import Header from "@/sections/Header";
-import { motion } from "framer-motion";
-
-// Placeholder images/videos
-const photos = [
-  "/assets/images/project-1.jpg",
-  "/assets/images/project-2.jpg",
-  "/assets/images/project-3.jpg",
-  "/assets/images/project-4.jpg",
-  "/assets/images/project-5.jpg",
-];
-const videos = [
-  "https://www.youtube.com/embed/dQw4w9WgXcQ",
-  "https://www.youtube.com/embed/3JZ_D3ELwOQ",
-];
-const paintings = [
-  "/assets/images/testimonial-1.jpg",
-  "/assets/images/testimonial-2.jpg",
-  "/assets/images/testimonial-3.jpg",
-];
-const edits = ["/assets/images/project-1.jpg", "/assets/images/project-2.jpg"];
-
-const MasonryGrid = ({ items }: { items: string[] }) => (
-  <div className="columns-1 sm:columns-2 lg:columns-4 gap-4 w-full">
-    {items.map((src, i) => (
-      <motion.img
-        key={i}
-        src={src}
-        alt="Photo"
-        className="mb-4 w-full rounded-lg shadow-lg"
-        whileHover={{ scale: 1.05 }}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.4 }}
-      />
-    ))}
-  </div>
-);
-
-const VideoGrid = ({ items }: { items: string[] }) => (
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    {items.map((src, i) => (
-      <motion.div
-        key={i}
-        className="aspect-video overflow-hidden rounded-lg shadow-lg bg-black"
-        whileHover={{ scale: 1.03 }}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.4 }}
-      >
-        <iframe
-          src={src}
-          title={`Video ${i}`}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          className="w-full h-full"
-        />
-      </motion.div>
-    ))}
-  </div>
-);
-
-const CardGrid = ({ items, label }: { items: string[]; label: string }) => (
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    {items.map((src, i) => (
-      <motion.div
-        key={i}
-        className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg p-4 flex flex-col items-center"
-        whileHover={{ scale: 1.04 }}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.4 }}
-      >
-        <img
-          src={src}
-          alt={label}
-          className="w-full h-40 object-cover rounded mb-2"
-        />
-        <span className="text-sm text-neutral-600 dark:text-neutral-300">
-          {label} #{i + 1}
-        </span>
-      </motion.div>
-    ))}
-  </div>
-);
 
 export default function PlayPage() {
   return (
     <main className="bg-white min-h-screen flex flex-col">
       <Header />
+
       {/* Hero Section */}
-      <AnimatedSection className="container mx-auto pt-16 pb-10 text-center">
-        <div className="max-w-3xl mx-auto">
+      <AnimatedSection className="container mx-auto pt-24 md:pt-32 lg:pt-40 pb-16 px-4">
+        <div className="max-w-4xl mx-auto">
           <h1
-            className="font-serif text-black text-4xl md:text-6xl font-bold mb-4 tracking-tight"
-            style={{ lineHeight: 1.2 }}
+            className="text-black font-normal mb-8"
+            style={{ fontSize: "clamp(2rem, 5vw, 3rem)" }}
           >
-            Play – A space where I share stories through videography and
-            visuals.
+            My creative <em className="font-serif italic">playground</em>
           </h1>
-          <p className="mt-4 text-lg md:text-xl text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
-            A collection of creative explorations—from photography and
-            videography to painting and digital art.
+          <p className="text-base md:text-lg text-black/80 mb-12">
+            Beyond code and design, I explore storytelling through motion, lens,
+            and editing—capturing moments, crafting narratives, and
+            experimenting with visual media.
           </p>
-        </div>
-      </AnimatedSection>
 
-      {/* Divider */}
-      <div className="border-t border-stone-200 mx-auto w-2/3 my-12" />
-
-      {/* Photography Section */}
-      <AnimatedSection className="container mx-auto px-4 pb-16">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-semibold mb-6">
-            Photography
-          </h2>
-          <MasonryGrid items={photos} />
-        </div>
-      </AnimatedSection>
-
-      {/* Videography & Content Creation Section */}
-      <AnimatedSection className="container mx-auto px-4 pb-16">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-semibold mb-6">
-            Videography & Content Creation
-          </h2>
-          <VideoGrid items={videos} />
-        </div>
-      </AnimatedSection>
-
-      {/* Painting & Video Editing Section */}
-      <AnimatedSection className="container mx-auto px-4 pb-16">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-semibold mb-6">
-            Painting & Video Editing
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
+          <div className="space-y-12">
+            {/* Content Creation */}
             <div>
-              <h3 className="text-xl font-semibold mb-4 text-black/80">
-                Paintings
-              </h3>
-              <CardGrid items={paintings} label="Painting" />
+              <h2
+                className="font-normal text-black mb-6 uppercase tracking-wide"
+                style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
+              >
+                Content Creation
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                {[
+                  {
+                    type: "instagram",
+                    url: "https://www.instagram.com/reel/DMcbSU7zbby/embed",
+                    title: "Network is Your Network",
+                  },
+                  {
+                    type: "instagram",
+                    url: "https://www.instagram.com/reel/DPmoOviE7Hm/embed",
+                    title: "Day in the Life",
+                  },
+                  {
+                    type: "tiktok",
+                    url: "https://www.tiktok.com/embed/7464261158665538823",
+                    title: "Tech Internship",
+                  },
+                ].map((video, index) => (
+                  <motion.div
+                    key={index}
+                    className="relative"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{
+                      opacity: 1,
+                      y: 0,
+                      transition: { delay: index * 0.1 },
+                    }}
+                    viewport={{ once: true, margin: "-50px" }}
+                  >
+                    <div className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 aspect-[9/16] max-h-[600px]">
+                      <iframe
+                        src={video.url}
+                        title={video.title}
+                        allowFullScreen
+                        scrolling="no"
+                        className="absolute inset-0 w-full h-full"
+                      />
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
+
+            {/* Photography */}
             <div>
-              <h3 className="text-xl font-semibold mb-4 text-black/80">
-                Edits
-              </h3>
-              <CardGrid items={edits} label="Edit" />
+              <h2
+                className="font-normal text-black mb-6 uppercase tracking-wide"
+                style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
+              >
+                Photography
+              </h2>
+              <div className="columns-1 sm:columns-2 md:columns-3 gap-4 mb-8">
+                {[
+                  "/assets/images/photography/photography/eyes.JPEG",
+                  "/assets/images/photography/photography/beach-girl.JPG",
+                  "/assets/images/photography/photography/forest1.JPG",
+                  "/assets/images/photography/photography/baptism.jpg",
+                  "/assets/images/photography/photography/billiard-portraits (3).JPG",
+                  "/assets/images/photography/photography/monochrome.JPG",
+                  "/assets/images/photography/photography/beach-couple-pics.JPG",
+                  "/assets/images/photography/photography/me-gym1.JPG",
+                ].map((src, index) => (
+                  <motion.div
+                    key={index}
+                    className="break-inside-avoid mb-2"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{
+                      opacity: 1,
+                      y: 0,
+                      transition: { delay: index * 0.05 },
+                    }}
+                    viewport={{ once: true, margin: "-50px" }}
+                  >
+                    <motion.div
+                      className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100"
+                      whileHover={{
+                        scale: 1.02,
+                        boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
+                        transition: { duration: 0.2 },
+                      }}
+                    >
+                      <Image
+                        src={src}
+                        alt={`Photography ${index + 1}`}
+                        width={800}
+                        height={800}
+                        className="w-full h-auto object-cover"
+                        loading={index < 3 ? "eager" : "lazy"}
+                      />
+                    </motion.div>
+                  </motion.div>
+                ))}
+              </div>
+              <motion.a
+                href="https://www.instagram.com/2049.rae/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm md:text-base font-medium"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                View Full Gallery
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M7 17L17 7" />
+                  <path d="M7 7h10v10" />
+                </svg>
+              </motion.a>
+            </div>
+
+            {/* Video Edit - Motion Graphics */}
+            <div>
+              <h2
+                className="font-normal text-black mb-6 uppercase tracking-wide"
+                style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
+              >
+                Video Edit - Motion Graphics
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {[
+                  {
+                    id: "DKqeyOe7rK4",
+                    title: "Motion Graphics Project 1",
+                  },
+                  {
+                    id: "9Dxdr7TG7Cc",
+                    title: "Motion Graphics Project 2",
+                  },
+                  {
+                    id: "HKC-_s8uySs",
+                    title: "Anime Horimiya",
+                  },
+                  {
+                    id: "uLXnvEShkOY",
+                    title: "Anime Howl's Moving Castle",
+                  },
+                  {
+                    id: "umzmjEKNft0",
+                    title: "Tamako Love Story",
+                  },
+                  {
+                    id: "UztaNptJkMo",
+                    title: "Demon Slayer",
+                  },
+                ].map((video, index) => (
+                  <motion.div
+                    key={video.id}
+                    className="relative"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{
+                      opacity: 1,
+                      y: 0,
+                      transition: { delay: index * 0.1 },
+                    }}
+                    viewport={{ once: true, margin: "-50px" }}
+                  >
+                    <div className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 aspect-video">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${video.id}`}
+                        title={video.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="absolute inset-0 w-full h-full"
+                      />
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Cinematography */}
+            <div>
+              <h2
+                className="font-normal text-black mb-6 uppercase tracking-wide"
+                style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
+              >
+                Cinematography
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {[
+                  {
+                    id: "RrilkyhAse8",
+                    title: "Baptism",
+                  },
+                  {
+                    id: "g0ZNLAo2wgo",
+                    title: "Rainy Day Planting",
+                  },
+                  {
+                    id: "8GCgMlxq1xM",
+                    title: "Intramuros",
+                  },
+                  {
+                    id: "7w8STwNeRdE",
+                    title: "Dopple Ganger",
+                  },
+                  {
+                    id: "hhZyIM4IXMs",
+                    title: "Beach Resort",
+                  },
+                ].map((video, index) => (
+                  <motion.div
+                    key={video.id}
+                    className="relative"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{
+                      opacity: 1,
+                      y: 0,
+                      transition: { delay: index * 0.1 },
+                    }}
+                    viewport={{ once: true, margin: "-50px" }}
+                  >
+                    <div className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 aspect-video">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${video.id}`}
+                        title={video.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="absolute inset-0 w-full h-full"
+                      />
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Painting */}
+            <div>
+              <h2
+                className="font-normal text-black mb-6 uppercase tracking-wide"
+                style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
+              >
+                Painting
+              </h2>
+              <div className="columns-1 sm:columns-2 md:columns-3 gap-4">
+                {[
+                  "/assets/images/painting1.jpg",
+                  "/assets/images/painting2.jpg",
+                  "/assets/images/painting3.jpg",
+                  "/assets/images/painting4.jpg",
+                  "/assets/images/painting5.jpg",
+                  "/assets/images/painting6.jpg",
+                  "/assets/images/painting7.jpg",
+                  "/assets/images/painting8.jpg",
+                  "/assets/images/painting9.jpg",
+                ].map((src, index) => (
+                  <motion.div
+                    key={index}
+                    className="break-inside-avoid mb-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{
+                      opacity: 1,
+                      y: 0,
+                      transition: { delay: index * 0.05 },
+                    }}
+                    viewport={{ once: true, margin: "-50px" }}
+                  >
+                    <motion.div
+                      className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100"
+                      whileHover={{
+                        scale: 1.02,
+                        boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
+                        transition: { duration: 0.2 },
+                      }}
+                    >
+                      <Image
+                        src={src}
+                        alt={`Painting ${index + 1}`}
+                        width={800}
+                        height={800}
+                        className="w-full h-auto object-cover"
+                        loading={index < 3 ? "eager" : "lazy"}
+                      />
+                    </motion.div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </AnimatedSection>
-
-      {/* Closing Section */}
-      <AnimatedSection className="container mx-auto py-12">
-        <div className="max-w-3xl mx-auto text-center">
-          <h3 className="text-xl md:text-2xl font-semibold mb-4">
-            Creativity as Play
-          </h3>
-          <p className="mt-4 text-base md:text-lg text-neutral-600 dark:text-neutral-300">
-            For me, creativity is a space to experiment, express, and grow.
-            Every photo, video, and painting is a reflection of joy and
-            curiosity.
-          </p>
         </div>
       </AnimatedSection>
 
