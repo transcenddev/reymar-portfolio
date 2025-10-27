@@ -71,7 +71,7 @@ const HeroSection = () => (
           style={{ letterSpacing: "-0.02em" }}
         >
           {/* <em className="font-serif italic">I</em>'m passionate about */}
-          I'm passionate about
+          I&apos;m passionate about
         </span>
         <span
           className="block text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-2"
@@ -89,7 +89,7 @@ const HeroSection = () => (
 
       <div className="max-w-3xl text-base md:text-lg text-black/80 leading-relaxed text-left space-y-4">
         <p>
-          I'm Reymar, a multidisciplinary Computer Science student at Cavite
+          I&apos;m Reymar, a multidisciplinary Computer Science student at Cavite
           State University, blending design, code, and storytelling to craft
           digital experiences.
         </p>
@@ -329,12 +329,12 @@ const EducationExperience = () => (
                 </p>
                 <p>
                   Leveraged AI tools to enhance and animate images, creating a
-                  dynamic visual presentation that demonstrated AI's potential
+                  dynamic visual presentation that demonstrated AI&apos;s potential
                   in storytelling and digital restoration.
                 </p>
                 <p>
                   Collaborated directly with the CEO and a cross-functional team
-                  to deliver the project's vision.
+                  to deliver the project&apos;s vision.
                 </p>
               </div>
             </div>
@@ -689,7 +689,7 @@ const Favourites = () => (
           <span className="font-semibold text-black">Music:</span>
           <span className="text-black/80">
             {" "}
-            Currently vibing to lo-fi beats while working, it's the perfect
+            Currently vibing to lo-fi beats while working, it&apos;s the perfect
             background noise
           </span>
         </div>

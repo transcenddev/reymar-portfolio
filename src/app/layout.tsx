@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Archivo } from "next/font/google";
-import { Imperial_Script } from 'next/font/google';
 import "./globals.css";
 
 const archivo = Archivo({
@@ -8,12 +7,6 @@ const archivo = Archivo({
   weight: ["200", "400", "500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-archivo",
-});
-
-const imperialScript = Imperial_Script({
-  weight: '400',
-  subsets: ['latin'],
-  variable: '--font-imperial',
 });
 
 export const metadata: Metadata = {
