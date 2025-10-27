@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import Footer from "@/sections/Footer";
 import Header from "@/sections/Header";
-import avatarImage from "@/assets/images/avatar.JPG";
+import avatarImage from "@/assets/images/avatar.jpg";
 
 // Hero Section
 // const HeroSection = () => (
@@ -89,9 +89,9 @@ const HeroSection = () => (
 
       <div className="max-w-3xl text-base md:text-lg text-black/80 leading-relaxed text-left space-y-4">
         <p>
-          I&apos;m Reymar, a multidisciplinary Computer Science student at Cavite
-          State University, blending design, code, and storytelling to craft
-          digital experiences.
+          I&apos;m Reymar, a multidisciplinary Computer Science student at
+          Cavite State University, blending design, code, and storytelling to
+          craft digital experiences.
         </p>
 
         <p>
@@ -329,8 +329,8 @@ const EducationExperience = () => (
                 </p>
                 <p>
                   Leveraged AI tools to enhance and animate images, creating a
-                  dynamic visual presentation that demonstrated AI&apos;s potential
-                  in storytelling and digital restoration.
+                  dynamic visual presentation that demonstrated AI&apos;s
+                  potential in storytelling and digital restoration.
                 </p>
                 <p>
                   Collaborated directly with the CEO and a cross-functional team
