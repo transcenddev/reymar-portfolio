@@ -171,7 +171,11 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
               >
                 {isVideo ? (
                   <video
-                    ref={(el) => (videoRefs.current[index] = el)}
+                    ref={(el) => {
+                      if (el) {
+                        videoRefs.current[index] = el;
+                      }
+                    }}
                     src={mediaSrc}
                     muted
                     loop
