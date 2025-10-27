@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import Footer from "@/sections/Footer";
 import Header from "@/sections/Header";
+import avatarImage from "@/assets/images/avatar.JPG";
 
 // Hero Section
 // const HeroSection = () => (
@@ -53,10 +54,15 @@ const HeroSection = () => (
   <AnimatedSection className="container mx-auto pt-16 pb-16">
     <div className="max-w-4xl mx-auto">
       {/* Portrait - smaller and more integrated */}
-      <figure
-        className="w-32 h-32 md:w-40 md:h-40 bg-stone-300 rounded-full mb-12 mt-12"
-        aria-label="Portrait placeholder"
-      />
+      <figure className="w-32 h-32 md:w-40 md:h-40 rounded-full mb-12 mt-12 overflow-hidden relative">
+        <Image
+          src={avatarImage}
+          alt="Reymar Mirante portrait"
+          fill
+          className="object-cover"
+          priority
+        />
+      </figure>
 
       {/* Main headline with similar typography treatment */}
       <h1 className="mb-12 font-serif text-black text-left">
@@ -77,8 +83,7 @@ const HeroSection = () => (
           className="block text-4xl md:text-5xl lg:text-6xl leading-tight"
           style={{ letterSpacing: "-0.02em" }}
         >
-          into <em className="font-serif italic">simple</em>{" "}
-          solutions.
+          into <em className="font-serif italic">simple</em> solutions.
         </span>
       </h1>
 
@@ -416,6 +421,214 @@ const CommunityLeadership = () => (
   </AnimatedSection>
 );
 
+const PlaySection = () => (
+  <AnimatedSection className="container mx-auto px-4 pb-16" delay={0.2}>
+    <div className="max-w-4xl mx-auto">
+      <h2
+        className="text-black font-normal mb-12"
+        style={{ fontSize: "clamp(2rem, 5vw, 3rem)" }}
+      >
+        My creative <em className="font-serif italic">playground</em>
+      </h2>
+      <p className="text-base md:text-lg text-black/80 mb-12">
+        Beyond code and design, I explore storytelling through motion, lens, and
+        editing—capturing moments, crafting narratives, and experimenting with
+        visual media.
+      </p>
+
+      <div className="space-y-12">
+        {/* Content Creation */}
+        <div>
+          <h3
+            className="font-normal text-black mb-6 uppercase tracking-wide"
+            style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
+          >
+            Content Creation
+          </h3>
+          <div className="space-y-3 text-base md:text-lg">
+            <div>
+              <a
+                href="https://www.instagram.com/reel/DMcbSU7zbby/?hl=en"
+                className="underline text-primary hover:text-primary/80 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Network is Your Network
+              </a>
+            </div>
+            <div>
+              <a
+                href="https://www.instagram.com/reel/DPmoOviE7Hm/?hl=en"
+                className="underline text-primary hover:text-primary/80 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Day in the Life
+              </a>
+            </div>
+            <div>
+              <a
+                href="https://www.tiktok.com/@2049rae/video/7464261158665538823"
+                className="underline text-primary hover:text-primary/80 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Tech Internship
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Motion Graphics & Video Edit */}
+        <div>
+          <h3
+            className="font-normal text-black mb-6 uppercase tracking-wide"
+            style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
+          >
+            Motion Graphics &amp; Video Edit
+          </h3>
+          <div className="space-y-3 text-base md:text-lg">
+            <div>
+              <a
+                href="https://www.youtube.com/watch?v=DKqeyOe7rK4"
+                className="underline text-primary hover:text-primary/80 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Motion Graphics Project 1
+              </a>
+            </div>
+            <div>
+              <a
+                href="https://www.youtube.com/watch?v=9Dxdr7TG7Cc"
+                className="underline text-primary hover:text-primary/80 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Motion Graphics Project 2
+              </a>
+            </div>
+            <div>
+              <a
+                href="https://www.youtube.com/watch?v=HKC-_s8uySs"
+                className="underline text-primary hover:text-primary/80 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Anime Horimiya
+              </a>
+            </div>
+            <div>
+              <a
+                href="https://www.youtube.com/watch?v=uLXnvEShkOY"
+                className="underline text-primary hover:text-primary/80 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Anime Howl&apos;s Moving Castle
+              </a>
+            </div>
+            <div>
+              <a
+                href="https://www.youtube.com/watch?v=umzmjEKNft0"
+                className="underline text-primary hover:text-primary/80 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Tamako Love Story
+              </a>
+            </div>
+            <div>
+              <a
+                href="https://www.youtube.com/watch?v=UztaNptJkMo"
+                className="underline text-primary hover:text-primary/80 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Demon Slayer
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Client Photography & Videography */}
+        <div>
+          <h3
+            className="font-normal text-black mb-6 uppercase tracking-wide"
+            style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
+          >
+            Client Photography &amp; Videography
+          </h3>
+          <div className="space-y-3 text-base md:text-lg">
+            <div>
+              <a
+                href="https://www.youtube.com/watch?v=RrilkyhAse8&t=139s"
+                className="underline text-primary hover:text-primary/80 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Baptism
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Cinematography */}
+        <div>
+          <h3
+            className="font-normal text-black mb-6 uppercase tracking-wide"
+            style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
+          >
+            Cinematography
+          </h3>
+          <div className="space-y-3 text-base md:text-lg">
+            <div>
+              <a
+                href="https://www.youtube.com/watch?v=g0ZNLAo2wgo"
+                className="underline text-primary hover:text-primary/80 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Rainy Day Planting
+              </a>
+            </div>
+            <div>
+              <a
+                href="https://www.youtube.com/watch?v=8GCgMlxq1xM"
+                className="underline text-primary hover:text-primary/80 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Intramuros
+              </a>
+            </div>
+            <div>
+              <a
+                href="https://www.youtube.com/watch?v=7w8STwNeRdE"
+                className="underline text-primary hover:text-primary/80 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Dopple Ganger
+              </a>
+            </div>
+            <div>
+              <a
+                href="https://www.youtube.com/watch?v=hhZyIM4IXMs"
+                className="underline text-primary hover:text-primary/80 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Beach Resort
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </AnimatedSection>
+);
+
 const Favourites = () => (
   <AnimatedSection
     className="container mx-auto pb-10"
@@ -430,9 +643,10 @@ const Favourites = () => (
         My current <em className="font-serif italic">favourites</em>
       </h2>
       <p className="text-base md:text-lg text-black/80 mb-8">
-        When I'm not coding or designing, you can catch me at a local coffee
-        shop with my camera, binge-watching anime until 3am, or perfecting my
-        handstand form. Here's what's currently on rotation:
+        When I&apos;m not coding or designing, you can catch me at a local
+        coffee shop with my camera, binge-watching anime until 3am, or
+        perfecting my handstand form. Here&apos;s what&apos;s currently on
+        rotation:
       </p>
 
       <div className="space-y-4 text-base md:text-lg leading-relaxed">
@@ -449,8 +663,7 @@ const Favourites = () => (
           <span className="font-semibold text-black">Manhwa:</span>
           <span className="text-black/80">
             {" "}
-            Solo Leveling, Tower of God, The God of High
-            School
+            Solo Leveling, Tower of God, The God of High School
           </span>
         </div>
 
@@ -742,6 +955,7 @@ export default function AboutPage() {
       <HeroSection />
       <EducationExperience />
       <CommunityLeadership />
+      <PlaySection />
       <Favourites />
       <LifeGallery />
       <Footer />

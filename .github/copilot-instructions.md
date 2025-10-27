@@ -6,14 +6,15 @@ This is a Next.js 14+ portfolio site using the **App Router** (`src/app/`), styl
 
 - **Sections** (`src/sections/`): Full-page layout blocks (Hero, Projects, Testimonials) that compose pages
 - **Components** (`src/components/`): Reusable UI elements (Button, AnimatedSection, ProjectDetail)
-- **Pages** (`src/app/`): Route definitions that import and compose sections
+- **Pages** (`src/app/`): Route definitions that import and compose sections (see `page.tsx` - sections imported in render order)
 - **Hooks** (`src/hooks/`): Custom animation logic (e.g., `useTextRevealAnimation.tsx`)
 
 Key architectural decisions:
 
 - **Client components** are marked with `"use client"` (required for motion animations and hooks)
 - **Static assets** live in both `src/assets/` (imported via Next.js) and `public/assets/` (direct references)
-- **Project data** is defined in-component (see `projects/[id]/page.tsx` - `projectsData` object), not in separate data files
+- **Project data** is defined in-component (see `projects/[id]/page.tsx` - `projectsData: Record<string, ProjectData>` object), not in separate data files
+- **Page composition**: Pages import sections as default exports and render them in sequence without wrapper divs (e.g., `<Header /><Hero /><Intro />...`)
 
 ## Animation System
 
@@ -21,15 +22,16 @@ This project uses a **custom text reveal animation pattern** that's critical to 
 
 1. **`useTextRevealAnimation` hook** (`src/hooks/useTextRevealAnimation.tsx`):
 
-   - Uses `split-type` to break text into `.word` and `.line` spans
+   - Uses `split-type` to break text into `.word` and `.line` spans in a `useEffect`
    - Returns `scope` ref, `entranceAnimation()`, and `exitAnimation()` functions
-   - Always includes null checks (`if (!scope.current) return;`) to prevent crashes
+   - **Always includes null checks** (`if (!scope.current) return;`) to prevent crashes
+   - Animates both `transform: translateY(0)` and `opacity: 1` for entrance
 
 2. **CSS classes** (`src/app/globals.css`):
 
-   - `.section`: Standard vertical padding (responsive)
-   - `.line`: Overflow hidden container
-   - `.word`: Initial state is `translate-y-full` (hidden below)
+   - `.section`: Standard vertical padding (responsive: `py-24 md:py-32 lg:py-40`)
+   - `.line`: Overflow hidden container (`overflow-hidden`)
+   - `.word`: Initial state is `translate-y-full` (hidden below viewport)
 
 3. **Usage pattern** (see `src/sections/Hero.tsx`):
 
@@ -41,6 +43,13 @@ This project uses a **custom text reveal animation pattern** that's critical to 
    }, [entranceAnimation]);
 
    <motion.h1 ref={scope}>Text to animate</motion.h1>;
+   ```
+
+4. **Standard enter animations** use `AnimatedSection` component with configurable delay:
+   ```tsx
+   <AnimatedSection className="container" delay={0.1}>
+     {/* Content fades in with y: 40 → 0 */}
+   </AnimatedSection>
    ```
 
 When creating animated text, always use this established pattern instead of inline motion variants.
@@ -81,6 +90,8 @@ Example icon animation pattern:
 - Responsive patterns: `className="text-4xl md:text-7xl lg:text-8xl"`
 - Use stone color palette (`stone-200`, `stone-900`) for base design
 - Primary color is `#5928e5` (accessible via `text-primary`, `bg-primary`, `border-primary`)
+- Dark mode configured via `darkMode: "class"` but not actively used
+- Typography: Responsive sizing via `clamp()` for fluid scaling (e.g., `fontSize: "clamp(2rem, 5vw, 3rem)"`)
 
 ### Custom CSS (avoid unless necessary)
 
@@ -137,6 +148,24 @@ const width = useTransform(scrollYProgress, [0, 1], ["100%", "240%"]);
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.7, delay }}
 >
+```
+
+### Smooth Scroll Navigation Pattern
+
+Use `data-hash` attribute with `scrollIntoView` for internal navigation:
+
+```tsx
+const handleClickNavItem = (e: MouseEvent<HTMLButtonElement>) => {
+  e.preventDefault();
+  const targetId = e.currentTarget.getAttribute("data-hash");
+  if (!targetId) return;
+  const target = document.getElementById(targetId);
+  if (target) target.scrollIntoView({ behavior: "smooth" });
+};
+
+<Button data-hash="projects" onClick={handleClickNavItem}>
+  View Projects
+</Button>;
 ```
 
 ## Development Commands
