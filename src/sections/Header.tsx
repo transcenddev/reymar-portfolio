@@ -126,12 +126,21 @@ const Header: FC = () => {
 
   const navigateToHashOrRoute = (href: string) => {
     if (!href) return;
+    
     if (href.startsWith("#")) {
-      const target =
-        typeof document !== "undefined" ? document.querySelector(href) : null;
-      if (target) {
-        (target as HTMLElement).scrollIntoView({ behavior: "smooth" });
-        return;
+      // Check if we're on the home page
+      const isHomePage = window.location.pathname === "/";
+      
+      if (isHomePage) {
+        // If on home page, use smooth scroll
+        const target = document.querySelector(href);
+        if (target) {
+          (target as HTMLElement).scrollIntoView({ behavior: "smooth" });
+          return;
+        }
+      } else {
+        // If on another page, navigate to home page with hash
+        router.push(`/${href}`);
       }
     } else if (href.startsWith("/")) {
       router.push(href);
@@ -247,9 +256,14 @@ const Header: FC = () => {
                 variant="primary"
                 className="hidden md:inline-flex"
                 onClick={() => {
-                  const el = document.querySelector("#contact");
-                  if (el) {
-                    el.scrollIntoView({ behavior: "smooth" });
+                  const isHomePage = window.location.pathname === "/";
+                  if (isHomePage) {
+                    const el = document.querySelector("#contact");
+                    if (el) {
+                      el.scrollIntoView({ behavior: "smooth" });
+                    }
+                  } else {
+                    router.push("/#contact");
                   }
                 }}
               >

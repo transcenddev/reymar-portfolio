@@ -3,6 +3,7 @@
 import Button from "@/components/Button";
 import useTextRevealAnimation from "@/hooks/useTextRevealAnimation";
 import { useInView } from "motion/react";
+import { useRouter } from "next/navigation";
 import { FC, useEffect, MouseEvent } from "react";
 
 const navItems = [
@@ -31,6 +32,7 @@ const navItems = [
 const Footer: FC = () => {
   const { scope, entranceAnimation } = useTextRevealAnimation();
   const inView = useInView(scope);
+  const router = useRouter();
 
   useEffect(() => {
     if (inView) {
@@ -43,13 +45,20 @@ const Footer: FC = () => {
 
     const url = new URL(e.currentTarget.href);
     const hash = url.hash;
+    
+    // Check if we're on the home page
+    const isHomePage = window.location.pathname === "/";
 
-    const target = document.querySelector(hash);
-
-    if (!target) return;
-    target.scrollIntoView({ behavior: "smooth" });
-
-    // console.log(hash);
+    if (isHomePage) {
+      // If on home page, use smooth scroll
+      const target = document.querySelector(hash);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      // If on another page, navigate to home page with hash
+      router.push(`/${hash}`);
+    }
   };
 
   return (
