@@ -21,11 +21,6 @@ const projects = [
     image: image2,
   },
   {
-    id: "personal-portfolio",
-    name: "Personal Portfolio",
-    image: image3,
-  },
-  {
     id: "covid-health-declaration",
     name: "COVID-19 Health Declaration System",
     image: image4,

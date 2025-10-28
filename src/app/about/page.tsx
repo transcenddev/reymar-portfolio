@@ -284,18 +284,30 @@ const EducationExperience = () => (
             <div className="text-2xl md:text-3xl font-serif italic text-black mb-3">
               Cavite State University
             </div>
-            <div className="text-base md:text-lg text-black/70">
+            <div className="text-base md:text-lg text-black/70 mb-2">
               Bachelor of Science in Computer Science
+            </div>
+            <div className="text-sm md:text-base text-black/50 mb-4">
+              GWA: 1.51 / 4.0 scale
             </div>
             <div className="text-sm md:text-base text-black/60 leading-relaxed space-y-4">
               <p>
-                I built a strong foundation in software development and
-                problem-solving, with a strategic mindset for tackling complex
-                challenges.
+                <span className="font-semibold text-black/80">Thesis:</span>{" "}
+                Developed IoT platform for real-time water quality monitoring
+                using predictive analytics with decision tree algorithms (90%+
+                accuracy).
               </p>
               <p>
-                My coursework has given me a focus on exploring and implementing
-                emerging technologies in my projects.
+                <span className="font-semibold text-black/80">
+                  Focused coursework:
+                </span>{" "}
+                Software Engineering, IoT, Machine Learning, Artificial
+                Intelligence, Web Systems
+              </p>
+              <p>
+                I built a strong foundation in software development and
+                problem-solving, with a strategic mindset for tackling complex
+                challenges through hands-on projects and emerging technologies.
               </p>
             </div>
           </div>
@@ -507,166 +519,494 @@ const Favourites = () => (
   </AnimatedSection>
 );
 
-// Life Gallery Section
-const lifeImages = [
-  // Fitness & Training (8 images)
+// Life Gallery Section - Mixed Video Snippets & Photos
+const lifeSnippets = [
+  // Fitness & Calisthenics
   {
-    src: "/assets/images/project-1.jpg",
-    alt: "Morning calisthenics routine - handstand practice",
-    aspectRatio: "4/3",
+    src: "/assets/videos/snippet-life/handstand-sunset-beach.mov",
+    alt: "Handstand practice at sunset beach",
+    aspectRatio: "9/16",
+    type: "video",
   },
   {
-    src: "/assets/images/project-2.jpg",
-    alt: "Martial arts training - high kick form",
+    src: "/assets/images/me-photo-highlights/calisthenics.jpg",
+    alt: "Calisthenics training",
     aspectRatio: "3/4",
+    type: "image",
   },
   {
-    src: "/assets/images/project-3.jpg",
-    alt: "Group workout session at the park",
-    aspectRatio: "16/9",
+    src: "/assets/videos/snippet-life/handstandpress-beach-sunset-calisthenics.mp4",
+    alt: "Handstand press at beach during sunset",
+    aspectRatio: "9/16",
+    type: "video",
   },
   {
-    src: "/assets/images/project-4.jpg",
-    alt: "Post-training stretching routine",
-    aspectRatio: "1/1",
-  },
-  {
-    src: "/assets/images/project-5.jpg",
-    alt: "Morning run through city trails",
-    aspectRatio: "4/3",
-  },
-  {
-    src: "/assets/images/testimonial-1.jpg",
-    alt: "Boxing practice with training partner",
-    aspectRatio: "1/1",
-  },
-  {
-    src: "/assets/images/testimonial-2.jpg",
-    alt: "Outdoor yoga session at sunset",
-    aspectRatio: "16/9",
-  },
-  {
-    src: "/assets/images/testimonial-3.jpg",
-    alt: "Resistance training setup",
+    src: "/assets/images/me-photo-highlights/calisthenics2.jpg",
+    alt: "Calisthenics workout moment",
     aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/videos/snippet-life/handstand-kids-calisthenics-sunset.mov",
+    alt: "Calisthenics with kids at sunset",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/calisthenics3.jpg",
+    alt: "Outdoor calisthenics session",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/videos/snippet-life/calisthenics hpsu qc.mp4",
+    alt: "Calisthenics HPSU workout in QC",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+  {
+    src: "/assets/videos/snippet-life/calisthenics nature morning workout.mov",
+    alt: "Morning calisthenics workout in nature",
+    aspectRatio: "9/16",
+    type: "video",
   },
 
-  // Photography & Creative Work (7 images)
+  // Gym & Training
   {
-    src: "/assets/images/project-1.jpg",
-    alt: "Street photography in urban setting",
-    aspectRatio: "3/4",
+    src: "/assets/videos/snippet-life/gym bicep black compression mullet.mov",
+    alt: "Bicep training at gym",
+    aspectRatio: "9/16",
+    type: "video",
   },
   {
-    src: "/assets/images/project-2.jpg",
-    alt: "Nature macro photography",
-    aspectRatio: "1/1",
+    src: "/assets/videos/snippet-life/gym boxing.mov",
+    alt: "Boxing training session",
+    aspectRatio: "9/16",
+    type: "video",
   },
   {
-    src: "/assets/images/project-3.jpg",
-    alt: "City landscape at golden hour",
-    aspectRatio: "16/9",
-  },
-  {
-    src: "/assets/images/project-4.jpg",
-    alt: "Behind the scenes - photo editing",
-    aspectRatio: "4/3",
-  },
-  {
-    src: "/assets/images/project-5.jpg",
-    alt: "Camera gear setup for shoot",
-    aspectRatio: "1/1",
-  },
-  {
-    src: "/assets/images/testimonial-1.jpg",
-    alt: "Portrait photography session",
-    aspectRatio: "3/4",
-  },
-  {
-    src: "/assets/images/testimonial-2.jpg",
-    alt: "Time-lapse setup at viewpoint",
-    aspectRatio: "16/9",
+    src: "/assets/videos/snippet-life/punching bag muaythai gym.mov",
+    alt: "Muay Thai punching bag workout",
+    aspectRatio: "9/16",
+    type: "video",
   },
 
-  // Reading & Learning (5 images)
+  // Running & Outdoor Activities
   {
-    src: "/assets/images/project-1.jpg",
-    alt: "Cozy reading corner setup",
-    aspectRatio: "1/1",
+    src: "/assets/videos/snippet-life/run-swim-abs.mov",
+    alt: "Running, swimming and abs workout",
+    aspectRatio: "9/16",
+    type: "video",
   },
   {
-    src: "/assets/images/project-2.jpg",
-    alt: "Book collection and notes",
-    aspectRatio: "4/3",
-  },
-  {
-    src: "/assets/images/project-3.jpg",
-    alt: "Study session at library",
+    src: "/assets/images/me-photo-highlights/running.jpg",
+    alt: "Running outdoors",
     aspectRatio: "3/4",
+    type: "image",
   },
   {
-    src: "/assets/images/project-4.jpg",
-    alt: "Morning reading routine",
-    aspectRatio: "16/9",
+    src: "/assets/videos/snippet-life/running-beach-salabay.mov",
+    alt: "Beach running at Salabay",
+    aspectRatio: "9/16",
+    type: "video",
   },
   {
-    src: "/assets/images/project-5.jpg",
-    alt: "Favorite books collection",
-    aspectRatio: "1/1",
+    src: "/assets/images/me-photo-highlights/running-beach-me-face.jpg",
+    alt: "Running at the beach",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/videos/snippet-life/running-beach forest-plaza-church- beach.mov",
+    alt: "Running through beach, forest, and church",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/running-beach-me-physique.jpg",
+    alt: "Beach running physique",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/videos/snippet-life/running-church-scene.MOV",
+    alt: "Running past church scenic route",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/running2.jpg",
+    alt: "Running session outdoors",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/videos/snippet-life/running-luya.mp4",
+    alt: "Running session",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/running3.jpg",
+    alt: "Running workout",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/videos/snippet-life/running with justin night.mov",
+    alt: "Night running with Justin",
+    aspectRatio: "9/16",
+    type: "video",
   },
 
-  // Travel & Adventure (5 images)
+  // Beach & Nature
   {
-    src: "/assets/images/testimonial-1.jpg",
-    alt: "Mountain hiking expedition",
-    aspectRatio: "16/9",
+    src: "/assets/videos/snippet-life/sunset-beach-swim-me.mov",
+    alt: "Swimming at beach during sunset",
+    aspectRatio: "9/16",
+    type: "video",
   },
   {
-    src: "/assets/images/testimonial-2.jpg",
-    alt: "Beach sunset meditation",
-    aspectRatio: "4/3",
-  },
-  {
-    src: "/assets/images/testimonial-3.jpg",
-    alt: "Local market exploration",
-    aspectRatio: "1/1",
-  },
-  {
-    src: "/assets/images/project-1.jpg",
-    alt: "Camping under stars",
-    aspectRatio: "16/9",
-  },
-  {
-    src: "/assets/images/project-2.jpg",
-    alt: "Historical site visit",
+    src: "/assets/images/me-photo-highlights/beach-me.JPG",
+    alt: "Beach moment",
     aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/videos/snippet-life/sunset-pink-beach-sea.MOV",
+    alt: "Pink sunset at the beach",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/beach1.jpg",
+    alt: "Beach vibes",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/beach2.jpg",
+    alt: "Beach day",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/beach-allwhitefit-guitar3.jpg",
+    alt: "Beach with guitar in all white",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/forest.jpg",
+    alt: "Forest exploration",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/forest2.jpg",
+    alt: "Nature forest scene",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/forest3.jpg",
+    alt: "Forest adventure",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/ilog1.jpg",
+    alt: "River adventure",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/ilog2.jpg",
+    alt: "River exploration",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/ilog3.jpg",
+    alt: "River moment",
+    aspectRatio: "3/4",
+    type: "image",
   },
 
-  // Community & Events (5 images)
+  // Fashion & Style
   {
-    src: "/assets/images/project-3.jpg",
-    alt: "Arc Community meetup",
-    aspectRatio: "16/9",
+    src: "/assets/videos/snippet-life/fit check mall all black mullet.mov",
+    alt: "All black fit check at the mall",
+    aspectRatio: "9/16",
+    type: "video",
   },
   {
-    src: "/assets/images/project-4.jpg",
-    alt: "Group workshop session",
-    aspectRatio: "4/3",
+    src: "/assets/videos/snippet-life/fitcheck bgc grey hoodie.mov",
+    alt: "Grey hoodie fit check at BGC",
+    aspectRatio: "9/16",
+    type: "video",
   },
   {
-    src: "/assets/images/project-5.jpg",
-    alt: "Community outreach event",
-    aspectRatio: "1/1",
+    src: "/assets/videos/snippet-life/grey hoodie baggy pants.mov",
+    alt: "Grey hoodie and baggy pants outfit",
+    aspectRatio: "9/16",
+    type: "video",
   },
   {
-    src: "/assets/images/testimonial-1.jpg",
-    alt: "Tech conference networking",
-    aspectRatio: "16/9",
+    src: "/assets/videos/snippet-life/white compression shirt baggy pants.mov",
+    alt: "White compression shirt outfit",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+
+  // Food & Cooking
+  {
+    src: "/assets/videos/snippet-life/food kimchi.MOV",
+    alt: "Kimchi food prep",
+    aspectRatio: "9/16",
+    type: "video",
   },
   {
-    src: "/assets/images/testimonial-2.jpg",
-    alt: "Team building activities",
+    src: "/assets/videos/snippet-life/food (4).MOV",
+    alt: "Food preparation",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+  {
+    src: "/assets/videos/snippet-life/cooking kila cess 1.MOV",
+    alt: "Cooking session",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+
+  // Creative & Work
+  {
+    src: "/assets/images/me-photo-highlights/me-pc-coffee.jpg",
+    alt: "Working at PC with coffee",
     aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/painting.jpg",
+    alt: "Painting artwork",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/photographer.jpg",
+    alt: "Photography work",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/photographer2.jpg",
+    alt: "Behind the camera",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+
+  // Internship & Work Life
+  {
+    src: "/assets/images/me-photo-highlights/intern-event-me.jpg",
+    alt: "Internship event",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/videos/snippet-life/internship behind the scene videography.MOV",
+    alt: "Behind the scenes videography at internship",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+  {
+    src: "/assets/videos/snippet-life/internship billiards qc (2).MOV",
+    alt: "Billiards during internship break",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+
+  // Museums & Culture
+  {
+    src: "/assets/videos/snippet-life/museum of manila (25).MOV",
+    alt: "Museum of Manila visit",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/museum-me.jpg",
+    alt: "Museum exploration",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/videos/snippet-life/national museum (1).MOV",
+    alt: "National Museum exploration",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/museum2.jpg",
+    alt: "Museum visit moment",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/museum3.jpg",
+    alt: "Museum art viewing",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/museum4.jpg",
+    alt: "Museum cultural experience",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/museum5.jpg",
+    alt: "Museum exploration day",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/videos/snippet-life/venice grand canal manila edited.mp4",
+    alt: "Venice Grand Canal Manila",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+
+  // Travel & Adventures
+  {
+    src: "/assets/images/me-photo-highlights/tagaytay-me.jpg",
+    alt: "Tagaytay trip",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/tagaytay-scene1.jpg",
+    alt: "Tagaytay scenic view",
+    aspectRatio: "16/9",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/tagayta2.jpg",
+    alt: "Tagaytay adventure",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/tagaytay3.jpg",
+    alt: "Tagaytay moment",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/tagaytay-scene3.jpg",
+    alt: "Tagaytay landscape",
+    aspectRatio: "16/9",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/tagaytay4.jpg",
+    alt: "Tagaytay exploration",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/acienda1.jpg",
+    alt: "Hacienda visit",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/acienda2.jpg",
+    alt: "Hacienda exploration",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/acienda3.jpg",
+    alt: "Hacienda adventure",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/pasig-river-esplanade-me.jpg",
+    alt: "Pasig River Esplanade",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/pasig-river-esplanade-scene.jpg",
+    alt: "Pasig River Esplanade view",
+    aspectRatio: "16/9",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/pasig-river-esplanade-scene2.jpg",
+    alt: "Pasig River scenic spot",
+    aspectRatio: "16/9",
+    type: "image",
+  },
+
+  // Events & Community
+  {
+    src: "/assets/videos/snippet-life/ccl anniversary.mp4",
+    alt: "CCL anniversary celebration",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+
+  // Family & Personal
+  {
+    src: "/assets/images/me-photo-highlights/mall-mom1.jpg",
+    alt: "Mall day with mom",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/mall-mom2.jpg",
+    alt: "Shopping with mom",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/mall-mom3.jpg",
+    alt: "Quality time with mom",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/me-photo-highlights/mall-mom4.jpg",
+    alt: "Mom and me at the mall",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+
+  // Hobbies & Personal
+  {
+    src: "/assets/videos/snippet-life/guitar frank ocean.mov",
+    alt: "Playing guitar - Frank Ocean",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+  {
+    src: "/assets/videos/snippet-life/cats-play-white-black.MOV",
+    alt: "Playing with cats",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+  {
+    src: "/assets/videos/snippet-life/fish-food.mov",
+    alt: "Feeding fish",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+  {
+    src: "/assets/videos/snippet-life/my-room-dark.mov",
+    alt: "My room setup",
+    aspectRatio: "9/16",
+    type: "video",
   },
 ];
 
@@ -674,8 +1014,6 @@ const LifeGallery = () => {
   return (
     <AnimatedSection className="container mx-auto pt-16 pb-10" delay={0.3}>
       <div className="max-w-4xl mx-auto mb-16">
-        {/* <AnimatedSection className="container mx-auto px-4 pb-20" delay={0.3}>
-        <div className="max-w-2xl mx-auto mb-16"> */}
         <h2
           className="text-black font-normal mb-8 text-center sm:text-left"
           style={{ fontSize: "clamp(2rem, 5vw, 3rem)" }}
@@ -683,15 +1021,10 @@ const LifeGallery = () => {
           Snippets of my <em className="font-serif italic">life</em> outside of
           work
         </h2>
-        {/* <p className="text-base md:text-lg text-black/80">
-            A visual journey through my interests, hobbies, and adventures. From
-            martial arts and fitness to exploring new places and capturing moments
-            through photography.
-          </p> */}
       </div>
 
       <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4">
-        {lifeImages.map((image, index) => (
+        {lifeSnippets.map((item, index) => (
           <motion.div
             key={index}
             className="break-inside-avoid mb-4"
@@ -699,7 +1032,7 @@ const LifeGallery = () => {
             whileInView={{
               opacity: 1,
               y: 0,
-              transition: { delay: index * 0.1 },
+              transition: { delay: index * 0.02 },
             }}
             viewport={{ once: true, margin: "-100px" }}
           >
@@ -714,17 +1047,33 @@ const LifeGallery = () => {
               <div
                 className="relative"
                 style={{
-                  paddingBottom: getAspectRatioPadding(image.aspectRatio),
+                  paddingBottom: getAspectRatioPadding(item.aspectRatio),
                 }}
               >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="object-cover"
-                  priority={index < 4}
-                />
+                {item.type === "video" ? (
+                  <video
+                    src={item.src}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    muted
+                    loop
+                    playsInline
+                    onMouseEnter={(e) => e.currentTarget.play()}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.pause();
+                      e.currentTarget.currentTime = 0;
+                    }}
+                    aria-label={item.alt}
+                  />
+                ) : (
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    className="object-cover"
+                    priority={index < 8}
+                  />
+                )}
               </div>
             </motion.div>
           </motion.div>

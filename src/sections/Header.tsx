@@ -18,6 +18,10 @@ const navItems = [
     label: "Works",
     href: "#projects",
   },
+  {
+    label: "Contact",
+    href: "#contact",
+  },
 ];
 
 const Header: FC = () => {
@@ -188,7 +192,14 @@ const Header: FC = () => {
         <div className="container !max-w-full">
           <div className="flex justify-between h-20 items-center">
             <div>
-              <a href="/">
+              <a
+                href="/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/");
+                }}
+                className="cursor-pointer"
+              >
                 <span className="text-xl font-bold uppercase text-white">
                   Reymar&nbsp;Mirante{" "}
                 </span>
