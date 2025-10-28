@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { motion, useAnimate } from "motion/react";
 // import { a, div, nav } from "motion/react-client";
 
-/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 const navItems = [
   {
     label: "About",
@@ -16,20 +15,8 @@ const navItems = [
     href: "/play",
   },
   {
-    label: "Selected Works",
+    label: "Works",
     href: "#projects",
-  },
-  {
-    label: "Testimonials",
-    href: "#testimonials",
-  },
-  {
-    label: "FAQs",
-    href: "#faqs",
-  },
-  {
-    label: "Contact",
-    href: "#contact",
   },
 ];
 
