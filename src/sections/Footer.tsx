@@ -45,7 +45,7 @@ const Footer: FC = () => {
 
     const url = new URL(e.currentTarget.href);
     const hash = url.hash;
-    
+
     // Check if we're on the home page
     const isHomePage = window.location.pathname === "/";
 

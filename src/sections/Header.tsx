@@ -126,11 +126,11 @@ const Header: FC = () => {
 
   const navigateToHashOrRoute = (href: string) => {
     if (!href) return;
-    
+
     if (href.startsWith("#")) {
       // Check if we're on the home page
       const isHomePage = window.location.pathname === "/";
-      
+
       if (isHomePage) {
         // If on home page, use smooth scroll
         const target = document.querySelector(href);

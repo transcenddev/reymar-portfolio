@@ -34,7 +34,7 @@ export default function Home() {
       <Services />
       <Testimonials />
       <FAQs />
-      <Footer /> 
+      <Footer />
     </>
   );
 }
