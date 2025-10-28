@@ -7,7 +7,6 @@ import image1 from "@/assets/images/project-1.jpg";
 import image2 from "@/assets/images/project-2.jpg";
 import image3 from "@/assets/images/project-3.jpg";
 import image4 from "@/assets/images/project-4.jpg";
-import image5 from "@/assets/images/project-5.jpg";
 
 /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 const projects = [
@@ -27,14 +26,9 @@ const projects = [
     image: image3,
   },
   {
-    id: "play-highlights",
-    name: "Play Highlights",
-    image: image4,
-  },
-  {
     id: "covid-health-declaration",
     name: "COVID-19 Health Declaration System",
-    image: image5,
+    image: image4,
   },
 ];
 const Projects: FC = () => {

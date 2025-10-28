@@ -36,24 +36,21 @@ export default function PlayPage() {
               >
                 Content Creation
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
                 {[
-                  {
-                    type: "instagram",
-                    url: "https://www.instagram.com/reel/DMcbSU7zbby/embed",
-                    title: "Network is Your Network",
-                  },
-                  {
-                    type: "instagram",
-                    url: "https://www.instagram.com/reel/DPmoOviE7Hm/embed",
-                    title: "Day in the Life",
-                  },
-                  {
-                    type: "tiktok",
-                    url: "https://www.tiktok.com/embed/7464261158665538823",
-                    title: "Tech Internship",
-                  },
-                ].map((video, index) => (
+                  "intern.mp4",
+                  "dayinthelife.mp4",
+                  "cstips.mp4",
+                  "getbacktrack.mp4",
+                  "handstandwithme.mp4",
+                  "howtogetlean.mp4",
+                  "runfishermen.mp4",
+                  "multipleinterest.mp4",
+                  "shadowboxbluehour.mp4",
+                  "cclmeet.mp4",
+                  "closure.mp4",
+                  "bgcmuseum.mp4",
+                ].map((videoFile, index) => (
                   <motion.div
                     key={index}
                     className="relative"
@@ -65,17 +62,45 @@ export default function PlayPage() {
                     }}
                     viewport={{ once: true, margin: "-50px" }}
                   >
-                    <div className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 aspect-[9/16] max-h-[600px]">
-                      <iframe
-                        src={video.url}
-                        title={video.title}
-                        allowFullScreen
-                        scrolling="no"
-                        className="absolute inset-0 w-full h-full"
+                    <div className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 aspect-[9/16]">
+                      <video
+                        src={`/assets/videos/${videoFile}`}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover"
+                        onError={(e) => {
+                          console.error(`Error loading video: ${videoFile}`, e);
+                        }}
                       />
                     </div>
                   </motion.div>
                 ))}
+              </div>
+              <div className="flex justify-center">
+                <a
+                  href="https://www.instagram.com/2049rae"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors text-sm md:text-base"
+                >
+                  View More
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="size-4"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                    />
+                  </svg>
+                </a>
               </div>
             </div>
 
@@ -129,33 +154,30 @@ export default function PlayPage() {
                   </motion.div>
                 ))}
               </div>
-              <motion.a
-                href="https://www.instagram.com/2049.rae/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm md:text-base font-medium"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                View Full Gallery
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+              <div className="flex justify-center">
+                <a
+                  href="https://www.instagram.com/2049.rae/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors text-sm md:text-base"
                 >
-                  <path d="M7 17L17 7" />
-                  <path d="M7 7h10v10" />
-                </svg>
-              </motion.a>
+                  View More
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="size-4"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                    />
+                  </svg>
+                </a>
+              </div>
             </div>
 
             {/* Video Edit - Motion Graphics */}
@@ -216,6 +238,30 @@ export default function PlayPage() {
                   </motion.div>
                 ))}
               </div>
+              <div className="flex justify-center mt-8">
+                <a
+                  href="https://www.youtube.com/@2049rae"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors text-sm md:text-base"
+                >
+                  View More
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="size-4"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                    />
+                  </svg>
+                </a>
+              </div>
             </div>
 
             {/* Cinematography */}
@@ -271,6 +317,30 @@ export default function PlayPage() {
                     </div>
                   </motion.div>
                 ))}
+              </div>
+              <div className="flex justify-center mt-8">
+                <a
+                  href="https://www.youtube.com/@2049rae"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors text-sm md:text-base"
+                >
+                  View More
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="size-4"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                    />
+                  </svg>
+                </a>
               </div>
             </div>
 

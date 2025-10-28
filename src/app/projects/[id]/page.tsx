@@ -54,11 +54,7 @@ const projectsData: Record<
       "/assets/images/sp-madrid-with-ceo.jpg",
     ],
     liveUrl: "#",
-    relatedProjects: [
-      "read-ai-website",
-      "personal-portfolio",
-      "play-highlights",
-    ],
+    relatedProjects: ["read-ai-website", "personal-portfolio"],
   },
   "read-ai-website": {
     id: "read-ai-website",
@@ -109,26 +105,7 @@ const projectsData: Record<
     timeline: "Ongoing",
     images: [],
     liveUrl: "#",
-    relatedProjects: [
-      "read-ai-website",
-      "play-highlights",
-      "covid-health-declaration",
-    ],
-  },
-  "play-highlights": {
-    id: "play-highlights",
-    title: "Play Highlights (Videography & Content Creation)",
-    description: "Creativity + editing workflow.",
-    client: "Various",
-    services: "Videography, Content Creation",
-    timeline: "1 year",
-    images: [],
-    liveUrl: "#",
-    relatedProjects: [
-      "sp-madrid-ai-multimedia",
-      "personal-portfolio",
-      "covid-health-declaration",
-    ],
+    relatedProjects: ["read-ai-website", "covid-health-declaration"],
   },
   "covid-health-declaration": {
     id: "covid-health-declaration",
@@ -164,11 +141,7 @@ const projectsData: Record<
       "/assets/images/covid-table.png",
     ],
     liveUrl: "#",
-    relatedProjects: [
-      "sp-madrid-ai-multimedia",
-      "read-ai-website",
-      "play-highlights",
-    ],
+    relatedProjects: ["sp-madrid-ai-multimedia", "read-ai-website"],
   },
 };
 
