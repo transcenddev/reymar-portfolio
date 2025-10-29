@@ -437,7 +437,7 @@ const lifeSnippets = [
     type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/running-church-scene.MOV",
+    src: "/assets/videos/snippet-life/running-church-scene.mov",
     alt: "Running past church scenic route",
     aspectRatio: "9/16",
     type: "video",
@@ -481,7 +481,7 @@ const lifeSnippets = [
     type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/sunset-pink-beach-sea.MOV",
+    src: "/assets/videos/snippet-life/sunset-pink-beach-sea.mov",
     alt: "Pink sunset at the beach",
     aspectRatio: "9/16",
     type: "video",
@@ -569,19 +569,19 @@ const lifeSnippets = [
 
   // Food & Cooking
   {
-    src: "/assets/videos/snippet-life/food kimchi.MOV",
+    src: "/assets/videos/snippet-life/food kimchi.mov",
     alt: "Kimchi food prep",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/videos/snippet-life/food (4).MOV",
+    src: "/assets/videos/snippet-life/food (4).mov",
     alt: "Food preparation",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/videos/snippet-life/cooking kila cess 1.MOV",
+    src: "/assets/videos/snippet-life/cooking kila cess 1.mov",
     alt: "Cooking session",
     aspectRatio: "9/16",
     type: "video",
@@ -621,13 +621,13 @@ const lifeSnippets = [
     type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/internship behind the scene videography.MOV",
+    src: "/assets/videos/snippet-life/internship behind the scene videography.mov",
     alt: "Behind the scenes videography at internship",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/videos/snippet-life/internship billiards qc (2).MOV",
+    src: "/assets/videos/snippet-life/internship billiards qc (2).mov",
     alt: "Billiards during internship break",
     aspectRatio: "9/16",
     type: "video",
@@ -635,7 +635,7 @@ const lifeSnippets = [
 
   // Museums & Culture
   {
-    src: "/assets/videos/snippet-life/museum of manila (25).MOV",
+    src: "/assets/videos/snippet-life/museum of manila (25).mov",
     alt: "Museum of Manila visit",
     aspectRatio: "9/16",
     type: "video",
@@ -647,7 +647,7 @@ const lifeSnippets = [
     type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/national museum (1).MOV",
+    src: "/assets/videos/snippet-life/national museum (1).mov",
     alt: "National Museum exploration",
     aspectRatio: "9/16",
     type: "video",
@@ -799,7 +799,7 @@ const lifeSnippets = [
     type: "video",
   },
   {
-    src: "/assets/videos/snippet-life/cats-play-white-black.MOV",
+    src: "/assets/videos/snippet-life/cats-play-white-black.mov",
     alt: "Playing with cats",
     aspectRatio: "9/16",
     type: "video",
