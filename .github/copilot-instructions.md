@@ -14,6 +14,7 @@ Next.js 14 portfolio site using App Router, Tailwind CSS, Framer Motion (`motion
 **Critical Patterns:**
 
 - All interactive/animated components MUST include `"use client"` directive (Next.js App Router requirement)
+- **CRITICAL**: Always import from `motion/react`, NEVER from `framer-motion` (legacy package causing conflicts)
 - Asset paths: Import from `src/assets/` for build optimization, reference `public/assets/` as strings
 - Project data is colocated in `projects/[id]/page.tsx` as `projectsData: Record<string, ProjectData>`
 - Dynamic routing uses client-side state (`useState(projectId)`) to switch projects without navigation
@@ -55,9 +56,28 @@ return <motion.h1 ref={scope}>Your animated text</motion.h1>;
 Use `AnimatedSection` for standard entrance animations:
 
 ```tsx
-<AnimatedSection className="container" delay={0.1}>
-  {/* Content fades in from y: 40 → 0, opacity: 0 → 1 */}
-</AnimatedSection>
+import { motion } from "motion/react"; // Correct package
+
+<motion.section
+  initial={{ opacity: 0, y: 40 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.7, delay: 0 }}
+>
+  {/* Content fades in */}
+</motion.section>;
+```
+
+### Scroll Detection with useInView
+
+Track when elements enter viewport (`Services.tsx`, `Intro.tsx`, `Footer.tsx`):
+
+```tsx
+import { useInView } from "motion/react";
+
+const ref = useRef<HTMLDivElement>(null);
+const isInView = useInView(ref, { once: true, amount: 0.3 }); // Triggers once when 30% visible
+
+return <div ref={ref}>{isInView && <AnimatedContent />}</div>;
 ```
 
 ### Scroll-Linked Animations
@@ -84,6 +104,54 @@ topLineAnimate([
   [topLineScope.current, { translateY: 4 }],
   [topLineScope.current, { rotate: 45 }],
 ]);
+```
+
+### Video Autoplay on Scroll
+
+`ProjectDetail.tsx` implements viewport-based video playback:
+
+```tsx
+const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+useEffect(() => {
+  const handleScroll = () => {
+    videoRefs.current.forEach((video) => {
+      if (video) {
+        const rect = video.getBoundingClientRect();
+        const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+        isVisible ? video.play() : video.pause();
+      }
+    });
+  };
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+```
+
+### Mouse-Following Image Preview
+
+`Projects.tsx` shows hover-following cursor preview:
+
+```tsx
+const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+const [isHovered, setIsHovered] = useState(false);
+
+const handleMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
+  setMousePosition({ x: e.clientX + 20, y: e.clientY + 20 });
+};
+
+// Preview image follows cursor
+<div
+  className="fixed w-80 aspect-video pointer-events-none"
+  style={{
+    left: mousePosition.x,
+    top: mousePosition.y,
+    transform: "translate(-50%, -50%)",
+    opacity: isHovered ? 1 : 0,
+  }}
+>
+  <Image src={image} ... />
+</div>
 ```
 
 ## Component Patterns
@@ -256,3 +324,17 @@ useEffect(() => {
 - Primary: Archivo (200/400/500/600/700 weights) → `--font-archivo` variable
 - Decorative: Imperial Script → `--font-imperial` variable
 - Fonts loaded via `next/font/google` for optimal performance
+
+## Known Issues to Fix
+
+**Import Inconsistencies** - Several files still import from deprecated `framer-motion`:
+
+- `src/components/AnimatedSection.tsx`
+- `src/components/PageLoader.tsx`
+- `src/components/MediaSkeleton.tsx`
+- `src/components/ImageWithBlur.tsx`
+- `src/components/VideoWithLoading.tsx`
+- `src/app/play/page.tsx`
+- `src/app/about/page.tsx`
+
+**Fix**: Replace `import { motion } from "framer-motion"` with `import { motion } from "motion/react"`

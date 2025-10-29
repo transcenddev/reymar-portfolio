@@ -12,7 +12,10 @@ const Testimonial = (
     company: string;
     imagePositionY: number;
     image: string | StaticImageData;
+    linkedin?: string;
     className?: string;
+    onPrev?: () => void;
+    onNext?: () => void;
   } & HTMLAttributes<HTMLDivElement>
 ) => {
   const {
@@ -22,7 +25,10 @@ const Testimonial = (
     company,
     imagePositionY,
     image,
+    linkedin,
     className,
+    onPrev,
+    onNext,
     ...rest
   } = props;
 
@@ -30,11 +36,6 @@ const Testimonial = (
     scope: quoteScope,
     entranceAnimation: quoteEntranceAnimation,
     exitAnimation: quoteExitAnimation,
-  } = useTextRevealAnimation();
-  const {
-    scope: citeScope,
-    entranceAnimation: citeEntranceAnimation,
-    exitAnimation: citeExitAnimation,
   } = useTextRevealAnimation();
   const [isPresent, safeToRemove] = usePresence();
 
@@ -45,9 +46,6 @@ const Testimonial = (
         try {
           if (quoteEntranceAnimation) {
             await quoteEntranceAnimation();
-            if (citeEntranceAnimation) {
-              await citeEntranceAnimation();
-            }
           }
         } catch (error) {
           console.error("Entrance animation error:", error);
@@ -58,10 +56,7 @@ const Testimonial = (
       // Handle exit animations
       const animate = async () => {
         try {
-          await Promise.all([
-            quoteExitAnimation?.() || Promise.resolve(),
-            citeExitAnimation?.() || Promise.resolve(),
-          ]);
+          await quoteExitAnimation?.();
           safeToRemove?.();
         } catch (error) {
           console.error("Exit animation error:", error);
@@ -69,94 +64,148 @@ const Testimonial = (
       };
       animate();
     }
-  }, [
-    isPresent,
-    quoteEntranceAnimation,
-    citeEntranceAnimation,
-    quoteExitAnimation,
-    citeExitAnimation,
-    safeToRemove,
-  ]);
+  }, [isPresent, quoteEntranceAnimation, quoteExitAnimation, safeToRemove]);
 
   return (
     <div
-      className={twMerge(
-        "md:grid md:grid-cols-5 md:gap-8 lg:gap-16 md:items-center md:mb-5",
-        className
-      )}
+      className={twMerge("flex flex-col gap-6 md:gap-8", className)}
       {...rest}
     >
-      <div className="aspect-square md:aspect-[9/16] col-span-2 relative overflow-hidden">
-        {/* Dark overlay animation */}
+      {/* Avatar and Info Section - Always visible first on mobile, second on desktop */}
+      <div className="flex items-center gap-4 order-1 md:order-2">
+        {/* Circular avatar */}
         <motion.div
-          className="absolute top-0 left-0 h-full w-full bg-stone-900 z-10"
-          initial={{ width: "100%" }}
-          animate={{ width: 0 }}
-          exit={{ width: "100%" }}
-          transition={{ duration: 0.5 }}
-        />
-
-        {/* Animate the image container (optional) */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
+          key={`avatar-${name}`}
+          className="relative shrink-0"
+          initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.98 }}
-          transition={{ duration: 0.4 }}
-          className="relative z-0 w-full h-full"
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <Image
-            src={image}
-            alt={name}
-            className="object-cover"
-            fill
-            style={{
-              objectPosition: `50% ${imagePositionY * 100}%`,
-            }}
-          />
+          <div className="size-16 md:size-20 lg:size-24 rounded-full overflow-hidden border-2 border-stone-200 shadow-lg">
+            <Image
+              src={image}
+              alt={name}
+              width={96}
+              height={96}
+              className="object-cover w-full h-full"
+              style={{
+                objectPosition: `50% ${imagePositionY * 100}%`,
+              }}
+              priority
+            />
+          </div>
         </motion.div>
+
+        {/* Name and role info */}
+        <motion.div
+          key={`info-${name}`}
+          className="flex flex-col gap-1 flex-1"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="font-semibold text-base md:text-lg lg:text-xl text-stone-900">
+              {name}
+            </span>
+            {linkedin && (
+              <a
+                href={linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center text-stone-500 hover:text-primary transition-colors"
+                aria-label={`${name}'s LinkedIn profile`}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="size-4 md:size-5"
+                >
+                  <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
+                </svg>
+              </a>
+            )}
+          </div>
+          <span className="text-xs md:text-sm lg:text-base text-stone-600">
+            {role}
+          </span>
+          <span className="text-xs md:text-sm lg:text-base text-stone-500">
+            {company}
+          </span>
+        </motion.div>
+
+        {/* Navigation buttons - positioned at the end */}
+        {(onPrev || onNext) && (
+          <motion.div
+            key={`nav-${name}`}
+            className="flex gap-3 shrink-0"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            {onPrev && (
+              <button
+                className="border border-stone-400 size-10 md:size-11 inline-flex items-center justify-center rounded-full hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+                onClick={onPrev}
+                aria-label="Previous testimonial"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-5 md:size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+                  />
+                </svg>
+              </button>
+            )}
+            {onNext && (
+              <button
+                className="border border-stone-400 size-10 md:size-11 inline-flex items-center justify-center rounded-full hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+                onClick={onNext}
+                aria-label="Next testimonial"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-5 md:size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                  />
+                </svg>
+              </button>
+            )}
+          </motion.div>
+        )}
       </div>
 
-      {/* <div className="aspect-square md:aspect-[9/16] col-span-2 relative">
-        <motion.div
-          className="absolute h-full bg-stone-900"
-          initial={{
-            width: "100%",
-          }}
-          animate={{
-            width: 0,
-          }}
-          exit={{
-            width: "100%",
-          }}
-          transition={{
-            duration: 0.5,
-          }}
-        ></motion.div>
-
-        <Image
-          src={image}
-          alt={`${name}`}
-          className="size-full object-cover"
-          style={{
-            objectPosition: `50% ${imagePositionY * 100}%`,
-          }}
-        />
-      </div> */}
-      <blockquote className="col-span-3">
+      {/* Quote Section */}
+      <blockquote className="order-2 md:order-1">
         <div
-          className="text-3xl md:text-5xl lg:text-6xl mt-8 md:mt-0"
+          className="text-xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight text-stone-700"
           ref={quoteScope}
         >
-          <span>&ldquo;</span>
-          {quote}
-          <span>&rdquo;</span>
+          <span className="text-primary text-4xl md:text-5xl lg:text-6xl leading-none">
+            &ldquo;
+          </span>
+          {quote}{" "}
+          <span className="text-primary text-4xl md:text-5xl lg:text-6xl leading-none">
+            &rdquo;
+          </span>
         </div>
-        <cite
-          className="mt-4 md:mt-8 not-italic block md:text-lg lg:text-xl"
-          ref={citeScope}
-        >
-          {name}, {role} at {company}
-        </cite>
       </blockquote>
     </div>
   );

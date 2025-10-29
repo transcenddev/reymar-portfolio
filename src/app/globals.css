@@ -12,9 +12,5 @@
 }
 
 .word {
-  @apply translate-y-full;
+  @apply translate-y-full opacity-0;
 }
-
-/* .word {
-  @apply inline-block translate-y-full opacity-0;
-} */

@@ -1,40 +1,39 @@
 "use client";
 
 import { FC, useRef, useState } from "react";
-import image1 from "@/assets/images/testimonial-1.jpg";
-import image2 from "@/assets/images/testimonial-2.jpg";
-import image3 from "@/assets/images/testimonial-3.jpg";
 import { useScroll, motion, useTransform, AnimatePresence } from "motion/react";
 import Testimonial from "@/components/Testimonial";
 
-/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 const testimonials = [
   {
-    name: "Sarah Chen",
-    company: "Pixel Perfect",
-    role: "Head of Design",
+    name: "Ryan Buan",
+    company: "OkPo AI",
+    role: "Tech Lead & AI Product Builder",
     quote:
-      "Reymar's expertise in both technical development and design created a beautiful, high-performing website.",
-    image: image1,
-    imagePositionY: 0.2,
+      "He excelled at integrating AI tools into his design process, consistently producing innovative and user-friendly solutions. His dedication was truly impressive; for example, he once stayed with the team until 2 a.m. to ensure a project was completed flawlessly.",
+    image: "/assets/images/avatar/avatar-ryan-buan.jpg",
+    imagePositionY: 0.5,
+    linkedin: "https://www.linkedin.com/in/ryan-buan-bbb605185/",
   },
   {
-    name: "Marcus Rodriguez",
-    company: "Craft Coffee Co.",
-    role: "Founder",
+    name: "Jonathan Alvarez",
+    company: "S.P. Madrid",
+    role: "Head of Product",
     quote:
-      "Reymar transformed our boutique coffee brand with a website that perfectly balances aesthetics and functionality.",
-    image: image2,
-    imagePositionY: 0.1,
+      "Reymar is one of those rare young professionals who pair remarkable discipline with an insatiable curiosity to learn. I've never once heard him complain about any project assigned to him. He simply dives in, determined to understand every detail so he can deliver quality work on time. Whether it's mastering a new skill, collaborating with the team, or producing both creative and technical outputs, his commitment is unwavering.",
+    image: "/assets/images/avatar/avatar-jonathan-alvarez.jpg",
+    imagePositionY: 0.5,
+    linkedin: "https://www.linkedin.com/in/jonathan-alvarez-b2bba8175/",
   },
   {
-    name: "Emily Watson",
-    company: "Studio Minimal",
-    role: "Creative Director",
+    name: "Julius Tuliao",
+    company: "Texxen",
+    role: "Technical Lead",
     quote:
-      "The collaborative process was amazing. Reymar brought lots of fresh perspectives and innovative solutions.",
-    image: image3,
-    imagePositionY: 0.55,
+      "Consistently demonstrated dedication by willingly working overtime to meet project deadlines. He remains focused even in challenging situations.",
+    image: "/assets/images/avatar/avatar-julius-tuliao.jpg",
+    imagePositionY: 0.5,
+    linkedin: "https://www.linkedin.com/in/juliustuliao/",
   },
 ];
 
@@ -90,71 +89,15 @@ const Testimonials: FC = () => {
         </motion.span>
       </h2>
       <div className="container">
-        <div className="mt-20">
+        <div className="mt-12 md:mt-20 max-w-4xl mx-auto">
           <AnimatePresence mode="wait" initial={false}>
             <Testimonial
               key={testimonials[testimonialIndex].name}
               {...testimonials[testimonialIndex]}
+              onPrev={handleClickPrev}
+              onNext={handleClickNext}
             />
           </AnimatePresence>
-        </div>
-        {/* <div className="mt-20">
-          {testimonials.map(
-            ({ name, company, role, quote, image, imagePositionY }, index) =>
-              index === testimonialIndex && (
-                <AnimatePresence mode="wait" initial={false}>
-                  <Testimonial
-                    name={name}
-                    company={company}
-                    role={role}
-                    quote={quote}
-                    image={image}
-                    imagePositionY={imagePositionY}
-                    key={name}
-                  />
-                </AnimatePresence>
-              )
-          )}
-        </div> */}
-        <div className="flex gap-4 mt-6 md:mt-0">
-          <button
-            className="border border-stone-400 size-11 inline-flex items-center justify-center rounded-full hover:bg-primary hover:text-white hover:border-primary transitional-all duration-300"
-            onClick={handleClickPrev}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
-              />
-            </svg>
-          </button>
-          <button
-            className="border border-stone-400 size-11 inline-flex items-center justify-center rounded-full hover:bg-primary hover:text-white hover:border-primary transitional-all duration-300"
-            onClick={handleClickNext}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-              />
-            </svg>
-          </button>
         </div>
       </div>
     </section>

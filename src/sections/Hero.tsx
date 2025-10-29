@@ -21,7 +21,9 @@ const Hero: FC = () => {
   const { scope, entranceAnimation } = useTextRevealAnimation();
 
   useEffect(() => {
-    entranceAnimation();
+    if (entranceAnimation) {
+      entranceAnimation();
+    }
   }, [entranceAnimation]);
 
   const handleClickNavItem = (e: MouseEvent<HTMLButtonElement>) => {
