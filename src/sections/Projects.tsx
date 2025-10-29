@@ -5,10 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import image1 from "@/assets/images/project-1.jpg";
 import image2 from "@/assets/images/project-2.jpg";
-import image3 from "@/assets/images/project-3.jpg";
 import image4 from "@/assets/images/project-4.jpg";
 
-/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 const projects = [
   {
     id: "sp-madrid-ai-multimedia",
