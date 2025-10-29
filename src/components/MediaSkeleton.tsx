@@ -6,7 +6,9 @@ interface MediaSkeletonProps {
   aspectRatio?: string;
 }
 
-export default function MediaSkeleton({ aspectRatio = "16/9" }: MediaSkeletonProps) {
+export default function MediaSkeleton({
+  aspectRatio = "16/9",
+}: MediaSkeletonProps) {
   return (
     <div
       className="relative w-full overflow-hidden bg-stone-200 rounded-lg"

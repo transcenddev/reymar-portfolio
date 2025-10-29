@@ -820,7 +820,7 @@ const lifeSnippets = [
 ];
 
 // Media Item Component with loading states
-const MediaItem = ({ item }: { item: typeof lifeSnippets[0] }) => {
+const MediaItem = ({ item }: { item: (typeof lifeSnippets)[0] }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (

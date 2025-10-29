@@ -198,17 +198,23 @@ const Header: FC = () => {
                   e.preventDefault();
                   router.push("/");
                 }}
-                className="cursor-pointer inline-block"
-                whileHover={{ scale: 1.05 }}
+                className="cursor-pointer inline-block px-4 py-2 rounded-lg"
+                whileHover={{
+                  scale: 1.05,
+                  backgroundColor: "rgba(89, 40, 229, 0.1)",
+                }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
                 <motion.span
-                  className="text-xl font-bold uppercase text-white transition-all duration-300 hover:text-primary"
-                  whileHover={{ letterSpacing: "0.05em" }}
+                  className="text-xl font-bold uppercase text-white"
+                  whileHover={{
+                    letterSpacing: "0.1em",
+                    color: "#5928e5",
+                  }}
                   transition={{ duration: 0.3 }}
                 >
-                  Reymar&nbsp;Mirante{" "}
+                  Reymar&nbsp;Mirante
                 </motion.span>
               </motion.a>
             </div>

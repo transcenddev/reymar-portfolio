@@ -1,157 +1,222 @@
 # Copilot Instructions for Reymar Portfolio
 
-Next.js 14 portfolio site with App Router, Tailwind CSS, Framer Motion (`motion`), and custom text animations via `split-type`.
+Next.js 14 portfolio site using App Router, Tailwind CSS, Framer Motion (`motion` package), and custom text reveal animations via `split-type`.
 
-## Project Structure
+## Architecture Overview
 
-- **Sections** (`src/sections/`): Full-page blocks (Hero, Projects, Testimonials) that compose pages
-- **Components** (`src/components/`): Reusable UI (Button, AnimatedSection, ProjectDetail)
-- **Pages** (`src/app/`): Route files import sections as default exports, render in sequence
-- **Hooks** (`src/hooks/`): Custom animation logic (e.g., `useTextRevealAnimation.tsx`)
+**Component Hierarchy:**
 
-**Critical patterns:**
+- **Pages** (`src/app/`): Route files that compose sections sequentially without wrapper divs
+- **Sections** (`src/sections/`): Full-page blocks (Hero, Projects, Testimonials) - always default exports
+- **Components** (`src/components/`): Reusable UI elements (Button, AnimatedSection, ProjectDetail)
+- **Hooks** (`src/hooks/`): Animation logic (primarily `useTextRevealAnimation.tsx`)
 
-- Client components require `"use client"` directive (all animations/hooks need this)
-- Static assets: `src/assets/` (import statements) vs `public/assets/` (direct string paths)
-- Project data lives in-component (`projects/[id]/page.tsx`) as `projectsData: Record<string, ProjectData>`
-- Pages compose sections directly: `<Header /><Hero /><Intro />...` (no wrapper divs)
+**Critical Patterns:**
+
+- All interactive/animated components MUST include `"use client"` directive (Next.js App Router requirement)
+- Asset paths: Import from `src/assets/` for build optimization, reference `public/assets/` as strings
+- Project data is colocated in `projects/[id]/page.tsx` as `projectsData: Record<string, ProjectData>`
+- Dynamic routing uses client-side state (`useState(projectId)`) to switch projects without navigation
+- Sections render directly in pages: `<Header /><Hero /><Intro />` - no container divs
 
 ## Animation System
 
-### Text Reveal Pattern (Primary Animation)
+### Text Reveal Animation (Primary Pattern)
 
-**Hook:** `useTextRevealAnimation` (`src/hooks/useTextRevealAnimation.tsx`)
+**Implementation** - `useTextRevealAnimation` hook (`src/hooks/useTextRevealAnimation.tsx`):
 
 ```tsx
-// Always use this pattern for animated text
+"use client"; // Required for all animations
+
 const { scope, entranceAnimation } = useTextRevealAnimation();
 
 useEffect(() => {
   entranceAnimation();
 }, [entranceAnimation]);
 
-<motion.h1 ref={scope}>Animated text here</motion.h1>;
+return <motion.h1 ref={scope}>Your animated text</motion.h1>;
 ```
 
-**How it works:**
+**How It Works:**
 
-1. `split-type` splits text into `.word` and `.line` spans in `useEffect`
-2. CSS (`.word` class): `translate-y-full` hides words below viewport initially
-3. Animation: Words animate to `translateY(0)` + `opacity: 1` with stagger
-4. **Critical:** Always includes `if (!scope.current) return;` null checks
+1. `SplitType` splits text into `.word` and `.line` spans on mount
+2. CSS `.word` class hides words with `translate-y-full`
+3. Animation transitions to `translateY(0)` + `opacity: 1` with stagger effect
+4. **Critical:** Always includes `if (!scope.current) return;` null safety checks
 
-**CSS classes** (`globals.css`):
+**Required CSS Classes** (`globals.css`):
 
-- `.section` - Standard padding (`py-24 md:py-32 lg:py-40`)
-- `.line` - Overflow container (`overflow-hidden`)
+- `.section` - Responsive section padding (`py-24 md:py-32 lg:py-40`)
+- `.line` - Overflow container for reveal effect (`overflow-hidden`)
 - `.word` - Initial hidden state (`translate-y-full`)
 
-### Standard Enter Animations
+### Fade-In Animations
 
-Use `AnimatedSection` component for fade-in content:
+Use `AnimatedSection` for standard entrance animations:
 
 ```tsx
 <AnimatedSection className="container" delay={0.1}>
-  {/* Fades in from y: 40 → 0, opacity: 0 → 1 */}
+  {/* Content fades in from y: 40 → 0, opacity: 0 → 1 */}
 </AnimatedSection>
 ```
 
-### Scroll-Based Animations
+### Scroll-Linked Animations
+
+Example from `Hero.tsx`:
 
 ```tsx
 const scrollingDiv = useRef<HTMLDivElement>(null);
 const { scrollYProgress } = useScroll({
   target: scrollingDiv,
-  offset: ["start end", "end end"],
+  offset: ["start end", "end end"], // Start/end trigger points
 });
 const width = useTransform(scrollYProgress, [0, 1], ["100%", "240%"]);
 ```
 
-See `Hero.tsx` for complete implementation.
+### Menu Toggle Animation
+
+`Header.tsx` demonstrates sequenced animations with `useAnimate`:
+
+```tsx
+const [topLineScope, topLineAnimate] = useAnimate();
+// Sequence: translate → rotate in array format
+topLineAnimate([
+  [topLineScope.current, { translateY: 4 }],
+  [topLineScope.current, { rotate: 45 }],
+]);
+```
 
 ## Component Patterns
 
-### Button (`src/components/Button.tsx`)
+### Button Component (`src/components/Button.tsx`)
 
-- Variants: `primary` (filled), `secondary` (outlined), `text` (underline on hover)
-- Uses `twMerge` for className merging
-- `iconAfter` prop for trailing animated icons
-- Named group: `group/button` for child hover effects
+**Variants:**
 
-**Icon slide animation pattern:**
+- `primary` - Filled background (`bg-primary text-white`)
+- `secondary` - Outlined with hover fill (`hover:bg-primary hover:text-white`)
+- `text` - Underline on hover using `after:` pseudo-element
+
+**Features:**
+
+- `twMerge` for className composition
+- `iconAfter` prop for trailing icons with slide animation
+- Named group `group/button` for nested hover effects
+
+**Icon Slide Pattern** (duplicate icon technique):
 
 ```tsx
 <div className="overflow-hidden size-5">
   <div className="h-5 w-10 flex group-hover/button:-translate-x-1/2 transition-transform">
     <svg>...</svg>
-    <svg>...</svg> {/* Duplicate icon for slide effect */}
+    <svg>...</svg> {/* Duplicate slides into view */}
   </div>
 </div>
 ```
 
-### Dynamic Routes (`projects/[id]/page.tsx`)
+### Dynamic Project Routes (`projects/[id]/page.tsx`)
 
-- Data stored in-component as `projectsData` object (not external JSON)
-- Client-side switching: `useState(projectId)` changes active project without navigation
-- Related projects: `base[i % base.length]` cycles through array
+**Data Management:**
 
-### Media Handling (`ProjectDetail.tsx`)
+- All project data stored as `projectsData: Record<string, ProjectData>` object within component
+- Client-side project switching: `useState(activeId)` changes displayed project without page navigation
+- Related projects cycle using modulo: `relatedProjects[i % relatedProjects.length]`
+
+**Structure:**
+
+```tsx
+const [activeId, setActiveId] = useState(params.id);
+const project = useMemo(() => projectsData[activeId], [activeId]);
+// ProjectDetail component handles rendering + switching via onProjectChange
+```
+
+### Media Rendering (`ProjectDetail.tsx`)
+
+**Video vs Image Detection:**
 
 ```tsx
 const isVideo = mediaSrc.endsWith(".mp4");
-// Videos: <video src={path} muted loop /> with viewport autoplay
+
+// Videos: <video src={path} muted loop autoplay /> (autoplay on viewport)
 // Images: <Image src={path} fill /> in aspect-ratio container
 ```
 
-**Asset path rules:**
+**Asset Path Rules:**
 
-- Import from `src/assets/`: `import img from '@/assets/images/hero.jpg'`
-- Reference `public/assets/`: `src="/assets/videos/demo.mp4"` (string path)
+- **Imported assets** (optimized): `import hero from '@/assets/images/hero.jpg'` → use `hero.src`
+- **Public assets** (strings): `src="/assets/videos/demo.mp4"` for videos/large files
 
 ## Styling Conventions
 
-**Tailwind config** (`tailwind.config.ts`):
+**Tailwind Configuration** (`tailwind.config.ts`):
 
-- Breakpoints: `sms: 375px`, `md: 768px`, `lg: 1200px`
-- Container: auto-centered with responsive padding (1rem → 2rem → 4rem)
-- Primary color: `#5928e5` (use `text-primary`, `bg-primary`, `border-primary`)
-- Stone palette: `stone-200/900` for base colors
-- Dark mode: configured but not active
+- Custom breakpoints: `sms: 375px`, `md: 768px`, `lg: 1200px`
+- Container: Auto-centered with responsive padding (`1rem` → `2rem` → `4rem`)
+- Primary brand color: `#5928e5` (access via `text-primary`, `bg-primary`, `border-primary`)
+- Base palette: `stone-200/900` for backgrounds and text
+- Dark mode: Class-based (`class`) but currently inactive
 
-**Responsive patterns:**
+**Responsive Typography Patterns:**
 
 ```tsx
-className="text-4xl md:text-7xl lg:text-8xl" // Typography
-style={{ fontSize: "clamp(2rem, 5vw, 3rem)" }} // Fluid scaling
+className="text-4xl md:text-7xl lg:text-8xl" // Step-based scaling
+style={{ fontSize: "clamp(2rem, 5vw, 3rem)" }} // Fluid scaling (min, preferred, max)
 ```
 
-**Named groups** for nested hover states:
+**Named Group Pattern** (for nested hover states):
 
 ```tsx
 <div className="group/project">
-  <div className="group-hover/project:pl-4 transition-all">...</div>
+  <div className="group-hover/project:pl-4 transition-all">
+    {/* Responds to parent hover */}
+  </div>
 </div>
 ```
 
+**Common named groups in codebase:**
+
+- `group/button` - Button component hover effects
+- `group/nav-item` - Mobile menu items
+- `group/project` - Project cards and detail views
+
 ## Navigation Pattern
 
-**Smooth scroll** with hash-based navigation:
+**Hash-Based Smooth Scrolling** (`Header.tsx` + `page.tsx`):
 
 ```tsx
-const handleClickNavItem = (e: MouseEvent<HTMLButtonElement>) => {
-  e.preventDefault();
-  const targetId = e.currentTarget.getAttribute("data-hash");
-  if (!targetId) return;
-  const target = document.getElementById(targetId);
-  if (target) target.scrollIntoView({ behavior: "smooth" });
+// Header navigation handler
+const navigateToHashOrRoute = (href: string) => {
+  if (href.startsWith("#")) {
+    const isHomePage = window.location.pathname === "/";
+    if (isHomePage) {
+      // Same page: smooth scroll
+      const target = document.querySelector(href);
+      if (target) target.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // Other page: navigate to home with hash
+      router.push(`/${href}`);
+    }
+  } else {
+    router.push(href); // Regular route navigation
+  }
 };
 
-<Button data-hash="projects" onClick={handleClickNavItem}>
-  View Projects
-</Button>;
+// Home page mounts and scrolls to hash
+useEffect(() => {
+  const hash = window.location.hash;
+  if (hash) {
+    setTimeout(() => {
+      const element = document.querySelector(hash);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    }, 100); // Delay ensures DOM ready
+  }
+}, []);
 ```
 
-Home page handles hash scrolling on mount (`page.tsx` - `useEffect` for `window.location.hash`).
+**Mobile Menu Pattern:**
+
+- Fixed overlay nav (`fixed top-0 left-0 w-full h-0`) expands to `h-full` on open
+- Sequenced hamburger animation: translate → rotate using `useAnimate` arrays
+- Menu items have sliding background effect on hover using absolute positioned div
 
 ## Development Workflow
 
@@ -161,23 +226,33 @@ Home page handles hash scrolling on mount (`page.tsx` - `useEffect` for `window.
 - `npm run build` - Production build
 - `npm run lint` - ESLint check
 
-**Prettier:** 2-space indentation (see `prettier.config.js`)
+**Code Formatting:**
+
+- Prettier: 2-space indentation (`prettier.config.js`)
+- ESLint: Next.js config extends `eslint-config-next`
+
+**Key Dependencies:**
+
+- `motion` (v11.12.0) - NOT `framer-motion` - Framer's newer package
+- `split-type` (v0.3.4) - Text splitting for animations
+- `tailwind-merge` - ClassName composition utility
 
 ## Common Tasks
 
 **Add a project:**
 
-1. Update `projectsData` in `projects/[id]/page.tsx`
+1. Update `projectsData` in `projects/[id]/page.tsx` with new project object
 2. Add card to `projects` array in `Projects.tsx` with imported thumbnail
 3. Place media in `public/assets/images/` or `public/assets/videos/`
 
 **Add a section:**
 
-1. Create `src/sections/NewSection.tsx` (default export)
+1. Create `src/sections/NewSection.tsx` (must be default export)
 2. Import in `page.tsx` and render: `<NewSection />`
-3. Add `"use client"` if using hooks/state
+3. Add `"use client"` directive if using hooks/state/animations
 
 **Font setup** (`layout.tsx`):
 
-- Primary: Archivo (200/400/500/600/700 weights) → `--font-archivo`
-- Decorative: Imperial Script → `--font-imperial`
+- Primary: Archivo (200/400/500/600/700 weights) → `--font-archivo` variable
+- Decorative: Imperial Script → `--font-imperial` variable
+- Fonts loaded via `next/font/google` for optimal performance
