@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import Footer from "@/sections/Footer";
 import Header from "@/sections/Header";
-import PageLoader from "@/components/PageLoader";
 import avatarImage from "@/assets/images/avatar.jpg";
 
 const HeroSection = () => (
@@ -900,17 +899,14 @@ const getAspectRatioPadding = (aspectRatio: string): string => {
 
 export default function AboutPage() {
   return (
-    <>
-      <PageLoader />
-      <main className="bg-white min-h-screen flex flex-col">
-        <Header />
-        <HeroSection />
-        <EducationExperience />
-        <CommunityLeadership />
-        <Favourites />
-        <LifeGallery />
-        <Footer />
-      </main>
-    </>
+    <main className="bg-white min-h-screen flex flex-col">
+      <Header />
+      <HeroSection />
+      <EducationExperience />
+      <CommunityLeadership />
+      <Favourites />
+      <LifeGallery />
+      <Footer />
+    </main>
   );
 }
