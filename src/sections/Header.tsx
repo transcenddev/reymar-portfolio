@@ -192,18 +192,25 @@ const Header: FC = () => {
         <div className="container !max-w-full">
           <div className="flex justify-between h-20 items-center">
             <div>
-              <a
+              <motion.a
                 href="/"
                 onClick={(e) => {
                   e.preventDefault();
                   router.push("/");
                 }}
-                className="cursor-pointer"
+                className="cursor-pointer inline-block"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
-                <span className="text-xl font-bold uppercase text-white">
+                <motion.span
+                  className="text-xl font-bold uppercase text-white transition-all duration-300 hover:text-primary"
+                  whileHover={{ letterSpacing: "0.05em" }}
+                  transition={{ duration: 0.3 }}
+                >
                   Reymar&nbsp;Mirante{" "}
-                </span>
-              </a>
+                </motion.span>
+              </motion.a>
             </div>
           </div>
         </div>
