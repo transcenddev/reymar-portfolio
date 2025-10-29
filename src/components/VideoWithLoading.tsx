@@ -6,7 +6,6 @@ import MediaSkeleton from "./MediaSkeleton";
 
 interface VideoWithLoadingProps {
   src: string;
-  alt: string;
   aspectRatio: string;
   className?: string;
   onVideoClick?: () => void;
@@ -14,7 +13,6 @@ interface VideoWithLoadingProps {
 
 export default function VideoWithLoading({
   src,
-  alt,
   aspectRatio,
   className = "",
   onVideoClick,
