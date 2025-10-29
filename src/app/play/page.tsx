@@ -66,7 +66,7 @@ const ImageWithLoading = ({
   return (
     <motion.div
       key={index}
-      className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 aspect-square"
+      className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100"
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{
         opacity: 1,
@@ -75,7 +75,7 @@ const ImageWithLoading = ({
       }}
       viewport={{ once: true, margin: "-50px" }}
       whileHover={{
-        scale: 1.05,
+        scale: 1.02,
         boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
         transition: { duration: 0.2 },
       }}
@@ -90,7 +90,7 @@ const ImageWithLoading = ({
         alt={alt}
         width={800}
         height={800}
-        className="w-full h-auto object-cover"
+        className="w-full h-full object-cover"
         style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.4s" }}
         loading={index < 3 ? "eager" : "lazy"}
         onLoad={() => setIsLoaded(true)}
@@ -184,7 +184,7 @@ export default function PlayPage() {
               >
                 Photography
               </h2>
-              <div className="columns-1 sm:columns-2 md:columns-3 gap-4 mb-8">
+              <div className="columns-1 sm:columns-2 md:columns-3 gap-6 mb-8">
                 {[
                   "/assets/images/photography/photography/eyes.JPEG",
                   "/assets/images/photography/photography/beach-girl.JPG",
@@ -195,7 +195,7 @@ export default function PlayPage() {
                   "/assets/images/photography/photography/beach-couple-pics.JPG",
                   "/assets/images/photography/photography/me-gym1.JPG",
                 ].map((src, index) => (
-                  <div key={index} className="break-inside-avoid mb-2">
+                  <div key={index} className="break-inside-avoid mb-6">
                     <ImageWithLoading
                       src={src}
                       alt={`Photography ${index + 1}`}
@@ -402,7 +402,7 @@ export default function PlayPage() {
               >
                 Painting
               </h2>
-              <div className="columns-1 sm:columns-2 md:columns-3 gap-4">
+              <div className="columns-1 sm:columns-2 md:columns-3 gap-6">
                 {[
                   "/assets/images/painting1.jpg",
                   "/assets/images/painting2.jpg",
@@ -414,7 +414,7 @@ export default function PlayPage() {
                   "/assets/images/painting8.jpg",
                   "/assets/images/painting9.jpg",
                 ].map((src, index) => (
-                  <div key={index} className="break-inside-avoid mb-4">
+                  <div key={index} className="break-inside-avoid mb-6">
                     <ImageWithLoading
                       src={src}
                       alt={`Painting ${index + 1}`}
