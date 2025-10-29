@@ -1,11 +1,103 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import Footer from "@/sections/Footer";
 import Header from "@/sections/Header";
+import MediaSkeleton from "@/components/MediaSkeleton";
+
+// Video component with loading state
+const VideoWithLoading = ({ src, index }: { src: string; index: number }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <motion.div
+      key={index}
+      className="relative"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        transition: { delay: index * 0.1 },
+      }}
+      viewport={{ once: true, margin: "-50px" }}
+    >
+      <div className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 aspect-[9/16]">
+        {!isLoaded && (
+          <div className="absolute inset-0">
+            <MediaSkeleton aspectRatio="9/16" />
+          </div>
+        )}
+        <motion.video
+          src={src}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ opacity: isLoaded ? 1 : 0 }}
+          onLoadedData={() => setIsLoaded(true)}
+          onError={(e) => {
+            console.error(`Error loading video: ${src}`, e);
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isLoaded ? 1 : 0 }}
+          transition={{ duration: 0.4 }}
+        />
+      </div>
+    </motion.div>
+  );
+};
+
+// Image component with loading state
+const ImageWithLoading = ({
+  src,
+  alt,
+  index,
+}: {
+  src: string;
+  alt: string;
+  index: number;
+}) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <motion.div
+      key={index}
+      className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 aspect-square"
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{
+        opacity: 1,
+        scale: 1,
+        transition: { delay: index * 0.05 },
+      }}
+      viewport={{ once: true, margin: "-50px" }}
+      whileHover={{
+        scale: 1.05,
+        boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
+        transition: { duration: 0.2 },
+      }}
+    >
+      {!isLoaded && (
+        <div className="absolute inset-0">
+          <MediaSkeleton aspectRatio="1/1" />
+        </div>
+      )}
+      <Image
+        src={src}
+        alt={alt}
+        width={800}
+        height={800}
+        className="w-full h-auto object-cover"
+        style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.4s" }}
+        loading={index < 3 ? "eager" : "lazy"}
+        onLoad={() => setIsLoaded(true)}
+      />
+    </motion.div>
+  );
+};
 
 export default function PlayPage() {
   return (
@@ -51,31 +143,11 @@ export default function PlayPage() {
                   "closure.mp4",
                   "bgcmuseum.mp4",
                 ].map((videoFile, index) => (
-                  <motion.div
+                  <VideoWithLoading
                     key={index}
-                    className="relative"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{
-                      opacity: 1,
-                      y: 0,
-                      transition: { delay: index * 0.1 },
-                    }}
-                    viewport={{ once: true, margin: "-50px" }}
-                  >
-                    <div className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 aspect-[9/16]">
-                      <video
-                        src={`/assets/videos/${videoFile}`}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="absolute inset-0 w-full h-full object-cover"
-                        onError={(e) => {
-                          console.error(`Error loading video: ${videoFile}`, e);
-                        }}
-                      />
-                    </div>
-                  </motion.div>
+                    src={`/assets/videos/${videoFile}`}
+                    index={index}
+                  />
                 ))}
               </div>
               <div className="flex justify-center">
@@ -123,35 +195,13 @@ export default function PlayPage() {
                   "/assets/images/photography/photography/beach-couple-pics.JPG",
                   "/assets/images/photography/photography/me-gym1.JPG",
                 ].map((src, index) => (
-                  <motion.div
-                    key={index}
-                    className="break-inside-avoid mb-2"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{
-                      opacity: 1,
-                      y: 0,
-                      transition: { delay: index * 0.05 },
-                    }}
-                    viewport={{ once: true, margin: "-50px" }}
-                  >
-                    <motion.div
-                      className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100"
-                      whileHover={{
-                        scale: 1.02,
-                        boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
-                        transition: { duration: 0.2 },
-                      }}
-                    >
-                      <Image
-                        src={src}
-                        alt={`Photography ${index + 1}`}
-                        width={800}
-                        height={800}
-                        className="w-full h-auto object-cover"
-                        loading={index < 3 ? "eager" : "lazy"}
-                      />
-                    </motion.div>
-                  </motion.div>
+                  <div key={index} className="break-inside-avoid mb-2">
+                    <ImageWithLoading
+                      src={src}
+                      alt={`Photography ${index + 1}`}
+                      index={index}
+                    />
+                  </div>
                 ))}
               </div>
               <div className="flex justify-center">
@@ -364,35 +414,13 @@ export default function PlayPage() {
                   "/assets/images/painting8.jpg",
                   "/assets/images/painting9.jpg",
                 ].map((src, index) => (
-                  <motion.div
-                    key={index}
-                    className="break-inside-avoid mb-4"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{
-                      opacity: 1,
-                      y: 0,
-                      transition: { delay: index * 0.05 },
-                    }}
-                    viewport={{ once: true, margin: "-50px" }}
-                  >
-                    <motion.div
-                      className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100"
-                      whileHover={{
-                        scale: 1.02,
-                        boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
-                        transition: { duration: 0.2 },
-                      }}
-                    >
-                      <Image
-                        src={src}
-                        alt={`Painting ${index + 1}`}
-                        width={800}
-                        height={800}
-                        className="w-full h-auto object-cover"
-                        loading={index < 3 ? "eager" : "lazy"}
-                      />
-                    </motion.div>
-                  </motion.div>
+                  <div key={index} className="break-inside-avoid mb-4">
+                    <ImageWithLoading
+                      src={src}
+                      alt={`Painting ${index + 1}`}
+                      index={index}
+                    />
+                  </div>
                 ))}
               </div>
             </div>

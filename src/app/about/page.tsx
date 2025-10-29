@@ -1,11 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import Footer from "@/sections/Footer";
 import Header from "@/sections/Header";
+import MediaSkeleton from "@/components/MediaSkeleton";
 import avatarImage from "@/assets/images/avatar.jpg";
 
 const HeroSection = () => (
@@ -818,6 +819,60 @@ const lifeSnippets = [
   },
 ];
 
+// Media Item Component with loading states
+const MediaItem = ({ item }: { item: typeof lifeSnippets[0] }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <div
+      className="relative"
+      style={{
+        paddingBottom: getAspectRatioPadding(item.aspectRatio),
+      }}
+    >
+      {/* Skeleton loader */}
+      {!isLoaded && (
+        <div className="absolute inset-0">
+          <MediaSkeleton aspectRatio={item.aspectRatio} />
+        </div>
+      )}
+
+      {/* Actual media */}
+      {item.type === "video" ? (
+        <motion.video
+          src={item.src}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ opacity: isLoaded ? 1 : 0 }}
+          muted
+          loop
+          playsInline
+          onLoadedData={() => setIsLoaded(true)}
+          onMouseEnter={(e) => e.currentTarget.play()}
+          onMouseLeave={(e) => {
+            e.currentTarget.pause();
+            e.currentTarget.currentTime = 0;
+          }}
+          aria-label={item.alt}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isLoaded ? 1 : 0 }}
+          transition={{ duration: 0.4 }}
+        />
+      ) : (
+        <Image
+          src={item.src}
+          alt={item.alt}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          className="object-cover"
+          style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.4s" }}
+          priority={false}
+          onLoad={() => setIsLoaded(true)}
+        />
+      )}
+    </div>
+  );
+};
+
 const LifeGallery = () => {
   return (
     <AnimatedSection className="container mx-auto pt-16 pb-10" delay={0.3}>
@@ -852,37 +907,7 @@ const LifeGallery = () => {
                 transition: { duration: 0.2 },
               }}
             >
-              <div
-                className="relative"
-                style={{
-                  paddingBottom: getAspectRatioPadding(item.aspectRatio),
-                }}
-              >
-                {item.type === "video" ? (
-                  <video
-                    src={item.src}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    muted
-                    loop
-                    playsInline
-                    onMouseEnter={(e) => e.currentTarget.play()}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.pause();
-                      e.currentTarget.currentTime = 0;
-                    }}
-                    aria-label={item.alt}
-                  />
-                ) : (
-                  <Image
-                    src={item.src}
-                    alt={item.alt}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    className="object-cover"
-                    priority={index < 8}
-                  />
-                )}
-              </div>
+              <MediaItem item={item} />
             </motion.div>
           </motion.div>
         ))}
