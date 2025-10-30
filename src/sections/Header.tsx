@@ -19,6 +19,10 @@ const navItems = [
     href: "#projects",
   },
   {
+    label: "All Work",
+    href: "/work",
+  },
+  {
     label: "Contact",
     href: "#contact",
   },

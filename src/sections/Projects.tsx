@@ -140,6 +140,50 @@ const Projects: FC = () => {
             <ProjectItem key={id} id={id} name={name} image={image} />
           ))}
         </div>
+
+        {/* More Work Button */}
+        <div className="mt-12 md:mt-16 flex justify-center">
+          <Link
+            href="/work"
+            className="group inline-flex items-center gap-3 px-8 py-4 border-2 border-stone-400 rounded-full hover:border-primary hover:bg-primary hover:text-white transition-all duration-300"
+          >
+            <span className="text-base md:text-lg font-medium">
+              View All Work
+            </span>
+            <div className="overflow-hidden size-5">
+              <div className="h-5 w-10 flex group-hover:-translate-x-1/2 transition-transform duration-300">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  className="size-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  className="size-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                  />
+                </svg>
+              </div>
+            </div>
+          </Link>
+        </div>
       </div>
     </section>
   );
