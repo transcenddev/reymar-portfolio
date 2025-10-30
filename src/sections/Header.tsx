@@ -197,7 +197,15 @@ const Header: FC = () => {
                 href="/"
                 onClick={(e) => {
                   e.preventDefault();
-                  router.push("/");
+                  // Check if we're already on the home page
+                  const isHomePage = window.location.pathname === "/";
+                  if (isHomePage) {
+                    // Scroll to top if already on home page
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  } else {
+                    // Navigate to home page
+                    router.push("/");
+                  }
                 }}
                 className="cursor-pointer inline-block px-4 py-2 rounded-lg"
                 whileHover={{
