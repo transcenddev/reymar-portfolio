@@ -15,11 +15,7 @@ const navItems = [
     href: "/play",
   },
   {
-    label: "Works",
-    href: "#projects",
-  },
-  {
-    label: "All Work",
+    label: "Work",
     href: "/work",
   },
   {
