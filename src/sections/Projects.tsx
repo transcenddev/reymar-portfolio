@@ -132,9 +132,12 @@ const ProjectItem: FC<{
 
 const Projects: FC = () => {
   return (
-    <section className="section" id="projects">
+    <section className="pt-0 pb-12 md:pb-16 lg:pb-20" id="projects">
       <div className="container">
-        <h2 className="text-4xl md:text-7xl lg:text-8xl">Selected Works</h2>
+        <h2 className="text-sm md:text-base uppercase tracking-wider text-stone-500 font-light">
+          Recent Work
+        </h2>
+
         <div className="mt-10 md:mt-16 lg:mt-20">
           {projects.map(({ id, name, image }) => (
             <ProjectItem key={id} id={id} name={name} image={image} />

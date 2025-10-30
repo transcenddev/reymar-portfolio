@@ -3,6 +3,7 @@
 import { useInView } from "motion/react";
 import { FC, useEffect, useRef } from "react";
 import useTextRevealAnimation from "@/hooks/useTextRevealAnimation";
+import Link from "next/link";
 
 const Intro: FC = () => {
   const sectionRef = useRef<HTMLElement>(null); // this tracks section
@@ -22,7 +23,7 @@ const Intro: FC = () => {
 
   return (
     <section
-      className="min-h-screen flex items-center"
+      className="min-h-[50vh] md:min-h-[60vh] flex items-center relative"
       id="intro"
       ref={sectionRef}
     >
@@ -39,7 +40,7 @@ const Intro: FC = () => {
             </h2>
           </div>
 
-          {/* Right Column - Description & Button */}
+          {/* Right Column - Description */}
           <div className="flex flex-col max-w-[200px] md:max-w-[240px]">
             <p className="text-xs md:text-sm leading-relaxed text-stone-600 dark:text-stone-400">
               The combination of my passion for design, code & interaction
@@ -48,6 +49,29 @@ const Intro: FC = () => {
           </div>
         </div>
       </div>
+
+      {/* About Me Button - Bridge between intro and projects, aligned with Recent Work */}
+      <Link
+        href="/about"
+        className="group absolute 
+          right-[18%] md:right-[20%] lg:right-[22%]         // Horizontal: increase = move left, decrease = move right
+          -bottom-6 md:-bottom-8 lg:-bottom-10              // Vertical: increase = move up, decrease = move down
+          size-32 md:size-36 lg:size-40                     // Size: 32=128px, 36=144px, 40=160px
+          rounded-full bg-stone-900 dark:bg-stone-100 
+          flex items-center justify-center 
+          transition-all duration-500 hover:scale-110 hover:rotate-12 hover:shadow-2xl z-10"
+        onClick={(e) => {
+          e.preventDefault();
+          const aboutSection = document.querySelector("#about");
+          if (aboutSection) {
+            aboutSection.scrollIntoView({ behavior: "smooth" });
+          }
+        }}
+      >
+        <span className="text-white dark:text-stone-900 font-medium text-sm md:text-base group-hover:scale-110 transition-transform duration-300">
+          About me
+        </span>
+      </Link>
     </section>
   );
 };
