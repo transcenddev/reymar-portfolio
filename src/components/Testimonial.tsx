@@ -81,7 +81,7 @@ const Testimonial = (
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <div className="size-16 md:size-20 lg:size-24 rounded-full overflow-hidden border-2 border-stone-200 shadow-lg">
+          <div className="size-16 md:size-20 lg:size-24 rounded-full overflow-hidden border-2 border-stone-200 dark:border-stone-700 shadow-lg transition-colors duration-300">
             <Image
               src={image}
               alt={name}
@@ -105,7 +105,7 @@ const Testimonial = (
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="font-semibold text-base md:text-lg lg:text-xl text-stone-900">
+            <span className="font-semibold text-base md:text-lg lg:text-xl text-stone-900 dark:text-stone-100 transition-colors duration-300">
               {name}
             </span>
             {linkedin && (
@@ -113,7 +113,7 @@ const Testimonial = (
                 href={linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center text-stone-500 hover:text-primary transition-colors"
+                className="inline-flex items-center justify-center text-stone-500 dark:text-stone-400 hover:text-primary transition-colors"
                 aria-label={`${name}'s LinkedIn profile`}
               >
                 <svg
@@ -127,10 +127,10 @@ const Testimonial = (
               </a>
             )}
           </div>
-          <span className="text-xs md:text-sm lg:text-base text-stone-600">
+          <span className="text-xs md:text-sm lg:text-base text-stone-600 dark:text-stone-400 transition-colors duration-300">
             {role}
           </span>
-          <span className="text-xs md:text-sm lg:text-base text-stone-500">
+          <span className="text-xs md:text-sm lg:text-base text-stone-500 dark:text-stone-500 transition-colors duration-300">
             {company}
           </span>
         </motion.div>
@@ -146,7 +146,7 @@ const Testimonial = (
           >
             {onPrev && (
               <button
-                className="border border-stone-400 size-10 md:size-11 inline-flex items-center justify-center rounded-full hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+                className="border border-stone-400 dark:border-stone-600 size-10 md:size-11 inline-flex items-center justify-center rounded-full hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
                 onClick={onPrev}
                 aria-label="Previous testimonial"
               >
@@ -168,7 +168,7 @@ const Testimonial = (
             )}
             {onNext && (
               <button
-                className="border border-stone-400 size-10 md:size-11 inline-flex items-center justify-center rounded-full hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+                className="border border-stone-400 dark:border-stone-600 size-10 md:size-11 inline-flex items-center justify-center rounded-full hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
                 onClick={onNext}
                 aria-label="Next testimonial"
               >
@@ -195,7 +195,7 @@ const Testimonial = (
       {/* Quote Section */}
       <blockquote className="order-2 md:order-1">
         <div
-          className="text-xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight text-stone-700"
+          className="text-xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight text-stone-700 dark:text-stone-300 transition-colors duration-300"
           ref={quoteScope}
         >
           <span className="text-primary text-4xl md:text-5xl lg:text-6xl leading-none">

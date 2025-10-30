@@ -52,20 +52,20 @@ const Services: FC = () => {
         </h2>
 
         <div className="mt-8 md:mt-12 lg:mt-16">
-          <div className="text-2xl md:text-3xl lg:text-4xl text-stone-900">
+          <div className="text-2xl md:text-3xl lg:text-4xl text-stone-900 dark:text-stone-100 transition-colors duration-300">
             {services.map(({ title, subtitle }, idx) => (
               <div
                 key={title}
-                className="border-t last:border-b border-stone-400 border-dotted py-6 md:py-8 lg:py-10 relative isolate group/service"
+                className="border-t last:border-b border-stone-400 dark:border-stone-600 border-dotted py-6 md:py-8 lg:py-10 relative isolate group/service transition-colors duration-300"
                 onClick={() =>
                   setSelectedIndex((prev) => (prev === idx ? null : idx))
                 }
               >
                 {/* hover background like FAQs */}
-                <div className={`absolute w-full bottom-0 left-0 bg-stone-300 -z-10 transition-all duration-700 ${selectedIndex === idx ? "h-full" : "h-0 group-hover/service:h-full"}`}></div>
+                <div className={`absolute w-full bottom-0 left-0 bg-stone-300 dark:bg-stone-700 -z-10 transition-all duration-700 ${selectedIndex === idx ? "h-full" : "h-0 group-hover/service:h-full"}`}></div>
                 <div className={`flex items-center justify-between gap-4 transition-all duration-700 group-hover/service:lg:px-8 ${selectedIndex === idx ? "lg:px-8" : ""}`}>
                   <div className="group-hover/service:pl-4 transition-all duration-700">{title}</div>
-                  <div className={`inline-flex items-center justify-center size-11 border border-stone-400 rounded-full shrink-0 transition-all duration-300 bg-stone-200 ${selectedIndex === idx ? "rotate-45" : "group-hover/service:rotate-45"}`}>
+                  <div className={`inline-flex items-center justify-center size-11 border border-stone-400 dark:border-stone-600 rounded-full shrink-0 transition-all duration-300 bg-stone-200 dark:bg-stone-800 ${selectedIndex === idx ? "rotate-45" : "group-hover/service:rotate-45"}`}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -81,7 +81,7 @@ const Services: FC = () => {
                 <AnimatePresence>
                   {selectedIndex === idx && (
                     <motion.div
-                      className="overflow-hidden lg:px-8"
+                      className="overflow-hidden lg:px-8 text-stone-700 dark:text-stone-300 transition-colors duration-300"
                       initial={{ height: 0 }}
                       animate={{ height: "auto" }}
                       exit={{ height: 0 }}

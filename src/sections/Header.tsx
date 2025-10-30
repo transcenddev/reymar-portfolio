@@ -1,5 +1,6 @@
 "use client";
 import Button from "@/components/Button";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { FC, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, useAnimate } from "motion/react";
@@ -227,6 +228,9 @@ const Header: FC = () => {
         <div className="container !max-w-full">
           <div className="flex justify-end h-20 items-center">
             <div className="flex items-center gap-4">
+              {/* Theme Toggle Button */}
+              <ThemeToggle />
+              
               {/* Menu button */}
               <div
                 className="size-11 border border-stone-300 dark:border-stone-600 rounded-full inline-flex items-center justify-center bg-white dark:bg-stone-800 text-stone-900 dark:text-white hover:bg-stone-50 dark:hover:bg-stone-700 cursor-pointer transition-colors duration-300"

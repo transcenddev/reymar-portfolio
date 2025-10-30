@@ -59,7 +59,11 @@ const Intro: FC = () => {
           size-32 md:size-36 lg:size-40                     // Size: 32=128px, 36=144px, 40=160px
           rounded-full bg-stone-900 dark:bg-stone-100 
           flex items-center justify-center 
-          transition-all duration-500 hover:scale-110 hover:rotate-12 hover:shadow-2xl z-10"
+          transition-all duration-700 ease-out
+          hover:scale-[1.15] hover:-rotate-6 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]
+          hover:bg-primary hover:ring-4 hover:ring-primary/20
+          active:scale-95
+          z-10"
         onClick={(e) => {
           e.preventDefault();
           const aboutSection = document.querySelector("#about");
@@ -68,7 +72,12 @@ const Intro: FC = () => {
           }
         }}
       >
-        <span className="text-white dark:text-stone-900 font-medium text-sm md:text-base group-hover:scale-110 transition-transform duration-300">
+        <span
+          className="text-white dark:text-stone-900 font-medium text-sm md:text-base 
+          transition-all duration-500 
+          group-hover:scale-110 group-hover:tracking-wider
+          group-active:scale-90"
+        >
           About me
         </span>
       </Link>

@@ -49,7 +49,7 @@ const FAQs: FC = () => {
           {faqs.map(({ question, answer }, faqIndex) => (
             <div
               key={question}
-              className="border-t border-stone-400 border-dotted py-6 md:py-8 lg:py-10 last:border-b relative isolate group/faq"
+              className="border-t border-stone-400 dark:border-stone-600 border-dotted py-6 md:py-8 lg:py-10 last:border-b relative isolate group/faq transition-colors duration-300"
               onClick={() => {
                 if (faqIndex === selectedIndex) {
                   setSelectIndex(null);
@@ -60,7 +60,7 @@ const FAQs: FC = () => {
             >
               <div
                 className={twMerge(
-                  "absolute h-0 w-full bottom-0 left-0 bg-stone-300 -z-10 group-hover/faq:h-full transition-all duration-700",
+                  "absolute h-0 w-full bottom-0 left-0 bg-stone-300 dark:bg-stone-700 -z-10 group-hover/faq:h-full transition-all duration-700",
                   faqIndex === selectedIndex && "h-full"
                 )}
               ></div>
@@ -75,7 +75,7 @@ const FAQs: FC = () => {
                 </div>
                 <div
                   className={twMerge(
-                    "inline-flex items-center justify-center size-11 border border-stone-400 rounded-full shrink-0 transition-all duration-300 bg-stone-200",
+                    "inline-flex items-center justify-center size-11 border border-stone-400 dark:border-stone-600 rounded-full shrink-0 transition-all duration-300 bg-stone-200 dark:bg-stone-800",
                     faqIndex === selectedIndex && "rotate-45"
                   )}
                 >
@@ -98,7 +98,7 @@ const FAQs: FC = () => {
               <AnimatePresence>
                 {faqIndex === selectedIndex && (
                   <motion.div
-                    className="overflow-hidden lg:px-8"
+                    className="overflow-hidden lg:px-8 text-stone-700 dark:text-stone-300 transition-colors duration-300"
                     initial={{ height: 0 }}
                     animate={{ height: "auto" }}
                     exit={{ height: 0 }}

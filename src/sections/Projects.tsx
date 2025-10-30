@@ -47,12 +47,12 @@ const ProjectItem: FC<{
   return (
     <Link
       href={`/projects/${id}`}
-      className="text-left border-t last:border-b border-stone-400 border-dotted py-6 md:py-8 lg:py-10 flex flex-col relative group/project w-full"
+      className="text-left border-t last:border-b border-stone-400 dark:border-stone-600 border-dotted py-6 md:py-8 lg:py-10 flex flex-col relative group/project w-full transition-colors duration-300"
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="absolute bottom-0 left-0 w-full h-0 group-hover/project:h-full transition-all duration-700 bg-stone-300"></div>
+      <div className="absolute bottom-0 left-0 w-full h-0 group-hover/project:h-full transition-all duration-700 bg-stone-300 dark:bg-stone-700"></div>
       <div className="relative">
         <div className="aspect-video md:hidden rounded-lg overflow-hidden">
           <Image
@@ -134,7 +134,7 @@ const Projects: FC = () => {
   return (
     <section className="pt-0 pb-12 md:pb-16 lg:pb-20" id="projects">
       <div className="container">
-        <h2 className="text-sm md:text-base uppercase tracking-wider text-stone-500 font-light">
+        <h2 className="text-sm md:text-base uppercase tracking-wider text-stone-500 dark:text-stone-400 font-light transition-colors duration-300">
           Recent Work
         </h2>
 
@@ -148,7 +148,7 @@ const Projects: FC = () => {
         <div className="mt-12 md:mt-16 flex justify-center">
           <Link
             href="/work"
-            className="group inline-flex items-center gap-3 px-8 py-4 border-2 border-stone-400 rounded-full hover:border-primary hover:bg-primary hover:text-white transition-all duration-300"
+            className="group inline-flex items-center gap-3 px-8 py-4 border-2 border-stone-400 dark:border-stone-600 rounded-full hover:border-primary hover:bg-primary hover:text-white dark:hover:text-white transition-all duration-300"
           >
             <span className="text-base md:text-lg font-medium">
               View All Work
