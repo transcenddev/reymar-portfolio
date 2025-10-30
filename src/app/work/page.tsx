@@ -58,6 +58,24 @@ const WorkPage: FC = () => {
     return allProjects.filter((project) => project.category === activeCategory);
   }, [activeCategory]);
 
+  // Compute project counts for each category
+  const categoryCounts = useMemo(() => {
+    const counts: Record<Category, number> = {
+      All: allProjects.length,
+      "Web Design": 0,
+      "Web Development": 0,
+      Branding: 0,
+      "Content Creation": 0,
+      Automation: 0,
+    };
+
+    allProjects.forEach((project) => {
+      counts[project.category]++;
+    });
+
+    return counts;
+  }, []);
+
   return (
     <>
       <Header />
@@ -98,6 +116,21 @@ const WorkPage: FC = () => {
                   `}
                 >
                   {category}
+
+                  {/* Count Badge */}
+                  <span
+                    className={`
+                      absolute -top-1 -right-1 text-xs rounded-full px-1.5 py-0.5 min-w-[20px] text-center
+                      ${
+                        activeCategory === category
+                          ? "bg-white text-primary"
+                          : "bg-stone-400 text-white"
+                      }
+                    `}
+                  >
+                    {categoryCounts[category]}
+                  </span>
+
                   {activeCategory === category && (
                     <motion.div
                       layoutId="activeCategory"
