@@ -9,8 +9,12 @@ interface Props {
 
 export const ThemeProvider: FC<Props> = ({ children }) => {
   return (
-    <NextThemesProvider attribute="class" defaultTheme="light" enableSystem={false}>
+    <NextThemesProvider
+      attribute="class"
+      defaultTheme="light"
+      enableSystem={false}
+    >
       {children}
     </NextThemesProvider>
   );
-}
+};

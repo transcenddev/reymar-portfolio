@@ -66,7 +66,10 @@ const Testimonials: FC = () => {
   };
 
   return (
-    <section className="section bg-stone-50 dark:bg-stone-900 transition-colors duration-300" id="testimonials">
+    <section
+      className="section bg-stone-50 dark:bg-stone-900 transition-colors duration-300"
+      id="testimonials"
+    >
       <h2
         className="text-4xl md:text-7xl lg:text-8xl flex flex-col overflow-hidden tracking-tighter"
         ref={titleRef}

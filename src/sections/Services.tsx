@@ -62,10 +62,28 @@ const Services: FC = () => {
                 }
               >
                 {/* hover background like FAQs */}
-                <div className={`absolute w-full bottom-0 left-0 bg-stone-300 dark:bg-stone-700 -z-10 transition-all duration-700 ${selectedIndex === idx ? "h-full" : "h-0 group-hover/service:h-full"}`}></div>
-                <div className={`flex items-center justify-between gap-4 transition-all duration-700 group-hover/service:lg:px-8 ${selectedIndex === idx ? "lg:px-8" : ""}`}>
-                  <div className="group-hover/service:pl-4 transition-all duration-700">{title}</div>
-                  <div className={`inline-flex items-center justify-center size-11 border border-stone-400 dark:border-stone-600 rounded-full shrink-0 transition-all duration-300 bg-stone-200 dark:bg-stone-800 ${selectedIndex === idx ? "rotate-45" : "group-hover/service:rotate-45"}`}>
+                <div
+                  className={`absolute w-full bottom-0 left-0 bg-stone-300 dark:bg-stone-700 -z-10 transition-all duration-700 ${
+                    selectedIndex === idx
+                      ? "h-full"
+                      : "h-0 group-hover/service:h-full"
+                  }`}
+                ></div>
+                <div
+                  className={`flex items-center justify-between gap-4 transition-all duration-700 group-hover/service:lg:px-8 ${
+                    selectedIndex === idx ? "lg:px-8" : ""
+                  }`}
+                >
+                  <div className="group-hover/service:pl-4 transition-all duration-700">
+                    {title}
+                  </div>
+                  <div
+                    className={`inline-flex items-center justify-center size-11 border border-stone-400 dark:border-stone-600 rounded-full shrink-0 transition-all duration-300 bg-stone-200 dark:bg-stone-800 ${
+                      selectedIndex === idx
+                        ? "rotate-45"
+                        : "group-hover/service:rotate-45"
+                    }`}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -74,7 +92,11 @@ const Services: FC = () => {
                       stroke="currentColor"
                       className="size-6"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 4.5v15m7.5-7.5h-15"
+                      />
                     </svg>
                   </div>
                 </div>
@@ -101,5 +123,3 @@ const Services: FC = () => {
 };
 
 export default Services;
-
-

@@ -9,35 +9,34 @@ const faqs = [
   {
     question: "How long does it take to design and develop a website?",
     answer:
-      "Timelines vary depending on complexity, but most projects range from 2 to 6 weeks. I focus on creating clean, functional, and responsive websites that align with your brand and goals."
+      "Timelines vary depending on complexity, but most projects range from 2 to 6 weeks. I focus on creating clean, functional, and responsive websites that align with your brand and goals.",
   },
   {
     question: "Do you also handle content creation and video editing?",
     answer:
-      "Yes — I provide full content support including short-form videos, branded edits, and visuals optimized for social platforms, ensuring your website and marketing campaigns have engaging media."
+      "Yes — I provide full content support including short-form videos, branded edits, and visuals optimized for social platforms, ensuring your website and marketing campaigns have engaging media.",
   },
   {
     question: "Can you help with brand design and graphics?",
     answer:
-      "Absolutely. I create cohesive brand identities including logos, style guides, and marketing assets so your online presence looks professional and consistent."
+      "Absolutely. I create cohesive brand identities including logos, style guides, and marketing assets so your online presence looks professional and consistent.",
   },
   {
     question: "Do you offer digital marketing and personal branding?",
     answer:
-      "Yes. I help individuals and businesses build their online presence through strategy, storytelling, and optimized content distribution to grow their audience and authority."
+      "Yes. I help individuals and businesses build their online presence through strategy, storytelling, and optimized content distribution to grow their audience and authority.",
   },
   {
     question: "How do you use AI and automation in your work?",
     answer:
-      "I integrate AI tools and workflow automations to save time, improve efficiency, and enhance creative output — from content generation to task automation."
+      "I integrate AI tools and workflow automations to save time, improve efficiency, and enhance creative output — from content generation to task automation.",
   },
   {
     question: "Do you work with international clients?",
     answer:
-      "Yes, I work with clients worldwide and can adapt to different time zones for smooth communication and collaboration."
-  }
+      "Yes, I work with clients worldwide and can adapt to different time zones for smooth communication and collaboration.",
+  },
 ];
-
 
 const FAQs: FC = () => {
   const [selectedIndex, setSelectIndex] = useState<number | null>(null);
