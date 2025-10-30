@@ -101,7 +101,9 @@ const EducationExperience = () => (
             </div>
             <div className="text-sm md:text-base text-black/60 dark:text-stone-400 leading-relaxed space-y-4 transition-colors duration-300">
               <p>
-                <span className="font-semibold text-black/80 dark:text-stone-300">Thesis:</span>{" "}
+                <span className="font-semibold text-black/80 dark:text-stone-300">
+                  Thesis:
+                </span>{" "}
                 Developed IoT platform for real-time water quality monitoring
                 using predictive analytics with decision tree algorithms (90%+
                 accuracy).
@@ -264,7 +266,9 @@ const Favourites = () => (
 
       <div className="space-y-4 text-base md:text-lg leading-relaxed">
         <div>
-          <span className="font-semibold text-black dark:text-white transition-colors duration-300">Book:</span>
+          <span className="font-semibold text-black dark:text-white transition-colors duration-300">
+            Book:
+          </span>
           <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
             {" "}
             Atomic Habits, Meditations, Think and Grow Rich, The Way of the
@@ -273,7 +277,9 @@ const Favourites = () => (
         </div>
 
         <div>
-          <span className="font-semibold text-black dark:text-white transition-colors duration-300">Manhwa:</span>
+          <span className="font-semibold text-black dark:text-white transition-colors duration-300">
+            Manhwa:
+          </span>
           <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
             {" "}
             Solo Leveling, Tower of God, The God of High School
@@ -281,7 +287,9 @@ const Favourites = () => (
         </div>
 
         <div>
-          <span className="font-semibold text-black dark:text-white transition-colors duration-300">Movie:</span>
+          <span className="font-semibold text-black dark:text-white transition-colors duration-300">
+            Movie:
+          </span>
           <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
             {" "}
             Blade Runner, The Matrix, Fight Club, Dune, The Batman, American
@@ -290,7 +298,9 @@ const Favourites = () => (
         </div>
 
         <div>
-          <span className="font-semibold text-black dark:text-white transition-colors duration-300">TV Shows:</span>
+          <span className="font-semibold text-black dark:text-white transition-colors duration-300">
+            TV Shows:
+          </span>
           <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
             {" "}
             Dark, Black Mirror, Breaking Bad, You, The 100, Attack on Titan,
@@ -878,7 +888,7 @@ const LifeGallery = () => {
     <AnimatedSection className="container mx-auto pt-16 pb-10" delay={0.3}>
       <div className="max-w-4xl mx-auto mb-16">
         <h2
-          className="text-black font-normal mb-8 text-center sm:text-left"
+          className="text-black dark:text-white font-normal mb-8 text-center sm:text-left transition-colors duration-300"
           style={{ fontSize: "clamp(2rem, 5vw, 3rem)" }}
         >
           Snippets of my <em className="font-serif italic">life</em> outside of
