@@ -22,22 +22,31 @@ const Intro: FC = () => {
 
   return (
     <section
-      className="section mt-12 md:mt-16 lg:mt-20"
+      className="min-h-screen flex items-center"
       id="intro"
-      ref={sectionRef} // track visibility
+      ref={sectionRef}
     >
-      <div className="container">
-        <h2
-          // className="text-4xl md:text-7xl lg:text-8xl lg:w-[80%]"
-          // ref={scope} 
-          className="text-2xl md:text-5xl lg:text-7xl lg:w-[80%] leading-tight max-w-4xl"
-    ref={scope}
-        >
-          {/* Building beautiful websites with clean code and thoughtful design to
-          help your business grow and stand out online */}
+      <div className="container w-full">
+        <div className="grid md:grid-cols-[65%_35%] gap-6 md:gap-8 lg:gap-12 items-start">
+          {/* Left Column - Main Heading */}
+          <div>
+            <h2
+              className="text-2xl md:text-3xl lg:text-4xl leading-tight tracking-tight"
+              ref={scope}
+            >
+              Helping brands to stand out in the digital era. Together we will
+              set the new status quo. No nonsense, always on the cutting edge.
+            </h2>
+          </div>
 
-          I help people through strategic digital solutions — building websites that convert, content that engages, brands that resonate, and AI automation that optimizes processes, saves time & reduces costs.
-        </h2>
+          {/* Right Column - Description & Button */}
+          <div className="flex flex-col max-w-[200px] md:max-w-[240px]">
+            <p className="text-xs md:text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+              The combination of my passion for design, code & interaction
+              positions me in a unique place in the web design world.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );

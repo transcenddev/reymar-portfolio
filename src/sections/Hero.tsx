@@ -9,11 +9,11 @@ import type { MouseEvent } from "react";
 
 const roles = [
   "software engineer",
+  "ai enthusiast",
+  "designer",
+  "automation builder",
   "content creator",
   "hybrid athlete",
-  "designer",
-  "AI enthusiast",
-  "automation builder",
   "photographer",
   "videographer",
   "storyteller",
