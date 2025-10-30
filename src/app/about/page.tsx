@@ -24,7 +24,7 @@ const HeroSection = () => (
       </figure>
 
       {/* Main headline with similar typography treatment */}
-      <h1 className="mb-12 font-serif text-black text-left">
+      <h1 className="mb-12 font-serif text-black dark:text-white text-left transition-colors duration-300">
         <span
           className="block text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-2"
           style={{ letterSpacing: "-0.02em" }}
@@ -46,7 +46,7 @@ const HeroSection = () => (
         </span>
       </h1>
 
-      <div className="max-w-3xl text-base md:text-lg text-black/80 leading-relaxed text-left space-y-4">
+      <div className="max-w-3xl text-base md:text-lg text-black/80 dark:text-stone-300 leading-relaxed text-left space-y-4 transition-colors duration-300">
         <p>
           I&apos;m Reymar, a multidisciplinary Computer Science student at
           Cavite State University, blending design, code, and storytelling to
@@ -83,31 +83,31 @@ const EducationExperience = () => (
       {/* Education */}
       <div className="mb-20">
         <h2
-          className="font-normal text-black mb-12 uppercase tracking-wide"
+          className="font-normal text-black dark:text-white mb-12 uppercase tracking-wide transition-colors duration-300"
           style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
         >
           EDUCATION
         </h2>
         <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-6">
           <div>
-            <div className="text-2xl md:text-3xl font-serif italic text-black mb-3">
+            <div className="text-2xl md:text-3xl font-serif italic text-black dark:text-white mb-3 transition-colors duration-300">
               Cavite State University
             </div>
-            <div className="text-base md:text-lg text-black/70 mb-2">
+            <div className="text-base md:text-lg text-black/70 dark:text-stone-400 mb-2 transition-colors duration-300">
               Bachelor of Science in Computer Science
             </div>
-            <div className="text-sm md:text-base text-black/50 mb-4">
+            <div className="text-sm md:text-base text-black/50 dark:text-stone-500 mb-4 transition-colors duration-300">
               GWA: 1.51 / 4.0 scale
             </div>
-            <div className="text-sm md:text-base text-black/60 leading-relaxed space-y-4">
+            <div className="text-sm md:text-base text-black/60 dark:text-stone-400 leading-relaxed space-y-4 transition-colors duration-300">
               <p>
-                <span className="font-semibold text-black/80">Thesis:</span>{" "}
+                <span className="font-semibold text-black/80 dark:text-stone-300">Thesis:</span>{" "}
                 Developed IoT platform for real-time water quality monitoring
                 using predictive analytics with decision tree algorithms (90%+
                 accuracy).
               </p>
               <p>
-                <span className="font-semibold text-black/80">
+                <span className="font-semibold text-black/80 dark:text-stone-300">
                   Focused coursework:
                 </span>{" "}
                 Software Engineering, IoT, Machine Learning, Artificial
@@ -120,7 +120,7 @@ const EducationExperience = () => (
               </p>
             </div>
           </div>
-          <div className="text-black/60 text-sm md:text-base">
+          <div className="text-black/60 dark:text-stone-500 text-sm md:text-base transition-colors duration-300">
             Sept 2021 - Present
           </div>
         </div>
@@ -129,7 +129,7 @@ const EducationExperience = () => (
       {/* Experience */}
       <div className="mb-0">
         <h2
-          className="font-normal text-black mb-12 uppercase tracking-wide"
+          className="font-normal text-black dark:text-white mb-12 uppercase tracking-wide transition-colors duration-300"
           style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
         >
           EXPERIENCE
@@ -137,13 +137,13 @@ const EducationExperience = () => (
         <div className="space-y-16">
           <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-6">
             <div>
-              <div className="text-2xl md:text-3xl font-serif italic text-black mb-3">
+              <div className="text-2xl md:text-3xl font-serif italic text-black dark:text-white mb-3 transition-colors duration-300">
                 SP Madrid & Associates Law Firm
               </div>
-              <div className="text-base md:text-lg text-black/70 mb-4">
+              <div className="text-base md:text-lg text-black/70 dark:text-stone-400 mb-4 transition-colors duration-300">
                 Artificial Intelligence Specialist
               </div>
-              <div className="text-sm md:text-base text-black/60 leading-relaxed space-y-4">
+              <div className="text-sm md:text-base text-black/60 dark:text-stone-400 leading-relaxed space-y-4 transition-colors duration-300">
                 <p>
                   Led an AI-driven multimedia project that successfully
                   revitalized brand content and helped secure new partnerships.
@@ -159,20 +159,20 @@ const EducationExperience = () => (
                 </p>
               </div>
             </div>
-            <div className="text-black/60 text-sm md:text-base">
+            <div className="text-black/60 dark:text-stone-500 text-sm md:text-base transition-colors duration-300">
               Jul 2024 - Sept 2024
             </div>
           </div>
 
           <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-6">
             <div>
-              <div className="text-2xl md:text-3xl font-serif italic text-black mb-3">
+              <div className="text-2xl md:text-3xl font-serif italic text-black dark:text-white mb-3 transition-colors duration-300">
                 SP Madrid & Associates Law Firm
               </div>
-              <div className="text-base md:text-lg text-black/70 mb-4">
+              <div className="text-base md:text-lg text-black/70 dark:text-stone-400 mb-4 transition-colors duration-300">
                 UI/UX Designer & Low-Code Developer Intern
               </div>
-              <div className="text-sm md:text-base text-black/60 leading-relaxed space-y-4">
+              <div className="text-sm md:text-base text-black/60 dark:text-stone-400 leading-relaxed space-y-4 transition-colors duration-300">
                 <p>
                   Designed and developed the Read AI website using Figma and
                   Bubble.io, focusing on a user-centered interface.
@@ -183,7 +183,7 @@ const EducationExperience = () => (
                 </p>
               </div>
             </div>
-            <div className="text-black/60 text-sm md:text-base">
+            <div className="text-black/60 dark:text-stone-500 text-sm md:text-base transition-colors duration-300">
               Jul 2024 - Aug 2024
             </div>
           </div>
@@ -198,20 +198,20 @@ const CommunityLeadership = () => (
   <AnimatedSection className="container mx-auto px-4 pb-16" delay={0.15}>
     <div className="max-w-4xl mx-auto">
       <h2
-        className="font-normal text-black mb-12 uppercase tracking-wide"
+        className="font-normal text-black dark:text-white mb-12 uppercase tracking-wide transition-colors duration-300"
         style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
       >
         COMMUNITY & LEADERSHIP
       </h2>
       <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-6">
         <div>
-          <div className="text-2xl md:text-3xl font-serif italic text-black mb-3">
+          <div className="text-2xl md:text-3xl font-serif italic text-black dark:text-white mb-3 transition-colors duration-300">
             Arc Community
           </div>
-          <div className="text-base md:text-lg text-black/70 mb-4">
+          <div className="text-base md:text-lg text-black/70 dark:text-stone-400 mb-4 transition-colors duration-300">
             Staff Member
           </div>
-          <div className="text-sm md:text-base text-black/60 leading-relaxed space-y-4">
+          <div className="text-sm md:text-base text-black/60 dark:text-stone-400 leading-relaxed space-y-4 transition-colors duration-300">
             <p>
               Drove community engagement by facilitating meetups and fostering
               connections among like-minded individuals.{" "}
@@ -234,7 +234,7 @@ const CommunityLeadership = () => (
             </p>
           </div>
         </div>
-        <div className="text-black/60 text-sm md:text-base">
+        <div className="text-black/60 dark:text-stone-500 text-sm md:text-base transition-colors duration-300">
           Dec 2024 - Present
         </div>
       </div>
@@ -250,12 +250,12 @@ const Favourites = () => (
   >
     <div className="max-w-2xl mx-auto mb-10">
       <h2
-        className="text-black font-normal mb-6"
+        className="text-black dark:text-white font-normal mb-6 transition-colors duration-300"
         style={{ fontSize: "clamp(2rem, 5vw, 3rem)" }}
       >
         My current <em className="font-serif italic">favourites</em>
       </h2>
-      <p className="text-base md:text-lg text-black/80 mb-8">
+      <p className="text-base md:text-lg text-black/80 dark:text-stone-300 mb-8 transition-colors duration-300">
         When I&apos;m not coding or designing, you can catch me at a local
         coffee shop with my camera, binge-watching anime until 3am, or
         perfecting my handstand form. Here&apos;s what&apos;s currently on
@@ -264,8 +264,8 @@ const Favourites = () => (
 
       <div className="space-y-4 text-base md:text-lg leading-relaxed">
         <div>
-          <span className="font-semibold text-black">Book:</span>
-          <span className="text-black/80">
+          <span className="font-semibold text-black dark:text-white transition-colors duration-300">Book:</span>
+          <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
             {" "}
             Atomic Habits, Meditations, Think and Grow Rich, The Way of the
             Superior Man, How to Win Friends and Influence People
@@ -273,16 +273,16 @@ const Favourites = () => (
         </div>
 
         <div>
-          <span className="font-semibold text-black">Manhwa:</span>
-          <span className="text-black/80">
+          <span className="font-semibold text-black dark:text-white transition-colors duration-300">Manhwa:</span>
+          <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
             {" "}
             Solo Leveling, Tower of God, The God of High School
           </span>
         </div>
 
         <div>
-          <span className="font-semibold text-black">Movie:</span>
-          <span className="text-black/80">
+          <span className="font-semibold text-black dark:text-white transition-colors duration-300">Movie:</span>
+          <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
             {" "}
             Blade Runner, The Matrix, Fight Club, Dune, The Batman, American
             Assassin
@@ -290,8 +290,8 @@ const Favourites = () => (
         </div>
 
         <div>
-          <span className="font-semibold text-black">TV Shows:</span>
-          <span className="text-black/80">
+          <span className="font-semibold text-black dark:text-white transition-colors duration-300">TV Shows:</span>
+          <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
             {" "}
             Dark, Black Mirror, Breaking Bad, You, The 100, Attack on Titan,
             Jujutsu Kaisen, Chainsaw Man, Lord of the Mysteries
@@ -900,7 +900,7 @@ const LifeGallery = () => {
             viewport={{ once: true, margin: "-100px" }}
           >
             <motion.div
-              className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100"
+              className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 dark:bg-stone-800 transition-colors duration-300"
               whileHover={{
                 scale: 1.02,
                 boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
@@ -924,7 +924,7 @@ const getAspectRatioPadding = (aspectRatio: string): string => {
 
 export default function AboutPage() {
   return (
-    <main className="bg-white min-h-screen flex flex-col">
+    <main className="bg-white dark:bg-stone-950 min-h-screen flex flex-col transition-colors duration-300">
       <Header />
       <HeroSection />
       <EducationExperience />

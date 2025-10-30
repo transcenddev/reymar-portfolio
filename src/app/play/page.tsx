@@ -24,7 +24,7 @@ const VideoWithLoading = ({ src, index }: { src: string; index: number }) => {
       }}
       viewport={{ once: true, margin: "-50px" }}
     >
-      <div className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 aspect-[9/16]">
+      <div className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 dark:bg-stone-800 aspect-[9/16] transition-colors duration-300">
         {!isLoaded && (
           <div className="absolute inset-0">
             <MediaSkeleton aspectRatio="9/16" />
@@ -66,7 +66,7 @@ const ImageWithLoading = ({
   return (
     <motion.div
       key={index}
-      className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100"
+      className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 dark:bg-stone-800 transition-colors duration-300"
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{
         opacity: 1,
@@ -101,19 +101,19 @@ const ImageWithLoading = ({
 
 export default function PlayPage() {
   return (
-    <main className="bg-white min-h-screen flex flex-col">
+    <main className="bg-white dark:bg-stone-950 min-h-screen flex flex-col transition-colors duration-300">
       <Header />
 
       {/* Hero Section */}
       <AnimatedSection className="container mx-auto pt-24 md:pt-32 lg:pt-40 pb-16 px-4">
         <div className="max-w-4xl mx-auto">
           <h1
-            className="text-black font-normal mb-8"
+            className="text-black dark:text-white font-normal mb-8 transition-colors duration-300"
             style={{ fontSize: "clamp(2rem, 5vw, 3rem)" }}
           >
             My creative <em className="font-serif italic">playground</em>
           </h1>
-          <p className="text-base md:text-lg text-black/80 mb-12">
+          <p className="text-base md:text-lg text-black/80 dark:text-stone-300 mb-12 transition-colors duration-300">
             Beyond code and design, I explore storytelling through motion, lens,
             and editing—capturing moments, crafting narratives, and
             experimenting with visual media.
@@ -123,7 +123,7 @@ export default function PlayPage() {
             {/* Content Creation */}
             <div>
               <h2
-                className="font-normal text-black mb-6 uppercase tracking-wide"
+                className="font-normal text-black dark:text-white mb-6 uppercase tracking-wide transition-colors duration-300"
                 style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
               >
                 Content Creation
@@ -179,7 +179,7 @@ export default function PlayPage() {
             {/* Photography */}
             <div>
               <h2
-                className="font-normal text-black mb-6 uppercase tracking-wide"
+                className="font-normal text-black dark:text-white mb-6 uppercase tracking-wide transition-colors duration-300"
                 style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
               >
                 Photography
@@ -233,7 +233,7 @@ export default function PlayPage() {
             {/* Video Edit - Motion Graphics */}
             <div>
               <h2
-                className="font-normal text-black mb-6 uppercase tracking-wide"
+                className="font-normal text-black dark:text-white mb-6 uppercase tracking-wide transition-colors duration-300"
                 style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
               >
                 Video Edit - Motion Graphics
@@ -276,7 +276,7 @@ export default function PlayPage() {
                     }}
                     viewport={{ once: true, margin: "-50px" }}
                   >
-                    <div className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 aspect-video">
+                    <div className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 dark:bg-stone-800 aspect-video transition-colors duration-300">
                       <iframe
                         src={`https://www.youtube.com/embed/${video.id}`}
                         title={video.title}
@@ -317,7 +317,7 @@ export default function PlayPage() {
             {/* Cinematography */}
             <div>
               <h2
-                className="font-normal text-black mb-6 uppercase tracking-wide"
+                className="font-normal text-black dark:text-white mb-6 uppercase tracking-wide transition-colors duration-300"
                 style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
               >
                 Cinematography
@@ -356,7 +356,7 @@ export default function PlayPage() {
                     }}
                     viewport={{ once: true, margin: "-50px" }}
                   >
-                    <div className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 aspect-video">
+                    <div className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 dark:bg-stone-800 aspect-video transition-colors duration-300">
                       <iframe
                         src={`https://www.youtube.com/embed/${video.id}`}
                         title={video.title}
@@ -397,7 +397,7 @@ export default function PlayPage() {
             {/* Painting */}
             <div>
               <h2
-                className="font-normal text-black mb-6 uppercase tracking-wide"
+                className="font-normal text-black dark:text-white mb-6 uppercase tracking-wide transition-colors duration-300"
                 style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
               >
                 Painting
