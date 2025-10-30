@@ -154,6 +154,46 @@ const handleMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
 </div>
 ```
 
+### Dynamic Role Cycling Animation
+
+`Hero.tsx` implements cycling text with smooth fade transitions:
+
+```tsx
+const roles = [
+  "software engineer",
+  "content creator",
+  "hybrid athlete",
+  "designer",
+  "AI & automation builder",
+  "storyteller",
+];
+const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+
+// Cycle through roles every 3 seconds
+useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+  }, 3000);
+  return () => clearInterval(interval);
+}, []);
+
+// In JSX - use AnimatePresence with mode="wait" for smooth transitions
+<span className="inline-block min-w-[280px]">
+  <AnimatePresence mode="wait">
+    <motion.span
+      key={currentRoleIndex}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5 }}
+      className="text-primary"
+    >
+      {roles[currentRoleIndex]}
+    </motion.span>
+  </AnimatePresence>
+</span>;
+```
+
 ## Component Patterns
 
 ### Button Component (`src/components/Button.tsx`)

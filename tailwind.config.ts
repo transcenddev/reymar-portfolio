@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
-  darkMode: "class", // Add dark mode
+  darkMode: "class", // Enable dark mode with class strategy
   theme: {
     screens: {
       sms: "375px",
@@ -22,19 +22,21 @@ const config: Config = {
         },
       },
       colors: {
+        // Primary purple accent - same for both themes
         primary: "#5928e5",
-        "red-orange": {
-          500: 'color-mix(in srgb, theme("colors.red.500") 50%, theme("colors.orange.500") 50%)', // Add dark mode colors
-          dark: {
-            bg: "#121212",
-            text: "#ffffff",
-            accent: "#2a004a",
-          },
-          light: {
-            bg: "#ffffff",
-            text: "#121212",
-            accent: "#fcf4ff",
-          },
+
+        // Semantic color tokens for light/dark theme support
+        background: {
+          DEFAULT: "#ffffff", // Light theme background
+          secondary: "#f5f5f4", // Light theme secondary background (stone-100)
+        },
+        foreground: {
+          DEFAULT: "#1c1917", // Light theme text (stone-900)
+          muted: "#57534e", // Light theme muted text (stone-600)
+        },
+        border: {
+          DEFAULT: "#d6d3d1", // Light theme border (stone-300)
+          muted: "#e7e5e4", // Light theme muted border (stone-200)
         },
       },
     },

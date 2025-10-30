@@ -2,6 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+
+  /* Light theme (default) */
+  :root {
+    --background: 255 255 255;
+    /* white */
+    --background-secondary: 245 245 244;
+    /* stone-100 */
+    --foreground: 28 25 23;
+    /* stone-900 */
+    --foreground-muted: 87 83 78;
+    /* stone-600 */
+    --border: 214 211 209;
+    /* stone-300 */
+    --border-muted: 231 229 228;
+    /* stone-200 */
+    --primary: 89 40 229;
+    /* #5928e5 */
+  }
+
+  /* Dark theme */
+  .dark {
+    --background: 12 10 9;
+    /* stone-950 */
+    --background-secondary: 28 25 23;
+    /* stone-900 */
+    --foreground: 250 250 249;
+    /* stone-50 */
+    --foreground-muted: 214 211 209;
+    /* stone-300 */
+    --border: 68 64 60;
+    /* stone-700 */
+    --border-muted: 41 37 36;
+    /* stone-800 */
+    --primary: 89 40 229;
+    /* Keep same purple */
+  }
+
+  /* Smooth transitions for theme switching */
+  * {
+    @apply transition-colors duration-300;
+  }
+}
 
 .section {
   @apply py-24 md:py-32 lg:py-40;

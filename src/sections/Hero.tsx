@@ -1,14 +1,26 @@
 "use client";
 
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import heroImage from "@/assets/images/hero-image.jpg";
 import Image from "next/image";
 import Button from "@/components/Button";
-import { motion, useTransform, useScroll } from "motion/react";
+import { motion, useTransform, useScroll, AnimatePresence } from "motion/react";
 import type { MouseEvent } from "react";
-import useTextRevealAnimation from "@/hooks/useTextRevealAnimation";
+
+const roles = [
+  "software engineer",
+  "content creator",
+  "hybrid athlete",
+  "designer",
+  "AI enthusiast",
+  "automation builder",
+  "photographer",
+  "videographer",
+  "storyteller",
+];
 
 const Hero: FC = () => {
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const scrollingDiv = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -18,13 +30,14 @@ const Hero: FC = () => {
 
   const portraitWidth = useTransform(scrollYProgress, [0, 1], ["100%", "240%"]);
 
-  const { scope, entranceAnimation } = useTextRevealAnimation();
-
+  // Cycle through roles every 3 seconds
   useEffect(() => {
-    if (entranceAnimation) {
-      entranceAnimation();
-    }
-  }, [entranceAnimation]);
+    const interval = setInterval(() => {
+      setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleClickNavItem = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -43,15 +56,30 @@ const Hero: FC = () => {
       <div className="grid md:grid-cols-12 md:h-screen items-stretch sticky top-0">
         <div className="md:col-span-7 flex flex-col justify-center">
           <div className="container !max-w-full">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-5xl md:text-6xl lg:text-7xl mt-40 md:mt-0 mb-4"
-              ref={scope}
-            >
-              Hi, I&apos;m Reymar — multidisciplinary software engineer.
-            </motion.h1>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl mt-40 md:mt-0 mb-4">
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="inline-block"
+              >
+                Hi, I&apos;m Reymar — multidisciplinary{" "}
+              </motion.span>
+              <span className="inline-block min-w-[280px] md:min-w-[450px] lg:min-w-[600px] align-bottom">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={currentRoleIndex}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5 }}
+                    className="text-primary inline-block"
+                  >
+                    {roles[currentRoleIndex]}.
+                  </motion.span>
+                </AnimatePresence>
+              </span>
+            </h1>
             {/* <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

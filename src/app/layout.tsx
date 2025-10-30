@@ -34,9 +34,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body
-        className={`antialiased bg-stone-200 text-stone-900 ${archivo.className}`}
+        className={`antialiased bg-white dark:bg-stone-950 text-stone-900 dark:text-stone-50 transition-colors duration-300 ${archivo.className}`}
       >
         {children}
       </body>

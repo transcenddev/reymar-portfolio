@@ -111,7 +111,7 @@ const WorkPage: FC = () => {
                     ${
                       activeCategory === category
                         ? "bg-primary text-white shadow-lg scale-105"
-                        : "bg-stone-200 text-stone-700 hover:bg-stone-300 hover:scale-105"
+                        : "bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-700 hover:scale-105"
                     }
                   `}
                 >
@@ -124,7 +124,7 @@ const WorkPage: FC = () => {
                       ${
                         activeCategory === category
                           ? "bg-white text-primary"
-                          : "bg-stone-400 text-white"
+                          : "bg-stone-300 dark:bg-stone-600 text-white"
                       }
                     `}
                   >
@@ -152,7 +152,7 @@ const WorkPage: FC = () => {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="mt-4 text-sm md:text-base text-stone-600"
+              className="mt-4 text-sm md:text-base text-stone-600 dark:text-stone-400 transition-colors duration-300"
             >
               Showing {filteredProjects.length}{" "}
               {filteredProjects.length === 1 ? "project" : "projects"}
@@ -180,7 +180,7 @@ const WorkPage: FC = () => {
                     className="group block h-full"
                   >
                     {/* Project Image */}
-                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-stone-300 mb-4">
+                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-stone-200 dark:bg-stone-800 mb-4 transition-colors duration-300">
                       <Image
                         src={project.image}
                         alt={project.name}
@@ -199,13 +199,13 @@ const WorkPage: FC = () => {
                       <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold group-hover:text-primary transition-colors">
                         {project.name}
                       </h3>
-                      <p className="text-sm md:text-base text-stone-600 line-clamp-2">
+                      <p className="text-sm md:text-base text-stone-600 dark:text-stone-400 line-clamp-2 transition-colors duration-300">
                         {project.description}
                       </p>
                     </div>
 
                     {/* View Project Arrow */}
-                    <div className="mt-4 flex items-center gap-2 text-sm font-medium text-stone-700 group-hover:text-primary transition-colors">
+                    <div className="mt-4 flex items-center gap-2 text-sm font-medium text-stone-700 dark:text-stone-300 group-hover:text-primary transition-colors">
                       <span>View Project</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -237,7 +237,7 @@ const WorkPage: FC = () => {
           >
             <Link
               href="/#projects"
-              className="inline-flex items-center gap-2 text-stone-600 hover:text-primary transition-colors"
+              className="inline-flex items-center gap-2 text-stone-600 dark:text-stone-400 hover:text-primary transition-colors"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

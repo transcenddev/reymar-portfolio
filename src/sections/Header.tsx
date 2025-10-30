@@ -151,7 +151,7 @@ const Header: FC = () => {
     <header className="">
       {/* Mobile Navigation Overlay */}
       <div
-        className="fixed top-0 left-0 w-full h-0 overflow-hidden bg-stone-900 z-20"
+        className="fixed top-0 left-0 w-full h-0 overflow-hidden bg-white dark:bg-stone-900 z-20 transition-colors duration-300"
         ref={navScope}
       >
         <nav className="mt-20 flex flex-col ">
@@ -159,7 +159,7 @@ const Header: FC = () => {
             <a
               href={href}
               key={label}
-              className="text-stone-200 border-t border-stone-800 last:border-b py-8 group/nav-item relative isolate"
+              className="text-stone-900 dark:text-stone-200 border-t border-stone-200 dark:border-stone-800 last:border-b py-8 group/nav-item relative isolate transition-colors duration-300"
               onClick={(e) => handleClickMobileNavItem(e, href)}
             >
               <div className="container !max-w-full flex items-center justify-between">
@@ -181,14 +181,14 @@ const Header: FC = () => {
                   />
                 </svg>
               </div>
-              <div className="absolute w-full h-0 bg-stone-800 group-hover/nav-item:h-full transition-all duration-500 bottom-0 -z-20"></div>
+              <div className="absolute w-full h-0 bg-stone-100 dark:bg-stone-800 group-hover/nav-item:h-full transition-all duration-500 bottom-0 -z-20"></div>
             </a>
           ))}
         </nav>
       </div>
 
       {/* Main Header */}
-      <div className="fixed top-0 left-0 w-full mix-blend-difference backdrop-blur-md z-20">
+      <div className="fixed top-0 left-0 w-full backdrop-blur-md z-20 bg-white/80 dark:bg-stone-950/80 transition-colors duration-300">
         <div className="container !max-w-full">
           <div className="flex justify-between h-20 items-center">
             <div>
@@ -207,7 +207,7 @@ const Header: FC = () => {
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
                 <motion.span
-                  className="text-xl font-bold uppercase text-white"
+                  className="text-xl font-bold uppercase text-stone-900 dark:text-white transition-colors duration-300"
                   whileHover={{
                     letterSpacing: "0.1em",
                     color: "#5928e5",
@@ -229,7 +229,7 @@ const Header: FC = () => {
             <div className="flex items-center gap-4">
               {/* Menu button */}
               <div
-                className="size-11 border border-stone-400 rounded-full  inline-flex items-center justify-center bg-stone-200"
+                className="size-11 border border-stone-300 dark:border-stone-600 rounded-full inline-flex items-center justify-center bg-white dark:bg-stone-800 text-stone-900 dark:text-white hover:bg-stone-50 dark:hover:bg-stone-700 cursor-pointer transition-colors duration-300"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 <svg
