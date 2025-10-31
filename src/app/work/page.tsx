@@ -44,6 +44,30 @@ const allProjects = [
     image: "/assets/images/covid-hero.png",
     category: "Web Development" as Category,
   },
+  {
+    id: "cvsufind",
+    name: "CVSUfind",
+    description:
+      "Lost-and-found platform for CvSU campus with user and admin dashboards",
+    image: "/assets/images/cvsufind/cvsufind-hero.png",
+    category: "Web Design" as Category,
+  },
+  {
+    id: "friskay-website",
+    name: "Friskay Website",
+    description:
+      "Web design recreated from YouTube tutorial about the world's best-tasting cat food",
+    image: "/assets/images/ui-ux-design-crash-course/ui-ux-design-crashcourse-desktop.jpg",
+    category: "Web Design" as Category,
+  },
+  {
+    id: "mobile-attendance-system",
+    name: "Mobile Attendance System",
+    description:
+      "UI/UX design from Gordon College webinar - Figma design project",
+    image: "/assets/images/mobile-attendance-system/mobile-attendance-system-clockin.png",
+    category: "Web Design" as Category,
+  },
   // Add more projects here as needed
 ];
 

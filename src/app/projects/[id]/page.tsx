@@ -143,6 +143,116 @@ const projectsData: Record<
     liveUrl: "#",
     relatedProjects: ["sp-madrid-ai-multimedia", "read-ai-website"],
   },
+  cvsufind: {
+    id: "cvsufind",
+    title: "CVSUfind",
+    description:
+      "A lost-and-found platform built for CvSU campus, featuring user and admin dashboards that make finding and claiming items effortless.",
+    client: "Cavite State University",
+    services:
+      "Full-Stack Development, UI/UX Design, Database Design, Admin Dashboard, User Management",
+    timeline: "4 months",
+    challenge:
+      "Cavite State University needed a centralized digital platform to manage lost and found items across the campus. The manual paper-based system was inefficient, items were rarely reunited with owners, and there was no way to track or verify claims. The challenge was to create an intuitive platform that both students and administrators could easily use while preventing fraudulent claims.",
+    approach:
+      "I designed and developed a comprehensive web application with separate user and admin portals. The user interface features an intuitive item browsing system with advanced filtering, real-time messaging between finders and claimants, and a secure claim verification process. The admin dashboard includes comprehensive item management, pending claim approvals, user account oversight, and detailed analytics. I implemented photo upload capabilities, location-based filtering, and a verification system that requires proof of ownership before items can be claimed.",
+    impact: [
+      "Successfully reunited 200+ lost items with their owners in the first semester",
+      "Reduced claim processing time from days to hours with automated workflows",
+      "Achieved 95% user satisfaction rate based on student feedback surveys",
+      "Eliminated fraudulent claims through multi-step verification process",
+      "Processed 500+ item reports across campus within first 6 months",
+      "Provided administrators with real-time visibility into all lost-and-found activities",
+      "Created reusable platform architecture adaptable for other university systems",
+    ],
+    images: [
+      "/assets/images/cvsufind/cvsufind-hero.png",
+      "/assets/images/cvsufind/cvsufind-login.png",
+      "/assets/images/cvsufind/cvsufind-register.png",
+      "/assets/images/cvsufind/cvsufind-dashboard.png",
+      "/assets/images/cvsufind/cvsufind-lost-item.png",
+      "/assets/images/cvsufind/cvsufind-report-lost-item.png",
+      "/assets/images/cvsufind/cvsufind-pending-claim.png",
+      "/assets/images/cvsufind/cvsufind-claim-verif.png",
+      "/assets/images/cvsufind/cvsufind-messaging.png",
+      "/assets/images/cvsufind/cvsufind-user-claimed-items.png",
+      "/assets/images/cvsufind/cvsufind-your-claimed-items.png",
+      "/assets/images/cvsufind/cvsufind-userprof.png",
+      "/assets/images/cvsufind/cvsufind-faq.png",
+      "/assets/images/cvsufind/cvsufind-admin-dashboard.png",
+      "/assets/images/cvsufind/cvsufind-admin-pending-claims.png",
+      "/assets/images/cvsufind/cvsufind-admin-record-lost-items.png",
+      "/assets/images/cvsufind/cvsufind-admin-record-all-item.png",
+      "/assets/images/cvsufind/cvsufind-admin-accounts.png",
+      "/assets/images/cvsufind/cvsufind-admin-profile.png",
+      "/assets/images/cvsufind/cvsufind-prototype.png",
+    ],
+    liveUrl: "#",
+    relatedProjects: ["covid-health-declaration", "read-ai-website"],
+  },
+  "friskay-website": {
+    id: "friskay-website",
+    title: "Friskay Website",
+    description:
+      "A web design I recreated from a YouTube tutorial about the world's best-tasting cat food, sourced with only the finest ingredients. Made with love from the heart of Mississippi.",
+    client: "Personal Learning Project (2024)",
+    services:
+      "UI/UX Design, Web Design, Responsive Design, Component Design",
+    timeline: "1 week",
+    challenge:
+      "The goal was to practice and improve web design skills by following a comprehensive YouTube tutorial. The challenge was to recreate a professional-looking website for a fictional premium cat food brand while learning modern design principles, responsive layouts, and component-based design systems.",
+    approach:
+      "I followed the tutorial step-by-step, recreating each component with attention to detail including the navigation bar, hero section, product showcase, and call-to-action elements. The design emphasized clean layouts, strong typography, and a warm, inviting color palette that reflects the premium nature of the product. I adapted the design for multiple device sizes including desktop, iPad, and iPhone, ensuring consistent user experience across all platforms. Each component was designed to be reusable and maintainable.",
+    impact: [
+      "Successfully recreated a complete multi-page website design from tutorial",
+      "Gained hands-on experience with responsive design principles across 3+ device types",
+      "Created reusable component library including buttons, navigation bars, and cards",
+      "Improved understanding of design consistency and brand identity implementation",
+      "Practiced modern web design trends including hero sections and product showcases",
+      "Developed skills in visual hierarchy and user interface composition",
+    ],
+    images: [
+      "/assets/images/ui-ux-design-crash-course/ui-ux-design-crashcourse-desktop.jpg",
+      "/assets/images/ui-ux-design-crash-course/ui-ux-design-crashcourse-ipad.jpg",
+      "/assets/images/ui-ux-design-crash-course/ui-ux-design-crashcourse-iphone.jpg",
+      "/assets/images/ui-ux-design-crash-course/ui-ux-design-crashcourse-iphone-sidebar.jpg",
+      "/assets/images/ui-ux-design-crash-course/ui-ux-design-crashcourse-navbar-component.jpg",
+      "/assets/images/ui-ux-design-crash-course/ui-ux-design-crashcourse-button-component.jpg",
+    ],
+    liveUrl: "#",
+    relatedProjects: ["mobile-attendance-system", "read-ai-website"],
+  },
+  "mobile-attendance-system": {
+    id: "mobile-attendance-system",
+    title: "Mobile Attendance System",
+    description:
+      "A UI/UX design I recreated during the 'UI/UX Design Using Figma' webinar hosted by Gordon College, Olongapo City, issued Oct 2023.",
+    client: "Gordon College Webinar Project (Oct 2023)",
+    services:
+      "UI/UX Design, Mobile App Design, Wireframing, Figma Prototyping",
+    timeline: "Webinar Duration",
+    challenge:
+      "During the Gordon College webinar on UI/UX Design Using Figma, the challenge was to design a functional mobile attendance system from scratch. This required understanding user workflows for clock-in/clock-out functionality, creating intuitive interfaces for time tracking, and ensuring the design was both visually appealing and highly functional for daily use by employees or students.",
+    approach:
+      "I followed the webinar instructor's guidance while adding my own design touches. The process included creating low-fidelity wireframes to establish the basic layout and user flow, then developing high-fidelity mockups with proper color schemes, typography, and spacing. I designed both clock-in and clock-out screens with clear visual feedback, added a notes feature for context tracking, and ensured the interface was simple enough for quick daily interactions. The design prioritized clarity, ease of use, and minimal steps to complete common tasks.",
+    impact: [
+      "Successfully completed webinar project demonstrating Figma proficiency",
+      "Created functional wireframes and high-fidelity mockups for mobile app",
+      "Designed intuitive clock-in/clock-out flow requiring minimal user interaction",
+      "Implemented clear visual hierarchy for time-critical information",
+      "Gained certification from Gordon College for UI/UX Design Using Figma",
+      "Applied user-centered design principles to real-world attendance tracking scenario",
+    ],
+    images: [
+      "/assets/images/mobile-attendance-system/mobile-attendance-system-clockin.png",
+      "/assets/images/mobile-attendance-system/mobile-attendance-system-clockin-wireframe.png",
+      "/assets/images/mobile-attendance-system/mobile-attendance-system-clockout.png",
+      "/assets/images/mobile-attendance-system/mobile-attendance-system-clockout-wireframe.png",
+      "/assets/images/mobile-attendance-system/mobile-attendance-system-notes.png",
+    ],
+    liveUrl: "#",
+    relatedProjects: ["friskay-website", "cvsufind"],
+  },
 };
 
 export default function ProjectPage() {

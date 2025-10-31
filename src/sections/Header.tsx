@@ -3,7 +3,7 @@ import Button from "@/components/Button";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { FC, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { motion, useAnimate } from "motion/react";
+import { motion, useAnimate, useScroll, useSpring } from "motion/react";
 // import { a, div, nav } from "motion/react-client";
 
 const navItems = [
@@ -31,6 +31,14 @@ const Header: FC = () => {
   const [bottomLineScope, bottomLineAnimate] = useAnimate();
   const [navScope, navAnimate] = useAnimate();
   const router = useRouter();
+
+  // Scroll progress indicator
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   useEffect(() => {
     if (isOpen) {
@@ -149,7 +157,7 @@ const Header: FC = () => {
   };
 
   return (
-    <header className="">
+    <>
       {/* Mobile Navigation Overlay */}
       <div
         className="fixed top-0 left-0 w-full h-0 overflow-hidden bg-white dark:bg-stone-900 z-20 transition-colors duration-300"
@@ -190,11 +198,16 @@ const Header: FC = () => {
 
       {/* Main Header */}
       <div className="fixed top-0 left-0 w-full backdrop-blur-md z-20 bg-white/80 dark:bg-stone-950/80 transition-colors duration-300">
+        {/* Scroll Progress Indicator */}
+        <motion.div
+          className="absolute top-0 left-0 right-0 h-1 bg-primary origin-left"
+          style={{ scaleX }}
+        />
+
         <div className="container !max-w-full">
           <div className="flex justify-between h-20 items-center">
             <div>
-              <motion.a
-                href="/"
+              <motion.div
                 onClick={(e) => {
                   e.preventDefault();
                   // Check if we're already on the home page
@@ -207,7 +220,7 @@ const Header: FC = () => {
                     router.push("/");
                   }
                 }}
-                className="cursor-pointer inline-block px-4 py-2 rounded-lg"
+                className="group/logo cursor-pointer inline-block px-4 py-2 rounded-lg relative"
                 whileHover={{
                   scale: 1.05,
                   backgroundColor: "rgba(89, 40, 229, 0.1)",
@@ -215,17 +228,11 @@ const Header: FC = () => {
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
-                <motion.span
-                  className="text-xl font-bold uppercase text-stone-900 dark:text-white transition-colors duration-300"
-                  whileHover={{
-                    letterSpacing: "0.1em",
-                    color: "#5928e5",
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
+                <span className="text-xl font-bold uppercase text-stone-900 dark:text-white group-hover/logo:text-primary transition-all duration-300 group-hover/logo:tracking-wider">
                   Reymar&nbsp;Mirante
-                </motion.span>
-              </motion.a>
+                </span>
+                <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-primary scale-x-0 group-hover/logo:scale-x-100 transition-transform duration-300 origin-left" />
+              </motion.div>
             </div>
           </div>
         </div>
@@ -240,9 +247,20 @@ const Header: FC = () => {
               <ThemeToggle />
 
               {/* Menu button */}
-              <div
-                className="size-11 border border-stone-300 dark:border-stone-600 rounded-full inline-flex items-center justify-center bg-white dark:bg-stone-800 text-stone-900 dark:text-white hover:bg-stone-50 dark:hover:bg-stone-700 cursor-pointer transition-colors duration-300"
+              <motion.div
+                className="relative size-11 border border-stone-300 dark:border-stone-600 rounded-full inline-flex items-center justify-center bg-white dark:bg-stone-800 text-stone-900 dark:text-white hover:bg-stone-50 dark:hover:bg-stone-700 cursor-pointer transition-colors duration-300"
                 onClick={() => setIsOpen(!isOpen)}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                // Gentle bounce on page load - happens once
+                initial={{ y: 0 }}
+                animate={{ y: [0, -8, 0, -4, 0] }}
+                transition={{
+                  duration: 0.8,
+                  times: [0, 0.2, 0.4, 0.6, 1],
+                  ease: "easeOut",
+                  delay: 1.5, // Starts after page loads
+                }}
               >
                 <svg
                   width="24"
@@ -274,7 +292,7 @@ const Header: FC = () => {
                     }}
                   />
                 </svg>
-              </div>
+              </motion.div>
               <Button
                 variant="primary"
                 className="hidden md:inline-flex"
@@ -299,7 +317,7 @@ const Header: FC = () => {
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 };
 
