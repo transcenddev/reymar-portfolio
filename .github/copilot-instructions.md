@@ -261,7 +261,11 @@ const isVideo = mediaSrc.endsWith(".mp4");
 - Container: Auto-centered with responsive padding (`1rem` → `2rem` → `4rem`)
 - Primary brand color: `#5928e5` (access via `text-primary`, `bg-primary`, `border-primary`)
 - Base palette: `stone-200/900` for backgrounds and text
-- Dark mode: Class-based (`class`) but currently inactive
+- Dark mode: Class-based (`class`) with `next-themes` integration - ACTIVE
+  - Theme provider wraps app in `layout.tsx` with `defaultTheme="light"`
+  - Use `useTheme()` hook from `next-themes` to access/toggle theme
+  - CSS variables in `globals.css` define theme-specific colors (`--background`, `--foreground`, etc.)
+  - All transitions have `duration-300` for smooth theme switching
 
 **Responsive Typography Patterns:**
 
@@ -362,8 +366,31 @@ useEffect(() => {
 **Font setup** (`layout.tsx`):
 
 - Primary: Archivo (200/400/500/600/700 weights) → `--font-archivo` variable
-- Decorative: Imperial Script → `--font-imperial` variable
 - Fonts loaded via `next/font/google` for optimal performance
+- Applied globally via className in body tag
+
+## Theme System
+
+**Implementation** (`next-themes` package):
+
+```tsx
+// ThemeProvider wraps entire app (layout.tsx)
+<ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+  {children}
+</ThemeProvider>;
+
+// Toggle theme in components (Header.tsx, ThemeToggle.tsx)
+import { useTheme } from "next-themes";
+const { theme, setTheme } = useTheme();
+setTheme(theme === "dark" ? "light" : "dark");
+```
+
+**CSS Variables Pattern** (`globals.css`):
+
+- Define colors as RGB values in `:root` and `.dark` selectors
+- Access via `bg-background`, `text-foreground`, `border-border` etc.
+- All elements inherit `transition-colors duration-300` for smooth switching
+- Avoid hardcoded `dark:` classes where possible - use semantic tokens instead
 
 ## Known Issues to Fix
 
@@ -378,3 +405,5 @@ useEffect(() => {
 - `src/app/about/page.tsx`
 
 **Fix**: Replace `import { motion } from "framer-motion"` with `import { motion } from "motion/react"`
+
+**Note**: Most core sections and hooks have been correctly updated to use `motion/react`. The above files are legacy components that need migration.
