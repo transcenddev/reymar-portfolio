@@ -1,7 +1,13 @@
 "use client";
 
 import { FC, useRef, useState } from "react";
-import { useScroll, useInView, motion, useTransform, AnimatePresence } from "motion/react";
+import {
+  useScroll,
+  useInView,
+  motion,
+  useTransform,
+  AnimatePresence,
+} from "motion/react";
 import Testimonial from "@/components/Testimonial";
 
 const testimonials = [

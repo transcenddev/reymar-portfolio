@@ -40,7 +40,11 @@ const Testimonial = (props: TestimonialProps) => {
     ...rest
   } = props;
 
-  const { scope: quoteScope, entranceAnimation: quoteEntranceAnimation, exitAnimation: quoteExitAnimation } = useTextRevealAnimation();
+  const {
+    scope: quoteScope,
+    entranceAnimation: quoteEntranceAnimation,
+    exitAnimation: quoteExitAnimation,
+  } = useTextRevealAnimation();
   const [isPresent, safeToRemove] = usePresence();
 
   // Video ref + autoplay state
@@ -89,7 +93,10 @@ const Testimonial = (props: TestimonialProps) => {
       } catch (err) {
         // Unmuted autoplay blocked — try muted fallback so autoplay at least occurs
         // eslint-disable-next-line no-console
-        console.warn("Unmuted autoplay blocked, attempting muted fallback:", err);
+        console.warn(
+          "Unmuted autoplay blocked, attempting muted fallback:",
+          err
+        );
       }
 
       // muted fallback
@@ -126,7 +133,10 @@ const Testimonial = (props: TestimonialProps) => {
   }, [isActive, shouldAutoplay]);
 
   return (
-    <div className={twMerge("flex flex-col gap-6 md:gap-8", className)} {...rest}>
+    <div
+      className={twMerge("flex flex-col gap-6 md:gap-8", className)}
+      {...rest}
+    >
       {/* Video (centered portrait) */}
       {video && (
         <motion.div
@@ -164,9 +174,19 @@ const Testimonial = (props: TestimonialProps) => {
                         console.error("User play failed:", err);
                       }
                     }}
-                    className="bg-white/95 dark:bg-black/80 text-stone-900 dark:text-stone-100 px-4 py-2 rounded shadow"
+                    className="bg-white/95 dark:bg-black/80 text-stone-900 dark:text-stone-100 p-3 rounded-full shadow inline-flex items-center justify-center"
+                    aria-label="Play testimonial"
                   >
-                    Play
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="h-5 w-5"
+                      aria-hidden="true"
+                    >
+                      <path d="M5.25 4.5v15l13.5-7.5-13.5-7.5z" />
+                    </svg>
+                    <span className="sr-only">Play testimonial</span>
                   </button>
                 </div>
               )}
@@ -191,7 +211,11 @@ const Testimonial = (props: TestimonialProps) => {
               width={96}
               height={96}
               className="object-cover w-full h-full"
-              style={{ objectPosition: `50% ${Math.max(0, Math.min(1, imagePositionY)) * 100}%` }}
+              style={{
+                objectPosition: `50% ${
+                  Math.max(0, Math.min(1, imagePositionY)) * 100
+                }%`,
+              }}
               priority
             />
           </div>
@@ -216,27 +240,56 @@ const Testimonial = (props: TestimonialProps) => {
                 className="inline-flex items-center justify-center text-stone-500 dark:text-stone-400 hover:text-primary transition-colors"
                 aria-label={`${name} LinkedIn`}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4 md:size-5">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="size-4 md:size-5"
+                >
                   <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z" />
                 </svg>
               </a>
             )}
           </div>
-          {role && <span className="text-xs md:text-sm lg:text-base text-stone-600 dark:text-stone-400">{role}</span>}
-          {company && <span className="text-xs md:text-sm lg:text-base text-stone-500 dark:text-stone-500">{company}</span>}
+          {role && (
+            <span className="text-xs md:text-sm lg:text-base text-stone-600 dark:text-stone-400">
+              {role}
+            </span>
+          )}
+          {company && (
+            <span className="text-xs md:text-sm lg:text-base text-stone-500 dark:text-stone-500">
+              {company}
+            </span>
+          )}
         </motion.div>
 
         {/* Prev/Next nav */}
         {(onPrev || onNext) && (
-          <motion.div className="flex gap-3 shrink-0" initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.45, delay: 0.18 }}>
+          <motion.div
+            className="flex gap-3 shrink-0"
+            initial={{ opacity: 0, x: 12 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.45, delay: 0.18 }}
+          >
             {onPrev && (
               <button
                 className="border border-stone-400 dark:border-stone-600 size-10 md:size-11 inline-flex items-center justify-center rounded-full hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
                 onClick={onPrev}
                 aria-label="Previous testimonial"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-5 md:size-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-5 md:size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+                  />
                 </svg>
               </button>
             )}
@@ -247,8 +300,19 @@ const Testimonial = (props: TestimonialProps) => {
                 onClick={onNext}
                 aria-label="Next testimonial"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-5 md:size-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-5 md:size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                  />
                 </svg>
               </button>
             )}
@@ -259,10 +323,17 @@ const Testimonial = (props: TestimonialProps) => {
       {/* Quote */}
       {quote && (
         <blockquote className="order-2 md:order-1">
-          <div className="text-xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight text-stone-700 dark:text-stone-300" ref={quoteScope}>
-            <span className="text-primary text-4xl md:text-5xl lg:text-6xl leading-none">&ldquo;</span>
+          <div
+            className="text-xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight text-stone-700 dark:text-stone-300"
+            ref={quoteScope}
+          >
+            <span className="text-primary text-4xl md:text-5xl lg:text-6xl leading-none">
+              &ldquo;
+            </span>
             {quote}
-            <span className="text-primary text-4xl md:text-5xl lg:text-6xl leading-none">&rdquo;</span>
+            <span className="text-primary text-4xl md:text-5xl lg:text-6xl leading-none">
+              &rdquo;
+            </span>
           </div>
         </blockquote>
       )}
