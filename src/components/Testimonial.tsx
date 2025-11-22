@@ -1,7 +1,7 @@
 import Image, { StaticImageData } from "next/image";
-import { HTMLAttributes, useEffect, useRef, useState } from "react";
+import { HTMLAttributes, useEffect } from "react";
 import { twMerge } from "tailwind-merge";
-import { usePresence, motion, AnimatePresence } from "motion/react";
+import { usePresence, motion } from "motion/react";
 import useTextRevealAnimation from "@/hooks/useTextRevealAnimation";
 
 type TestimonialProps = {
@@ -43,11 +43,6 @@ const Testimonial = (props: TestimonialProps) => {
   } = useTextRevealAnimation();
   const [isPresent, safeToRemove] = usePresence();
 
-  // Modal player state
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const modalVideoRef = useRef<HTMLVideoElement | null>(null);
-  const [modalAutoplayBlocked, setModalAutoplayBlocked] = useState(false);
-
   useEffect(() => {
     if (isPresent) {
       const animate = async () => {
@@ -73,95 +68,22 @@ const Testimonial = (props: TestimonialProps) => {
     }
   }, [isPresent, quoteEntranceAnimation, quoteExitAnimation, safeToRemove]);
 
-  useEffect(() => {
-    const v = modalVideoRef.current;
-    if (isModalOpen && v) {
-      v.muted = false;
-      const p = v.play();
-      p
-        ?.then(() => setModalAutoplayBlocked(false))
-        .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.error("Modal play failed:", err);
-          setModalAutoplayBlocked(true);
-        });
-    }
-
-    if (!isModalOpen && v) {
-      v.pause();
-      v.currentTime = 0;
-      setModalAutoplayBlocked(false);
-    }
-  }, [isModalOpen]);
-
   return (
     <div className={twMerge("flex flex-col gap-6 md:gap-8", className)} {...rest}>
       {video && (
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="w-full rounded-xl overflow-hidden">
           <div className="mx-auto md:mx-0">
-            <div
-              role="button"
-              tabIndex={0}
-              onClick={() => setIsModalOpen(true)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") setIsModalOpen(true);
-              }}
-              className="w-48 sm:w-64 md:w-80 aspect-[9/16] rounded-xl overflow-hidden cursor-pointer relative mx-auto md:mx-0"
-            >
-              {videoPoster ? (
-                <div className="relative w-full h-full">
-                  <Image src={videoPoster} alt={`${name} video poster`} fill className="object-cover" />
-                </div>
-              ) : (
-                <div className="w-full h-full bg-stone-200 flex items-center justify-center"> </div>
-              )}
-
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="bg-white/95 dark:bg-black/80 p-3 rounded-full shadow-lg">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-stone-900 dark:text-stone-100">
-                    <path d="M5 3v18l15-9L5 3z" />
-                  </svg>
-                </div>
-              </div>
+            <div className="mx-auto w-48 sm:w-64 md:w-80 aspect-[9/16] rounded-xl overflow-hidden">
+              <video
+                src={video}
+                poster={videoPoster}
+                controls
+                playsInline
+                className="w-full h-full object-contain bg-black"
+                style={{ objectFit: "contain" }}
+              />
             </div>
           </div>
-
-          <AnimatePresence>
-            {isModalOpen && (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-6">
-                <div className="relative w-full max-w-md md:max-w-2xl lg:max-w-3xl">
-                  <button aria-label="Close video" onClick={() => setIsModalOpen(false)} className="absolute top-3 right-3 z-50 bg-white/90 dark:bg-black/80 rounded-full p-2 shadow">
-                    ✕
-                  </button>
-
-                  <div className="bg-black rounded-lg overflow-hidden">
-                    <video ref={modalVideoRef} src={video} poster={videoPoster} controls className="w-full h-auto block" />
-
-                    {modalAutoplayBlocked && (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <button
-                          aria-label="Play video"
-                          onClick={() => {
-                            const v = modalVideoRef.current;
-                            if (!v) return;
-                            v.muted = false;
-                            const p = v.play();
-                            p?.then(() => setModalAutoplayBlocked(false)).catch((err) => console.error("Modal play failed:", err));
-                          }}
-                          className="bg-white/95 dark:bg-black/80 text-stone-900 dark:text-stone-100 px-6 py-4 rounded-full shadow-lg flex items-center gap-3"
-                        >
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                            <path d="M5 3v18l15-9L5 3z" />
-                          </svg>
-                          Play
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </motion.div>
       )}
 
