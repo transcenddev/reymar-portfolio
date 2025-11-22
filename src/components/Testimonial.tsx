@@ -77,16 +77,32 @@ const Testimonial = (props: TestimonialProps) => {
 
     const tryPlay = async () => {
       try {
-        v.muted = true; // required for autoplay in many browsers
+        // First, attempt to play unmuted (user wants sound)
+        v.muted = false;
         v.playsInline = true;
         v.preload = "metadata";
         const p = v.play();
         if (p instanceof Promise) await p;
+        // unmuted autoplay succeeded
         setShowPlayCTA(false);
+        return;
       } catch (err) {
-        // autoplay blocked — show play CTA
+        // Unmuted autoplay blocked — try muted fallback so autoplay at least occurs
         // eslint-disable-next-line no-console
-        console.warn("Autoplay blocked or failed:", err);
+        console.warn("Unmuted autoplay blocked, attempting muted fallback:", err);
+      }
+
+      // muted fallback
+      try {
+        v.muted = true;
+        const p2 = v.play();
+        if (p2 instanceof Promise) await p2;
+        // muted autoplay succeeded — show CTA to unmute
+        setShowPlayCTA(true);
+      } catch (err2) {
+        // both unmuted and muted autoplay failed — require user interaction
+        // eslint-disable-next-line no-console
+        console.warn("Muted autoplay also blocked:", err2);
         setShowPlayCTA(true);
       }
     };
@@ -102,7 +118,7 @@ const Testimonial = (props: TestimonialProps) => {
       // pause when not active
       try {
         v.pause();
-      } catch (e) {
+      } catch {
         /* ignore */
       }
       setShowPlayCTA(false);
@@ -127,7 +143,7 @@ const Testimonial = (props: TestimonialProps) => {
                 poster={videoPoster}
                 controls
                 playsInline
-                muted
+                muted={false}
                 preload="metadata"
                 className="w-full h-full object-contain bg-black"
                 style={{ objectFit: "contain" }}
