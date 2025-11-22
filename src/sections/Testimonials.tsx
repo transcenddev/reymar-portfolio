@@ -6,6 +6,16 @@ import Testimonial from "@/components/Testimonial";
 
 const testimonials = [
   {
+    name: "Ian (Martin) Madrid",
+    company: "S.P. Madrid | OkPo AI",
+    role: "CEO & Founder",
+    image: "/assets/images/avatar/avatar-ian-madrid.jpg",
+    imagePositionY: 0.5,
+    linkedin: "https://www.linkedin.com/in/ianmadridph/",
+    video: "/assets/videos/ianmadrid-testimonial.mp4",
+    videoPoster: "/assets/images/avatar/avatar-ian-madrid.jpg",
+  },
+  {
     name: "Ryan Buan",
     company: "OkPo AI",
     role: "Tech Lead & AI Product Builder",
@@ -24,16 +34,6 @@ const testimonials = [
     image: "/assets/images/avatar/avatar-jonathan-alvarez.jpg",
     imagePositionY: 0.5,
     linkedin: "https://www.linkedin.com/in/jonathan-alvarez-b2bba8175/",
-  },
-  {
-    name: "Ian (Martin) Madrid",
-    company: "S.P. Madrid | OkPo AI",
-    role: "CEO & Founder",
-    quote:
-      "Working with Reymar has been exceptional. His ability to blend creative design with technical execution is remarkable. He approaches every challenge with enthusiasm and delivers solutions that exceed expectations. His dedication to mastering AI tools and integrating them into our workflows has been invaluable to our team's success.",
-    image: "/assets/images/avatar/avatar-ian-madrid.jpg",
-    imagePositionY: 0.5,
-    linkedin: "https://www.linkedin.com/in/ianmadridph/",
   },
   {
     name: "Julius Tuliao",

@@ -349,13 +349,44 @@ useEffect(() => {
 - `split-type` (v0.3.4) - Text splitting for animations
 - `tailwind-merge` - ClassName composition utility
 
+## Portfolio Content Structure
+
+**Main Project Categories:**
+
+1. **Web Design** – UI/UX projects, landing pages, and visual layouts
+2. **Web Development** – Frontend builds and interactive websites (React + Tailwind)
+3. **Branding & Visual Identity** – Logos, color systems, and brand direction
+4. **Content Creation** – Personal brand visuals, storytelling videos, and social media content
+5. **Automation & AI** – Workflows, bots, or AI-based automations that improve productivity
+
+**Optional Categories** (can be hidden or marked "Coming Soon"):
+
+- 🧪 **Experiments / Case Studies** – Redesigns, clones, or projects built for learning
+- 📈 **Strategy / Systems** – Growth frameworks, content systems, or creative direction
+
+**Services Categories** (from `Services.tsx`):
+
+- Web Design & Development
+- Content Creation & Video Editing
+- Graphic & Brand Design
+- Digital Marketing & Personal Branding
+- AI & Automation
+
+**Documentation**:
+
+- See `.github/PORTFOLIO_CATEGORIES.md` for detailed category definitions
+- See `.github/PROJECT_CHECKLIST.md` for step-by-step project addition guide
+- See `.github/design-portfolio-guide.md` for portfolio strategy and best practices
+
 ## Common Tasks
 
 **Add a project:**
 
 1. Update `projectsData` in `projects/[id]/page.tsx` with new project object
 2. Add card to `projects` array in `Projects.tsx` with imported thumbnail
-3. Place media in `public/assets/images/` or `public/assets/videos/`
+3. Assign appropriate category tag from the main categories above
+4. Place media in `public/assets/images/` or `public/assets/videos/`
+5. Follow the complete checklist in `.github/PROJECT_CHECKLIST.md`
 
 **Add a section:**
 

@@ -12,9 +12,9 @@ const categories = [
   "All",
   "Web Design",
   "Web Development",
-  "Branding",
+  "Branding & Visual Identity",
   "Content Creation",
-  "Automation",
+  "Automation & AI",
 ] as const;
 
 type Category = (typeof categories)[number];
@@ -26,7 +26,7 @@ const allProjects = [
     name: "Reviving Memories with AI",
     description: "AI-driven multimedia presentation for SP Madrid's heritage",
     image: "/assets/images/sp-madrid-exhibition.jpg",
-    category: "Automation" as Category,
+    category: "Automation & AI" as Category,
   },
   {
     id: "read-ai-website",
@@ -57,7 +57,8 @@ const allProjects = [
     name: "Friskay Website",
     description:
       "Web design recreated from YouTube tutorial about the world's best-tasting cat food",
-    image: "/assets/images/ui-ux-design-crash-course/ui-ux-design-crashcourse-desktop.jpg",
+    image:
+      "/assets/images/ui-ux-design-crash-course/ui-ux-design-crashcourse-desktop.jpg",
     category: "Web Design" as Category,
   },
   {
@@ -65,7 +66,8 @@ const allProjects = [
     name: "Mobile Attendance System",
     description:
       "UI/UX design from Gordon College webinar - Figma design project",
-    image: "/assets/images/mobile-attendance-system/mobile-attendance-system-clockin.png",
+    image:
+      "/assets/images/mobile-attendance-system/mobile-attendance-system-clockin.png",
     category: "Web Design" as Category,
   },
   // Add more projects here as needed
@@ -88,9 +90,9 @@ const WorkPage: FC = () => {
       All: allProjects.length,
       "Web Design": 0,
       "Web Development": 0,
-      Branding: 0,
+      "Branding & Visual Identity": 0,
       "Content Creation": 0,
-      Automation: 0,
+      "Automation & AI": 0,
     };
 
     allProjects.forEach((project) => {

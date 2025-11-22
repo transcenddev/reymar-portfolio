@@ -1,18 +1,161 @@
 import Image, { StaticImageData } from "next/image";
-import { HTMLAttributes, useEffect } from "react";
+import { HTMLAttributes, useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
-import { usePresence, motion } from "motion/react";
+import { usePresence, motion, useInView } from "motion/react";
+
+// Small helper component: plays muted video when it enters the viewport, pauses when it leaves.
+function VideoWithAutoplay({
+  src,
+  poster,
+  className,
+}: {
+  src: string;
+  poster?: string;
+  className?: string;
+}) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const isInView = useInView(videoRef, { once: false, margin: "-20% 0px" });
+  const [unmutedByUser, setUnmutedByUser] = useState(false);
+  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
+  const [unsupportedFormat, setUnsupportedFormat] = useState(false);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+
+    // Ensure muted so autoplay is allowed in browsers
+    if (!unmutedByUser) v.muted = true;
+
+    if (isInView) {
+      // Quick format support check. If the browser reports it cannot play the file type,
+      // surface a download/open fallback immediately. This helps when the mp4 uses an
+      // unsupported codec (HEVC, ProRes, etc.).
+      if (typeof v.canPlayType === "function") {
+        const canPlay = v.canPlayType("video/mp4");
+        if (!canPlay) {
+          // empty string means the browser cannot play mp4
+          setUnsupportedFormat(true);
+          return;
+        }
+      }
+
+      const playPromise = v.play();
+      playPromise
+        ?.then(() => {
+          // autoplay succeeded
+        })
+        .catch((err) => {
+          // Log error and surface fallback UI so user can play manually
+          // Common causes: autoplay policy, codec not supported, 404
+          // Keep console error to aid debugging
+          // eslint-disable-next-line no-console
+          console.error("Video play failed:", err);
+          setAutoplayBlocked(true);
+        });
+    } else {
+      v.pause();
+    }
+  }, [isInView, unmutedByUser]);
+
+  return (
+    <div className="relative">
+      <video
+        ref={videoRef}
+        src={src}
+        poster={poster}
+        muted={!unmutedByUser}
+        playsInline
+        controls
+        preload="metadata"
+        className={className}
+      />
+
+      {/* Unmute overlay: visible while autoplay is muted */}
+      {!unmutedByUser && (
+        <button
+          aria-label="Unmute video"
+          onClick={() => {
+            const v = videoRef.current;
+            if (!v) return;
+            v.muted = false;
+            const p = v.play();
+            p?.catch(() => {});
+            setUnmutedByUser(true);
+          }}
+          className="absolute bottom-4 right-4 bg-white/90 dark:bg-black/70 text-stone-900 dark:text-stone-100 px-3 py-2 rounded-full shadow-md backdrop-blur-sm"
+        >
+          Unmute
+        </button>
+      )}
+
+      {/* If autoplay was blocked (promise rejected), show a large play CTA */}
+      {autoplayBlocked && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <button
+            aria-label="Play video"
+            onClick={() => {
+              const v = videoRef.current;
+              if (!v) return;
+              // user intent: unmute and play
+              v.muted = false;
+              const p = v.play();
+              p?.then(() => {
+                setUnmutedByUser(true);
+                setAutoplayBlocked(false);
+              }).catch((err) => {
+                // eslint-disable-next-line no-console
+                console.error("Play after user click failed:", err);
+              });
+            }}
+            className="bg-white/95 dark:bg-black/80 text-stone-900 dark:text-stone-100 px-6 py-4 rounded-full shadow-lg flex items-center gap-3"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="size-6"
+            >
+              <path d="M5 3v18l15-9L5 3z" />
+            </svg>
+            Play
+          </button>
+        </div>
+      )}
+
+      {/* If browser can't play the provided source, surface a download/open fallback */}
+      {unsupportedFormat && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/80 dark:bg-black/80 p-6">
+          <p className="mb-4 text-center text-stone-800 dark:text-stone-100">
+            This browser cannot play the provided video file. It may be encoded
+            with a codec that is unsupported (eg. HEVC/ProRes). You can download
+            and open it with a local player or re-encode to H.264/AAC for web
+            playback.
+          </p>
+          <a
+            href={src}
+            download
+            className="inline-flex items-center gap-2 bg-white/95 dark:bg-black/80 text-stone-900 dark:text-stone-100 px-4 py-2 rounded-md shadow"
+          >
+            Download video
+          </a>
+        </div>
+      )}
+    </div>
+  );
+}
 import useTextRevealAnimation from "@/hooks/useTextRevealAnimation";
 
 const Testimonial = (
   props: {
-    quote: string;
+    quote?: string;
     name: string;
     role: string;
     company: string;
     imagePositionY: number;
     image: string | StaticImageData;
     linkedin?: string;
+    video?: string;
+    videoPoster?: string;
     className?: string;
     onPrev?: () => void;
     onNext?: () => void;
@@ -26,6 +169,8 @@ const Testimonial = (
     imagePositionY,
     image,
     linkedin,
+    video,
+    videoPoster,
     className,
     onPrev,
     onNext,
@@ -71,6 +216,22 @@ const Testimonial = (
       className={twMerge("flex flex-col gap-6 md:gap-8", className)}
       {...rest}
     >
+      {/* Optional video testimonial - rendered above avatar/info on desktop */}
+      {video && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="w-full rounded-xl overflow-hidden"
+        >
+          {/* Autoplay when in view (muted) */}
+          <VideoWithAutoplay
+            src={video}
+            poster={videoPoster}
+            className="w-full h-auto block"
+          />
+        </motion.div>
+      )}
       {/* Avatar and Info Section - Always visible first on mobile, second on desktop */}
       <div className="flex items-center gap-4 order-1 md:order-2">
         {/* Circular avatar */}
@@ -192,21 +353,23 @@ const Testimonial = (
         )}
       </div>
 
-      {/* Quote Section */}
-      <blockquote className="order-2 md:order-1">
-        <div
-          className="text-xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight text-stone-700 dark:text-stone-300 transition-colors duration-300"
-          ref={quoteScope}
-        >
-          <span className="text-primary text-4xl md:text-5xl lg:text-6xl leading-none">
-            &ldquo;
-          </span>
-          {quote}{" "}
-          <span className="text-primary text-4xl md:text-5xl lg:text-6xl leading-none">
-            &rdquo;
-          </span>
-        </div>
-      </blockquote>
+      {/* Quote Section (render only when a quote exists) */}
+      {quote && (
+        <blockquote className="order-2 md:order-1">
+          <div
+            className="text-xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight text-stone-700 dark:text-stone-300 transition-colors duration-300"
+            ref={quoteScope}
+          >
+            <span className="text-primary text-4xl md:text-5xl lg:text-6xl leading-none">
+              &ldquo;
+            </span>
+            {quote}
+            <span className="text-primary text-4xl md:text-5xl lg:text-6xl leading-none">
+              &rdquo;
+            </span>
+          </div>
+        </blockquote>
+      )}
     </div>
   );
 };
