@@ -49,6 +49,7 @@ const testimonials = [
 
 const Testimonials: FC = () => {
   const titleRef = useRef(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: titleRef,
     offset: ["start end", "end start"],
@@ -58,6 +59,9 @@ const Testimonials: FC = () => {
   const transformBottom = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
 
   const [testimonialIndex, setTestimonialIndex] = useState(0);
+
+  // is the testimonials section visible enough to allow autoplay?
+  const sectionInView = useInView(sectionRef, { amount: 0.35 });
 
   const handleClickPrev = () => {
     setTestimonialIndex((curr) => {
@@ -77,6 +81,7 @@ const Testimonials: FC = () => {
 
   return (
     <section
+      ref={sectionRef}
       className="section bg-stone-50 dark:bg-stone-900 transition-colors duration-300"
       id="testimonials"
     >
@@ -110,7 +115,7 @@ const Testimonials: FC = () => {
               onPrev={handleClickPrev}
               onNext={handleClickNext}
               isActive={true}
-              shouldAutoplay={useInView(titleRef, { amount: 0.35 })}
+              shouldAutoplay={sectionInView}
             />
           </AnimatePresence>
         </div>
