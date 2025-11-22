@@ -57,7 +57,7 @@ const Testimonial = (props: TestimonialProps) => {
       const run = async () => {
         try {
           if (quoteEntranceAnimation) await quoteEntranceAnimation();
-        } catch (err) {
+        } catch {
           // noop
         }
       };
@@ -67,7 +67,7 @@ const Testimonial = (props: TestimonialProps) => {
         try {
           await quoteExitAnimation?.();
           safeToRemove?.();
-        } catch (err) {
+        } catch {
           // noop
         }
       };
