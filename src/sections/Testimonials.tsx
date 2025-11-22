@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useRef, useState } from "react";
-import { useScroll, motion, useTransform, AnimatePresence } from "motion/react";
+import { useScroll, useInView, motion, useTransform, AnimatePresence } from "motion/react";
 import Testimonial from "@/components/Testimonial";
 
 const testimonials = [
@@ -109,6 +109,8 @@ const Testimonials: FC = () => {
               {...testimonials[testimonialIndex]}
               onPrev={handleClickPrev}
               onNext={handleClickNext}
+              isActive={true}
+              shouldAutoplay={useInView(titleRef, { amount: 0.35 })}
             />
           </AnimatePresence>
         </div>
