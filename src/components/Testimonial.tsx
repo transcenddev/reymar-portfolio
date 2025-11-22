@@ -153,7 +153,7 @@ const Testimonial = (props: TestimonialProps) => {
                 poster={videoPoster}
                 controls
                 playsInline
-                muted={false}
+                muted={true}
                 preload="metadata"
                 className="w-full h-full object-contain bg-black"
                 style={{ objectFit: "contain" }}
@@ -187,6 +187,7 @@ const Testimonial = (props: TestimonialProps) => {
                       <path d="M5.25 4.5v15l13.5-7.5-13.5-7.5z" />
                     </svg>
                     <span className="sr-only">Play testimonial</span>
+                    <span className="ml-2 hidden sm:inline">Play / Unmute</span>
                   </button>
                 </div>
               )}
