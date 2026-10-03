@@ -348,7 +348,7 @@ const Favourites = () => (
 const lifeSnippets = [
   // Fitness & Calisthenics
   {
-    src: "/assets/videos/snippet-life/handstand-sunset-beach.mov",
+    src: "/assets/videos/snippet-life/handstand-sunset-beach.mp4",
     alt: "Handstand practice at sunset beach",
     aspectRatio: "9/16",
     type: "video",
@@ -372,7 +372,7 @@ const lifeSnippets = [
     type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/handstand-kids-calisthenics-sunset.mov",
+    src: "/assets/videos/snippet-life/handstand-kids-calisthenics-sunset.mp4",
     alt: "Calisthenics with kids at sunset",
     aspectRatio: "9/16",
     type: "video",
@@ -390,7 +390,7 @@ const lifeSnippets = [
     type: "video",
   },
   {
-    src: "/assets/videos/snippet-life/calisthenics nature morning workout.mov",
+    src: "/assets/videos/snippet-life/calisthenics nature morning workout.mp4",
     alt: "Morning calisthenics workout in nature",
     aspectRatio: "9/16",
     type: "video",
@@ -398,19 +398,19 @@ const lifeSnippets = [
 
   // Gym & Training
   {
-    src: "/assets/videos/snippet-life/gym bicep black compression mullet.mov",
+    src: "/assets/videos/snippet-life/gym bicep black compression mullet.mp4",
     alt: "Bicep training at gym",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/videos/snippet-life/gym boxing.mov",
+    src: "/assets/videos/snippet-life/gym boxing.mp4",
     alt: "Boxing training session",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/videos/snippet-life/punching bag muaythai gym.mov",
+    src: "/assets/videos/snippet-life/punching bag muaythai gym.mp4",
     alt: "Muay Thai punching bag workout",
     aspectRatio: "9/16",
     type: "video",
@@ -418,7 +418,7 @@ const lifeSnippets = [
 
   // Running & Outdoor Activities
   {
-    src: "/assets/videos/snippet-life/run-swim-abs.mov",
+    src: "/assets/videos/snippet-life/run-swim-abs.mp4",
     alt: "Running, swimming and abs workout",
     aspectRatio: "9/16",
     type: "video",
@@ -430,7 +430,7 @@ const lifeSnippets = [
     type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/running-beach-salabay.mov",
+    src: "/assets/videos/snippet-life/running-beach-salabay.mp4",
     alt: "Beach running at Salabay",
     aspectRatio: "9/16",
     type: "video",
@@ -442,7 +442,7 @@ const lifeSnippets = [
     type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/running-beach forest-plaza-church- beach.mov",
+    src: "/assets/videos/snippet-life/running-beach forest-plaza-church- beach.mp4",
     alt: "Running through beach, forest, and church",
     aspectRatio: "9/16",
     type: "video",
@@ -454,7 +454,7 @@ const lifeSnippets = [
     type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/running-church-scene.mov",
+    src: "/assets/videos/snippet-life/running-church-scene.mp4",
     alt: "Running past church scenic route",
     aspectRatio: "9/16",
     type: "video",
@@ -478,7 +478,7 @@ const lifeSnippets = [
     type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/running with justin night.mov",
+    src: "/assets/videos/snippet-life/running with justin night.mp4",
     alt: "Night running with Justin",
     aspectRatio: "9/16",
     type: "video",
@@ -486,7 +486,7 @@ const lifeSnippets = [
 
   // Beach & Nature
   {
-    src: "/assets/videos/snippet-life/sunset-beach-swim-me.mov",
+    src: "/assets/videos/snippet-life/sunset-beach-swim-me.mp4",
     alt: "Swimming at beach during sunset",
     aspectRatio: "9/16",
     type: "video",
@@ -498,7 +498,7 @@ const lifeSnippets = [
     type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/sunset-pink-beach-sea.mov",
+    src: "/assets/videos/snippet-life/sunset-pink-beach-sea.mp4",
     alt: "Pink sunset at the beach",
     aspectRatio: "9/16",
     type: "video",
@@ -560,25 +560,25 @@ const lifeSnippets = [
 
   // Fashion & Style
   {
-    src: "/assets/videos/snippet-life/fit check mall all black mullet.mov",
+    src: "/assets/videos/snippet-life/fit check mall all black mullet.mp4",
     alt: "All black fit check at the mall",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/videos/snippet-life/fitcheck bgc grey hoodie.mov",
+    src: "/assets/videos/snippet-life/fitcheck bgc grey hoodie.mp4",
     alt: "Grey hoodie fit check at BGC",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/videos/snippet-life/grey hoodie baggy pants.mov",
+    src: "/assets/videos/snippet-life/grey hoodie baggy pants.mp4",
     alt: "Grey hoodie and baggy pants outfit",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/videos/snippet-life/white compression shirt baggy pants.mov",
+    src: "/assets/videos/snippet-life/white compression shirt baggy pants.mp4",
     alt: "White compression shirt outfit",
     aspectRatio: "9/16",
     type: "video",
@@ -586,19 +586,19 @@ const lifeSnippets = [
 
   // Food & Cooking
   {
-    src: "/assets/videos/snippet-life/food kimchi.mov",
+    src: "/assets/videos/snippet-life/food kimchi.mp4",
     alt: "Kimchi food prep",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/videos/snippet-life/food (4).mov",
+    src: "/assets/videos/snippet-life/food (4).mp4",
     alt: "Food preparation",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/videos/snippet-life/cooking kila cess 1.mov",
+    src: "/assets/videos/snippet-life/cooking kila cess 1.mp4",
     alt: "Cooking session",
     aspectRatio: "9/16",
     type: "video",
@@ -638,13 +638,13 @@ const lifeSnippets = [
     type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/internship behind the scene videography.mov",
+    src: "/assets/videos/snippet-life/internship behind the scene videography.mp4",
     alt: "Behind the scenes videography at internship",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/videos/snippet-life/internship billiards qc (2).mov",
+    src: "/assets/videos/snippet-life/internship billiards qc (2).mp4",
     alt: "Billiards during internship break",
     aspectRatio: "9/16",
     type: "video",
@@ -652,7 +652,7 @@ const lifeSnippets = [
 
   // Museums & Culture
   {
-    src: "/assets/videos/snippet-life/museum of manila (25).mov",
+    src: "/assets/videos/snippet-life/museum of manila (25).mp4",
     alt: "Museum of Manila visit",
     aspectRatio: "9/16",
     type: "video",
@@ -664,7 +664,7 @@ const lifeSnippets = [
     type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/national museum (1).mov",
+    src: "/assets/videos/snippet-life/national museum (1).mp4",
     alt: "National Museum exploration",
     aspectRatio: "9/16",
     type: "video",
@@ -810,25 +810,25 @@ const lifeSnippets = [
 
   // Hobbies & Personal
   {
-    src: "/assets/videos/snippet-life/guitar frank ocean.mov",
+    src: "/assets/videos/snippet-life/guitar frank ocean.mp4",
     alt: "Playing guitar - Frank Ocean",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/videos/snippet-life/cats-play-white-black.mov",
+    src: "/assets/videos/snippet-life/cats-play-white-black.mp4",
     alt: "Playing with cats",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/videos/snippet-life/fish-food.mov",
+    src: "/assets/videos/snippet-life/fish-food.mp4",
     alt: "Feeding fish",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/videos/snippet-life/my-room-dark.mov",
+    src: "/assets/videos/snippet-life/my-room-dark.mp4",
     alt: "My room setup",
     aspectRatio: "9/16",
     type: "video",
@@ -907,13 +907,6 @@ const LifeGallery = () => {
           <motion.div
             key={index}
             className="break-inside-avoid mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{
-              opacity: 1,
-              y: 0,
-              transition: { delay: index * 0.02 },
-            }}
-            viewport={{ once: true, margin: "-100px" }}
           >
             <motion.div
               className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 dark:bg-stone-800 transition-colors duration-300"
