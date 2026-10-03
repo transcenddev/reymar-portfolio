@@ -21,6 +21,11 @@ const roles = [
 
 const Hero: FC = () => {
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+  const [resumeMousePosition, setResumeMousePosition] = useState({
+    x: 0,
+    y: 0,
+  });
+  const [isResumeHovered, setIsResumeHovered] = useState(false);
   const scrollingDiv = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -49,6 +54,10 @@ const Hero: FC = () => {
     if (target) {
       target.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const handleResumeMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
+    setResumeMousePosition({ x: e.clientX + 20, y: e.clientY + 20 });
   };
 
   return (
@@ -164,7 +173,7 @@ const Hero: FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 2.7 }}
-              className="flex items-center gap-6 mt-16 md:mt-20"
+              className="flex flex-wrap items-center gap-x-6 gap-y-4 mt-16 md:mt-20"
             >
               {/* Social Icons */}
               <div className="flex items-center gap-4">
@@ -202,6 +211,25 @@ const Hero: FC = () => {
                       viewBox="0 0 24 24"
                     >
                       <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                  </div>
+                </a>
+
+                {/* Facebook */}
+                <a
+                  href="https://www.facebook.com/2049rae"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group"
+                  aria-label="Facebook"
+                >
+                  <div className="size-10 rounded-full border border-stone-300 flex items-center justify-center hover:border-primary hover:bg-primary/5 transition-all duration-300">
+                    <svg
+                      className="size-5 text-stone-600 group-hover:text-primary transition-colors"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M13.5 22v-8h2.75l.5-3h-3.25V9.05c0-.87.24-1.55 1.62-1.55H17V4.82c-.33-.04-1.46-.14-2.78-.14-2.75 0-4.63 1.68-4.63 4.76V11H6.5v3h3.09v8h3.91z" />
                     </svg>
                   </div>
                 </a>
@@ -246,29 +274,70 @@ const Hero: FC = () => {
               </div>
 
               {/* Divider */}
-              <div className="h-8 w-px bg-stone-300" />
+              <div className="hidden sm:block h-8 w-px bg-stone-300" />
 
               {/* Resume Button */}
               <a
                 href="/assets/resume.pdf"
                 download
-                className="text-sm font-medium text-stone-600 hover:text-primary transition-colors inline-flex items-center gap-2"
+                className="group/resume relative inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-stone-600 transition-colors duration-300 hover:text-primary"
+                onMouseMove={handleResumeMouseMove}
+                onMouseEnter={() => setIsResumeHovered(true)}
+                onMouseLeave={() => setIsResumeHovered(false)}
               >
-                Resume
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="size-4"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
-                  />
-                </svg>
+                <span className="relative">Resume</span>
+                <div className="relative size-4 overflow-hidden">
+                  <div className="flex h-4 w-8 transition-transform duration-300 group-hover/resume:-translate-x-1/2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="size-4 shrink-0"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5a2.25 2.25 0 002.25-2.25V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+                      />
+                    </svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="size-4 shrink-0"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5a2.25 2.25 0 002.25-2.25V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div className="pointer-events-none hidden md:block">
+                  <div
+                    className="fixed z-50 w-64 overflow-hidden rounded-xl bg-white shadow-2xl"
+                    style={{
+                      left: resumeMousePosition.x,
+                      top: resumeMousePosition.y,
+                      transform: "translate(-50%, -50%)",
+                      opacity: isResumeHovered ? 1 : 0,
+                      transition: "opacity 0.3s",
+                    }}
+                  >
+                    <Image
+                      src="/assets/images/resume.png"
+                      alt="Resume preview"
+                      width={600}
+                      height={900}
+                      className="h-auto w-full object-contain"
+                    />
+                  </div>
+                </div>
               </a>
             </motion.div>
           </div>
