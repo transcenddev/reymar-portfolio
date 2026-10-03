@@ -64,13 +64,6 @@ const Intro: FC = () => {
           hover:bg-primary hover:ring-4 hover:ring-primary/20
           active:scale-95
           z-10"
-        onClick={(e) => {
-          e.preventDefault();
-          const aboutSection = document.querySelector("#about");
-          if (aboutSection) {
-            aboutSection.scrollIntoView({ behavior: "smooth" });
-          }
-        }}
       >
         <span
           className="text-white dark:text-stone-900 font-medium text-sm md:text-base 
