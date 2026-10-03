@@ -207,48 +207,41 @@ const Header: FC = () => {
         <div className="container !max-w-full">
           <div className="flex justify-between h-20 items-center">
             <div>
-              <motion.div
+              <a
+                href="/"
                 onClick={(e) => {
-                  e.preventDefault();
                   // Check if we're already on the home page
                   const isHomePage = window.location.pathname === "/";
                   if (isHomePage) {
                     // Scroll to top if already on home page
+                    e.preventDefault();
                     window.scrollTo({ top: 0, behavior: "smooth" });
-                  } else {
-                    // Navigate to home page
-                    router.push("/");
                   }
                 }}
-                className="group/logo cursor-pointer inline-block px-4 py-2 rounded-lg relative"
-                whileHover={{
-                  scale: 1.05,
-                  backgroundColor: "rgba(89, 40, 229, 0.1)",
-                }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                className="cursor-pointer inline-block px-4 py-2 rounded-lg"
               >
-                <span className="text-xl font-bold uppercase text-stone-900 dark:text-white group-hover/logo:text-primary transition-all duration-300 group-hover/logo:tracking-wider">
+                <span className="text-xl font-bold uppercase text-stone-900 dark:text-white hover:text-primary">
                   Reymar&nbsp;Mirante
                 </span>
-                <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-primary scale-x-0 group-hover/logo:scale-x-100 transition-transform duration-300 origin-left" />
-              </motion.div>
+              </a>
             </div>
           </div>
         </div>
       </div>
 
       {/* Menu button */}
-      <div className="fixed top-0 left-0 w-full z-20">
+      <div className="pointer-events-none fixed top-0 left-0 w-full z-20">
         <div className="container !max-w-full">
           <div className="flex justify-end h-20 items-center">
             <div className="flex items-center gap-4">
               {/* Theme Toggle Button */}
-              <ThemeToggle />
+              <div className="pointer-events-auto">
+                <ThemeToggle />
+              </div>
 
               {/* Menu button */}
               <motion.div
-                className="relative size-11 border border-stone-300 dark:border-stone-600 rounded-full inline-flex items-center justify-center bg-white dark:bg-stone-800 text-stone-900 dark:text-white hover:bg-stone-50 dark:hover:bg-stone-700 cursor-pointer transition-colors duration-300"
+                className="pointer-events-auto relative size-11 border border-stone-300 dark:border-stone-600 rounded-full inline-flex items-center justify-center bg-white dark:bg-stone-800 text-stone-900 dark:text-white hover:bg-stone-50 dark:hover:bg-stone-700 cursor-pointer transition-colors duration-300"
                 onClick={() => setIsOpen(!isOpen)}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}

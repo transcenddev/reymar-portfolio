@@ -309,8 +309,10 @@ const Favourites = () => (
         </div>
 
         <div>
-          <span className="font-semibold text-black">Music:</span>
-          <span className="text-black/80">
+          <span className="font-semibold text-black dark:text-white transition-colors duration-300">
+            Music:
+          </span>
+          <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
             {" "}
             Currently vibing to lo-fi beats while working, it&apos;s the perfect
             background noise
@@ -318,8 +320,10 @@ const Favourites = () => (
         </div>
 
         <div>
-          <span className="font-semibold text-black">Food:</span>
-          <span className="text-black/80">
+          <span className="font-semibold text-black dark:text-white transition-colors duration-300">
+            Food:
+          </span>
+          <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
             {" "}
             Can&apos;t live without Oatmeal, Adobong Manok, Kare-Kare, and
             Nilagang Baka
@@ -327,8 +331,10 @@ const Favourites = () => (
         </div>
 
         <div>
-          <span className="font-semibold text-black">Clothing:</span>
-          <span className="text-black/80">
+          <span className="font-semibold text-black dark:text-white transition-colors duration-300">
+            Clothing:
+          </span>
+          <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
             {" "}
             Gustavo, Wisdom Kaye, Daniel Simmons, Giafratte, Jevon Henley
           </span>

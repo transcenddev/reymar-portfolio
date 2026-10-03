@@ -73,8 +73,19 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
           const rect = video.getBoundingClientRect();
           const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
           if (isVisible) {
-            video.play();
-          } else {
+            if (video.paused) {
+              void video.play().catch((error: unknown) => {
+                // A pause during an in-flight play request is expected when
+                // scrolling quickly and produces an AbortError in browsers.
+                if (
+                  !(error instanceof DOMException) ||
+                  error.name !== "AbortError"
+                ) {
+                  console.error("Video playback failed:", error);
+                }
+              });
+            }
+          } else if (!video.paused) {
             video.pause();
           }
         }
@@ -179,6 +190,8 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                     src={mediaSrc}
                     muted
                     loop
+                    playsInline
+                    preload="metadata"
                     className="object-cover w-full h-full"
                   />
                 ) : (
