@@ -278,7 +278,7 @@ const Hero: FC = () => {
 
               {/* Resume Button */}
               <a
-                href="/assets/resume.pdf"
+                href="/assets/resume.pdf?v=20261003"
                 download
                 className="group/resume relative inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-stone-600 transition-colors duration-300 hover:text-primary"
                 onMouseMove={handleResumeMouseMove}
