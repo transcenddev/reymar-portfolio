@@ -325,16 +325,22 @@ const Testimonial = (props: TestimonialProps) => {
       {quote && (
         <blockquote className="order-2 md:order-1">
           <div
-            className="text-xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight text-stone-700 dark:text-stone-300"
+            className="relative pl-8 text-xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight text-stone-700 dark:text-stone-300"
             ref={quoteScope}
           >
-            <span className="text-primary text-4xl md:text-5xl lg:text-6xl leading-none">
+            <span
+              aria-hidden="true"
+              className="absolute left-0 top-0 text-primary text-4xl md:text-5xl lg:text-6xl leading-none"
+            >
               &ldquo;
             </span>
-            {quote}
-            <span className="text-primary text-4xl md:text-5xl lg:text-6xl leading-none">
+            <p className="m-0">{quote}</p>
+            <div
+              aria-hidden="true"
+              className="text-right text-primary text-4xl md:text-5xl lg:text-6xl leading-none"
+            >
               &rdquo;
-            </span>
+            </div>
           </div>
         </blockquote>
       )}

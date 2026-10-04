@@ -51,6 +51,16 @@ const testimonials = [
     imagePositionY: 0.5,
     linkedin: "https://www.linkedin.com/in/juliustuliao/",
   },
+  {
+    name: "Arleah Grace Grencio",
+    company: "S.P. Madrid",
+    role: "Project Manager",
+    quote:
+      "Reymar consistently demonstrated dedication, professionalism, and a strong willingness to learn. He adapted quickly, communicated effectively, and delivered quality work reliably. His positive attitude and eagerness to grow made him easy to work with, and I highly recommend him for future opportunities.",
+    image: "/assets/images/avatar/avatar-arleah_grace-grencio.jpg",
+    imagePositionY: 0.5,
+    linkedin: "https://www.linkedin.com/in/arleah-grace-grencio",
+  },
 ];
 
 const Testimonials: FC = () => {
