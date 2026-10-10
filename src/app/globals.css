@@ -40,9 +40,25 @@
     /* Keep same purple */
   }
 
+  /* Accessible focus indicator — keyboard navigation only (:focus-visible) */
+  :focus-visible {
+    outline: 2px solid rgb(var(--primary));
+    outline-offset: 2px;
+  }
+
+  /* On dark surfaces the brand purple is below 3:1, so use the light foreground token */
+  .dark :focus-visible {
+    outline-color: rgb(var(--foreground));
+  }
+
+  /* The footer keeps a dark background in both themes, so it always needs a light ring */
+  #contact :focus-visible {
+    outline-color: #ffffff;
+  }
+
   /* Smooth transitions for theme switching */
   * {
-    @apply transition-colors duration-300;
+    @apply transition-colors duration-200;
   }
 }
 
@@ -50,10 +66,40 @@
   @apply py-24 md:py-32 lg:py-40;
 }
 
+.container {
+  @apply font-sans;
+}
+
 .line {
   @apply overflow-hidden;
 }
 
-.word {
-  @apply translate-y-full opacity-0;
+/* Heading entrance animation — replaces SplitType/stagger
+   Usage: add `animate-fade-up` to a heading element
+   Staggered children: add `animate-fade-up-delayed` variant classes */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+/* Staggered delay utilities */
+.animate-fade-up-delay-1 { animation-delay: 100ms; }
+.animate-fade-up-delay-2 { animation-delay: 200ms; }
+.animate-fade-up-delay-3 { animation-delay: 300ms; }
+.animate-fade-up-delay-4 { animation-delay: 400ms; }
+
+/* Telemetry / data numbers: tabular-nums for consistent vertical alignment */
+.telemetry {
+  font-variant-numeric: tabular-nums;
 }

@@ -1,190 +1,271 @@
 "use client";
 
-import { FC, useState, MouseEvent } from "react";
+import { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { additionalWork, projectsById } from "@/data/projects";
+import Button from "@/components/Button";
 
-// Import actual project images from public assets
-const projects = [
-  {
-    id: "sp-madrid-ai-multimedia",
-    name: "Reviving Memories with AI",
-    image: "/assets/images/sp-madrid-exhibition.jpg",
-  },
-  {
-    id: "read-ai-website",
-    name: "Read AI",
-    image: "/assets/images/read-ai-webdesign1.png",
-  },
-  {
-    id: "covid-health-declaration",
-    name: "COVID-19 Health Declaration System",
-    image: "/assets/images/covid-hero.png",
-  },
+const FEATURED_PROJECT_ID = "agwasuri";
+
+const featuredHighlights = [
+  "Real-time monitoring: Solar-backed ESP32 nodes track pH, dissolved oxygen, salinity, and temperature. Detects salinity spikes and hypoxia early, preventing mass fish mortality and reducing financial losses.",
+  "Web dashboard: Laravel dashboard with Python service shows live pond data, historical logs, and critical alerts. Helps operators and MAO officers act fast, improve fish survival, and make informed decisions.",
+  "Predictive analytics: Decision Tree classifier (93.5% accuracy, 0.001s inference) matches live conditions with SEAFDEC benchmarks. Recommends optimal species, eliminating guesswork and preventing mismatched stocking.",
 ];
 
-const ProjectItem: FC<{
-  id: string;
-  name: string;
-  image: string;
-}> = ({ id, name, image }) => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
+const Projects: FC = () => {
+  const featuredProject = projectsById[FEATURED_PROJECT_ID];
 
-  const handleMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
-    setMousePosition({ x: e.clientX + 20, y: e.clientY + 20 });
-  };
+  const description = featuredProject.intro
+    ? featuredProject.intro.charAt(0).toUpperCase() +
+      featuredProject.intro.slice(1)
+    : featuredProject.tagline;
 
-  const handleMouseEnter = (e: MouseEvent<HTMLAnchorElement>) => {
-    setMousePosition({ x: e.clientX + 20, y: e.clientY + 20 });
-    setIsHovered(true);
-  };
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches);
+    };
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  const effectiveAutoplay = !prefersReducedMotion;
 
   return (
-    <Link
-      href={`/projects/${id}`}
-      className="text-left border-t last:border-b border-stone-400 dark:border-stone-600 border-dotted py-6 md:py-8 lg:py-10 flex flex-col relative group/project w-full transition-colors duration-300"
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div className="absolute bottom-0 left-0 w-full h-0 group-hover/project:h-full transition-all duration-700 bg-stone-300 dark:bg-stone-700"></div>
-      <div className="relative">
-        <div className="aspect-video md:hidden rounded-lg overflow-hidden">
-          <Image
-            src={image}
-            alt={`${name} preview`}
-            width={800}
-            height={450}
-            className="size-full object-cover"
-          />
-        </div>
-        <div className="mt-8 md:mt-0 flex justify-between items-center md:grid md:[grid-template-columns:1fr_300px_max-content] md:gap-8">
-          <div className="group-hover/project:pl-4 transition-all duration-700">
-            <h3 className="text-2xl md:text-3xl lg:text-4xl">{name}</h3>
-          </div>
+    <section className="pt-0 pb-12 md:pb-16 lg:pb-20" id="work">
+      <div className="container">
+        <h2 className="my-12 md:mb-16 font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 transition-colors duration-200">
+          featured work
+        </h2>
 
-          {/* Mouse-following preview image - Desktop only */}
-          <div className="hidden md:block pointer-events-none">
-            <div
-              className="fixed w-80 aspect-video rounded-xl overflow-hidden shadow-2xl z-50"
-              style={{
-                left: mousePosition.x,
-                top: mousePosition.y,
-                transform: "translate(-50%, -50%)",
-                opacity: isHovered ? 1 : 0,
-                transition: "opacity 0.3s",
-              }}
-            >
-              <Image
-                src={image}
-                alt={`${name} preview`}
-                width={800}
-                height={450}
-                className="size-full object-cover"
-              />
+        {/* Featured Project */}
+        <Link
+          href={`/projects/${featuredProject.id}`}
+          className="group block mt-5 md:mt-16 lg:mt-10"
+        >
+          <div className="grid md:grid-cols-12 gap-6 md:gap-8 lg:gap-12 items-center">
+            <div className="md:col-span-7">
+              {/* <p className="text-sm md:text-base uppercase tracking-wider text-primary font-medium">
+                Featured Project
+              </p> */}
+              <h3 className="font-display text-display uppercase mt-3 font-bold text-balance">
+                {featuredProject.name}
+              </h3>
+              <p className="text-sm md:text-base text-stone-500 dark:text-stone-400 mt-2 transition-colors duration-200">
+                {featuredProject.client}
+              </p>
+              <p className="text-stone-600 dark:text-stone-400 mt-4 leading-relaxed transition-colors duration-200">
+                {description}
+              </p>
+
+              <ul className="mt-6 space-y-3">
+                {featuredHighlights.map((highlight) => (
+                  <li
+                    key={highlight}
+                    className="flex items-start gap-3 text-sm md:text-base text-stone-700 dark:text-stone-300 transition-colors duration-200 font-mono telemetry"
+                  >
+                    <span className="text-stone-900 dark:text-white text-xl mt-1 flex-shrink-0">
+                      &#8226;
+                    </span>
+                    <span className="leading-relaxed font-sans">
+                      {highlight}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <p className="mt-6 text-sm md:text-base text-stone-600 dark:text-stone-400 leading-relaxed transition-colors duration-200">
+                By preventing fish mortality and optimizing species selection, Agwasuri boosts productivity, supports sustainable aquaculture, and strengthens local livelihoods.
+              </p>
+
+              <span className="mt-8 inline-flex items-center gap-2 text-stone-700 dark:text-stone-300 group-hover:text-primary transition-colors duration-200">
+                <span>View case study</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  className="size-4 md:size-5 shrink-0 group-hover:translate-x-1 transition-transform duration-200"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M7 7h10v10"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M7 17 17 7"
+                  />
+                </svg>
+              </span>
             </div>
-          </div>
 
-          <div className="lg:group-hover/project:pr-4 transition-all duration-700">
-            <div className="size-6 overflow-hidden">
-              <div className="h-6 w-12 flex group-hover/project:-translate-x-1/2 transition-transform duration-300">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
-                  />
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
-                  />
-                </svg>
+            <div className="md:col-span-5">
+              {/* Asymmetric Triptych: Result Hero + Hardware Teardown + Full Dashboard */}
+              <div className="space-y-4 md:space-y-6">
+                {/* 1. PRIMARY — Dashboard Demo Video (Hero, 16:9) */}
+                <div className="relative aspect-[16/9] overflow-hidden border border-stone-200 dark:border-stone-800 bg-stone-100 dark:bg-stone-900 transition-colors duration-200">
+                  {effectiveAutoplay ? (
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      disablePictureInPicture
+                      className="w-full h-full object-cover"
+                      poster="/assets/images/works/thesis_agwasuri/agwasuri_website_photos/agwasuri_dashboard_top_section.png"
+                      preload="metadata"
+                    >
+                      <source
+                        src="/assets/videos/works/agwasuri/navigation_website_full_video.mp4"
+                        type="video/mp4"
+                      />
+                    </video>
+                  ) : (
+                    <Image
+                      src="/assets/images/works/thesis_agwasuri/agwasuri_website_photos/agwasuri_dashboard_top_section.png"
+                      alt="AgwaSuri dashboard with real-time water quality charts and species recommendation panel"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover"
+                      priority
+                    />
+                  )}
+                </div>
+
+                {/* 2. SPLIT ROW — Hardware Teardown (left) + Full Dashboard (right) */}
+                <div className="grid grid-cols-2 gap-4">
+                  {/* Hardware Teardown — Tangible Engineering */}
+                  <div className="relative aspect-square overflow-hidden border border-stone-200 dark:border-stone-800 bg-stone-100 dark:bg-stone-900 transition-colors duration-200">
+                    {effectiveAutoplay ? (
+                      <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        disablePictureInPicture
+                        className="w-full h-full object-cover"
+                        poster="/assets/images/works/thesis_agwasuri/agwasuri_prototype_design_colored.png"
+                        preload="metadata"
+                      >
+                        <source
+                          src="/assets/videos/works/agwasuri/agwasuri_3d_prototype_blender_edit.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                    ) : (
+                      <Image
+                        src="/assets/images/works/thesis_agwasuri/agwasuri_prototype_design_colored.png"
+                        alt="3D render of solar-powered floating IoT platform prototype for water quality monitoring"
+                        fill
+                        sizes="(max-width: 768px) 50vw, 210px"
+                        className="object-cover"
+                      />
+                    )}
+                  </div>
+
+                  {/* Full Dashboard — Software Intelligence */}
+                  <div className="relative aspect-square overflow-hidden border border-stone-200 dark:border-stone-800 bg-stone-100 dark:bg-stone-900 transition-colors duration-200">
+                    <Image
+                      src="/assets/images/works/thesis_agwasuri/agwasuri_fishpond_prototype_fishpond_owner_reymar_jazrel_wholesome.JPG"
+                      alt="AgwaSuri Laravel dashboard: real-time pH, dissolved oxygen, salinity, temperature charts with decision-tree species recommendation (Bangus, Lapu-lapu, Tilapia, Sugpo, Mudcrab)"
+                      fill
+                      sizes="(max-width: 768px) 50vw, 210px"
+                      className="object-cover transition-opacity duration-300"
+                      placeholder="blur"
+                      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </Link>
-  );
-};
+        </Link>
 
-const Projects: FC = () => {
-  return (
-    <section className="pt-0 pb-12 md:pb-16 lg:pb-20" id="projects">
-      <div className="container">
-        <h2 className="text-sm md:text-base uppercase tracking-wider text-stone-500 dark:text-stone-400 font-light transition-colors duration-300">
-          Recent Work
-        </h2>
+        {/* Additional Work */}
+        <div className="mt-16 border-t border-stone-200 pt-8 transition-colors duration-200 md:mt-20 md:pt-10 lg:mt-24 dark:border-stone-800">
+          <h3 className="mb-6 md:mb-8 font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 transition-colors duration-200">
+            Additional Work
+          </h3>
 
-        <div className="mt-10 md:mt-16 lg:mt-20">
-          {projects.map(({ id, name, image }) => (
-            <ProjectItem key={id} id={id} name={name} image={image} />
-          ))}
+          <div>
+            {additionalWork.map((item) => {
+              const rowClassName =
+                "group grid grid-cols-1 items-baseline gap-4 border-b border-stone-200 dark:border-stone-800 px-2 py-4 md:py-5 transition-colors duration-200 hover:bg-stone-900/20 md:grid-cols-12 dark:hover:bg-stone-100/10";
+
+              const rowContent = (
+                <>
+                  <div className="flex items-center justify-between gap-3 md:col-span-4">
+                    <span className="text-base font-medium transition-colors duration-200 group-hover:text-primary">
+                      {item.title}
+                    </span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="2"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                      className="size-3.5 flex-shrink-0 text-stone-400 group-hover:text-primary group-hover:translate-x-1 transition-transform duration-200"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M7 7h10v10"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M7 17 17 7"
+                      />
+                    </svg>
+                  </div>
+
+                  <div className="md:col-span-3">
+                    <span className="font-mono text-xs uppercase tracking-wider text-stone-500 dark:text-stone-400 transition-colors duration-200">
+                      {item.category}
+                    </span>
+                  </div>
+
+                  <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400 transition-colors duration-200 md:col-span-5">
+                    {item.summary}
+                  </p>
+                </>
+              );
+
+              return item.external ? (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={rowClassName}
+                >
+                  {rowContent}
+                </a>
+              ) : (
+                <Link key={item.id} href={item.href} className={rowClassName}>
+                  {rowContent}
+                </Link>
+              );
+            })}
+          </div>
         </div>
 
         {/* More Work Button */}
         <div className="mt-12 md:mt-16 flex justify-center">
-          <Link
-            href="/work"
-            className="group inline-flex items-center gap-3 px-8 py-4 border-2 border-stone-400 dark:border-stone-600 rounded-full hover:border-primary hover:bg-primary hover:text-white dark:hover:text-white transition-all duration-300"
-          >
-            <span className="text-base md:text-lg font-medium">
-              View All Work
-            </span>
-            <div className="overflow-hidden size-5">
-              <div className="h-5 w-10 flex group-hover:-translate-x-1/2 transition-transform duration-300">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  className="size-5"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-                  />
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  className="size-5"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-                  />
-                </svg>
-              </div>
-            </div>
+          <Link href="/work" className="inline-block">
+            <Button variant="secondary">View All Work</Button>
           </Link>
         </div>
       </div>
