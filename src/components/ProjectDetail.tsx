@@ -174,7 +174,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
           {project.stakeholderQuote ? (
             <blockquote className="space-y-3">
               <p className="font-sans text-neutral-700 dark:text-neutral-300 italic leading-relaxed">
-                "{project.stakeholderQuote.quote}"
+                &ldquo;{project.stakeholderQuote.quote}&rdquo;
               </p>
               <footer className="font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-500">
                 — {project.stakeholderQuote.attribution}
