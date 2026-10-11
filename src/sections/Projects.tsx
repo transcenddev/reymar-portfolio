@@ -25,9 +25,7 @@ const Projects: FC = () => {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    );
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setPrefersReducedMotion(mediaQuery.matches);
 
     const handleChange = (e: MediaQueryListEvent) => {
@@ -83,7 +81,9 @@ const Projects: FC = () => {
               </ul>
 
               <p className="mt-6 text-sm md:text-base text-stone-600 dark:text-stone-400 leading-relaxed transition-colors duration-200">
-                By preventing fish mortality and optimizing species selection, Agwasuri boosts productivity, supports sustainable aquaculture, and strengthens local livelihoods.
+                By preventing fish mortality and optimizing species selection,
+                Agwasuri boosts productivity, supports sustainable aquaculture,
+                and strengthens local livelihoods.
               </p>
 
               <span className="mt-8 inline-flex items-center gap-2 text-stone-700 dark:text-stone-300 group-hover:text-primary transition-colors duration-200">
@@ -114,7 +114,7 @@ const Projects: FC = () => {
               {/* Asymmetric Triptych: Result Hero + Hardware Teardown + Full Dashboard */}
               <div className="space-y-4 md:space-y-6">
                 {/* 1. PRIMARY — Dashboard Demo Video (Hero, 16:9) */}
-                <div className="relative aspect-[16/9] overflow-hidden border border-stone-200 dark:border-stone-800 bg-stone-100 dark:bg-stone-900 transition-colors duration-200">
+                <div className="relative aspect-[16/9] overflow-hidden rounded-none bg-[#080808] transition-colors duration-200">
                   {effectiveAutoplay ? (
                     <video
                       autoPlay
@@ -123,30 +123,35 @@ const Projects: FC = () => {
                       playsInline
                       disablePictureInPicture
                       className="w-full h-full object-cover"
-                      poster="/assets/images/works/thesis_agwasuri/agwasuri_website_photos/agwasuri_dashboard_top_section.png"
                       preload="metadata"
                     >
                       <source
-                        src="/assets/videos/works/agwasuri/navigation_website_full_video.mp4"
+                        src="/assets/videos/works/agwasuri/agwasuri_dashboard_prediction_test_video.mp4"
                         type="video/mp4"
                       />
                     </video>
                   ) : (
-                    <Image
-                      src="/assets/images/works/thesis_agwasuri/agwasuri_website_photos/agwasuri_dashboard_top_section.png"
-                      alt="AgwaSuri dashboard with real-time water quality charts and species recommendation panel"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover"
-                      priority
-                    />
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      disablePictureInPicture
+                      className="w-full h-full object-cover"
+                      preload="metadata"
+                    >
+                      <source
+                        src="/assets/videos/works/agwasuri/agwasuri_dashboard_prediction_test_video.mp4"
+                        type="video/mp4"
+                      />
+                    </video>
                   )}
                 </div>
 
                 {/* 2. SPLIT ROW — Hardware Teardown (left) + Full Dashboard (right) */}
                 <div className="grid grid-cols-2 gap-4">
                   {/* Hardware Teardown — Tangible Engineering */}
-                  <div className="relative aspect-square overflow-hidden border border-stone-200 dark:border-stone-800 bg-stone-100 dark:bg-stone-900 transition-colors duration-200">
+                  <div className="relative aspect-square overflow-hidden transition-colors duration-200">
                     {effectiveAutoplay ? (
                       <video
                         autoPlay
@@ -164,13 +169,20 @@ const Projects: FC = () => {
                         />
                       </video>
                     ) : (
-                      <Image
-                        src="/assets/images/works/thesis_agwasuri/agwasuri_prototype_design_colored.png"
-                        alt="3D render of solar-powered floating IoT platform prototype for water quality monitoring"
-                        fill
-                        sizes="(max-width: 768px) 50vw, 210px"
-                        className="object-cover"
-                      />
+                      <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        disablePictureInPicture
+                        className="w-full h-full object-cover"
+                        preload="metadata"
+                      >
+                        <source
+                          src="/assets/videos/works/agwasuri/agwasuri_3d_prototype_blender_edit.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
                     )}
                   </div>
 
