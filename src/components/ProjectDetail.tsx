@@ -4,6 +4,7 @@ import React, { FC, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button";
+import TelemetryHero from "@/components/TelemetryHero";
 import { projectsById, type Project } from "@/data/projects";
 
 const isVideoSrc = (src: string) => /\.(mp4|mov|webm)$/i.test(src);
@@ -172,6 +173,11 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
           )}
         </div>
 
+        {/* AgwaSuri live telemetry console */}
+        {project.id === "agwasuri" && (
+          <TelemetryHero prefersReducedMotion={prefersReducedMotion} />
+        )}
+
         {/* Info grid */}
         <div className="mt-10 md:mt-16 lg:mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
@@ -230,7 +236,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
               {project.tech.map((tool) => (
                 <li
                   key={tool}
-                  className="rounded-none border border-stone-300 px-3 py-1 text-sm text-stone-700 md:text-base font-sans"
+                  className="rounded-none border border-neutral-200 dark:border-neutral-800 px-3 py-1 text-sm text-stone-700 dark:text-stone-300 md:text-base font-sans"
                 >
                   {tool}
                 </li>
