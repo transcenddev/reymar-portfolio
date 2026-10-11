@@ -21,16 +21,21 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
 }) => {
    const [isSwitching, setIsSwitching] = useState(false);
   const [autoplayEnabled, setAutoplayEnabled] = useState(true);
-  const [prefersReducedMotion, setPrefersReducedMotion] =
-    useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
+    () =>
+      typeof window !== "undefined"
+        ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        : false
+  );
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     );
-    setPrefersReducedMotion(mediaQuery.matches);
 
     const handleChange = (e: MediaQueryListEvent) => {
+      // Runtime changes only — initial state is already sourced from the
+      // useState initializer to avoid a hydration flash.
       setPrefersReducedMotion(e.matches);
     };
     mediaQuery.addEventListener("change", handleChange);
@@ -121,10 +126,9 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
       <div className="container">
         {/* Header */}
         <div>
-          <h1 className="sr-only">{project.name}</h1>
-          <h2 className="font-display text-statement font-bold text-balance">
+          <h1 className="font-display text-statement font-bold text-balance">
             {project.name}
-          </h2>
+          </h1>
           {project.intro && (
             <div className="mt-6">
               <h3 className="text-sm text-stone-500 uppercase tracking-wider mb-2">
@@ -195,9 +199,9 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
         {/* Challenge Section */}
         {project.problem && (
           <div className="mt-10 md:mt-16 lg:mt-20">
-            <h3 className="text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-6">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-6">
               Challenge
-            </h3>
+            </h2>
             <p className="text-stone-700 md:text-lg leading-relaxed max-w-4xl">
               {project.problem}
             </p>
@@ -207,9 +211,9 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
         {/* What I Did Section */}
         {project.built && (
           <div className="mt-10 md:mt-16 lg:mt-20">
-            <h3 className="text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-6">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-6">
               What I Did
-            </h3>
+            </h2>
             <p className="text-stone-700 md:text-lg leading-relaxed max-w-4xl">
               {project.built}
             </p>
@@ -219,9 +223,9 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
         {/* Tech Stack Section */}
         {project.tech && project.tech.length > 0 && (
           <div className="mt-10 md:mt-16 lg:mt-20">
-            <h3 className="text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-6">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-6">
               Tech Stack
-            </h3>
+            </h2>
             <ul className="flex flex-wrap gap-2 font-mono telemetry">
               {project.tech.map((tool) => (
                 <li
@@ -244,7 +248,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
             return (
               <div
                 key={index}
-                className={`relative w-full bg-stone-300 overflow-hidden ${
+                className={`relative w-full bg-[#050505] overflow-hidden ${
                   isVideo ? (isLongForm ? "aspect-video" : "aspect-[4/3]") : ""
                 }`}
               >
@@ -264,33 +268,36 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                     />
                    ) : (
                      <div className="relative w-full h-full">
-                       <video
-                         ref={(el) => {
-                           if (el) {
-                             videoRefs.current[index] = el;
-                           }
-                         }}
-                         src={mediaSrc}
-                         muted
-                         loop
-                         playsInline
-                         preload="metadata"
-                         autoPlay={effectiveAutoplay}
-                         className={`object-cover w-full h-full ${!effectiveAutoplay ? "hidden" : ""}`}
-                       />
-                       <button
-                         onClick={(e) => {
-                           e.preventDefault();
-                           const video = videoRefs.current[index];
-                           if (video) {
-                             if (video.paused) {
-                               void video.play();
-                             } else {
-                               video.pause();
-                             }
-                           }
-                         }}
-                         aria-label={autoplayEnabled ? "Pause video" : "Play video"}
+                        <video
+                          id={`media-video-${index}`}
+                          ref={(el) => {
+                            if (el) {
+                              videoRefs.current[index] = el;
+                            }
+                          }}
+                          src={mediaSrc}
+                          muted
+                          loop
+                          playsInline
+                          preload="metadata"
+                          autoPlay={effectiveAutoplay}
+                          className={`object-cover w-full h-full ${!effectiveAutoplay ? "hidden" : ""}`}
+                        />
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            const video = videoRefs.current[index];
+                            if (video) {
+                              if (video.paused) {
+                                void video.play();
+                              } else {
+                                video.pause();
+                              }
+                            }
+                          }}
+                          aria-label="Toggle video playback"
+                          aria-controls={`media-video-${index}`}
+                          aria-pressed={effectiveAutoplay}
                          className="absolute top-2 right-2 p-1.5 rounded bg-black/30 text-white hover:bg-black/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 transition-colors duration-200"
                        >
                          {effectiveAutoplay ? (
@@ -322,9 +329,9 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
         {/* Outcome Section */}
         {project.result && project.result.length > 0 && (
           <div className="mt-10 md:mt-16 lg:mt-20">
-            <h3 className="text-2xl md:text-3xl lg:text-4xl mb-6 md:mb-8">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl mb-6 md:mb-8">
               Outcome
-            </h3>
+            </h2>
             <ul className="space-y-4 max-w-4xl font-mono telemetry">
               {project.result.map((item, index) => (
                 <li
@@ -343,9 +350,9 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
 
         {/* Recent projects (masonry) */}
         <div className="mt-16 md:mt-24">
-          <h3 className="text-3xl md:text-5xl max-w-3xl">
+          <h2 className="text-3xl md:text-5xl max-w-3xl">
             Check out some of my recent projects
-          </h3>
+          </h2>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
             {masonryItems.map((id, idx) => {
@@ -402,8 +409,12 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
           <Button variant="secondary" onClick={onBack}>
             See all
           </Button>
-           {hasAutoplayVideos && (
-            <Button variant="primary" onClick={toggleAutoplay}>
+          {hasAutoplayVideos && (
+            <Button
+              variant="primary"
+              onClick={toggleAutoplay}
+              aria-pressed={autoplayEnabled}
+            >
               {prefersReducedMotion
                 ? "Reduced motion active"
                 : autoplayEnabled
@@ -415,7 +426,12 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
 
         {/* Loading overlay while switching */}
         {isSwitching && (
-          <div className="fixed inset-0 bg-white/60 backdrop-blur-[1px] flex items-center justify-center z-50">
+          <div
+            className="fixed inset-0 bg-white/60 backdrop-blur-[1px] flex items-center justify-center z-50"
+            aria-busy="true"
+            aria-live="polite"
+            role="status"
+          >
             <div className="text-stone-900">Loading…</div>
           </div>
         )}
