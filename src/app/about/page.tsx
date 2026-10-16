@@ -81,9 +81,7 @@ const EducationExperience = () => (
     <div className="max-w-4xl mx-auto">
       {/* Education */}
       <div className="mb-20">
-        <h2
-          className="font-display font-bold text-stone-900 dark:text-stone-100 mb-12 uppercase tracking-wide transition-colors duration-300"
-        >
+        <h2 className="font-display font-bold text-stone-900 dark:text-stone-100 mb-12 uppercase tracking-wide transition-colors duration-300">
           EDUCATION
         </h2>
         <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-6">
@@ -128,9 +126,7 @@ const EducationExperience = () => (
 
       {/* Experience */}
       <div className="mb-0">
-        <h2
-          className="font-display font-bold text-stone-900 dark:text-stone-100 mb-12 uppercase tracking-wide transition-colors duration-300"
-        >
+        <h2 className="font-display font-bold text-stone-900 dark:text-stone-100 mb-12 uppercase tracking-wide transition-colors duration-300">
           EXPERIENCE
         </h2>
         <div className="space-y-16">
@@ -196,9 +192,7 @@ const EducationExperience = () => (
 const CommunityLeadership = () => (
   <AnimatedSection className="container mx-auto px-4 pb-16" delay={0.15}>
     <div className="max-w-4xl mx-auto">
-      <h2
-        className="font-display font-bold text-stone-900 dark:text-stone-100 mb-12 uppercase tracking-wide transition-colors duration-300"
-      >
+      <h2 className="font-display font-bold text-stone-900 dark:text-stone-100 mb-12 uppercase tracking-wide transition-colors duration-300">
         COMMUNITY & LEADERSHIP
       </h2>
       <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-6">
