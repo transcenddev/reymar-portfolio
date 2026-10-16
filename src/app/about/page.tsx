@@ -2,18 +2,17 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import Footer from "@/sections/Footer";
 import Header from "@/sections/Header";
 import MediaSkeleton from "@/components/MediaSkeleton";
-import avatarImage from "@/assets/images/avatar.jpg";
 
 const HeroSection = () => (
   <AnimatedSection className="container mx-auto pt-16 pb-16">
     <div className="max-w-4xl mx-auto">
       {/* Portrait - smaller and more integrated */}
-      <figure className="w-32 h-32 md:w-40 md:h-40 rounded-full mb-12 mt-12 overflow-hidden relative">
+      {/* <figure className="w-32 h-32 md:w-40 md:h-40 rounded-full mb-12 mt-12 overflow-hidden relative">
         <Image
           src={avatarImage}
           alt="Reymar Mirante portrait"
@@ -21,10 +20,10 @@ const HeroSection = () => (
           className="object-cover"
           priority
         />
-      </figure>
+      </figure> */}
 
       {/* Main headline with similar typography treatment */}
-      <h1 className="mb-12 font-serif text-black dark:text-white text-left transition-colors duration-300">
+      <h1 className="my-12 font-serif text-black dark:text-white text-left transition-colors duration-300">
         <span
           className="block text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-2"
           style={{ letterSpacing: "-0.02em" }}
@@ -112,8 +111,8 @@ const EducationExperience = () => (
                 <span className="font-semibold text-black/80 dark:text-stone-300">
                   Focused coursework:
                 </span>{" "}
-                Software Engineering, IoT, Machine Learning, Artificial
-                Intelligence, Web Systems
+                Programming, Data Structures and Algorithms, Software
+                Engineering, Systems Analysis and Design, Machine Learning
               </p>
               <p>
                 I built a strong foundation in software development and
@@ -123,7 +122,7 @@ const EducationExperience = () => (
             </div>
           </div>
           <div className="text-black/60 dark:text-stone-500 text-sm md:text-base transition-colors duration-300">
-            Sept 2021 - Present
+            Sept 2021 - 2026
           </div>
         </div>
       </div>
@@ -259,9 +258,8 @@ const Favourites = () => (
       </h2>
       <p className="text-base md:text-lg text-black/80 dark:text-stone-300 mb-8 transition-colors duration-300">
         When I&apos;m not coding or designing, you can catch me at a local
-        coffee shop with my camera, binge-watching anime until 3am, or
-        perfecting my handstand form. Here&apos;s what&apos;s currently on
-        rotation:
+        coffee shop with my camera, reading, or perfecting my bodyweight
+        exercises. Here&apos;s what&apos;s currently on rotation:
       </p>
 
       <div className="space-y-4 text-base md:text-lg leading-relaxed">
@@ -904,12 +902,9 @@ const LifeGallery = () => {
 
       <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4">
         {lifeSnippets.map((item, index) => (
-          <motion.div
-            key={index}
-            className="break-inside-avoid mb-4"
-          >
+          <motion.div key={index} className="break-inside-avoid mb-4">
             <motion.div
-              className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 dark:bg-stone-800 transition-colors duration-300"
+              className="relative overflow-hidden rounded-none shadow-sm bg-stone-100 dark:bg-stone-800 transition-colors duration-300"
               whileHover={{
                 scale: 1.02,
                 boxShadow: "0 8px 24px rgba(0,0,0,0.12)",

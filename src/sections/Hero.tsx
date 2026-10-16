@@ -1,53 +1,16 @@
 "use client";
 
-import { FC, useEffect, useRef, useState } from "react";
-import heroImage from "@/assets/images/hero-image.jpg";
+import { FC } from "react";
+import heroImage from "@/assets/images/macbook_type_starbucks_reymar-mirante.jpg";
 import Image from "next/image";
 import Button from "@/components/Button";
-import { motion, useTransform, useScroll, AnimatePresence } from "motion/react";
 import type { MouseEvent } from "react";
 
-const roles = [
-  "software engineer",
-  "ai enthusiast",
-  "designer",
-  "automation builder",
-  "content creator",
-  "hybrid athlete",
-  "photographer",
-  "videographer",
-  "storyteller",
-];
-
 const Hero: FC = () => {
-  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
-  const [resumeMousePosition, setResumeMousePosition] = useState({
-    x: 0,
-    y: 0,
-  });
-  const [isResumeHovered, setIsResumeHovered] = useState(false);
-  const scrollingDiv = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: scrollingDiv,
-    offset: ["start end", "end end"],
-  });
-
-  const portraitWidth = useTransform(scrollYProgress, [0, 1], ["100%", "240%"]);
-
-  // Cycle through roles every 3 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   const handleClickNavItem = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    const targetId = e.currentTarget.getAttribute("data-hash"); // <-- read from custom attribute
+    const targetId = e.currentTarget.getAttribute("data-hash");
     if (!targetId) return;
 
     const target = document.getElementById(targetId);
@@ -56,61 +19,47 @@ const Hero: FC = () => {
     }
   };
 
-  const handleResumeMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
-    setResumeMousePosition({ x: e.clientX + 20, y: e.clientY + 20 });
-  };
-
   return (
-    <section id="hero">
-      <div className="grid md:grid-cols-12 md:h-screen items-stretch sticky top-0">
+    <section
+      className="relative min-h-screen flex items-center pt-16 md:pt-0"
+      id="hero"
+    >
+      <div className="grid md:grid-cols-12 md:h-screen items-stretch">
+        {/* Left Column */}
         <div className="md:col-span-7 flex flex-col justify-center">
           <div className="container !max-w-full">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl mt-40 md:mt-0 mb-4">
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="inline-block"
-              >
-                Hi, I&apos;m Reymar — multidisciplinary{" "}
-              </motion.span>
-              <span className="inline-block min-w-[280px] md:min-w-[450px] lg:min-w-[600px] align-bottom">
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={currentRoleIndex}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.5 }}
-                    className="text-primary inline-block"
-                  >
-                    {roles[currentRoleIndex]}.
-                  </motion.span>
-                </AnimatePresence>
-              </span>
-            </h1>
-            {/* <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg font-semibold text-gray-600 mt-4 md:mt-0"
-              ref={scope}
+            <p
+              className="font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-4 animate-fade-up"
+              style={{ animationDelay: "0ms" }}
             >
-            I help people through strategic digital solutions — building websites that convert, content that engages, brands that resonate, and AI automation that optimizes processes, saves time & reduces costs.
-            </motion.p> */}
-            <div className="flex flex-row items-center mt-10 gap-6">
-              <motion.div
-                initial={{ opacity: 0, y: "100%" }}
-                animate={{ opacity: 1, y: "0%" }}
-                transition={{ duration: 0.5, delay: 1.75 }}
-              >
-                <Button
-                  variant="secondary"
-                  data-hash="projects" // <-- reference the section ID
-                  onClick={handleClickNavItem}
+              Software Development × AI Automation × Product Thinking
+            </p>
+            <h1
+              className="font-display text-statement mb-4 font-bold animate-fade-up"
+              style={{ animationDelay: "100ms" }}
+            >
+              I build useful software that makes complex workflows simpler.
+            </h1>
+            <p
+              className="text-lg text-stone-600 dark:text-stone-400 max-w-xl animate-fade-up"
+              style={{ animationDelay: "200ms" }}
+            >
+              I&apos;m a software developer with a Computer Science background,
+              focused on web applications, thoughtful user experiences, and
+              AI-powered automation.
+            </p>
+
+            <div
+              className="flex flex-row items-center mt-10 gap-6 animate-fade-up"
+              style={{ animationDelay: "300ms" }}
+            >
+              <Button
+                variant="primary"
+                data-hash="projects"
+                onClick={handleClickNavItem}
                   iconAfter={
-                    <div className="overflow-hidden size-5">
-                      <div className="h-5 w-10 flex group-hover/button:-translate-x-1/2 transition-transform duration-500">
+                    <div className="size-5 overflow-hidden">
+                      <div className="h-5 w-10 flex group-hover/button:translate-x-1/2 transition-transform duration-200">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -142,60 +91,27 @@ const Hero: FC = () => {
                       </div>
                     </div>
                   }
-                >
-                  <span>View My Work</span>
-                </Button>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: "100%" }}
-                animate={{ opacity: 1, y: "0%" }}
-                transition={{ duration: 0.5, delay: 2.2 }}
               >
-                {/* <Button variant="text">Let&apos;s Talk</Button> */}
-                <a
-                  href="https://calendly.com/2049rare/30min"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block"
-                >
-                  <Button
-                    variant="text"
-                    className="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:[background-color:#5928e5] after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100"
-                  >
-                    Let&apos;s Talk
-                  </Button>
-                </a>
-              </motion.div>
+                View My Work
+              </Button>
+
+              <a
+                href="https://cal.com/reymarmirante/freelance"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block"
+              >
+                <Button variant="secondary">Let&apos;s Talk</Button>
+              </a>
             </div>
 
             {/* Social Icons & Resume */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 2.7 }}
-              className="flex flex-wrap items-center gap-x-6 gap-y-4 mt-16 md:mt-20"
+            <div
+              className="hidden flex-wrap items-center gap-x-6 gap-y-4 mt-16 md:mt-20 animate-fade-up"
+              style={{ animationDelay: "400ms" }}
             >
               {/* Social Icons */}
               <div className="flex items-center gap-4">
-                {/* LinkedIn */}
-                <a
-                  href="https://linkedin.com/in/reymar-mirante"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group"
-                  aria-label="LinkedIn"
-                >
-                  <div className="size-10 rounded-full border border-stone-300 flex items-center justify-center hover:border-primary hover:bg-primary/5 transition-all duration-300">
-                    <svg
-                      className="size-5 text-stone-600 group-hover:text-primary transition-colors"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                    </svg>
-                  </div>
-                </a>
-
                 {/* GitHub */}
                 <a
                   href="https://github.com/transcenddev"
@@ -204,9 +120,9 @@ const Hero: FC = () => {
                   className="group"
                   aria-label="GitHub"
                 >
-                  <div className="size-10 rounded-full border border-stone-300 flex items-center justify-center hover:border-primary hover:bg-primary/5 transition-all duration-300">
+                   <div className="size-10 rounded-none border border-stone-300 dark:border-stone-600 flex items-center justify-center hover:border-primary hover:bg-primary/5 transition-all duration-200">
                     <svg
-                      className="size-5 text-stone-600 group-hover:text-primary transition-colors"
+                      className="size-5 text-stone-600 dark:text-stone-400 group-hover:text-primary transition-colors"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >
@@ -215,79 +131,39 @@ const Hero: FC = () => {
                   </div>
                 </a>
 
-                {/* Facebook */}
+                {/* LinkedIn */}
                 <a
-                  href="https://www.facebook.com/2049rae"
+                  href="https://linkedin.com/in/reymar-mirante"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group"
-                  aria-label="Facebook"
+                  aria-label="LinkedIn"
                 >
-                  <div className="size-10 rounded-full border border-stone-300 flex items-center justify-center hover:border-primary hover:bg-primary/5 transition-all duration-300">
+                   <div className="size-10 rounded-none border border-stone-300 dark:border-stone-600 flex items-center justify-center hover:border-primary hover:bg-primary/5 transition-all duration-200">
                     <svg
-                      className="size-5 text-stone-600 group-hover:text-primary transition-colors"
+                      className="size-5 text-stone-600 dark:text-stone-400 group-hover:text-primary transition-colors"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >
-                      <path d="M13.5 22v-8h2.75l.5-3h-3.25V9.05c0-.87.24-1.55 1.62-1.55H17V4.82c-.33-.04-1.46-.14-2.78-.14-2.75 0-4.63 1.68-4.63 4.76V11H6.5v3h3.09v8h3.91z" />
-                    </svg>
-                  </div>
-                </a>
-
-                {/* Instagram */}
-                <a
-                  href="https://www.instagram.com/2049rae"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group"
-                  aria-label="Instagram"
-                >
-                  <div className="size-10 rounded-full border border-stone-300 flex items-center justify-center hover:border-primary hover:bg-primary/5 transition-all duration-300">
-                    <svg
-                      className="size-5 text-stone-600 group-hover:text-primary transition-colors"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                    </svg>
-                  </div>
-                </a>
-
-                {/* TikTok */}
-                <a
-                  href="https://www.tiktok.com/@2049rae"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group"
-                  aria-label="TikTok"
-                >
-                  <div className="size-10 rounded-full border border-stone-300 flex items-center justify-center hover:border-primary hover:bg-primary/5 transition-all duration-300">
-                    <svg
-                      className="size-5 text-stone-600 group-hover:text-primary transition-colors"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                     </svg>
                   </div>
                 </a>
               </div>
 
               {/* Divider */}
-              <div className="hidden sm:block h-8 w-px bg-stone-300" />
+              <div className="hidden sm:block h-8 w-px bg-stone-300 dark:bg-stone-700" />
 
-              {/* Resume Button */}
+              {/* Resume Link */}
               <a
                 href="/assets/resume.pdf?v=20261003"
                 download
-                className="group/resume relative inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-stone-600 transition-colors duration-300 hover:text-primary"
-                onMouseMove={handleResumeMouseMove}
-                onMouseEnter={() => setIsResumeHovered(true)}
-                onMouseLeave={() => setIsResumeHovered(false)}
+                aria-label="Download resume (PDF)"
+                className="group/resume inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-stone-600 dark:text-stone-400 transition-colors duration-200 hover:text-primary"
               >
-                <span className="relative">Resume</span>
+                <span>Resume</span>
                 <div className="relative size-4 overflow-hidden">
-                  <div className="flex h-4 w-8 transition-transform duration-300 group-hover/resume:-translate-x-1/2">
+                  <div className="flex h-4 w-8 transition-transform duration-200 group-hover/resume:translate-x-1/2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -316,48 +192,26 @@ const Hero: FC = () => {
                         d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5a2.25 2.25 0 002.25-2.25V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
                       />
                     </svg>
-                  </div>
-                </div>
-                <div className="pointer-events-none hidden md:block">
-                  <div
-                    className="fixed z-50 w-64 overflow-hidden rounded-xl bg-white shadow-2xl"
-                    style={{
-                      left: resumeMousePosition.x,
-                      top: resumeMousePosition.y,
-                      transform: "translate(-50%, -50%)",
-                      opacity: isResumeHovered ? 1 : 0,
-                      transition: "opacity 0.3s",
-                    }}
-                  >
-                    <Image
-                      src="/assets/images/resume.png"
-                      alt="Resume preview"
-                      width={600}
-                      height={900}
-                      className="h-auto w-full object-contain"
-                    />
                   </div>
                 </div>
               </a>
-            </motion.div>
+            </div>
           </div>
         </div>
-        <div className="md:col-span-5 relative">
-          <motion.div
-            className="mt-20 md:mt-0 md:size-full md:absolute md:right-0 max-md:!w-full"
-            style={{
-              width: portraitWidth,
-            }}
-          >
-            <Image
-              src={heroImage}
-              alt="My Portrait"
-              className="size-full object-cover"
-            />
-          </motion.div>
-        </div>
+
+          {/* Right Column — Portrait */}
+          <div className="md:col-span-5 relative">
+            <div className="md:absolute md:top-0 md:right-0 md:max-w-[80%] lg:max-w-[85%]">
+              <div className="border border-stone-200 dark:border-stone-800 overflow-hidden">
+                <Image
+                  src={heroImage}
+                  alt="Reymar Mirante portrait"
+                  className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                />
+              </div>
+            </div>
+          </div>
       </div>
-      <div className="md:h-[200vh]" ref={scrollingDiv}></div>
     </section>
   );
 };

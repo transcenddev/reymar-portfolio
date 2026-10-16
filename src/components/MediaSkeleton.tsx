@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 interface MediaSkeletonProps {
   aspectRatio?: string;
@@ -11,7 +11,7 @@ export default function MediaSkeleton({
 }: MediaSkeletonProps) {
   return (
     <div
-      className="relative w-full overflow-hidden bg-stone-200 rounded-lg"
+      className="relative w-full overflow-hidden bg-stone-200 rounded-none"
       style={{ paddingBottom: getAspectRatioPadding(aspectRatio) }}
     >
       <motion.div

@@ -1,8 +1,7 @@
 import Image, { StaticImageData } from "next/image";
 import { HTMLAttributes, useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
-import { motion, usePresence } from "motion/react";
-import useTextRevealAnimation from "@/hooks/useTextRevealAnimation";
+import { motion } from "motion/react";
 
 type TestimonialProps = {
   quote?: string;
@@ -40,40 +39,9 @@ const Testimonial = (props: TestimonialProps) => {
     ...rest
   } = props;
 
-  const {
-    scope: quoteScope,
-    entranceAnimation: quoteEntranceAnimation,
-    exitAnimation: quoteExitAnimation,
-  } = useTextRevealAnimation();
-  const [isPresent, safeToRemove] = usePresence();
-
   // Video ref + autoplay state
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [showPlayCTA, setShowPlayCTA] = useState(false);
-
-  useEffect(() => {
-    // entrance / exit animations for the quote block
-    if (isPresent) {
-      const run = async () => {
-        try {
-          if (quoteEntranceAnimation) await quoteEntranceAnimation();
-        } catch {
-          // noop
-        }
-      };
-      run();
-    } else {
-      const run = async () => {
-        try {
-          await quoteExitAnimation?.();
-          safeToRemove?.();
-        } catch {
-          // noop
-        }
-      };
-      run();
-    }
-  }, [isPresent, quoteEntranceAnimation, quoteExitAnimation, safeToRemove]);
 
   useEffect(() => {
     const v = videoRef.current;
@@ -324,10 +292,9 @@ const Testimonial = (props: TestimonialProps) => {
       {/* Quote */}
       {quote && (
         <blockquote className="order-2 md:order-1">
-          <div
-            className="relative pl-8 text-xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight text-stone-700 dark:text-stone-300"
-            ref={quoteScope}
-          >
+            <div
+              className="relative pl-8 text-xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight text-stone-700 dark:text-stone-300"
+            >
             <span
               aria-hidden="true"
               className="absolute left-0 top-0 text-primary text-4xl md:text-5xl lg:text-6xl leading-none"

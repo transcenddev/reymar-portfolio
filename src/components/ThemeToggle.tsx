@@ -1,13 +1,15 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const ThemeToggle = () => {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
+  const pressStart = useRef<number | null>(null);
+  const wasLongPress = useRef(false);
 
-  // useEffect only runs on the client, so now we can safely show the UI
+  // useEffect only runs on the client, so we can safely show the UI
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -15,7 +17,7 @@ export const ThemeToggle = () => {
   if (!mounted) {
     return (
       <button
-        className="p-2 rounded-full hover:bg-stone-200 dark:hover:bg-stone-800 transition-colors duration-200"
+        className="p-3 text-neutral-800 dark:text-neutral-300 transition-colors duration-200"
         aria-label="Toggle theme"
       >
         <div className="size-5" />
@@ -23,20 +25,71 @@ export const ThemeToggle = () => {
     );
   }
 
+  // resolvedTheme is always "light" | "dark" once mounted, even when
+  // theme === "system". This lets a 2-state button reflect the actual
+  // applied mode without guessing.
+  const current = resolvedTheme || theme || "light";
+  const isDark = current === "dark";
+
+  // Click: flip to the opposite EXPLICIT mode (locks the choice)
+  const toggle = () => setTheme(isDark ? "light" : "dark");
+
+  // Long-press / secondary click: return to system preference
+  const reset = () => setTheme("system");
+
+  const HOLD_MS = 450;
+
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2 rounded-full hover:bg-stone-200 dark:hover:bg-stone-800 transition-colors duration-200 group"
-      aria-label="Toggle theme"
+      onClick={() => {
+        // A long-press already handled the action via onPointerUp; do not
+        // also fire the click toggle, or the reset would be undone instantly.
+        if (wasLongPress.current) {
+          wasLongPress.current = false;
+          return;
+        }
+        toggle();
+      }}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        reset();
+      }}
+      onPointerDown={() => {
+        pressStart.current = Date.now();
+        wasLongPress.current = false;
+      }}
+      onPointerUp={() => {
+        if (pressStart.current === null) return;
+        const held = Date.now() - pressStart.current;
+        pressStart.current = null;
+        // A hold long enough to be a gesture (not a tap) resets to system.
+        if (held >= HOLD_MS) {
+          wasLongPress.current = true;
+          reset();
+        }
+      }}
+      onPointerCancel={() => {
+        pressStart.current = null;
+        wasLongPress.current = false;
+      }}
+      onPointerLeave={() => {
+        pressStart.current = null;
+        wasLongPress.current = false;
+      }}
+      className="p-3 text-neutral-800 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-stone-950"
+      aria-label={`Toggle theme: currently ${current}`}
+      title={`Theme: ${current} (click to switch, hold to use system)`}
     >
-      {/* Sun icon for dark mode (will show when in light mode) */}
+      {/* Sun: visible in light mode, click switches to dark */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth="2"
         stroke="currentColor"
-        className="size-5 hidden dark:block transition-transform group-hover:rotate-45 duration-300"
+        className={`size-5 transition-all duration-200 ${
+          !isDark ? "block rotate-0" : "hidden"
+        }`}
       >
         <path
           strokeLinecap="round"
@@ -45,14 +98,16 @@ export const ThemeToggle = () => {
         />
       </svg>
 
-      {/* Moon icon for light mode (will show when in dark mode) */}
+      {/* Moon: visible in dark mode, click switches to light */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth="2"
         stroke="currentColor"
-        className="size-5 block dark:hidden transition-transform group-hover:-rotate-12 duration-300"
+        className={`size-5 transition-all duration-200 ${
+          isDark ? "block rotate-0" : "hidden"
+        }`}
       >
         <path
           strokeLinecap="round"

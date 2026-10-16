@@ -1,13 +1,14 @@
 "use client";
 
-import React, { FC, useEffect, useMemo, useRef, useState } from "react";
+import React, { FC, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button";
 import TelemetryHero from "@/components/TelemetryHero";
+import CustomVideoPlayer from "@/components/CustomVideoPlayer";
 import { projectsById, type Project } from "@/data/projects";
 
-const isVideoSrc = (src: string) => /\.(mp4|mov|webm)$/i.test(src);
+const isVideoSrc = (src: string) => /\.(mp4|mov|webm|m4v)$/i.test(src);
 
 type ProjectDetailProps = {
   project: Project;
@@ -22,17 +23,14 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
 }) => {
   const [isSwitching, setIsSwitching] = useState(false);
   const [autoplayEnabled, setAutoplayEnabled] = useState(true);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
-    () =>
-      typeof window !== "undefined"
-        ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        : false
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() =>
+    typeof window !== "undefined"
+      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      : false,
   );
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    );
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     const handleChange = (e: MediaQueryListEvent) => {
       // Runtime changes only — initial state is already sourced from the
@@ -45,275 +43,432 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
 
   const effectiveAutoplay = autoplayEnabled && !prefersReducedMotion;
 
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
-
-  // Derive the first few media items for the Block 4 preview grid
-  const previewMedia = useMemo(() => {
-    const media = Array.isArray(project.images) ? project.images : [];
-    return media.filter(Boolean).slice(0, 3) as string[];
+  const items = useMemo(() => {
+    const arr = Array.isArray(project.images) ? project.images : [];
+    return arr.filter(Boolean) as string[];
   }, [project.images]);
 
-  // Derive metrics for the Block 1 spec bar
-  const metrics = useMemo(() => {
-    if (project.heroMetrics && project.heroMetrics.length >= 4) {
-      return project.heroMetrics.slice(0, 4);
-    }
-    // Fallback: synthesize from result array keywords (AgwaSuri-style)
-    if (project.result) {
-      const r = project.result.join(" ");
-      const extracted = [
-        { label: "Accuracy", value: r.match(/(\d{2,3}\.\d+%)/)?.[1] ?? "—" },
-      ];
-      return extracted;
-    }
-    return [];
-  }, [project.heroMetrics, project.result]);
+  const hasAutoplayVideos = !project.longFormVideo && items.some(isVideoSrc);
 
-  const hasAutoplayVideos =
-    !project.longFormVideo && previewMedia.some(isVideoSrc);
-
-  // Deduplicated related projects
+  // Deduplicated related projects (must exist in projectsById)
   const related = useMemo(() => {
     const base = project.relatedProjects ?? [];
-    if (base.length === 0) return [];
-    return Array.from(base);
+    return Array.from(new Set(base)).filter((id) => projectsById[id]);
   }, [project.relatedProjects]);
 
-  // ------------------------------------------------------------------
-  // BLOCK 1: Header & Spec Strip
-  // ------------------------------------------------------------------
-  const BlockHeader = () => (
+  // ----------------------------------------------------------------
+  // A. Header
+  // ----------------------------------------------------------------
+  const renderHeader = () => (
     <section className="space-y-8">
-      {/* Title / category / client / lead */}
       <div className="space-y-4">
-        <span className="block font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
+        <span className="block font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400">
           {project.category}
         </span>
-        <h1 className="font-display text-4xl md:text-5xl font-bold text-neutral-900 dark:text-neutral-100 max-w-3xl">
+        <h1 className="font-display text-4xl md:text-5xl font-bold text-stone-900 dark:text-stone-100 max-w-3xl">
           {project.name}
         </h1>
         {project.client && (
-          <p className="font-mono text-sm uppercase tracking-widest text-neutral-600 dark:text-neutral-400">
+          <p className="font-mono text-sm uppercase tracking-widest text-stone-600 dark:text-stone-400">
             {project.client}
           </p>
         )}
-        <p className="font-sans text-neutral-600 dark:text-neutral-400 max-w-2xl leading-relaxed">
+        <p className="font-sans text-stone-600 dark:text-stone-400 max-w-2xl leading-relaxed">
           {project.intro ?? project.tagline}
         </p>
       </div>
 
-      {/* Block 1 hero: live telemetry console for systems-genre projects,
-          or a 4-card metric spec bar for all others */}
-      {project.hasLiveTelemetry ? (
-        <TelemetryHero
-          prefersReducedMotion={prefersReducedMotion}
-          className="mt-6"
-        />
-      ) : (
-        <div
-          className="grid gap-px bg-neutral-200 dark:bg-neutral-800"
-          style={{ gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))" }}
-        >
-          {metrics.length > 0
-            ? metrics.map((m) => (
-                <div
-                  key={m.label}
-                  className="bg-white dark:bg-neutral-950 p-6 border border-neutral-200 dark:border-neutral-800"
-                >
-                  <div className="font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-2">
-                    {m.label}
-                  </div>
-                  <div className="font-display text-3xl font-bold text-neutral-900 dark:text-neutral-100 tabular-nums">
-                    {m.value}
-                  </div>
-                </div>
-              ))
-            : Array.from({ length: 4 }).map((_, i) => (
-                <div
-                  key={`metric-placeholder-${i}`}
-                  className="bg-neutral-100/60 dark:bg-neutral-900/30 border-2 border-dashed border-neutral-300 dark:border-neutral-700 rounded-none p-6 flex flex-col justify-end"
-                >
-                  <span className="font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-500">
-                    [METRIC {i + 1}]
-                  </span>
-                </div>
-              ))}
+      {/* External links — only when URLs exist */}
+      {(project.githubUrl || project.liveUrl) && (
+        <div className="flex flex-wrap gap-3">
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-stone-700 dark:text-stone-300 hover:text-primary transition-colors group"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-4 group-hover:translate-x-0.5 transition-transform"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12.75 15l3-3m-3-3l3 3m0 0L12 12m3 3l-3 3"
+                />
+              </svg>
+              GitHub
+            </a>
+          )}
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-stone-700 dark:text-stone-300 hover:text-primary transition-colors group"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-4 group-hover:translate-x-0.5 transition-transform"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.5 6H5.25a2.25 2.25 0 00-2.25 2.25v12.5A2.25 2.25 0 005.25 23h13.5A2.25 2.25 0 0021 20.75V9a2.25 2.25 0 00-2.25-2.25H13.5"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.5 6l3-3m0 0v8.25M16.5 3l-3 3"
+                />
+              </svg>
+              Live demo
+            </a>
+          )}
         </div>
       )}
     </section>
   );
 
-  // ------------------------------------------------------------------
-  // BLOCK 2: Field Problem & Stakes
-  // ------------------------------------------------------------------
-  const BlockProblem = () => (
-    <section className="mt-16 md:mt-24 lg:mt-32">
-      <div className="grid gap-px bg-neutral-200 dark:bg-neutral-800 md:grid-cols-2">
-        {/* Left — operational problem narrative */}
-        <div className="bg-white dark:bg-neutral-950 p-6 md:p-8 border border-neutral-200 dark:border-neutral-800">
-          <h2 className="font-display text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">
-            Field Problem
-          </h2>
-          {project.problem ? (
-            <p className="font-sans text-neutral-600 dark:text-neutral-400 leading-relaxed">
-              {project.problem}
-            </p>
-          ) : (
-            <div className="border-2 border-dashed border-neutral-300 dark:border-neutral-700 rounded-none h-48 flex items-center justify-center">
-              <span className="font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-500">
-                [PROBLEM NARRATIVE]
-              </span>
-            </div>
-          )}
-        </div>
-        {/* Right — stakeholder quote / interview card */}
-        <div className="bg-white dark:bg-neutral-950 p-6 md:p-8 border border-neutral-200 dark:border-neutral-800">
-          <h2 className="font-display text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">
-            Stakeholder Perspective
-          </h2>
-          {project.stakeholderQuote ? (
-            <blockquote className="space-y-3">
-              <p className="font-sans text-neutral-700 dark:text-neutral-300 italic leading-relaxed">
-                &ldquo;{project.stakeholderQuote.quote}&rdquo;
-              </p>
-              <footer className="font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-500">
-                — {project.stakeholderQuote.attribution}
-              </footer>
-            </blockquote>
-          ) : (
-            <div className="border-2 border-dashed border-neutral-300 dark:border-neutral-700 rounded-none h-48 flex items-center justify-center">
-              <span className="font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-500">
-                [STAKEHOLDER QUOTE]
-              </span>
-            </div>
-          )}
-        </div>
-      </div>
-    </section>
-  );
+  // ----------------------------------------------------------------
+  // B. Hero media (telemetry or image/video)
+  // ----------------------------------------------------------------
+  const renderHeroMedia = () => {
+    if (project.hasLiveTelemetry) {
+      return (
+        <TelemetryHero
+          prefersReducedMotion={prefersReducedMotion}
+          className="my-6"
+        />
+      );
+    }
 
-  // ------------------------------------------------------------------
-  // BLOCK 3: Core Architecture / System Teardown
-  // ------------------------------------------------------------------
-  const BlockArchitecture = () => (
-    <section className="mt-16 md:mt-24 lg:mt-32">
-      <div className="grid gap-px bg-neutral-200 dark:bg-neutral-800 md:grid-cols-2">
-        {/* Left — physical / frontend tier */}
-        <div className="bg-white dark:bg-neutral-950 p-6 md:p-8 border border-neutral-200 dark:border-neutral-800">
-          <h2 className="font-display text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">
-            {project.architecture?.left.title ?? "Physical Tier"}
-          </h2>
-          {project.architecture?.left.description ? (
-            <p className="font-sans text-neutral-600 dark:text-neutral-400 leading-relaxed">
+    if (!items.length) return null;
+    const mediaHero = items[0];
+
+    // DEBUG: log what we're rendering
+    console.log("[DEBUG ProjectDetail] renderHeroMedia", {
+      projectId: project.id,
+      hasLiveTelemetry: project.hasLiveTelemetry,
+      longFormVideo: project.longFormVideo,
+      mediaHero,
+      videoChapters: project.videoChapters?.length,
+      heroImage: project.heroImage,
+    });
+
+    return (
+      <div className="relative aspect-[16/9] overflow-hidden bg-stone-200 dark:bg-stone-800 rounded-none mt-6">
+        {isVideoSrc(mediaHero) ? (
+          project.longFormVideo ? (
+            <CustomVideoPlayer
+              src={mediaHero}
+              title={project.longFormVideoTitle ?? `${project.name} video`}
+              chapters={project.videoChapters}
+              poster={project.heroImage}
+              className="w-full h-full"
+            />
+          ) : (
+            <video
+              src={mediaHero}
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              autoPlay={effectiveAutoplay}
+              className="w-full h-full object-cover"
+              aria-label={`${project.name} demo video`}
+            />
+          )
+        ) : (
+          <Image
+            src={mediaHero}
+            alt={project.heroAlt ?? `${project.name} hero`}
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority
+          />
+        )}
+      </div>
+    );
+  };
+
+  // ----------------------------------------------------------------
+  // B. Gallery grid
+  // ----------------------------------------------------------------
+  const renderGallery = () => {
+    const galleryItems = items.slice(1);
+    if (galleryItems.length === 0) return null;
+
+    return (
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-stone-200 dark:bg-stone-800 mt-4 md:mt-6">
+        {galleryItems.map((src, index) => (
+          <div
+            key={index}
+            className="relative aspect-[4/3] bg-stone-200 dark:bg-stone-800 overflow-hidden"
+          >
+            {isVideoSrc(src) ? (
+              <video
+                src={src}
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                autoPlay={effectiveAutoplay}
+                className="w-full h-full object-cover"
+                aria-label={`${project.name} footage ${index + 2}`}
+              />
+            ) : (
+              <Image
+                src={src}
+                alt={
+                  project.galleryAlts?.[index] ??
+                  `${project.name} screenshot ${index + 2}`
+                }
+                fill
+                sizes="(max-width: 768px) 50vw, 33vw"
+                className="object-cover"
+              />
+            )}
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  // ----------------------------------------------------------------
+  // C. What I Built
+  // ----------------------------------------------------------------
+  const renderBuilt = () => {
+    if (!project.built) return null;
+
+    return (
+      <section className="mt-16 md:mt-24 lg:mt-32">
+        <span className="block font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-4">
+          What I Built
+        </span>
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-stone-900 dark:text-stone-100 mb-6">
+          {project.builtTitle ?? "Implementation"}
+        </h2>
+        <div className="prose dark:prose-invert max-w-none">
+          {project.built.split("\n\n").map((paragraph: string, i: number) => (
+            <p
+              key={i}
+              className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed"
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
+      </section>
+    );
+  };
+
+  // ----------------------------------------------------------------
+  // D. Outcome
+  // ----------------------------------------------------------------
+  const renderOutcome = () => {
+    if (!project.result || project.result.length === 0) return null;
+
+    return (
+      <section className="mt-16 md:mt-24 lg:mt-32">
+        <span className="block font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-4">
+          Outcome
+        </span>
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-stone-900 dark:text-stone-100 mb-6">
+          Verified results & deliverables
+        </h2>
+        <ul className="space-y-3 font-mono">
+          {project.result.map((item, i) => (
+            <li key={i} className="text-stone-700 dark:text-stone-300 text-sm">
+              <span className="text-primary mr-3" aria-hidden="true">
+                ↳
+              </span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
+    );
+  };
+
+  // ----------------------------------------------------------------
+  // E. Technical Details
+  // ----------------------------------------------------------------
+  const renderTech = () => {
+    if (!project.tech || project.tech.length === 0) return null;
+
+    const mid = Math.ceil(project.tech.length / 2);
+    const columns = [project.tech.slice(0, mid), project.tech.slice(mid)];
+
+    return (
+      <section className="mt-16 md:mt-24 lg:mt-32">
+        <span className="block font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-4">
+          Technical Details
+        </span>
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-stone-900 dark:text-stone-100 mb-6">
+          Technologies used
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 font-mono">
+          {columns.map((col, colIdx) => (
+            <ul key={colIdx} className="space-y-2">
+              {col.map((tech) => (
+                <li
+                  key={tech}
+                  className="text-stone-700 dark:text-stone-300 text-sm"
+                >
+                  <span className="text-primary mr-3" aria-hidden="true">
+                    ·
+                  </span>
+                  {tech}
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
+      </section>
+    );
+  };
+
+  // ----------------------------------------------------------------
+  // Optional: Problem
+  // ----------------------------------------------------------------
+  const renderProblem = () => {
+    if (!project.problem) return null;
+
+    return (
+      <section className="mt-16 md:mt-24 lg:mt-32">
+        <span className="block font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-4">
+          The Problem
+        </span>
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-stone-900 dark:text-stone-100 mb-6">
+          Context & stakes
+        </h2>
+        <p className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-3xl">
+          {project.problem}
+        </p>
+      </section>
+    );
+  };
+
+  // ----------------------------------------------------------------
+  // Optional: Architecture
+  // ----------------------------------------------------------------
+  const renderArchitecture = () => {
+    if (!project.architecture) return null;
+
+    return (
+      <section className="mt-16 md:mt-24 lg:mt-32">
+        <span className="block font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-4">
+          Architecture
+        </span>
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-stone-900 dark:text-stone-100 mb-6">
+          System design overview
+        </h2>
+        <div className="grid gap-px bg-stone-200 dark:bg-stone-800 md:grid-cols-2">
+          <div className="bg-white dark:bg-neutral-950 p-6 md:p-8 border border-stone-200 dark:border-stone-800">
+            <h3 className="font-display text-xl font-bold text-stone-900 dark:text-stone-100 mb-4">
+              {project.architecture.left.title}
+            </h3>
+            <p className="font-sans text-stone-600 dark:text-stone-400 leading-relaxed">
               {project.architecture.left.description}
             </p>
-          ) : (
-            <div className="border-2 border-dashed border-neutral-300 dark:border-neutral-700 rounded-none aspect-[4/3] flex items-center justify-center">
-              <span className="font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-500">
-                [HARDWARE / FRONTEND TEARDOWN]
-              </span>
-            </div>
-          )}
-        </div>
-        {/* Right — engine / backend tier */}
-        <div className="bg-white dark:bg-neutral-950 p-6 md:p-8 border border-neutral-200 dark:border-neutral-800">
-          <h2 className="font-display text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">
-            {project.architecture?.right.title ?? "Engine Tier"}
-          </h2>
-          {project.architecture?.right.description ? (
-            <p className="font-sans text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          </div>
+          <div className="bg-white dark:bg-neutral-950 p-6 md:p-8 border border-stone-200 dark:border-stone-800">
+            <h3 className="font-display text-xl font-bold text-stone-900 dark:text-stone-100 mb-4">
+              {project.architecture.right.title}
+            </h3>
+            <p className="font-sans text-stone-600 dark:text-stone-400 leading-relaxed">
               {project.architecture.right.description}
             </p>
-          ) : (
-            <div className="border-2 border-dashed border-neutral-300 dark:border-neutral-700 rounded-none aspect-[4/3] flex items-center justify-center">
-              <span className="font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-500">
-                [ARCHITECTURE / PIPELINE]
-              </span>
-            </div>
-          )}
-        </div>
-      </div>
-    </section>
-  );
-
-  // ------------------------------------------------------------------
-  // BLOCK 4: Artifact Walkthrough & Verification
-  // ------------------------------------------------------------------
-  const BlockArtifacts = () => (
-    <section className="mt-16 md:mt-24 lg:mt-32">
-      {/* 3-column media preview grid */}
-      <div
-        className="grid gap-px bg-neutral-200 dark:bg-neutral-800 mb-8"
-        style={{ gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))" }}
-      >
-        {previewMedia.length > 0
-          ? previewMedia.map((src, index) => {
-              const isVideo = isVideoSrc(src);
-              return (
-                <div
-                  key={index}
-                  className="bg-white dark:bg-neutral-950 aspect-[4/3] overflow-hidden border border-neutral-200 dark:border-neutral-800"
-                >
-                  {isVideo ? (
-                    <video
-                      id={`artifact-video-${index}`}
-                      ref={(el) => {
-                        if (el) videoRefs.current[index] = el;
-                      }}
-                      src={src}
-                      muted
-                      loop
-                      playsInline
-                      preload="metadata"
-                      autoPlay={effectiveAutoplay}
-                      className={`w-full h-full object-cover ${!effectiveAutoplay ? "hidden" : ""}`}
-                    />
-                  ) : (
-                    <Image
-                      src={src}
-                      alt={`${project.name} artifact ${index + 1}`}
-                      fill
-                      sizes="(max-width: 768px) 50vw, 210px"
-                      className="object-cover"
-                    />
-                  )}
-                </div>
-              );
-            })
-          : Array.from({ length: 3 }).map((_, i) => (
-              <div
-                key={`media-placeholder-${i}`}
-                className="bg-neutral-100/60 dark:bg-neutral-900/30 border-2 border-dashed border-neutral-300 dark:border-neutral-700 rounded-none aspect-[4/3] flex items-center justify-center"
-              >
-                <span className="font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-500">
-                  [MEDIA {i + 1}]
-                </span>
-              </div>
-            ))}
-      </div>
-
-      {/* Outcome verification scorecard */}
-      <div className="border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 rounded-none">
-        <h2 className="font-display text-2xl font-bold text-neutral-900 dark:text-neutral-100 p-6 md:p-8 border-b border-neutral-200 dark:border-neutral-800">
-          Outcome &amp; Verification
-        </h2>
-        {project.result && project.result.length > 0 ? (
-          <ul className="divide-y divide-neutral-200 dark:divide-neutral-800 font-mono">
-            {project.result.map((item, i) => (
-              <li
-                key={i}
-                className="p-4 md:p-6 text-sm text-neutral-600 dark:text-neutral-400"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <div className="p-6 md:p-8 border-2 border-dashed border-neutral-300 dark:border-neutral-700 rounded-none">
-            <span className="font-mono text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-500">
-              [OUTCOME / VERIFICATION SCORECARD]
-            </span>
           </div>
+        </div>
+      </section>
+    );
+  };
+
+  // ----------------------------------------------------------------
+  // F. Navigation & related projects
+  // ----------------------------------------------------------------
+  const renderNavigation = () => (
+    <section className="mt-16 md:mt-24 lg:mt-32 border-t border-stone-200 dark:border-stone-800 pt-8">
+      {/* Related projects — only when available */}
+      {related.length > 0 && (
+        <div className="mb-8">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-stone-900 dark:text-stone-100 mb-6">
+            Related projects
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            {related.map((relatedId) => {
+              const rp = projectsById[relatedId];
+              return (
+                <Link
+                  key={relatedId}
+                  href={`/projects/${relatedId}`}
+                  onClick={() => {
+                    setIsSwitching(true);
+                    onProjectChange(relatedId);
+                  }}
+                  className="group block p-4 border border-stone-200 dark:border-stone-800 hover:bg-stone-50 dark:hover:bg-neutral-900 transition-colors"
+                  aria-label={`View ${rp ? rp.name : relatedId}`}
+                >
+                  <div className="flex items-start gap-4">
+                    {rp?.image && (
+                      <div className="relative w-20 h-15 flex-shrink-0 overflow-hidden bg-stone-200 dark:bg-stone-800">
+                        <Image
+                          src={rp.image}
+                          alt={rp.name}
+                          fill
+                          sizes="80px"
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
+                    <div className="space-y-1">
+                      <span className="block font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400">
+                        {rp?.category}
+                      </span>
+                      <h3 className="font-display text-lg font-bold text-stone-900 dark:text-stone-100 group-hover:text-primary transition-colors">
+                        {rp ? rp.name : relatedId}
+                      </h3>
+                      <p className="font-sans text-sm text-stone-600 dark:text-stone-400 line-clamp-2">
+                        {rp ? rp.tagline : ""}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Back to work + Autoplay controls */}
+      <div className="flex flex-wrap justify-between items-center gap-4">
+        <Button variant="secondary" onClick={onBack}>
+          See all projects
+        </Button>
+        {hasAutoplayVideos && (
+          <Button
+            variant="primary"
+            onClick={() => setAutoplayEnabled((v) => !v)}
+            aria-pressed={autoplayEnabled}
+          >
+            {prefersReducedMotion
+              ? "Reduced motion active"
+              : autoplayEnabled
+                ? "Disable autoplay"
+                : "Enable autoplay"}
+          </Button>
         )}
       </div>
     </section>
@@ -322,72 +477,32 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
   return (
     <section className="section">
       <div className="container">
-        {/* Block 1: Header & Spec Strip */}
-        <BlockHeader />
+        {/* A. Header */}
+        {renderHeader()}
 
-        {/* Block 2: Field Problem & Stakes */}
-        <BlockProblem />
+        {/* B. Visuals (telemetry or media) */}
+        {renderHeroMedia()}
+        {renderGallery()}
 
-        {/* Block 3: Core Architecture / System Teardown */}
-        <BlockArchitecture />
+        {/* C. What I Built */}
+        {renderBuilt()}
 
-        {/* Block 4: Artifact Walkthrough & Verification */}
-        <BlockArtifacts />
+        {/* Optional: The Problem */}
+        {renderProblem()}
 
-        {/* See Also: Related projects */}
-        {related.length > 0 && (
-          <div className="mt-16 md:mt-24 lg:mt-32">
-            <h2 className="font-display text-3xl md:text-5xl font-bold text-neutral-900 dark:text-neutral-100 max-w-2xl mb-8">
-              See Also
-            </h2>
-            <div className="grid gap-px bg-neutral-200 dark:bg-neutral-800 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              {related.map((id, idx) => {
-                const tone = ["bg-neutral-50", "bg-neutral-100", "bg-neutral-200"][
-                  idx % 3
-                ];
-                const relatedProject = projectsById[id];
-                return (
-                  <Link
-                    key={`${id}-${idx}`}
-                    href={`/projects/${id}`}
-                    onClick={() => {
-                      setIsSwitching(true);
-                      onProjectChange(id);
-                    }}
-                    className={`relative ${tone} dark:bg-neutral-800 aspect-[4/3] transition-all duration-300 hover:brightness-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 flex items-end p-4 border border-neutral-200 dark:border-neutral-800`}
-                    aria-label={`View ${relatedProject ? relatedProject.name : id}`}
-                  >
-                    <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
-                      {relatedProject ? relatedProject.name : id}
-                    </span>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        )}
+        {/* Optional: Architecture */}
+        {renderArchitecture()}
 
-        {/* Back & Autoplay controls */}
-        <div className="mt-16 md:mt-24 flex justify-between items-center">
-          <Button variant="secondary" onClick={onBack}>
-            See all
-          </Button>
-          {hasAutoplayVideos && (
-            <Button
-              variant="primary"
-              onClick={() => setAutoplayEnabled((v) => !v)}
-              aria-pressed={autoplayEnabled}
-            >
-              {prefersReducedMotion
-                ? "Reduced motion active"
-                : autoplayEnabled
-                  ? "Disable Autoplay"
-                  : "Enable Autoplay"}
-            </Button>
-          )}
-        </div>
+        {/* D. Outcome */}
+        {renderOutcome()}
 
-        {/* Loading overlay while switching */}
+        {/* E. Technical Details */}
+        {renderTech()}
+
+        {/* F. Navigation */}
+        {renderNavigation()}
+
+        {/* Loading overlay while switching projects */}
         {isSwitching && (
           <div
             className="fixed inset-0 bg-white/60 backdrop-blur-[1px] flex items-center justify-center z-50"

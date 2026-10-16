@@ -4,14 +4,26 @@ const config: Config = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class", // Enable dark mode with class strategy
   theme: {
-    screens: {
-      sms: "375px",
-      md: "768px",
-      lg: "1200px",
-    },
     extend: {
+      screens: {
+        sms: "375px",
+        md: "768px",
+        lg: "1200px",
+      },
       fontFamily: {
-        sans: "var(--font-archivo)",
+        sans: "var(--font-inter)",
+        display: "var(--font-display)",
+        mono: "ui-monospace, SFMono-Regular, Monaco, 'JetBrains Mono', Menlo, monospace",
+      },
+      fontSize: {
+        display: [
+          "clamp(2.75rem, 10vw, 8.5rem)",
+          { lineHeight: "0.95", letterSpacing: "-0.04em" },
+        ],
+        statement: [
+          "clamp(2rem, 5.5vw, 4.75rem)",
+          { lineHeight: "1.02", letterSpacing: "-0.03em" },
+        ],
       },
       container: {
         center: true,

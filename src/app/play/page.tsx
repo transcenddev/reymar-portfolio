@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import Footer from "@/sections/Footer";
 import Header from "@/sections/Header";
@@ -24,7 +24,7 @@ const VideoWithLoading = ({ src, index }: { src: string; index: number }) => {
       }}
       viewport={{ once: true, margin: "-50px" }}
     >
-      <div className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 dark:bg-stone-800 aspect-[9/16] transition-colors duration-300">
+      <div className="relative overflow-hidden rounded-none shadow-sm bg-stone-100 dark:bg-stone-800 aspect-[9/16] transition-colors duration-300">
         {!isLoaded && (
           <div className="absolute inset-0">
             <MediaSkeleton aspectRatio="9/16" />
@@ -66,7 +66,7 @@ const ImageWithLoading = ({
   return (
     <motion.div
       key={index}
-      className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 dark:bg-stone-800 transition-colors duration-300"
+      className="relative overflow-hidden rounded-none shadow-sm bg-stone-100 dark:bg-stone-800 transition-colors duration-300"
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{
         opacity: 1,
@@ -108,14 +108,14 @@ export default function PlayPage() {
       <AnimatedSection className="container mx-auto pt-24 md:pt-32 lg:pt-40 pb-16 px-4">
         <div className="max-w-4xl mx-auto">
           <h1
-            className="text-black dark:text-white font-normal mb-8 transition-colors duration-300"
+            className="font-display text-black dark:text-white font-normal mb-8 transition-colors duration-300"
             style={{ fontSize: "clamp(2rem, 5vw, 3rem)" }}
           >
-            My creative <em className="font-serif italic">playground</em>
+            My creative <em className="not-italic font-bold">playground</em>
           </h1>
           <p className="text-base md:text-lg text-black/80 dark:text-stone-300 mb-12 transition-colors duration-300">
             Beyond code and design, I explore storytelling through motion, lens,
-            and editing—capturing moments, crafting narratives, and
+            and editing-capturing moments, crafting narratives, and
             experimenting with visual media.
           </p>
 
@@ -186,14 +186,14 @@ export default function PlayPage() {
               </h2>
               <div className="columns-1 sm:columns-2 md:columns-3 gap-6 mb-8">
                 {[
-                  "/assets/images/photography/photography/eyes.JPEG",
-                  "/assets/images/photography/photography/beach-girl.JPG",
-                  "/assets/images/photography/photography/forest1.JPG",
-                  "/assets/images/photography/photography/baptism.jpg",
-                  "/assets/images/photography/photography/billiard-portraits (3).JPG",
-                  "/assets/images/photography/photography/monochrome.JPG",
-                  "/assets/images/photography/photography/beach-couple-pics.JPG",
-                  "/assets/images/photography/photography/me-gym1.JPG",
+                  "/assets/images/play/photography/eyes_combined_kids.jpeg",
+                  "/assets/images/play/photography/beach_girl.jpg",
+                  "/assets/images/play/photography/forest.jpg",
+                  "/assets/images/play/photography/baptism_koa_hold_mom_father_water.jpg",
+                  "/assets/images/play/photography/billiard_portrait_lorens.jpg",
+                  "/assets/images/play/photography/beach_monochrome_kenjie.jpg",
+                  "/assets/images/play/photography/beach_couple_pics.jpg",
+                  "/assets/images/play/photography/gym_portrait_reymar_1.jpg",
                 ].map((src, index) => (
                   <div key={index} className="break-inside-avoid mb-6">
                     <ImageWithLoading
@@ -276,7 +276,7 @@ export default function PlayPage() {
                     }}
                     viewport={{ once: true, margin: "-50px" }}
                   >
-                    <div className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 dark:bg-stone-800 aspect-video transition-colors duration-300">
+                      <div className="relative overflow-hidden rounded-none shadow-sm bg-stone-100 dark:bg-stone-800 aspect-video transition-colors duration-300">
                       <iframe
                         src={`https://www.youtube.com/embed/${video.id}`}
                         title={video.title}
@@ -356,7 +356,7 @@ export default function PlayPage() {
                     }}
                     viewport={{ once: true, margin: "-50px" }}
                   >
-                    <div className="relative overflow-hidden rounded-lg shadow-sm bg-stone-100 dark:bg-stone-800 aspect-video transition-colors duration-300">
+                      <div className="relative overflow-hidden rounded-none shadow-sm bg-stone-100 dark:bg-stone-800 aspect-video transition-colors duration-300">
                       <iframe
                         src={`https://www.youtube.com/embed/${video.id}`}
                         title={video.title}
@@ -404,15 +404,15 @@ export default function PlayPage() {
               </h2>
               <div className="columns-1 sm:columns-2 md:columns-3 gap-6">
                 {[
-                  "/assets/images/painting1.jpg",
-                  "/assets/images/painting2.jpg",
-                  "/assets/images/painting3.jpg",
-                  "/assets/images/painting4.jpg",
-                  "/assets/images/painting5.jpg",
-                  "/assets/images/painting6.jpg",
-                  "/assets/images/painting7.jpg",
-                  "/assets/images/painting8.jpg",
-                  "/assets/images/painting9.jpg",
+                  "/assets/images/play/painting/painting_reymar__1",
+                  "/assets/images/play/painting/painting_reymar__2",
+                  "/assets/images/play/painting/painting_reymar__3",
+                  "/assets/images/play/painting/painting_reymar__4",
+                  "/assets/images/play/painting/painting_reymar__5",
+                  "/assets/images/play/painting/painting_reymar__6",
+                  "/assets/images/play/painting/painting_reymar__7",
+                  "/assets/images/play/painting/painting_reymar__8",
+                  "/assets/images/play/painting/painting_reymar__9",
                 ].map((src, index) => (
                   <div key={index} className="break-inside-avoid mb-6">
                     <ImageWithLoading

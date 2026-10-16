@@ -11,8 +11,9 @@ export const ThemeProvider: FC<Props> = ({ children }) => {
   return (
     <NextThemesProvider
       attribute="class"
-      defaultTheme="light"
-      enableSystem={false}
+      defaultTheme="system"
+      enableSystem={true}
+      storageKey="reymar-portfolio-theme"
     >
       {children}
     </NextThemesProvider>

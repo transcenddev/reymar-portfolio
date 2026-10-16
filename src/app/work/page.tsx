@@ -6,72 +6,12 @@ import Link from "next/link";
 import Header from "@/sections/Header";
 import Footer from "@/sections/Footer";
 import { motion, AnimatePresence } from "motion/react";
-
-// Project categories
-const categories = [
-  "All",
-  "Web Design",
-  "Web Development",
-  "Branding & Visual Identity",
-  "Content Creation",
-  "Automation & AI",
-] as const;
-
-type Category = (typeof categories)[number];
-
-// All projects data - you can add more projects here
-const allProjects = [
-  {
-    id: "sp-madrid-ai-multimedia",
-    name: "Reviving Memories with AI",
-    description: "AI-driven multimedia presentation for SP Madrid's heritage",
-    image: "/assets/images/sp-madrid-exhibition.jpg",
-    category: "Automation & AI" as Category,
-  },
-  {
-    id: "read-ai-website",
-    name: "Read AI",
-    description:
-      "UI/UX design and no-code development for meeting intelligence platform",
-    image: "/assets/images/read-ai-webdesign1.png",
-    category: "Web Design" as Category,
-  },
-  {
-    id: "covid-health-declaration",
-    name: "COVID-19 Health Declaration System",
-    description:
-      "Full-stack health screening platform with real-time analytics",
-    image: "/assets/images/covid-hero.png",
-    category: "Web Development" as Category,
-  },
-  {
-    id: "cvsufind",
-    name: "CVSUfind",
-    description:
-      "Lost-and-found platform for CvSU campus with user and admin dashboards",
-    image: "/assets/images/cvsufind/cvsufind-hero.png",
-    category: "Web Design" as Category,
-  },
-  {
-    id: "friskay-website",
-    name: "Friskay Website",
-    description:
-      "Web design recreated from YouTube tutorial about the world's best-tasting cat food",
-    image:
-      "/assets/images/ui-ux-design-crash-course/ui-ux-design-crashcourse-desktop.jpg",
-    category: "Web Design" as Category,
-  },
-  {
-    id: "mobile-attendance-system",
-    name: "Mobile Attendance System",
-    description:
-      "UI/UX design from Gordon College webinar - Figma design project",
-    image:
-      "/assets/images/mobile-attendance-system/mobile-attendance-system-clockin.png",
-    category: "Web Design" as Category,
-  },
-  // Add more projects here as needed
-];
+import {
+  categories,
+  categoryCounts,
+  listedProjects,
+  type Category,
+} from "@/data/projects";
 
 const WorkPage: FC = () => {
   const [activeCategory, setActiveCategory] = useState<Category>("All");
@@ -79,28 +19,12 @@ const WorkPage: FC = () => {
   // Filter projects based on active category
   const filteredProjects = useMemo(() => {
     if (activeCategory === "All") {
-      return allProjects;
+      return listedProjects;
     }
-    return allProjects.filter((project) => project.category === activeCategory);
+    return listedProjects.filter(
+      (project) => project.category === activeCategory
+    );
   }, [activeCategory]);
-
-  // Compute project counts for each category
-  const categoryCounts = useMemo(() => {
-    const counts: Record<Category, number> = {
-      All: allProjects.length,
-      "Web Design": 0,
-      "Web Development": 0,
-      "Branding & Visual Identity": 0,
-      "Content Creation": 0,
-      "Automation & AI": 0,
-    };
-
-    allProjects.forEach((project) => {
-      counts[project.category]++;
-    });
-
-    return counts;
-  }, []);
 
   return (
     <>
@@ -114,7 +38,7 @@ const WorkPage: FC = () => {
             transition={{ duration: 0.6 }}
             className="mb-12 md:mb-16"
           >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight">
+            <h1 className="font-display text-statement font-bold mb-6">
               Creating next level <br /> digital products
             </h1>
           </motion.div>
@@ -132,7 +56,7 @@ const WorkPage: FC = () => {
                   key={category}
                   onClick={() => setActiveCategory(category)}
                   className={`
-                    px-4 md:px-6 py-2 md:py-3 rounded-full text-sm md:text-base font-medium
+                    px-4 md:px-6 py-2 md:py-3 rounded-none text-sm md:text-base font-medium
                     transition-all duration-300 relative
                     ${
                       activeCategory === category
@@ -143,24 +67,21 @@ const WorkPage: FC = () => {
                 >
                   {category}
 
-                  {/* Count Badge */}
-                  <span
-                    className={`
-                      absolute -top-1 -right-1 text-xs rounded-full px-1.5 py-0.5 min-w-[20px] text-center
-                      ${
+                    {/* Count */}
+                    <span
+                      className={`ml-2 font-mono text-xs tracking-wider ${
                         activeCategory === category
-                          ? "bg-white text-primary"
-                          : "bg-stone-300 dark:bg-stone-600 text-white"
-                      }
-                    `}
-                  >
-                    {categoryCounts[category]}
-                  </span>
+                          ? "text-primary"
+                          : "text-stone-500 dark:text-stone-400"
+                      }`}
+                    >
+                      {categoryCounts[category]}
+                    </span>
 
                   {activeCategory === category && (
                     <motion.div
                       layoutId="activeCategory"
-                      className="absolute inset-0 bg-primary rounded-full -z-10"
+                      className="absolute inset-0 bg-primary rounded-none -z-10"
                       transition={{
                         type: "spring",
                         stiffness: 380,
@@ -206,13 +127,17 @@ const WorkPage: FC = () => {
                     className="group block h-full"
                   >
                     {/* Project Image */}
-                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-stone-200 dark:bg-stone-800 mb-4 transition-colors duration-300">
-                      <Image
-                        src={project.image}
-                        alt={project.name}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
+                    <div className="relative aspect-[4/3] rounded-none overflow-hidden bg-stone-200 dark:bg-stone-800 mb-4 transition-colors duration-300">
+                      {project.image ? (
+                        <Image
+                          src={project.image}
+                          alt={project.name}
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      ) : (
+                        <div className="size-full bg-stone-200 dark:bg-stone-800" />
+                      )}
                       {/* Overlay on hover */}
                       <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-300" />
                     </div>
@@ -222,11 +147,11 @@ const WorkPage: FC = () => {
                       <div className="text-xs md:text-sm text-primary font-medium uppercase tracking-wider">
                         {project.category}
                       </div>
-                      <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold group-hover:text-primary transition-colors">
+                      <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-semibold group-hover:text-primary transition-colors">
                         {project.name}
                       </h3>
                       <p className="text-sm md:text-base text-stone-600 dark:text-stone-400 line-clamp-2 transition-colors duration-300">
-                        {project.description}
+                        {project.tagline}
                       </p>
                     </div>
 
@@ -261,8 +186,8 @@ const WorkPage: FC = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mt-20 text-center"
           >
-            <Link
-              href="/#projects"
+             <Link
+               href="/#work"
               className="inline-flex items-center gap-2 text-stone-600 dark:text-stone-400 hover:text-primary transition-colors"
             >
               <svg
