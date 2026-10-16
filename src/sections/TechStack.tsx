@@ -111,7 +111,7 @@ const TechStack: FC = () => {
       <div className="container">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-[2fr_3fr] md:gap-8 lg:gap-12">
           {/* Left column */}
-          <div>
+          <div className="sticky top-24">
             <p className="font-mono text-xs font-medium uppercase tracking-widest text-primary">
               Working Stack
             </p>
