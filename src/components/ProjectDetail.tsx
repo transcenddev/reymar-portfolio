@@ -274,29 +274,196 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
   };
 
   // ----------------------------------------------------------------
-  // D. Outcome
+  // D. Solution (with feature subsections)
   // ----------------------------------------------------------------
-  const renderOutcome = () => {
-    if (!project.result || project.result.length === 0) return null;
+  const renderSolution = () => {
+    if (!project.solution && !project.features) return null;
 
     return (
       <section className="mt-16 md:mt-24 lg:mt-32">
         <span className="block font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-4">
-          Outcome
+          The Solution
         </span>
         <h2 className="font-display text-2xl md:text-3xl font-bold text-stone-900 dark:text-stone-100 mb-6">
-          Verified results & deliverables
+          Solution & approach
         </h2>
-        <ul className="space-y-3 font-mono">
-          {project.result.map((item, i) => (
-            <li key={i} className="text-stone-700 dark:text-stone-300 text-sm">
-              <span className="text-primary mr-3" aria-hidden="true">
-                ↳
-              </span>
-              {item}
-            </li>
+        {project.solution && (
+          <p className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-3xl mb-8">
+            {project.solution}
+          </p>
+        )}
+        {project.features &&
+          project.features.map((feature, index) => (
+            <div
+              key={index}
+              className="mt-12 md:mt-16 first:mt-0 border-t border-stone-200 dark:border-stone-800 pt-8 md:pt-12"
+            >
+              <h3 className="font-display text-xl md:text-2xl font-bold text-stone-900 dark:text-stone-100 mb-4">
+                {feature.title}
+              </h3>
+              {feature.media && (
+                <div className="my-6">
+                  {isVideoSrc(feature.media) ? (
+                    <video
+                      src={feature.media}
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      autoPlay={effectiveAutoplay}
+                      className="w-full aspect-[16/9] object-cover"
+                      aria-label={`${project.name} - ${feature.title}`}
+                    />
+                  ) : (
+                    <div className="relative aspect-[16/9] overflow-hidden bg-stone-200 dark:bg-stone-800">
+                      <Image
+                        src={feature.media}
+                        alt={feature.mediaAlt ?? `${project.name} - ${feature.title}`}
+                        fill
+                        sizes="100vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+              <p className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-3xl">
+                {feature.description}
+              </p>
+              {feature.table && (
+                <div className="mt-6 overflow-x-auto">
+                  <table className="w-full text-left border-collapse">
+                    <tbody>
+                      {feature.table.map((row, rowIdx) => (
+                        <tr
+                          key={rowIdx}
+                          className={rowIdx % 2 === 0 ? "bg-stone-50 dark:bg-neutral-900" : ""}
+                        >
+                          <td className="font-mono text-xs uppercase tracking-wider text-stone-500 dark:text-stone-400 px-4 py-3">
+                            {row[0]}
+                          </td>
+                          <td className="font-sans text-stone-700 dark:text-stone-300 px-4 py-3">
+                            {row[1]}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
           ))}
-        </ul>
+      </section>
+    );
+  };
+
+  // ----------------------------------------------------------------
+  // E. Results (with metrics table)
+  // ----------------------------------------------------------------
+  const renderResults = () => {
+    if (!project.results && (!project.result || project.result.length === 0))
+      return null;
+
+    const hasMetrics =
+      project.results?.metrics && project.results.metrics.length > 0;
+
+    return (
+      <section className="mt-16 md:mt-24 lg:mt-32">
+        <span className="block font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-4">
+          Results
+        </span>
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-stone-900 dark:text-stone-100 mb-6">
+          Measurable outcomes
+        </h2>
+        {project.results?.summary && (
+          <p className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-3xl mb-6">
+            {project.results.summary}
+          </p>
+        )}
+        {hasMetrics && (
+          <div className="mt-6 overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr>
+                  <th className="font-mono text-xs uppercase tracking-wider text-stone-500 dark:text-stone-400 px-4 py-3 border-b border-stone-200 dark:border-stone-800">
+                    Metric
+                  </th>
+                  <th className="font-mono text-xs uppercase tracking-wider text-stone-500 dark:text-stone-400 px-4 py-3 border-b border-stone-200 dark:border-stone-800">
+                    Score
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {project.results?.metrics.map((row, rowIdx) => (
+                  <tr
+                    key={rowIdx}
+                    className={rowIdx % 2 === 0 ? "bg-stone-50 dark:bg-neutral-900" : ""}
+                  >
+                    <td className="font-mono text-xs text-stone-500 dark:text-stone-400 px-4 py-3">
+                      {row[0]}
+                    </td>
+                    <td className="font-sans text-stone-700 dark:text-stone-300 px-4 py-3">
+                      {row[1]}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
+    );
+  };
+
+  // ----------------------------------------------------------------
+  // F. Team & Credits (optional)
+  // ----------------------------------------------------------------
+  const renderTeam = () => {
+    if (!project.team) return null;
+    const { researchers, adviser, institution, role } = project.team;
+
+    return (
+      <section className="mt-16 md:mt-24 lg:mt-32">
+        <span className="block font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-4">
+          Team & Credits
+        </span>
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-stone-900 dark:text-stone-100 mb-6">
+          People behind the project
+        </h2>
+        <div className="space-y-4 font-sans text-stone-700 dark:text-stone-300">
+          {researchers && researchers.length > 0 && (
+            <p>
+              <span className="font-mono text-xs uppercase tracking-wider text-stone-500 dark:text-stone-400">
+                Researchers:
+              </span>{" "}
+              {researchers.join(" · ")}
+            </p>
+          )}
+          {adviser && (
+            <p>
+              <span className="font-mono text-xs uppercase tracking-wider text-stone-500 dark:text-stone-400">
+                Adviser:
+              </span>{" "}
+              {adviser}
+            </p>
+          )}
+          {institution && (
+            <p>
+              <span className="font-mono text-xs uppercase tracking-wider text-stone-500 dark:text-stone-400">
+                Institution:
+              </span>{" "}
+              {institution}
+            </p>
+          )}
+          {role && (
+            <p>
+              <span className="font-mono text-xs uppercase tracking-wider text-stone-500 dark:text-stone-400">
+                My Role:
+              </span>{" "}
+              {role}
+            </p>
+          )}
+        </div>
       </section>
     );
   };
@@ -490,11 +657,17 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
         {/* Optional: The Problem */}
         {renderProblem()}
 
+        {/* Optional: Solution (with features) */}
+        {renderSolution()}
+
         {/* Optional: Architecture */}
         {renderArchitecture()}
 
-        {/* D. Outcome */}
-        {renderOutcome()}
+        {/* E. Results (with metrics table) */}
+        {renderResults()}
+
+        {/* F. Team & Credits */}
+        {renderTeam()}
 
         {/* E. Technical Details */}
         {renderTech()}

@@ -75,6 +75,31 @@ export type Project = {
     left: { title: string; description: string };
     right: { title: string; description: string };
   };
+  /** Solution section: how the build solves the problem */
+  solution?: string;
+  /** Feature subsections within the Solution section */
+  features?: Array<{
+    title: string;
+    description: string;
+    /** Image or video source for the feature */
+    media?: string;
+    /** Optional alt text for media */
+    mediaAlt?: string;
+    /** Optional comparison table: rows of [label, value] pairs */
+    table?: Array<[string, string]>;
+  }>;
+  /** Results with metrics table: { title, metrics: [[label, value]] } */
+  results?: {
+    summary: string;
+    metrics: Array<[string, string]>;
+  };
+  /** Team & Credits section (optional) */
+  team?: {
+    researchers?: string[];
+    adviser?: string;
+    institution?: string;
+    role?: string;
+  };
 };
 
 export const projects: Project[] = [
