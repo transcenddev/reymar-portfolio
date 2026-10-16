@@ -111,16 +111,18 @@ const TechStack: FC = () => {
       <div className="container">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-[2fr_3fr] md:gap-8 lg:gap-12">
           {/* Left column */}
-          <div className="sticky top-24">
-            <p className="font-mono text-xs font-medium uppercase tracking-widest text-primary">
-              Working Stack
-            </p>
-            <h2
-              className="text-2xl md:text-3xl lg:text-4xl leading-tight tracking-tight font-medium mt-3 animate-fade-up"
-              style={{ animationDelay: "100ms" }}
-            >
-              The tools I use to build useful products.
-            </h2>
+          <div>
+            <div className="sticky top-24">
+              <p className="font-mono text-xs font-medium uppercase tracking-widest text-primary">
+                Working Stack
+              </p>
+              <h2
+                className="text-2xl md:text-3xl lg:text-4xl leading-tight tracking-tight font-medium mt-3 animate-fade-up"
+                style={{ animationDelay: "100ms" }}
+              >
+                The tools I use to build useful products.
+              </h2>
+            </div>
           </div>
 
           {/* Right column */}
