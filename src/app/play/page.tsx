@@ -130,18 +130,18 @@ export default function PlayPage() {
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
                 {[
-                  "intern.mp4",
-                  "dayinthelife.mp4",
-                  "cstips.mp4",
-                  "getbacktrack.mp4",
-                  "handstandwithme.mp4",
-                  "howtogetlean.mp4",
-                  "runfishermen.mp4",
-                  "multipleinterest.mp4",
+                  "snippet_life/intern_behind_the_scenes_videography_reymar.mp4",
+                  "snippet_life/day_in_the_life_reymar.mp4",
+                  "snippet_life/cs_tips_reymar.mp4",
+                  "snippet_life/get_back_track_reymar.mp4",
+                  "snippet_life/handstand_with_me_reymar.mp4",
+                  "snippet_life/how_to_get_lean_reymar.mp4",
+                  "snippet_life/run_fishermen_reymar.mp4",
+                  "snippet_life/multiple_interest_reymar.mp4",
                   "snippet_life/shadowboxing_night_rain_bluehour_reymar.mp4",
-                  "cclmeet.mp4",
-                  "closure.mp4",
-                  "bgcmuseum.mp4",
+                  "snippet_life/ccl_anniversary_reymar.mp4",
+                  "snippet_life/closure_reymar.mp4",
+                  "snippet_life/bgc_museum_reymar.mp4",
                 ].map((videoFile, index) => (
                   <VideoWithLoading
                     key={index}

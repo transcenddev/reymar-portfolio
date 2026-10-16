@@ -189,7 +189,7 @@ const Projects: FC = () => {
                   {/* Full Dashboard — Software Intelligence */}
                   <div className="relative aspect-square overflow-hidden border border-stone-200 dark:border-stone-800 bg-stone-100 dark:bg-stone-900 transition-colors duration-200">
                     <Image
-                      src="/assets/images/works/thesis_agwasuri/agwasuri_fishpond_prototype_fishpond_owner_reymar_jazrel_wholesome.JPG"
+                      src="/assets/images/works/thesis_agwasuri/agwasuri_fishpond_prototype_fishpond_owner_reymar_jazrel_wholesome.jpg"
                       alt="AgwaSuri Laravel dashboard: real-time pH, dissolved oxygen, salinity, temperature charts with decision-tree species recommendation (Bangus, Lapu-lapu, Tilapia, Sugpo, Mudcrab)"
                       fill
                       sizes="(max-width: 768px) 50vw, 210px"
