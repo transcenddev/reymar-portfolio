@@ -246,7 +246,7 @@ const Favourites = () => (
     id="favourites"
     delay={0.25}
   >
-    <div className="max-w-2xl mx-auto mb-10">
+    <div className="max-w-4xl mx-auto mb-10">
       <h2
         className="font-display font-bold text-stone-900 dark:text-stone-100 mb-6 transition-colors duration-300"
         style={{ fontSize: "clamp(2rem, 5vw, 3rem)" }}
