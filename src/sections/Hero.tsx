@@ -163,7 +163,7 @@ const Hero: FC = () => {
               >
                 <span>Resume</span>
                 <div className="relative size-4 overflow-hidden">
-                  <div className="flex h-4 w-8 transition-transform duration-200 group-hover/resume:translate-x-1/2">
+                  <div className="flex h-4 w-8 transition-transform duration-200 group-hover/resume:-translate-x-1/2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
