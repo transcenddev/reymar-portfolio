@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Inter_Tight } from "next/font/google";
+import { Inter, Inter_Tight, Lora } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
@@ -15,6 +15,13 @@ const interTight = Inter_Tight({
   weight: ["500", "600", "700", "800"],
   subsets: ["latin"],
   variable: "--font-display",
+});
+
+const lora = Lora({
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-serif",
 });
 
 export const metadata: Metadata = {
@@ -44,7 +51,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`scroll-smooth ${inter.variable} ${interTight.variable}`}
+      className={`scroll-smooth ${inter.variable} ${interTight.variable} ${lora.variable}`}
       suppressHydrationWarning
     >
       <body

@@ -23,7 +23,7 @@ const HeroSection = () => (
       </figure> */}
 
       {/* Main headline with similar typography treatment */}
-      <h1 className="my-12 font-serif text-black dark:text-white text-left transition-colors duration-300">
+      <h1 className="my-12 font-serif text-stone-900 dark:text-stone-50 text-left transition-colors duration-300">
         <span
           className="block text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-2"
           style={{ letterSpacing: "-0.02em" }}
@@ -82,14 +82,13 @@ const EducationExperience = () => (
       {/* Education */}
       <div className="mb-20">
         <h2
-          className="font-normal text-black dark:text-white mb-12 uppercase tracking-wide transition-colors duration-300"
-          style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
+          className="font-display font-bold text-stone-900 dark:text-stone-100 mb-12 uppercase tracking-wide transition-colors duration-300"
         >
           EDUCATION
         </h2>
         <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-6">
           <div>
-            <div className="text-2xl md:text-3xl font-serif italic text-black dark:text-white mb-3 transition-colors duration-300">
+            <div className="text-2xl md:text-3xl font-serif italic text-stone-900 dark:text-stone-50 mb-3 transition-colors duration-300">
               Cavite State University
             </div>
             <div className="text-base md:text-lg text-black/70 dark:text-stone-400 mb-2 transition-colors duration-300">
@@ -130,15 +129,14 @@ const EducationExperience = () => (
       {/* Experience */}
       <div className="mb-0">
         <h2
-          className="font-normal text-black dark:text-white mb-12 uppercase tracking-wide transition-colors duration-300"
-          style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
+          className="font-display font-bold text-stone-900 dark:text-stone-100 mb-12 uppercase tracking-wide transition-colors duration-300"
         >
           EXPERIENCE
         </h2>
         <div className="space-y-16">
           <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-6">
             <div>
-              <div className="text-2xl md:text-3xl font-serif italic text-black dark:text-white mb-3 transition-colors duration-300">
+              <div className="text-2xl md:text-3xl font-serif italic text-stone-900 dark:text-stone-50 mb-3 transition-colors duration-300">
                 SP Madrid & Associates Law Firm
               </div>
               <div className="text-base md:text-lg text-black/70 dark:text-stone-400 mb-4 transition-colors duration-300">
@@ -167,7 +165,7 @@ const EducationExperience = () => (
 
           <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-6">
             <div>
-              <div className="text-2xl md:text-3xl font-serif italic text-black dark:text-white mb-3 transition-colors duration-300">
+              <div className="text-2xl md:text-3xl font-serif italic text-stone-900 dark:text-stone-50 mb-3 transition-colors duration-300">
                 SP Madrid & Associates Law Firm
               </div>
               <div className="text-base md:text-lg text-black/70 dark:text-stone-400 mb-4 transition-colors duration-300">
@@ -198,15 +196,14 @@ const EducationExperience = () => (
 const CommunityLeadership = () => (
   <AnimatedSection className="container mx-auto px-4 pb-16" delay={0.15}>
     <div className="max-w-4xl mx-auto">
-      <h2
-        className="font-normal text-black dark:text-white mb-12 uppercase tracking-wide transition-colors duration-300"
-        style={{ fontSize: "clamp(1rem, 2vw, 1.2rem)" }}
-      >
-        COMMUNITY & LEADERSHIP
-      </h2>
+        <h2
+          className="font-display font-bold text-stone-900 dark:text-stone-100 mb-12 uppercase tracking-wide transition-colors duration-300"
+        >
+          COMMUNITY & LEADERSHIP
+        </h2>
       <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-6">
         <div>
-          <div className="text-2xl md:text-3xl font-serif italic text-black dark:text-white mb-3 transition-colors duration-300">
+          <div className="text-2xl md:text-3xl font-serif italic text-stone-900 dark:text-stone-50 mb-3 transition-colors duration-300">
             Arc Community
           </div>
           <div className="text-base md:text-lg text-black/70 dark:text-stone-400 mb-4 transition-colors duration-300">
@@ -251,7 +248,7 @@ const Favourites = () => (
   >
     <div className="max-w-2xl mx-auto mb-10">
       <h2
-        className="text-black dark:text-white font-normal mb-6 transition-colors duration-300"
+        className="font-display font-bold text-stone-900 dark:text-stone-100 mb-6 transition-colors duration-300"
         style={{ fontSize: "clamp(2rem, 5vw, 3rem)" }}
       >
         My current <em className="font-serif italic">favourites</em>
@@ -264,7 +261,7 @@ const Favourites = () => (
 
       <div className="space-y-4 text-base md:text-lg leading-relaxed">
         <div>
-          <span className="font-semibold text-black dark:text-white transition-colors duration-300">
+          <span className="font-semibold text-stone-900 dark:text-stone-300 transition-colors duration-300">
             Book:
           </span>
           <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
@@ -275,7 +272,7 @@ const Favourites = () => (
         </div>
 
         <div>
-          <span className="font-semibold text-black dark:text-white transition-colors duration-300">
+          <span className="font-semibold text-stone-900 dark:text-stone-300 transition-colors duration-300">
             Manhwa:
           </span>
           <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
@@ -285,7 +282,7 @@ const Favourites = () => (
         </div>
 
         <div>
-          <span className="font-semibold text-black dark:text-white transition-colors duration-300">
+          <span className="font-semibold text-stone-900 dark:text-stone-300 transition-colors duration-300">
             Movie:
           </span>
           <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
@@ -296,7 +293,7 @@ const Favourites = () => (
         </div>
 
         <div>
-          <span className="font-semibold text-black dark:text-white transition-colors duration-300">
+          <span className="font-semibold text-stone-900 dark:text-stone-300 transition-colors duration-300">
             TV Shows:
           </span>
           <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
@@ -307,7 +304,7 @@ const Favourites = () => (
         </div>
 
         <div>
-          <span className="font-semibold text-black dark:text-white transition-colors duration-300">
+          <span className="font-semibold text-stone-900 dark:text-stone-300 transition-colors duration-300">
             Music:
           </span>
           <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
@@ -318,7 +315,7 @@ const Favourites = () => (
         </div>
 
         <div>
-          <span className="font-semibold text-black dark:text-white transition-colors duration-300">
+          <span className="font-semibold text-stone-900 dark:text-stone-300 transition-colors duration-300">
             Food:
           </span>
           <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
@@ -329,7 +326,7 @@ const Favourites = () => (
         </div>
 
         <div>
-          <span className="font-semibold text-black dark:text-white transition-colors duration-300">
+          <span className="font-semibold text-stone-900 dark:text-stone-300 transition-colors duration-300">
             Clothing:
           </span>
           <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
@@ -892,7 +889,7 @@ const LifeGallery = () => {
     <AnimatedSection className="container mx-auto pt-16 pb-10" delay={0.3}>
       <div className="max-w-4xl mx-auto mb-16">
         <h2
-          className="text-black dark:text-white font-normal mb-8 text-center sm:text-left transition-colors duration-300"
+          className="font-display font-bold text-stone-900 dark:text-stone-100 mb-8 text-center sm:text-left transition-colors duration-300"
           style={{ fontSize: "clamp(2rem, 5vw, 3rem)" }}
         >
           Snippets of my <em className="font-serif italic">life</em> outside of

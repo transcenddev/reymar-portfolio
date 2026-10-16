@@ -13,6 +13,7 @@ const config: Config = {
       fontFamily: {
         sans: "var(--font-inter)",
         display: "var(--font-display)",
+        serif: "var(--font-serif)",
         mono: "ui-monospace, SFMono-Regular, Monaco, 'JetBrains Mono', Menlo, monospace",
       },
       fontSize: {
