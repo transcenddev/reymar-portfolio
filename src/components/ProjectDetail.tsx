@@ -10,6 +10,98 @@ import { projectsById, type Project } from "@/data/projects";
 
 const isVideoSrc = (src: string) => /\.(mp4|mov|webm|m4v)$/i.test(src);
 
+type FlowStage = { title: string; detail?: string };
+type FlowBranch = {
+  at: number;
+  title: string;
+  detail?: string;
+  dashed?: boolean;
+};
+
+/* Shared pipeline diagram: sharp-corner mono node chips joined by arrows,
+   optional edge labels and branch nodes. Row on md+, stacked on mobile. */
+const FlowDiagram: FC<{
+  stages: FlowStage[];
+  edgeLabels?: Array<string | null>;
+  branches?: FlowBranch[];
+}> = ({ stages, edgeLabels, branches }) => (
+  <ol
+    aria-label="Flow diagram"
+    className="flex flex-col gap-3 md:flex-row md:items-start md:gap-0"
+  >
+    {stages.map((stage, index) => {
+      const branch = branches?.find((b) => b.at === index);
+      const edgeLabel = edgeLabels?.[index];
+      const isLast = index === stages.length - 1;
+
+      return (
+        <li
+          key={index}
+          className="flex flex-col md:min-w-0 md:flex-1 md:flex-row md:items-start"
+        >
+          <div className="flex flex-col md:min-w-0 md:flex-1">
+            <div
+              className={`border bg-stone-50 dark:bg-neutral-900 px-3 py-2 ${
+                isLast
+                  ? "border-primary"
+                  : "border-stone-300 dark:border-stone-700"
+              }`}
+            >
+              <span className="block font-mono text-[11px] uppercase tracking-widest text-stone-900 dark:text-stone-100">
+                {stage.title}
+              </span>
+              {stage.detail && (
+                <span className="mt-0.5 block font-mono text-[10px] uppercase tracking-wider text-stone-500 dark:text-stone-400">
+                  {stage.detail}
+                </span>
+              )}
+            </div>
+
+            {branch && (
+              <div className="mt-2 flex items-start gap-1.5 pl-2">
+                <span
+                  aria-hidden="true"
+                  className={`h-4 border-l border-stone-300 dark:border-stone-700 ${
+                    branch.dashed ? "border-dashed" : ""
+                  }`}
+                />
+                <span
+                  className={`border px-2 py-1 font-mono text-[10px] uppercase tracking-wider ${
+                    branch.dashed
+                      ? "border-dashed border-stone-400 dark:border-stone-600 text-stone-500 dark:text-stone-400"
+                      : "border-stone-300 dark:border-stone-700 text-stone-600 dark:text-stone-300"
+                  }`}
+                >
+                  {branch.detail
+                    ? `${branch.title} · ${branch.detail}`
+                    : branch.title}
+                </span>
+              </div>
+            )}
+          </div>
+
+          {!isLast && (
+            <div className="flex items-center justify-center py-1 md:flex-col md:justify-start md:px-1.5 md:pt-2.5">
+              {edgeLabel && (
+                <span className="mr-2 font-mono text-[9px] uppercase tracking-wider text-stone-400 dark:text-stone-500 md:mr-0 md:mb-0.5">
+                  {edgeLabel}
+                </span>
+              )}
+              <span
+                aria-hidden="true"
+                className="text-sm leading-none text-stone-400 dark:text-stone-600"
+              >
+                <span className="md:hidden">↓</span>
+                <span className="hidden md:inline">→</span>
+              </span>
+            </div>
+          )}
+        </li>
+      );
+    })}
+  </ol>
+);
+
 type ProjectDetailProps = {
   project: Project;
   onProjectChange: (projectId: string) => void;
@@ -62,19 +154,16 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
   const renderHeader = () => (
     <section className="space-y-8">
       <div className="space-y-4">
-        <span className="block font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400">
-          {project.category}
-        </span>
         <h1 className="font-display text-4xl md:text-5xl font-bold text-stone-900 dark:text-stone-100 max-w-3xl">
           {project.name}
         </h1>
-        {project.client && (
-          <p className="font-mono text-sm uppercase tracking-widest text-stone-600 dark:text-stone-400">
-            {project.client}
-          </p>
-        )}
         <p className="font-sans text-stone-600 dark:text-stone-400 max-w-2xl leading-relaxed">
           {project.intro ?? project.tagline}
+        </p>
+        <p className="font-mono text-xs md:text-sm uppercase tracking-widest text-stone-600 dark:text-stone-400">
+          {[project.category, project.year, project.client]
+            .filter(Boolean)
+            .join(" · ")}
         </p>
       </div>
 
@@ -152,6 +241,36 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
       );
     }
 
+    if (project.cover) {
+      const { video, image, poster } = project.cover;
+      return (
+        <div className="relative aspect-[16/9] overflow-hidden bg-stone-200 dark:bg-stone-800 rounded-none mt-6">
+          {video ? (
+            <video
+              src={video}
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              autoPlay={effectiveAutoplay}
+              poster={poster}
+              className="w-full h-full object-cover"
+              aria-label={`${project.name} cover video`}
+            />
+          ) : image ? (
+            <Image
+              src={image}
+              alt={project.heroAlt ?? `${project.name} cover`}
+              fill
+              sizes="100vw"
+              className="object-cover"
+              priority
+            />
+          ) : null}
+        </div>
+      );
+    }
+
     if (!items.length) return null;
     const mediaHero = items[0];
 
@@ -206,11 +325,59 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
   // B. Gallery grid
   // ----------------------------------------------------------------
   const renderGallery = () => {
+    if (project.galleryHighlights?.length) {
+      const highlights = project.galleryHighlights;
+      return (
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-stone-200 dark:bg-stone-800">
+          {highlights.map((item, index) => (
+            <figure
+              key={index}
+              className={`bg-white dark:bg-neutral-950 ${
+                index === highlights.length - 1 && highlights.length % 2 === 1
+                  ? "col-span-2 md:col-span-1"
+                  : ""
+              }`}
+            >
+              <div className="relative aspect-[4/3] overflow-hidden bg-stone-200 dark:bg-stone-800">
+                {isVideoSrc(item.src) ? (
+                  <video
+                    src={item.src}
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    autoPlay={effectiveAutoplay}
+                    className="w-full h-full object-cover"
+                    aria-label={`${project.name} highlight ${index + 1}`}
+                  />
+                ) : (
+                  <Image
+                    src={item.src}
+                    alt={
+                      item.caption ?? `${project.name} highlight ${index + 1}`
+                    }
+                    fill
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                    className="object-cover"
+                  />
+                )}
+              </div>
+              {item.caption && (
+                <figcaption className="px-3 py-2 font-mono text-[11px] uppercase tracking-wider text-stone-500 dark:text-stone-400">
+                  {item.caption}
+                </figcaption>
+              )}
+            </figure>
+          ))}
+        </div>
+      );
+    }
+
     const galleryItems = items.slice(1);
     if (galleryItems.length === 0) return null;
 
     return (
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-stone-200 dark:bg-stone-800 mt-4 md:mt-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-stone-200 dark:bg-stone-800">
         {galleryItems.map((src, index) => (
           <div
             key={index}
@@ -301,11 +468,16 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
               <h3 className="font-display text-xl md:text-2xl font-bold text-stone-900 dark:text-stone-100 mb-4">
                 {feature.title}
               </h3>
+              {feature.lead && (
+                <p className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-3xl">
+                  {feature.lead}
+                </p>
+              )}
               {feature.media && (
                 <div
                   className={`${
                     Array.isArray(feature.media) && feature.media.length === 2
-                      ? "my-6 grid grid-cols-1 md:grid-cols-2 gap-6"
+                      ? "my-6 grid grid-cols-1 md:grid-cols-3 gap-6"
                       : "my-6"
                   }`}
                 >
@@ -315,9 +487,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                       : [feature.media];
                     const altItems = Array.isArray(feature.mediaAlt)
                       ? feature.mediaAlt
-                      : Array(mediaItems.length).fill(
-                          feature.mediaAlt ?? "",
-                        );
+                      : Array(mediaItems.length).fill(feature.mediaAlt ?? "");
                     return mediaItems.map((src, mediaIdx) =>
                       isVideoSrc(src) ? (
                         <video
@@ -335,7 +505,11 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                         feature.media.length === 2 ? (
                         <div
                           key={mediaIdx}
-                          className="relative aspect-[4/3] overflow-hidden bg-stone-200 dark:bg-stone-800"
+                          className={`relative overflow-hidden ${
+                            mediaIdx === 0
+                              ? "md:col-span-2 aspect-[4/3]"
+                              : "aspect-square md:aspect-auto"
+                          }`}
                         >
                           <Image
                             src={src}
@@ -369,9 +543,46 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                   })()}
                 </div>
               )}
-              <p className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-3xl">
-                {feature.description}
-              </p>
+              {feature.diagram && (
+                <figure className="my-6">
+                  <a
+                    href={feature.diagram.src}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block"
+                    aria-label={`${feature.diagram.alt} - open full size`}
+                  >
+                    <div className="overflow-x-auto border border-stone-200 dark:border-stone-800 bg-white">
+                      <Image
+                        src={feature.diagram.src}
+                        alt={feature.diagram.alt}
+                        width={feature.diagram.width}
+                        height={feature.diagram.height}
+                        sizes="(max-width: 768px) 760px, 100vw"
+                        className="block h-auto w-full min-w-[760px] md:min-w-0"
+                      />
+                    </div>
+                    <span className="mt-2 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider text-stone-500 dark:text-stone-400 transition-colors duration-200 group-hover:text-primary">
+                      {feature.diagram.caption ?? "Diagram"}
+                      <span aria-hidden="true">↗</span>
+                      <span>Open full size</span>
+                    </span>
+                  </a>
+                </figure>
+              )}
+              {feature.flow && feature.flow.stages.length > 0 && (
+                <div className="my-6">
+                  <FlowDiagram
+                    stages={feature.flow.stages}
+                    edgeLabels={feature.flow.edgeLabels}
+                  />
+                </div>
+              )}
+              {feature.description && (
+                <p className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-3xl">
+                  {feature.description}
+                </p>
+              )}
               {feature.table && (
                 <div className="mt-6 overflow-x-auto">
                   <table className="w-full text-left border-collapse">
@@ -416,6 +627,11 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                     </tbody>
                   </table>
                 </div>
+              )}
+              {feature.note && (
+                <p className="mt-6 font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-3xl">
+                  {feature.note}
+                </p>
               )}
             </div>
           ))}
@@ -463,7 +679,9 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                 {project.results?.metrics.map((row, rowIdx) => (
                   <tr
                     key={rowIdx}
-                    className={rowIdx % 2 === 0 ? "bg-stone-50 dark:bg-neutral-900" : ""}
+                    className={
+                      rowIdx % 2 === 0 ? "bg-stone-50 dark:bg-neutral-900" : ""
+                    }
                   >
                     <td className="font-mono text-xs text-stone-500 dark:text-stone-400 px-4 py-3">
                       {row[0]}
@@ -486,7 +704,8 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
   // ----------------------------------------------------------------
   const renderTeam = () => {
     if (!project.team) return null;
-    const { researchers, adviser, technicalCritic, institution, role } = project.team;
+    const { researchers, adviser, technicalCritic, institution, role } =
+      project.team;
 
     return (
       <section className="mt-16 md:mt-24 lg:mt-32">
@@ -548,8 +767,10 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
   const renderTech = () => {
     if (!project.tech || project.tech.length === 0) return null;
 
-    const mid = Math.ceil(project.tech.length / 2);
-    const columns = [project.tech.slice(0, mid), project.tech.slice(mid)];
+    const groups =
+      project.techGroups && project.techGroups.length > 0
+        ? project.techGroups
+        : [{ title: "Stack", items: project.tech }];
 
     return (
       <section className="mt-16 md:mt-24 lg:mt-32">
@@ -559,23 +780,28 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
         <h2 className="font-display text-2xl md:text-3xl font-bold text-stone-900 dark:text-stone-100 mb-6">
           Technologies used
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 font-mono">
-          {columns.map((col, colIdx) => (
-            <ul key={colIdx} className="space-y-2">
-              {col.map((tech) => (
-                <li
-                  key={tech}
-                  className="text-stone-700 dark:text-stone-300 text-sm"
-                >
-                  <span className="text-primary mr-3" aria-hidden="true">
-                    ·
+        <dl className="border-t border-stone-200 dark:border-stone-800 divide-y divide-stone-200 dark:divide-stone-800">
+          {groups.map((group) => (
+            <div
+              key={group.title}
+              className="grid grid-cols-[130px_1fr] gap-4 py-5 md:grid-cols-[170px_1fr] md:gap-6 md:py-6"
+            >
+              <dt className="font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 md:pt-0.5">
+                {group.title}
+              </dt>
+              <dd className="flex flex-wrap gap-1.5">
+                {group.items.map((item) => (
+                  <span
+                    key={item}
+                    className="font-mono text-xs uppercase tracking-wider text-neutral-800 dark:text-neutral-300 border border-neutral-300 dark:border-neutral-700 bg-neutral-50/60 dark:bg-neutral-800/40 px-3 py-1 rounded-none select-none transition-colors duration-200 hover:border-neutral-900 dark:hover:border-neutral-400 hover:bg-neutral-100/70 dark:hover:bg-neutral-700/50"
+                  >
+                    {item}
                   </span>
-                  {tech}
-                </li>
-              ))}
-            </ul>
+                ))}
+              </dd>
+            </div>
           ))}
-        </div>
+        </dl>
       </section>
     );
   };
@@ -597,6 +823,33 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
         <p className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-3xl">
           {project.problem}
         </p>
+        {project.problemDetail && (
+          <p className="mt-4 font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-3xl">
+            {project.problemDetail}
+          </p>
+        )}
+        {project.problemQuotes && project.problemQuotes.length > 0 && (
+          <div className="mt-10 max-w-3xl space-y-8">
+            {project.problemQuotes.map((quote, index) => (
+              <figure
+                key={index}
+                className="border-l-2 border-primary/40 pl-5 md:pl-6"
+              >
+                <blockquote className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed">
+                  &ldquo;{quote.text}&rdquo;
+                </blockquote>
+                {quote.translation && (
+                  <p className="mt-2 font-sans italic text-stone-500 dark:text-stone-400 leading-relaxed">
+                    &ldquo;{quote.translation}&rdquo;
+                  </p>
+                )}
+                <figcaption className="mt-3 font-mono text-[11px] uppercase tracking-wider text-stone-500 dark:text-stone-400">
+                  {quote.attribution}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        )}
       </section>
     );
   };
@@ -605,7 +858,9 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
   // Optional: Architecture
   // ----------------------------------------------------------------
   const renderArchitecture = () => {
-    if (!project.architecture) return null;
+    const flow = project.architectureFlow;
+    const hasFlow = !!flow && flow.stages.length > 0;
+    if (!project.architecture && !hasFlow) return null;
 
     return (
       <section className="mt-16 md:mt-24 lg:mt-32">
@@ -615,24 +870,43 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
         <h2 className="font-display text-2xl md:text-3xl font-bold text-stone-900 dark:text-stone-100 mb-6">
           System design overview
         </h2>
-        <div className="grid gap-px bg-stone-200 dark:bg-stone-800 md:grid-cols-2">
-          <div className="bg-white dark:bg-neutral-950 p-6 md:p-8 border border-stone-200 dark:border-stone-800">
-            <h3 className="font-display text-xl font-bold text-stone-900 dark:text-stone-100 mb-4">
-              {project.architecture.left.title}
-            </h3>
-            <p className="font-sans text-stone-600 dark:text-stone-400 leading-relaxed">
-              {project.architecture.left.description}
-            </p>
+
+        {hasFlow && flow && (
+          <figure className="mb-10 md:mb-14">
+            <FlowDiagram
+              stages={flow.stages}
+              edgeLabels={flow.edgeLabels}
+              branches={flow.branches}
+            />
+
+            {flow.note && (
+              <figcaption className="mt-5 max-w-3xl font-sans text-sm md:text-base leading-relaxed text-stone-600 dark:text-stone-400">
+                {flow.note}
+              </figcaption>
+            )}
+          </figure>
+        )}
+
+        {project.architecture && (
+          <div className="grid gap-px bg-stone-200 dark:bg-stone-800 md:grid-cols-2">
+            <div className="bg-white dark:bg-neutral-950 p-6 md:p-8 border border-stone-200 dark:border-stone-800">
+              <h3 className="font-display text-xl font-bold text-stone-900 dark:text-stone-100 mb-4">
+                {project.architecture.left.title}
+              </h3>
+              <p className="font-sans text-stone-600 dark:text-stone-400 leading-relaxed">
+                {project.architecture.left.description}
+              </p>
+            </div>
+            <div className="bg-white dark:bg-neutral-950 p-6 md:p-8 border border-stone-200 dark:border-stone-800">
+              <h3 className="font-display text-xl font-bold text-stone-900 dark:text-stone-100 mb-4">
+                {project.architecture.right.title}
+              </h3>
+              <p className="font-sans text-stone-600 dark:text-stone-400 leading-relaxed">
+                {project.architecture.right.description}
+              </p>
+            </div>
           </div>
-          <div className="bg-white dark:bg-neutral-950 p-6 md:p-8 border border-stone-200 dark:border-stone-800">
-            <h3 className="font-display text-xl font-bold text-stone-900 dark:text-stone-100 mb-4">
-              {project.architecture.right.title}
-            </h3>
-            <p className="font-sans text-stone-600 dark:text-stone-400 leading-relaxed">
-              {project.architecture.right.description}
-            </p>
-          </div>
-        </div>
+        )}
       </section>
     );
   };

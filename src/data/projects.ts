@@ -31,19 +31,39 @@ export type Project = {
   /** Keep the detail route reachable but hide from the homepage and Works list */
   draft?: boolean;
   client: string;
+  /** Optional year shown in the cover meta line */
+  year?: string;
   services?: string;
   timeline?: string;
   /** "The Problem" */
   problem?: string;
+  /** Second Problem paragraph (context / stakes) */
+  problemDetail?: string;
+  /** Interview quotes shown beneath the Problem section */
+  problemQuotes?: Array<{
+    text: string;
+    translation?: string;
+    attribution: string;
+  }>;
   /** "What I Built" */
   built?: string;
   /** "The Result" - verified outcomes only */
   result?: string[];
   /** "Tech Stack" - confirmed technologies only */
   tech?: string[];
+  /** Categorized tech stack for the Technical Details section (falls back to `tech`) */
+  techGroups?: Array<{ title: string; items: string[] }>;
   githubUrl?: string;
   liveUrl?: string;
   images?: string[];
+  /** Explicit cover media for the page hero (overrides images[0]) */
+  cover?: {
+    video?: string;
+    image?: string;
+    poster?: string;
+  };
+  /** Curated cover gallery with captions (replaces the auto gallery when present) */
+  galleryHighlights?: Array<{ src: string; caption?: string }>;
   /** Optional alt text for hero image */
   heroAlt?: string;
   /** Optional alt texts for gallery images (indexed by position) */
@@ -75,18 +95,51 @@ export type Project = {
     left: { title: string; description: string };
     right: { title: string; description: string };
   };
+  /** Optional architecture flow, rendered as a styled pipeline diagram */
+  architectureFlow?: {
+    stages: Array<{ title: string; detail?: string }>;
+    /** Edge label between stage i and i+1 (length = stages.length - 1) */
+    edgeLabels?: Array<string | null>;
+    /** Branch nodes anchored beneath a stage index */
+    branches?: Array<{
+      at: number;
+      title: string;
+      detail?: string;
+      dashed?: boolean;
+    }>;
+    /** Caption shown beneath the diagram */
+    note?: string;
+  };
   /** Solution section: how the build solves the problem */
   solution?: string;
   /** Feature subsections within the Solution section */
   features?: Array<{
     title: string;
-    description: string;
+    /** Intro line rendered above the media/diagram */
+    lead?: string;
+    /** Body paragraph (rendered after media, before the table) */
+    description?: string;
     /** Image or video source(s) for the feature */
     media?: string | string[];
     /** Optional alt text for media (single or per-image) */
     mediaAlt?: string | string[];
+    /** Optional inline flow diagram */
+    flow?: {
+      stages: Array<{ title: string; detail?: string }>;
+      edgeLabels?: Array<string | null>;
+    };
+    /** Optional full-width diagram image (object-contain; links to full size) */
+    diagram?: {
+      src: string;
+      alt: string;
+      caption?: string;
+      width: number;
+      height: number;
+    };
     /** Optional comparison table: header row + data rows */
     table?: { headers: string[]; rows: string[][] };
+    /** Trailing paragraph rendered after the table */
+    note?: string;
   }>;
   /** Results with metrics table: { title, metrics: [[label, value]] } */
   results?: {
@@ -137,6 +190,14 @@ export const projects: Project[] = [
       "After Effects",
       "Figma",
       "Photoshop",
+    ],
+    techGroups: [
+      { title: "AI generation", items: ["Runway Gen-2", "Midjourney"] },
+      {
+        title: "Post-production",
+        items: ["Adobe Premiere Pro", "After Effects"],
+      },
+      { title: "Design", items: ["Figma", "Photoshop"] },
     ],
     githubUrl: undefined,
     liveUrl: undefined,
@@ -197,6 +258,11 @@ export const projects: Project[] = [
       "Completed full redesign and development in under 2 months, 20% faster than projected",
     ],
     tech: ["Figma", "Webflow", "Bubble.io", "Hotjar", "Google Analytics"],
+    techGroups: [
+      { title: "Design", items: ["Figma"] },
+      { title: "No-code build", items: ["Webflow", "Bubble.io"] },
+      { title: "Analytics", items: ["Hotjar", "Google Analytics"] },
+    ],
     githubUrl: undefined,
     liveUrl: "https://read.ai",
     images: [
@@ -254,6 +320,15 @@ export const projects: Project[] = [
       "Docker",
       "Nginx",
     ],
+    techGroups: [
+      { title: "Backend", items: ["PHP", "Laravel"] },
+      { title: "Data", items: ["MySQL"] },
+      {
+        title: "Frontend",
+        items: ["JavaScript", "jQuery", "Bootstrap", "Chart.js"],
+      },
+      { title: "Infrastructure", items: ["Docker", "Nginx"] },
+    ],
     githubUrl: undefined,
     liveUrl: undefined,
     images: [
@@ -306,6 +381,13 @@ export const projects: Project[] = [
       "Tailwind CSS",
       "Pusher",
       "Docker",
+    ],
+    techGroups: [
+      { title: "Backend", items: ["PHP", "Laravel"] },
+      { title: "Data", items: ["MySQL"] },
+      { title: "Frontend", items: ["JavaScript", "Vue.js", "Tailwind CSS"] },
+      { title: "Realtime", items: ["Pusher"] },
+      { title: "Infrastructure", items: ["Docker"] },
     ],
     githubUrl: undefined,
     liveUrl: undefined,
@@ -361,6 +443,10 @@ export const projects: Project[] = [
       "Developed skills in visual hierarchy and user interface composition",
     ],
     tech: ["Figma", "HTML", "CSS", "JavaScript"],
+    techGroups: [
+      { title: "Design", items: ["Figma"] },
+      { title: "Frontend", items: ["HTML", "CSS", "JavaScript"] },
+    ],
     githubUrl: undefined,
     liveUrl: undefined,
     images: [
@@ -399,6 +485,7 @@ export const projects: Project[] = [
       "Applied user-centered design principles to real-world attendance tracking scenario",
     ],
     tech: ["Figma"],
+    techGroups: [{ title: "Design", items: ["Figma"] }],
     githubUrl: undefined,
     liveUrl: undefined,
     images: [
@@ -416,24 +503,69 @@ export const projects: Project[] = [
     tagline: "IoT water-quality monitoring + decision-tree species prediction",
     intro:
       "A solar-powered IoT and machine-learning system that monitors water quality in real time and recommends suitable aquaculture species for fishpond operators in San Juan I, Ternate, Cavite.",
-    image: "/assets/images/works/thesis_agwasuri/agwasuri_home_hero.png",
+    image:
+      "/assets/images/works/thesis_agwasuri/agwasuri_website_photos/agwasuri_dashboard.png",
     category: "Automation & AI",
     featured: true,
     client: "Municipal Agricultural Office of Ternate",
     services:
       "IoT System Design, Embedded Firmware, Machine Learning, Full-Stack Web Development",
+    year: "2026",
+    cover: {
+      video:
+        "/assets/videos/works/agwasuri/agwasuri_dashboard_prediction_test_video.mp4",
+      poster:
+        "/assets/images/works/thesis_agwasuri/agwasuri_website_photos/agwasuri_dashboard.png",
+    },
+    galleryHighlights: [
+      {
+        src: "/assets/images/works/thesis_agwasuri/agwasuri_prototype_fishpond.jpg",
+        caption: "Device in the pond",
+      },
+      {
+        src: "/assets/images/works/thesis_agwasuri/agwasuri_website_photos/agwasuri_prediction.png",
+        caption: "Species prediction page",
+      },
+      {
+        src: "/assets/images/works/thesis_agwasuri/agwasuri_sensor_controller_components.jpg",
+        caption: "Sensor & controller hardware",
+      },
+    ],
     problem:
       "Fishpond operators in San Juan I, Ternate relied on trial-and-error species selection and manual water checks. Summer salinity spikes and rainy-season freshwater dilution caused mass fish kills within 2 to 3 days of stocking, wiping out capital and family income.",
+    problemDetail:
+      "A single cycle represents months of savings: fingerlings, feed, labor, and pond preparation. With only two to three cycles per year, one bad season can erase a year's household income.",
+    problemQuotes: [
+      {
+        text: "Wala kaming ginagamit na device... sana meron para mas accurate.",
+        translation:
+          "We don't use any device... I wish there was one so it's more accurate.",
+        attribution: "Fishpond Owner, San Juan I",
+      },
+      {
+        text: "Pag alpas mo pa lang, kuha na siya agad, mga dalawa o tatlong araw lang, namamatay na.",
+        translation:
+          "Right after stocking, it's gone almost immediately. Two or three days, then they're dead.",
+        attribution: "Fishpond Owner, San Juan I",
+      },
+      {
+        text: "Gastos ka na ng pera, kailangan mong kumita para sa pamilya.",
+        translation:
+          "You've already spent money, and you need to earn for your family.",
+        attribution: "Fishpond Owner, San Juan I",
+      },
+    ],
     built:
       "I designed the web UI in Figma and built the frontend using Tailwind CSS and JavaScript. I modeled the 3D hardware casing in Blender and fabricated it using fiberglass cloth, polyester resin, and MEKP catalyst. I also interviewed fishpond owners and the Municipal Agriculture Office of Ternate, tested the system in actual fishponds, and coordinated our team's case study tasks.",
     solution:
-      "A solar-powered floating device monitors pond conditions continuously. The dashboard shows live readings and historical trends, and the ML model recommends which species will thrive based on current water quality.",
+      "A solar-powered floating device monitors pond conditions continuously. The dashboard shows live readings and historical trends, and the Machine Learning (ML) model recommends which species will thrive based on current water quality.",
     features: [
       {
         title: "Live dashboard",
         description:
           "The dashboard refreshes in real time as new sensor data arrives. Operators see current pond conditions, historical trends, and the recommended species without refreshing the page.",
-        media: "/assets/videos/works/agwasuri/navigation_website_full_video.mp4",
+        media:
+          "/assets/videos/works/agwasuri/navigation_website_full_video.mp4",
         mediaAlt: "Agwasuri dashboard walkthrough",
       },
       {
@@ -460,8 +592,14 @@ export const projects: Project[] = [
       },
       {
         title: "Decision Tree Model",
-        description:
-          "The Decision Tree reads four inputs and outputs the best species. Same accuracy as Random Forest, but 51x faster to train and 14x faster to predict. That speed makes it edge-deployable and easy for operators to understand, since every recommendation traces back to clear rules. Benchmarked against SEAFDEC optimal parameter ranges for each of the five species.",
+        lead: "The Decision Tree reads four inputs and outputs the best species:",
+        diagram: {
+          src: "/assets/images/works/thesis_agwasuri/decision_tree_algorithm_agwasuri/decision_tree_algorithm_zoomed.png",
+          alt: "Decision tree trained on SEAFDEC optimal water parameters: splits on salinity, temperature, dissolved oxygen, and pH into species classes (bangus, tilapia, lapu-lapu, sugpo, mud crab)",
+          caption: "Decision Tree classifier",
+          width: 2310,
+          height: 736,
+        },
         table: {
           headers: ["Algorithm", "Accuracy", "Train", "Predict"],
           rows: [
@@ -469,6 +607,7 @@ export const projects: Project[] = [
             ["Random Forest", "93.5%", "0.929s", "0.014s"],
           ],
         },
+        note: "Same accuracy as Random Forest, but 51x faster to train and 14x faster to predict. That speed makes it edge-deployable and easy for operators to understand, since every recommendation traces back to clear rules. Benchmarked against SEAFDEC optimal parameter ranges for each of the five species.",
       },
     ],
     results: {
@@ -501,6 +640,28 @@ export const projects: Project[] = [
       "Fritzing",
       "Blender",
     ],
+    techGroups: [
+      {
+        title: "Hardware & sensors",
+        items: [
+          "pH-4502C",
+          "Galvanic DO sensor",
+          "DFRobot EC sensor",
+          "DS18B20",
+        ],
+      },
+      { title: "Embedded", items: ["ESP32-WROOM-32", "MicroPython"] },
+      { title: "Backend & data", items: ["Laravel (PHP)", "MySQL", "FastAPI"] },
+      {
+        title: "Machine learning",
+        items: ["Decision Tree Classifier", "scikit-learn", "joblib"],
+      },
+      { title: "Web frontend", items: ["Tailwind CSS", "JavaScript"] },
+      {
+        title: "Design & prototyping",
+        items: ["Figma", "Fritzing", "Blender"],
+      },
+    ],
     githubUrl: undefined,
     liveUrl: undefined,
     images: [
@@ -525,7 +686,8 @@ export const projects: Project[] = [
       { start: 203, title: "Alert Configuration" },
       { start: 256, title: "Account & Settings" },
     ],
-    heroImage: "/assets/images/works/thesis_agwasuri/agwasuri_dashboard.png",
+    heroImage:
+      "/assets/images/works/thesis_agwasuri/agwasuri_website_photos/agwasuri_dashboard.png",
     relatedProjects: ["covid-health-declaration", "read-ai-website"],
     needsVerification: [
       "Add a repository link if the source is public.",
@@ -537,16 +699,32 @@ export const projects: Project[] = [
         "The real-time salinity alerts and species recommendation saved us from a major fish kill during the June 2025 salinity spike. We would have lost half our Bangus stock without the early warning.",
       attribution: "Reymar Jazrel, Fishpond Operator, San Juan I",
     },
+    architectureFlow: {
+      stages: [
+        { title: "Sensors", detail: "pH · DO · EC · Temp" },
+        { title: "ESP32", detail: "MicroPython" },
+        { title: "Laravel API", detail: "PHP · Reverb" },
+        { title: "Dashboard", detail: "Livewire" },
+        { title: "FastAPI", detail: "Decision Tree" },
+        { title: "Species", detail: "Recommendation" },
+      ],
+      edgeLabels: [null, "Wi-Fi", "Reverb WS", null, null],
+      branches: [
+        { at: 1, title: "microSD", detail: "Offline log", dashed: true },
+        { at: 2, title: "MySQL", detail: "Data store" },
+      ],
+      note: "Sensor to dashboard to prediction in under a second. The device logs to microSD when Wi-Fi drops, then syncs automatically when reconnected.",
+    },
     architecture: {
       left: {
         title: "Physical Tiers",
         description:
-          "Sensor to dashboard to prediction in under a second. The device logs to microSD when Wi-Fi drops, then syncs automatically when reconnected. Sensor → ESP32 (MicroPython) → Wi-Fi/Laravel API → MySQL → Dashboard (Livewire) → FastAPI Decision Tree → Species Recommendation.",
+          "Solar-powered floating platform: ESP32-WROOM-32 (MicroPython) reads pH-4502C, Galvanic DO, DFRobot EC, and DS18B20 sensors, with offline microSD logging that syncs automatically on reconnect. Fiberglass buoy enclosure, 20,000 mAh LiFePO4 battery, and a 12V solar panel keep it running off-grid.",
       },
       right: {
-        title: "Engine Tiers",
+        title: "Software Tiers",
         description:
-          "Solar-powered floating platform: ESP32-WROOM-32 (MicroPython) reads pH-4502C, Galvanic DO, DFRobot EC, and DS18B20 sensors, transmits over Wi-Fi with offline microSD logging. Fiberglass buoy enclosure, 20,000 mAh LiFePO4 battery, 12V solar panel. Laravel 11 / Reverb WebSocket pipeline ingests sensor data into MySQL. FastAPI hosts the Decision Tree classifier (scikit-learn), benchmarked against SEAFDEC optimal parameters. Decision Tree was chosen over Random Forest for 0.001s edge-deployable inference.",
+          "A Laravel 11 API with a Reverb WebSocket pipeline ingests sensor data into MySQL and streams it to the Livewire dashboard. FastAPI hosts the Decision Tree classifier (scikit-learn), benchmarked against SEAFDEC optimal parameters. Decision Tree was chosen over Random Forest for 0.001s edge-deployable inference.",
       },
     },
     team: {
@@ -558,8 +736,7 @@ export const projects: Project[] = [
       adviser: "Dr. Ricky Jay A. Riel",
       technicalCritic: "Dr. Rossian V. Perea",
       institution: "Cavite State University Naic, January 2026",
-      role:
-        "IoT System Design, Embedded Firmware, Machine Learning, Full-Stack Web Development, UI/UX Design, 3D Modeling & Hardware Fabrication, Field Research & Interviews",
+      role: "IoT System Design, Embedded Firmware, Machine Learning, Full-Stack Web Development, UI/UX Design, 3D Modeling & Hardware Fabrication, Field Research & Interviews",
     },
   },
   {
@@ -574,6 +751,12 @@ export const projects: Project[] = [
     services: "Web Development, Branding",
     timeline: "Ongoing",
     tech: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    techGroups: [
+      {
+        title: "Product engineering",
+        items: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+      },
+    ],
     images: [],
     result: [],
     relatedProjects: ["read-ai-website", "covid-health-declaration"],
