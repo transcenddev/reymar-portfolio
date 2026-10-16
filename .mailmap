@@ -1,0 +1,7 @@
+# Consolidate multiple git author identities into a single contributor
+# All commits share the same GitHub noreply email; these map display-name
+# variants to the canonical identity.
+
+transcenddev <97653516+transcenddev@users.noreply.github.com> dev <97653516+transcenddev@users.noreply.github.com>
+transcenddev <97653516+transcenddev@users.noreply.github.com> Reymar Mirante <97653516+transcenddev@users.noreply.github.com>
+
