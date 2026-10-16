@@ -53,8 +53,8 @@ const HeroSection = () => (
         </p>
 
         <p>
-          Currently building my portfolio in web design & development, AI,
-          automation and content creation while seeking opportunities to
+          I&apos;m currently building my portfolio in web design & development,
+          AI, automation and content creation while seeking opportunities to
           collaborate and grow as a creative-developer. Outside work, I capture
           life through photos and videos while enjoying my{" "}
           <a
@@ -196,11 +196,11 @@ const EducationExperience = () => (
 const CommunityLeadership = () => (
   <AnimatedSection className="container mx-auto px-4 pb-16" delay={0.15}>
     <div className="max-w-4xl mx-auto">
-        <h2
-          className="font-display font-bold text-stone-900 dark:text-stone-100 mb-12 uppercase tracking-wide transition-colors duration-300"
-        >
-          COMMUNITY & LEADERSHIP
-        </h2>
+      <h2
+        className="font-display font-bold text-stone-900 dark:text-stone-100 mb-12 uppercase tracking-wide transition-colors duration-300"
+      >
+        COMMUNITY & LEADERSHIP
+      </h2>
       <div className="grid md:grid-cols-[1fr,200px] gap-x-8 gap-y-6">
         <div>
           <div className="text-2xl md:text-3xl font-serif italic text-stone-900 dark:text-stone-50 mb-3 transition-colors duration-300">
@@ -253,7 +253,7 @@ const Favourites = () => (
       >
         My current <em className="font-serif italic">favourites</em>
       </h2>
-      <p className="text-base md:text-lg text-black/80 dark:text-stone-300 mb-8 transition-colors duration-300">
+      <p className="text-base md:text-lg text-stone-900 dark:text-stone-300 mb-8 transition-colors duration-300">
         When I&apos;m not coding or designing, you can catch me at a local
         coffee shop with my camera, reading, or perfecting my bodyweight
         exercises. Here&apos;s what&apos;s currently on rotation:
@@ -264,7 +264,7 @@ const Favourites = () => (
           <span className="font-semibold text-stone-900 dark:text-stone-300 transition-colors duration-300">
             Book:
           </span>
-          <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
+          <span className="text-stone-900 dark:text-stone-300 transition-colors duration-300">
             {" "}
             Atomic Habits, Meditations, Think and Grow Rich, The Way of the
             Superior Man, How to Win Friends and Influence People
@@ -275,7 +275,7 @@ const Favourites = () => (
           <span className="font-semibold text-stone-900 dark:text-stone-300 transition-colors duration-300">
             Manhwa:
           </span>
-          <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
+          <span className="text-stone-900 dark:text-stone-300 transition-colors duration-300">
             {" "}
             Solo Leveling, Tower of God, The God of High School
           </span>
@@ -285,7 +285,7 @@ const Favourites = () => (
           <span className="font-semibold text-stone-900 dark:text-stone-300 transition-colors duration-300">
             Movie:
           </span>
-          <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
+          <span className="text-stone-900 dark:text-stone-300 transition-colors duration-300">
             {" "}
             Blade Runner, The Matrix, Fight Club, Dune, The Batman, American
             Assassin
@@ -296,7 +296,7 @@ const Favourites = () => (
           <span className="font-semibold text-stone-900 dark:text-stone-300 transition-colors duration-300">
             TV Shows:
           </span>
-          <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
+          <span className="text-stone-900 dark:text-stone-300 transition-colors duration-300">
             {" "}
             Dark, Black Mirror, Breaking Bad, You, The 100, Attack on Titan,
             Jujutsu Kaisen, Chainsaw Man, Lord of the Mysteries
@@ -307,7 +307,7 @@ const Favourites = () => (
           <span className="font-semibold text-stone-900 dark:text-stone-300 transition-colors duration-300">
             Music:
           </span>
-          <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
+          <span className="text-stone-900 dark:text-stone-300 transition-colors duration-300">
             {" "}
             Currently vibing to lo-fi beats while working, it&apos;s the perfect
             background noise
@@ -318,7 +318,7 @@ const Favourites = () => (
           <span className="font-semibold text-stone-900 dark:text-stone-300 transition-colors duration-300">
             Food:
           </span>
-          <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
+          <span className="text-stone-900 dark:text-stone-300 transition-colors duration-300">
             {" "}
             Can&apos;t live without Oatmeal, Adobong Manok, Kare-Kare, and
             Nilagang Baka
@@ -329,7 +329,7 @@ const Favourites = () => (
           <span className="font-semibold text-stone-900 dark:text-stone-300 transition-colors duration-300">
             Clothing:
           </span>
-          <span className="text-black/80 dark:text-stone-300 transition-colors duration-300">
+          <span className="text-stone-900 dark:text-stone-300 transition-colors duration-300">
             {" "}
             Gustavo, Wisdom Kaye, Daniel Simmons, Giafratte, Jevon Henley
           </span>
@@ -343,303 +343,237 @@ const Favourites = () => (
 const lifeSnippets = [
   // Fitness & Calisthenics
   {
-    src: "/assets/videos/snippet-life/handstand-sunset-beach.mp4",
-    alt: "Handstand practice at sunset beach",
+    src: "/assets/videos/snippet_life/clean_handstand_press_90_degree_hold_beach_sunset_reymar.mp4",
+    alt: "Handstand press hold at beach sunset",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/images/me-photo-highlights/calisthenics.jpg",
-    alt: "Calisthenics training",
+    src: "/assets/videos/snippet_life/handstand_sunset_red_beach.mp4",
+    alt: "Handstand practice at red beach sunset",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+  {
+    src: "/assets/videos/snippet_life/handstand_with_me_reymar.mp4",
+    alt: "Handstand session at the beach",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+  {
+    src: "/assets/images/photo_highlights_reymar_mirante/gymnnastic_rings_forest_reymar_1.jpg",
+    alt: "Gymnastic rings training in the forest",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/handstandpress-beach-sunset-calisthenics.mp4",
-    alt: "Handstand press at beach during sunset",
-    aspectRatio: "9/16",
-    type: "video",
-  },
-  {
-    src: "/assets/images/me-photo-highlights/calisthenics2.jpg",
-    alt: "Calisthenics workout moment",
+    src: "/assets/images/photo_highlights_reymar_mirante/gymnnastic_rings_forest_reymar_2.jpg",
+    alt: "Gymnastic rings workout in nature",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/handstand-kids-calisthenics-sunset.mp4",
-    alt: "Calisthenics with kids at sunset",
-    aspectRatio: "9/16",
-    type: "video",
-  },
-  {
-    src: "/assets/images/me-photo-highlights/calisthenics3.jpg",
-    alt: "Outdoor calisthenics session",
+    src: "/assets/images/photo_highlights_reymar_mirante/handstand_forest_reymar.jpg",
+    alt: "Handstand practice in the forest",
     aspectRatio: "3/4",
     type: "image",
-  },
-  {
-    src: "/assets/videos/snippet-life/calisthenics hpsu qc.mp4",
-    alt: "Calisthenics HPSU workout in QC",
-    aspectRatio: "9/16",
-    type: "video",
-  },
-  {
-    src: "/assets/videos/snippet-life/calisthenics nature morning workout.mp4",
-    alt: "Morning calisthenics workout in nature",
-    aspectRatio: "9/16",
-    type: "video",
   },
 
   // Gym & Training
   {
-    src: "/assets/videos/snippet-life/gym bicep black compression mullet.mp4",
-    alt: "Bicep training at gym",
-    aspectRatio: "9/16",
-    type: "video",
-  },
-  {
-    src: "/assets/videos/snippet-life/gym boxing.mp4",
-    alt: "Boxing training session",
-    aspectRatio: "9/16",
-    type: "video",
-  },
-  {
-    src: "/assets/videos/snippet-life/punching bag muaythai gym.mp4",
+    src: "/assets/videos/snippet_life/punching_bag_muaythai_gym.mp4",
     alt: "Muay Thai punching bag workout",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+  {
+    src: "/assets/videos/snippet_life/shadowboxing_night_rain_bluehour_reymar.mp4",
+    alt: "Shadowboxing at night in the rain",
     aspectRatio: "9/16",
     type: "video",
   },
 
   // Running & Outdoor Activities
   {
-    src: "/assets/videos/snippet-life/run-swim-abs.mp4",
-    alt: "Running, swimming and abs workout",
+    src: "/assets/videos/snippet_life/run_fishermen_reymar.mp4",
+    alt: "Running past fishermen by the water",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/images/me-photo-highlights/running.jpg",
-    alt: "Running outdoors",
+    src: "/assets/images/photo_highlights_reymar_mirante/running_face_clear_skin_side_view_reymar.jpg",
+    alt: "Running outdoors with clear sky",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/running-beach-salabay.mp4",
-    alt: "Beach running at Salabay",
-    aspectRatio: "9/16",
-    type: "video",
-  },
-  {
-    src: "/assets/images/me-photo-highlights/running-beach-me-face.jpg",
-    alt: "Running at the beach",
+    src: "/assets/images/photo_highlights_reymar_mirante/running_lying_down_grass_reymar.jpg",
+    alt: "Resting on grass after a run",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/running-beach forest-plaza-church- beach.mp4",
-    alt: "Running through beach, forest, and church",
-    aspectRatio: "9/16",
-    type: "video",
-  },
-  {
-    src: "/assets/images/me-photo-highlights/running-beach-me-physique.jpg",
-    alt: "Beach running physique",
+    src: "/assets/images/photo_highlights_reymar_mirante/running_side_view_mullet_reymar.jpg",
+    alt: "Running side view with mullet haircut",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/running-church-scene.mp4",
-    alt: "Running past church scenic route",
-    aspectRatio: "9/16",
-    type: "video",
-  },
-  {
-    src: "/assets/images/me-photo-highlights/running2.jpg",
-    alt: "Running session outdoors",
+    src: "/assets/images/photo_highlights_reymar_mirante/running_sit_guard_rail_grass_maragondon_reymar.jpg",
+    alt: "Running session at Maragondon grass field",
     aspectRatio: "3/4",
     type: "image",
-  },
-  {
-    src: "/assets/videos/snippet-life/running-luya.mp4",
-    alt: "Running session",
-    aspectRatio: "9/16",
-    type: "video",
-  },
-  {
-    src: "/assets/images/me-photo-highlights/running3.jpg",
-    alt: "Running workout",
-    aspectRatio: "3/4",
-    type: "image",
-  },
-  {
-    src: "/assets/videos/snippet-life/running with justin night.mp4",
-    alt: "Night running with Justin",
-    aspectRatio: "9/16",
-    type: "video",
   },
 
   // Beach & Nature
   {
-    src: "/assets/videos/snippet-life/sunset-beach-swim-me.mp4",
-    alt: "Swimming at beach during sunset",
-    aspectRatio: "9/16",
-    type: "video",
-  },
-  {
-    src: "/assets/images/me-photo-highlights/beach-me.JPG",
-    alt: "Beach moment",
+    src: "/assets/images/photo_highlights_reymar_mirante/beach_all_white_guitar_reymar.jpg",
+    alt: "Beach moment in all white with guitar",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/sunset-pink-beach-sea.mp4",
-    alt: "Pink sunset at the beach",
-    aspectRatio: "9/16",
-    type: "video",
-  },
-  {
-    src: "/assets/images/me-photo-highlights/beach1.jpg",
-    alt: "Beach vibes",
+    src: "/assets/images/photo_highlights_reymar_mirante/beach_physique_calvin_klein_reymar.jpg",
+    alt: "Beach physique in Calvin Klein",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/beach2.jpg",
-    alt: "Beach day",
+    src: "/assets/images/photo_highlights_reymar_mirante/beach_physique_sunset_grown_blow_out_taper_reymar.jpg",
+    alt: "Beach physique at sunset with blow out taper",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/beach-allwhitefit-guitar3.jpg",
-    alt: "Beach with guitar in all white",
+    src: "/assets/images/photo_highlights_reymar_mirante/beach_sunset_blow_out_taper_side_view_reymar.jpg",
+    alt: "Beach sunset blow out taper side view",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/forest.jpg",
-    alt: "Forest exploration",
+    src: "/assets/images/photo_highlights_reymar_mirante/physique_beach_front_back_reymar_1.jpg",
+    alt: "Beach physique front view",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/forest2.jpg",
-    alt: "Nature forest scene",
+    src: "/assets/images/photo_highlights_reymar_mirante/physique_beach_front_back_reymar_2.jpg",
+    alt: "Beach physique back view",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/forest3.jpg",
-    alt: "Forest adventure",
+    src: "/assets/images/photo_highlights_reymar_mirante/physique_forest_reymar.jpg",
+    alt: "Physique shot in the forest",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/ilog1.jpg",
-    alt: "River adventure",
+    src: "/assets/images/photo_highlights_reymar_mirante/utod_river_falls_tree_sunkiss_reymar_2.jpg",
+    alt: "River falls tree sun-kissed moment",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/ilog2.jpg",
-    alt: "River exploration",
+    src: "/assets/images/photo_highlights_reymar_mirante/utod_river_falls_stand_reymar_1.jpg",
+    alt: "Standing at Utod river falls",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/ilog3.jpg",
-    alt: "River moment",
+    src: "/assets/images/photo_highlights_reymar_mirante/utod_river_falls_physique_back_friends_swim_river_reymar_5.jpg",
+    alt: "River falls swim with friends",
     aspectRatio: "3/4",
     type: "image",
   },
 
   // Fashion & Style
   {
-    src: "/assets/videos/snippet-life/fit check mall all black mullet.mp4",
-    alt: "All black fit check at the mall",
-    aspectRatio: "9/16",
-    type: "video",
+    src: "/assets/images/photo_highlights_reymar_mirante/mall_mirror_shot_uniqlo_blow_out_taper_reymar_3.jpg",
+    alt: "Fit check mirror shot at Uniqlo",
+    aspectRatio: "3/4",
+    type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/fitcheck bgc grey hoodie.mp4",
-    alt: "Grey hoodie fit check at BGC",
-    aspectRatio: "9/16",
-    type: "video",
+    src: "/assets/images/photo_highlights_reymar_mirante/mall_sit_blow_out_taper_reymar_2.jpg",
+    alt: "Sit down blow out taper fit at mall",
+    aspectRatio: "3/4",
+    type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/grey hoodie baggy pants.mp4",
-    alt: "Grey hoodie and baggy pants outfit",
-    aspectRatio: "9/16",
-    type: "video",
-  },
-  {
-    src: "/assets/videos/snippet-life/white compression shirt baggy pants.mp4",
-    alt: "White compression shirt outfit",
-    aspectRatio: "9/16",
-    type: "video",
+    src: "/assets/images/photo_highlights_reymar_mirante/side_view_blow_out_taper_forest_reymar.jpg",
+    alt: "Side view blow out taper in the forest",
+    aspectRatio: "3/4",
+    type: "image",
   },
 
   // Food & Cooking
   {
-    src: "/assets/videos/snippet-life/food kimchi.mp4",
-    alt: "Kimchi food prep",
+    src: "/assets/videos/snippet_life/milkfish_food.mp4",
+    alt: "Milkfish food preparation",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/videos/snippet-life/food (4).mp4",
-    alt: "Food preparation",
-    aspectRatio: "9/16",
-    type: "video",
-  },
-  {
-    src: "/assets/videos/snippet-life/cooking kila cess 1.mp4",
-    alt: "Cooking session",
+    src: "/assets/videos/snippet_life/shrimp_food.mp4",
+    alt: "Shrimp food preparation",
     aspectRatio: "9/16",
     type: "video",
   },
 
   // Creative & Work
   {
-    src: "/assets/images/me-photo-highlights/me-pc-coffee.jpg",
-    alt: "Working at PC with coffee",
+    src: "/assets/videos/snippet_life/day_in_the_life_reymar.mp4",
+    alt: "Day in the life at work",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+  {
+    src: "/assets/images/photo_highlights_reymar_mirante/hold_camera_church_reymar.jpg",
+    alt: "Holding camera at church",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/painting.jpg",
+    src: "/assets/images/photo_highlights_reymar_mirante/hold_camera_mirror_shot_reymar.jpg",
+    alt: "Mirror shot with camera",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/photo_highlights_reymar_mirante/macbook_type_starbucks_reymar.jpg",
+    alt: "Typing on MacBook at Starbucks",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/photo_highlights_reymar_mirante/painting_reymar.jpg",
     alt: "Painting artwork",
-    aspectRatio: "3/4",
-    type: "image",
-  },
-  {
-    src: "/assets/images/me-photo-highlights/photographer.jpg",
-    alt: "Photography work",
-    aspectRatio: "3/4",
-    type: "image",
-  },
-  {
-    src: "/assets/images/me-photo-highlights/photographer2.jpg",
-    alt: "Behind the camera",
     aspectRatio: "3/4",
     type: "image",
   },
 
   // Internship & Work Life
   {
-    src: "/assets/images/me-photo-highlights/intern-event-me.jpg",
-    alt: "Internship event",
+    src: "/assets/images/photo_highlights_reymar_mirante/formal_mirror_shot_cs_internship_event.jpg",
+    alt: "Formal mirror shot at internship event",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/internship behind the scene videography.mp4",
+    src: "/assets/videos/snippet_life/intern_behind_the_scenes_videography_reymar.mp4",
     alt: "Behind the scenes videography at internship",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/videos/snippet-life/internship billiards qc (2).mp4",
+    src: "/assets/videos/snippet_life/internship_behind_the_scene_videography.mp4",
+    alt: "Internship behind the scenes videography",
+    aspectRatio: "9/16",
+    type: "video",
+  },
+  {
+    src: "/assets/videos/snippet_life/internship_billiads.mp4",
     alt: "Billiards during internship break",
     aspectRatio: "9/16",
     type: "video",
@@ -647,131 +581,131 @@ const lifeSnippets = [
 
   // Museums & Culture
   {
-    src: "/assets/videos/snippet-life/museum of manila (25).mp4",
-    alt: "Museum of Manila visit",
+    src: "/assets/videos/snippet_life/bgc_museum_reymar.mp4",
+    alt: "BGC museum visit",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/images/me-photo-highlights/museum-me.jpg",
-    alt: "Museum exploration",
-    aspectRatio: "3/4",
-    type: "image",
-  },
-  {
-    src: "/assets/videos/snippet-life/national museum (1).mp4",
-    alt: "National Museum exploration",
+    src: "/assets/videos/snippet_life/national_museum_painting.mp4",
+    alt: "National Museum painting exploration",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/images/me-photo-highlights/museum2.jpg",
-    alt: "Museum visit moment",
+    src: "/assets/images/photo_highlights_reymar_mirante/national_museum_architecture_design_2.jpg",
+    alt: "National Museum architecture design",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/museum3.jpg",
-    alt: "Museum art viewing",
+    src: "/assets/images/photo_highlights_reymar_mirante/national_museum_architecture_design.jpg",
+    alt: "National Museum architecture",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/museum4.jpg",
-    alt: "Museum cultural experience",
+    src: "/assets/images/photo_highlights_reymar_mirante/national_museum_jose_rizal_painting_reymar.jpg",
+    alt: "Jose Rizal painting at National Museum",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/museum5.jpg",
-    alt: "Museum exploration day",
+    src: "/assets/images/photo_highlights_reymar_mirante/national_museum_old_money_fit_check_stand_reymar.jpg",
+    alt: "Old money fit check at National Museum",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/videos/snippet-life/venice grand canal manila edited.mp4",
-    alt: "Venice Grand Canal Manila",
-    aspectRatio: "9/16",
-    type: "video",
+    src: "/assets/images/photo_highlights_reymar_mirante/national_museum_painting_spolarium_reymar.jpg",
+    alt: "Spolarium painting at National Museum",
+    aspectRatio: "3/4",
+    type: "image",
   },
 
   // Travel & Adventures
   {
-    src: "/assets/images/me-photo-highlights/tagaytay-me.jpg",
-    alt: "Tagaytay trip",
+    src: "/assets/images/photo_highlights_reymar_mirante/acienda_designer_outlet_reymar_1.jpg",
+    alt: "Hacienda visit at designer outlet",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/tagaytay-scene1.jpg",
-    alt: "Tagaytay scenic view",
-    aspectRatio: "16/9",
-    type: "image",
-  },
-  {
-    src: "/assets/images/me-photo-highlights/tagayta2.jpg",
-    alt: "Tagaytay adventure",
+    src: "/assets/images/photo_highlights_reymar_mirante/acienda_designer_outlet_reymar_2.jpg",
+    alt: "Hacienda exploration at designer outlet",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/tagaytay3.jpg",
-    alt: "Tagaytay moment",
+    src: "/assets/images/photo_highlights_reymar_mirante/acienda_designer_outlet_reymar_3.jpg",
+    alt: "Hacienda adventure at designer outlet",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/tagaytay-scene3.jpg",
-    alt: "Tagaytay landscape",
-    aspectRatio: "16/9",
-    type: "image",
-  },
-  {
-    src: "/assets/images/me-photo-highlights/tagaytay4.jpg",
-    alt: "Tagaytay exploration",
+    src: "/assets/images/photo_highlights_reymar_mirante/pasig_river_esplanade_night_light_architecture_1.jpg",
+    alt: "Pasig River Esplanade night architecture",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/acienda1.jpg",
-    alt: "Hacienda visit",
+    src: "/assets/images/photo_highlights_reymar_mirante/pasig_river_esplanade_night_light_architecture_2.jpg",
+    alt: "Pasig River Esplanade night view",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/acienda2.jpg",
-    alt: "Hacienda exploration",
+    src: "/assets/images/photo_highlights_reymar_mirante/pasig_river_esplanade_stand_reymar.jpg",
+    alt: "Standing at Pasig River Esplanade",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/acienda3.jpg",
-    alt: "Hacienda adventure",
+    src: "/assets/images/photo_highlights_reymar_mirante/skyranch_night_light_reymar_2.jpg",
+    alt: "Sky Ranch night light",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/pasig-river-esplanade-me.jpg",
-    alt: "Pasig River Esplanade",
+    src: "/assets/images/photo_highlights_reymar_mirante/skyranch_night_light_reymar.jpg",
+    alt: "Sky Ranch night view",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/pasig-river-esplanade-scene.jpg",
-    alt: "Pasig River Esplanade view",
-    aspectRatio: "16/9",
+    src: "/assets/images/photo_highlights_reymar_mirante/skyranch_night_light.jpg",
+    alt: "Sky Ranch night scene",
+    aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/pasig-river-esplanade-scene2.jpg",
-    alt: "Pasig River scenic spot",
-    aspectRatio: "16/9",
+    src: "/assets/images/photo_highlights_reymar_mirante/tagaytay_mountai_2.jpg",
+    alt: "Tagaytay mountain trip",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/photo_highlights_reymar_mirante/tagaytay_mountain_sign.jpg",
+    alt: "Tagaytay mountain sign",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/photo_highlights_reymar_mirante/tagaytay_mountain_stand_all_black_fit_reymar_1.jpg",
+    alt: "Tagaytay mountain all black fit",
+    aspectRatio: "3/4",
+    type: "image",
+  },
+  {
+    src: "/assets/images/photo_highlights_reymar_mirante/tagaytay_mountain_sunset_pink_road_night_light.jpg",
+    alt: "Tagaytay sunset pink road night light",
+    aspectRatio: "3/4",
     type: "image",
   },
 
   // Events & Community
   {
-    src: "/assets/videos/snippet-life/ccl anniversary.mp4",
+    src: "/assets/videos/snippet_life/ccl_anniversary_reymar.mp4",
     alt: "CCL anniversary celebration",
     aspectRatio: "9/16",
     type: "video",
@@ -779,52 +713,28 @@ const lifeSnippets = [
 
   // Family & Personal
   {
-    src: "/assets/images/me-photo-highlights/mall-mom1.jpg",
-    alt: "Mall day with mom",
+    src: "/assets/images/photo_highlights_reymar_mirante/mall_hold_manga_reymar_1.jpg",
+    alt: "Mall day holding manga",
     aspectRatio: "3/4",
     type: "image",
   },
   {
-    src: "/assets/images/me-photo-highlights/mall-mom2.jpg",
-    alt: "Shopping with mom",
-    aspectRatio: "3/4",
-    type: "image",
-  },
-  {
-    src: "/assets/images/me-photo-highlights/mall-mom3.jpg",
-    alt: "Quality time with mom",
-    aspectRatio: "3/4",
-    type: "image",
-  },
-  {
-    src: "/assets/images/me-photo-highlights/mall-mom4.jpg",
-    alt: "Mom and me at the mall",
+    src: "/assets/images/photo_highlights_reymar_mirante/mall_hold_shopping_reymar_4.jpg",
+    alt: "Shopping at the mall",
     aspectRatio: "3/4",
     type: "image",
   },
 
   // Hobbies & Personal
   {
-    src: "/assets/videos/snippet-life/guitar frank ocean.mp4",
+    src: "/assets/videos/snippet_life/guitar_frank_ocean_reymar.mp4",
     alt: "Playing guitar - Frank Ocean",
     aspectRatio: "9/16",
     type: "video",
   },
   {
-    src: "/assets/videos/snippet-life/cats-play-white-black.mp4",
-    alt: "Playing with cats",
-    aspectRatio: "9/16",
-    type: "video",
-  },
-  {
-    src: "/assets/videos/snippet-life/fish-food.mp4",
-    alt: "Feeding fish",
-    aspectRatio: "9/16",
-    type: "video",
-  },
-  {
-    src: "/assets/videos/snippet-life/my-room-dark.mp4",
-    alt: "My room setup",
+    src: "/assets/videos/snippet_life/my_room_dark_cat.mp4",
+    alt: "My room setup with cat",
     aspectRatio: "9/16",
     type: "video",
   },
