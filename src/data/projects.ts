@@ -81,12 +81,12 @@ export type Project = {
   features?: Array<{
     title: string;
     description: string;
-    /** Image or video source for the feature */
-    media?: string;
-    /** Optional alt text for media */
-    mediaAlt?: string;
-    /** Optional comparison table: rows of [label, value] pairs */
-    table?: Array<[string, string]>;
+    /** Image or video source(s) for the feature */
+    media?: string | string[];
+    /** Optional alt text for media (single or per-image) */
+    mediaAlt?: string | string[];
+    /** Optional comparison table: header row + data rows */
+    table?: { headers: string[]; rows: string[][] };
   }>;
   /** Results with metrics table: { title, metrics: [[label, value]] } */
   results?: {
@@ -97,6 +97,7 @@ export type Project = {
   team?: {
     researchers?: string[];
     adviser?: string;
+    technicalCritic?: string;
     institution?: string;
     role?: string;
   };
@@ -422,15 +423,65 @@ export const projects: Project[] = [
     services:
       "IoT System Design, Embedded Firmware, Machine Learning, Full-Stack Web Development",
     problem:
-      "Aquaculture operators in San Juan I, Ternate, Cavite suffered fish kills and financial losses from trial-and-error species selection and unmonitored water-quality changes - summer salinity spikes and rainy-season freshwater dilution.",
+      "Fishpond operators in San Juan I, Ternate relied on trial-and-error species selection and manual water checks. Summer salinity spikes and rainy-season freshwater dilution caused mass fish kills within 2 to 3 days of stocking, wiping out capital and family income.",
     built:
-      "An ESP32-WROOM-32 (MicroPython) device measures pH, dissolved oxygen, salinity/electrical conductivity, and temperature, transmitting readings in real time over Wi-Fi with offline microSD logging, on a solar-powered floating platform. A Laravel/PHP + MySQL web dashboard presents the data (alongside an on-site LCD), and a decision-tree classifier recommends suitable species - Bangus, Lapu-lapu, Tilapia, Sugpo, and Mudcrab - benchmarked against SEAFDEC optimal parameters.",
-    result: [
-      "Decision-tree classifier reached 93.5% accuracy, matching Random Forest while training in 0.018 s and predicting in 0.001 s - fast enough for edge recommendations.",
-      "Trained on 5,000 water-quality records across five species.",
-      "Software evaluation (ISO/IEC 25010) by 10 domain reviewers: 4.84 / 5.00 (Excellent).",
-      "Hardware usability (System Usability Scale): 4.85 / 5.00, with a perfect 5.00 for functional integration.",
+      "I designed the web UI in Figma and built the frontend using Tailwind CSS and JavaScript. I modeled the 3D hardware casing in Blender and fabricated it using fiberglass cloth, polyester resin, and MEKP catalyst. I also interviewed fishpond owners and the Municipal Agriculture Office of Ternate, tested the system in actual fishponds, and coordinated our team's case study tasks.",
+    solution:
+      "A solar-powered floating device monitors pond conditions continuously. The dashboard shows live readings and historical trends, and the ML model recommends which species will thrive based on current water quality.",
+    features: [
+      {
+        title: "Live dashboard",
+        description:
+          "The dashboard refreshes in real time as new sensor data arrives. Operators see current pond conditions, historical trends, and the recommended species without refreshing the page.",
+        media: "/assets/videos/works/agwasuri/navigation_website_full_video.mp4",
+        mediaAlt: "Agwasuri dashboard walkthrough",
+      },
+      {
+        title: "Hardware & Sensors",
+        description:
+          "Everything runs on a 12V solar panel with a 20,000 mAh battery. When Wi-Fi drops, readings log to microSD and sync later. The device floats on a fiberglass enclosure with styrofoam base.",
+        table: {
+          headers: ["Sensor", "Measures", "Model"],
+          rows: [
+            ["pH", "Water acidity/alkalinity", "pH-4502C"],
+            ["Dissolved Oxygen", "Oxygen available for fish", "Galvanic Probe"],
+            ["Salinity / EC", "Salt concentration", "DFRobot Gravity"],
+            ["Temperature", "Water heat", "DS18B20"],
+          ],
+        },
+        media: [
+          "/assets/images/works/thesis_agwasuri/agwasuri_isometric_diagram_of_the_floating_platform_device_prototype_white_bg.png",
+          "/assets/images/works/thesis_agwasuri/agwasuri_sensor_controller_components.jpg",
+        ],
+        mediaAlt: [
+          "Exploded isometric diagram of the floating device",
+          "Sensor and controller setup photo",
+        ],
+      },
+      {
+        title: "Decision Tree Model",
+        description:
+          "The Decision Tree reads four inputs and outputs the best species. Same accuracy as Random Forest, but 51x faster to train and 14x faster to predict. That speed makes it edge-deployable and easy for operators to understand, since every recommendation traces back to clear rules. Benchmarked against SEAFDEC optimal parameter ranges for each of the five species.",
+        table: {
+          headers: ["Algorithm", "Accuracy", "Train", "Predict"],
+          rows: [
+            ["Decision Tree", "93.5%", "0.018s", "0.001s"],
+            ["Random Forest", "93.5%", "0.929s", "0.014s"],
+          ],
+        },
+      },
     ],
+    results: {
+      summary:
+        "Ten participants from four groups (fishpond operators, MAO officers, marine science experts, IT experts) rated Agwasuri Excellent across the board. The Decision Tree model matched Random Forest accuracy at a fraction of the compute cost.",
+      metrics: [
+        ["Decision Tree Accuracy", "93.5%"],
+        ["Training Time", "0.018s"],
+        ["Prediction Time", "0.001s"],
+        ["Software Evaluation (ISO/IEC 25010)", "4.84 / 5.00 (Excellent)"],
+        ["Hardware Usability (SUS)", "4.85 / 5.00"],
+      ],
+    },
     tech: [
       "ESP32-WROOM-32",
       "MicroPython",
@@ -443,6 +494,9 @@ export const projects: Project[] = [
       "Tailwind CSS",
       "JavaScript",
       "Decision Tree Classifier",
+      "scikit-learn",
+      "FastAPI",
+      "joblib",
       "Figma",
       "Fritzing",
       "Blender",
@@ -451,25 +505,12 @@ export const projects: Project[] = [
     liveUrl: undefined,
     images: [
       "/assets/videos/works/agwasuri/navigation_website_full_video.mp4",
-      // "/assets/images/works/thesis_agwasuri/agwasuri_website_photos/agwasuri_home_hero.png",
-      // "/assets/images/works/thesis_agwasuri/agwasuri_website_photos/agwasuri_dashboard.png",
-      // "/assets/images/works/thesis_agwasuri/agwasuri_website_photos/agwasuri_history.png",
-      // "/assets/images/works/thesis_agwasuri/agwasuri_website_photos/agwasuri_prediction.png",
-      // "/assets/images/works/thesis_agwasuri/agwasuri_website_photos/agwasuri_login_signin.png",
-      // "/assets/images/works/thesis_agwasuri/agwasuri_website_photos/agwasuri_account_management.png",
-      // "/assets/images/works/thesis_agwasuri/agwasuri_website_photos/agwasuri_dashboard_top_section.png",
-      // "/assets/images/works/thesis_agwasuri/agwasuri_website_photos/agwasuri_dashboard_bot_section.png",
-      // "/assets/images/works/thesis_agwasuri/agwasuri_website_photos/agwasuri_dashboard_no_sensor.png",
-      // "/assets/images/works/thesis_agwasuri/agwasuri_website_photos/agwasuri_troubleshoot.png",
-      // "/assets/images/works/thesis_agwasuri/agwasuri_prototype_design_colored.png",
       "/assets/images/works/thesis_agwasuri/agwasuri_fishpond_prototype_fishpond_owner_reymar_jazrel_wholesome.jpg",
       "/assets/images/works/thesis_agwasuri/agwasuri_prototype_fishpond.jpg",
       "/assets/images/works/thesis_agwasuri/agwasuri_prototype_fishpond_lcd.png",
       "/assets/images/works/thesis_agwasuri/agwasuri_sensor_controller_components.jpg",
       "/assets/images/works/thesis_agwasuri/agwasuri_isometric_diagram_of_the_floating_platform_device_prototype_white_bg.png",
-      // "/assets/images/works/thesis_agwasuri/agwasuri_poster_graphic_design.png",
       "/assets/images/works/thesis_agwasuri/agwasuri_fishpond_fish_hold.jpg",
-      // "/assets/images/works/thesis_agwasuri/agwasuri_municipal_agricultural_office_reymar_jazrel (1).JPG",
       "/assets/images/works/thesis_agwasuri/agwasuri_municipal_agricultural_office_clients_talk_prototype_reymar_jazrel_landscape.png",
       "/assets/images/works/thesis_agwasuri/agwasuri_fishpond_fishpond_owner_interview_reymar.png",
       "/assets/images/works/thesis_agwasuri/agwasuri_fishpond_prototype_fishpond_owner_reymar_interview_write_paper.jpg",
@@ -500,13 +541,25 @@ export const projects: Project[] = [
       left: {
         title: "Physical Tiers",
         description:
-          "Solar-powered floating platform: ESP32-WROOM-32 (MicroPython) reads pH-4502C, Galvanic DO, DFRobot EC, and DS18B20 sensors, transmits over Wi-Fi with offline microSD logging. Fiberglass buoy enclosure, 20,000 mAh LiFePO4 battery, 12V solar panel.",
+          "Sensor to dashboard to prediction in under a second. The device logs to microSD when Wi-Fi drops, then syncs automatically when reconnected. Sensor → ESP32 (MicroPython) → Wi-Fi/Laravel API → MySQL → Dashboard (Livewire) → FastAPI Decision Tree → Species Recommendation.",
       },
       right: {
         title: "Engine Tiers",
         description:
-          "Laravel 11 / Reverb WebSocket pipeline ingests sensor data into MySQL. FastAPI hosts the Decision Tree classifier (scikit-learn), benchmarked against SEAFDEC optimal parameters. Decision Tree was chosen over Random Forest for 0.001s edge-deployable inference.",
+          "Solar-powered floating platform: ESP32-WROOM-32 (MicroPython) reads pH-4502C, Galvanic DO, DFRobot EC, and DS18B20 sensors, transmits over Wi-Fi with offline microSD logging. Fiberglass buoy enclosure, 20,000 mAh LiFePO4 battery, 12V solar panel. Laravel 11 / Reverb WebSocket pipeline ingests sensor data into MySQL. FastAPI hosts the Decision Tree classifier (scikit-learn), benchmarked against SEAFDEC optimal parameters. Decision Tree was chosen over Random Forest for 0.001s edge-deployable inference.",
       },
+    },
+    team: {
+      researchers: [
+        "Jazrel Dennis P. Mendoza",
+        "Reymar V. Mirante",
+        "John Mark A. Pachico",
+      ],
+      adviser: "Dr. Ricky Jay A. Riel",
+      technicalCritic: "Dr. Rossian V. Perea",
+      institution: "Cavite State University Naic, January 2026",
+      role:
+        "IoT System Design, Embedded Firmware, Machine Learning, Full-Stack Web Development, UI/UX Design, 3D Modeling & Hardware Fabrication, Field Research & Interviews",
     },
   },
   {

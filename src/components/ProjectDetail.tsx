@@ -302,29 +302,71 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                 {feature.title}
               </h3>
               {feature.media && (
-                <div className="my-6">
-                  {isVideoSrc(feature.media) ? (
-                    <video
-                      src={feature.media}
-                      muted
-                      loop
-                      playsInline
-                      preload="metadata"
-                      autoPlay={effectiveAutoplay}
-                      className="w-full aspect-[16/9] object-cover"
-                      aria-label={`${project.name} - ${feature.title}`}
-                    />
-                  ) : (
-                    <div className="relative aspect-[16/9] overflow-hidden bg-stone-200 dark:bg-stone-800">
-                      <Image
-                        src={feature.media}
-                        alt={feature.mediaAlt ?? `${project.name} - ${feature.title}`}
-                        fill
-                        sizes="100vw"
-                        className="object-cover"
-                      />
-                    </div>
-                  )}
+                <div
+                  className={`${
+                    Array.isArray(feature.media) && feature.media.length === 2
+                      ? "my-6 grid grid-cols-1 md:grid-cols-2 gap-6"
+                      : "my-6"
+                  }`}
+                >
+                  {(() => {
+                    const mediaItems = Array.isArray(feature.media)
+                      ? feature.media
+                      : [feature.media];
+                    const altItems = Array.isArray(feature.mediaAlt)
+                      ? feature.mediaAlt
+                      : Array(mediaItems.length).fill(
+                          feature.mediaAlt ?? "",
+                        );
+                    return mediaItems.map((src, mediaIdx) =>
+                      isVideoSrc(src) ? (
+                        <video
+                          key={mediaIdx}
+                          src={src}
+                          muted
+                          loop
+                          playsInline
+                          preload="metadata"
+                          autoPlay={effectiveAutoplay}
+                          className="w-full aspect-[16/9] object-cover"
+                          aria-label={`${project.name} - ${feature.title}`}
+                        />
+                      ) : Array.isArray(feature.media) &&
+                        feature.media.length === 2 ? (
+                        <div
+                          key={mediaIdx}
+                          className="relative aspect-[4/3] overflow-hidden bg-stone-200 dark:bg-stone-800"
+                        >
+                          <Image
+                            src={src}
+                            alt={
+                              altItems[mediaIdx] ||
+                              `${project.name} - ${feature.title}`
+                            }
+                            fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className="object-contain"
+                          />
+                        </div>
+                      ) : (
+                        <div
+                          key={mediaIdx}
+                          className="relative aspect-[16/9] overflow-hidden bg-stone-200 dark:bg-stone-800"
+                        >
+                          <Image
+                            src={src}
+                            alt={
+                              altItems[mediaIdx] ||
+                              `${project.name} - ${feature.title}`
+                            }
+                            fill
+                            sizes="100vw"
+                            className="object-cover"
+                          />
+                        </div>
+                      ),
+                    );
+                  })()}
                 </div>
               )}
               <p className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-3xl">
@@ -333,18 +375,42 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
               {feature.table && (
                 <div className="mt-6 overflow-x-auto">
                   <table className="w-full text-left border-collapse">
+                    {feature.table.headers && (
+                      <thead>
+                        <tr>
+                          {feature.table.headers.map((h, i) => (
+                            <th
+                              key={i}
+                              className="font-mono text-xs uppercase tracking-wider text-stone-500 dark:text-stone-400 px-4 py-3 border-b border-stone-200 dark:border-stone-800"
+                            >
+                              {h}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                    )}
                     <tbody>
-                      {feature.table.map((row, rowIdx) => (
+                      {feature.table.rows.map((row, rowIdx) => (
                         <tr
                           key={rowIdx}
-                          className={rowIdx % 2 === 0 ? "bg-stone-50 dark:bg-neutral-900" : ""}
+                          className={
+                            rowIdx % 2 === 0
+                              ? "bg-stone-50 dark:bg-neutral-900"
+                              : ""
+                          }
                         >
-                          <td className="font-mono text-xs uppercase tracking-wider text-stone-500 dark:text-stone-400 px-4 py-3">
-                            {row[0]}
-                          </td>
-                          <td className="font-sans text-stone-700 dark:text-stone-300 px-4 py-3">
-                            {row[1]}
-                          </td>
+                          {row.map((cell, cellIdx) => (
+                            <td
+                              key={cellIdx}
+                              className={
+                                cellIdx === 0
+                                  ? "font-mono text-xs uppercase tracking-wider text-stone-500 dark:text-stone-400 px-4 py-3"
+                                  : "font-sans text-stone-700 dark:text-stone-300 px-4 py-3"
+                              }
+                            >
+                              {cell}
+                            </td>
+                          ))}
                         </tr>
                       ))}
                     </tbody>
@@ -420,7 +486,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
   // ----------------------------------------------------------------
   const renderTeam = () => {
     if (!project.team) return null;
-    const { researchers, adviser, institution, role } = project.team;
+    const { researchers, adviser, technicalCritic, institution, role } = project.team;
 
     return (
       <section className="mt-16 md:mt-24 lg:mt-32">
@@ -445,6 +511,14 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                 Adviser:
               </span>{" "}
               {adviser}
+            </p>
+          )}
+          {technicalCritic && (
+            <p>
+              <span className="font-mono text-xs uppercase tracking-wider text-stone-500 dark:text-stone-400">
+                Technical Critic:
+              </span>{" "}
+              {technicalCritic}
             </p>
           )}
           {institution && (
