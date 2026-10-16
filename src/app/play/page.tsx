@@ -138,7 +138,7 @@ export default function PlayPage() {
                   "howtogetlean.mp4",
                   "runfishermen.mp4",
                   "multipleinterest.mp4",
-                  "shadowboxbluehour.mp4",
+                  "snippet_life/shadowboxing_night_rain_bluehour_reymar.mp4",
                   "cclmeet.mp4",
                   "closure.mp4",
                   "bgcmuseum.mp4",
