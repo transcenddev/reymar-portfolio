@@ -3,29 +3,6 @@
 import Button from "@/components/Button";
 import { FC } from "react";
 
-const navItems = [
-  {
-    href: "#hero",
-    label: "Home",
-  },
-  {
-    href: "#work",
-    label: "Projects",
-  },
-  {
-    href: "#feedback",
-    label: "Testimonials",
-  },
-  {
-    href: "#faqs",
-    label: "FAQs",
-  },
-  {
-    href: "#contact",
-    label: "Contact",
-  },
-];
-
 // Shared arrow icon component for consistent button icon animation
 const ArrowIcon = () => (
   <div className="size-5 overflow-hidden">
@@ -63,24 +40,6 @@ const ArrowIcon = () => (
 );
 
 const Footer: FC = () => {
-  const handleClickNavItem = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-
-    const url = new URL(e.currentTarget.href);
-    const hash = url.hash;
-
-    const isHomePage = window.location.pathname === "/";
-
-    if (isHomePage) {
-      const target = document.querySelector(hash);
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth" });
-      }
-    } else {
-      window.location.href = `/${hash}`;
-    }
-  };
-
   return (
     <footer
       className="bg-stone-950 text-white transition-colors duration-200"
@@ -95,7 +54,7 @@ const Footer: FC = () => {
             </span>
           </div>
           <div className="grid md:grid-cols-3 md:items-center">
-            <div className="md:col-span-2">
+            <div className="md:col-span-3">
               <h2
                 className="font-display text-statement mt-8 font-bold tracking-tight animate-fade-up"
                 style={{ animationDelay: "100ms" }}
@@ -141,17 +100,6 @@ const Footer: FC = () => {
                   Book a call
                 </Button>
               </div>
-            </div>
-            <div>
-              <nav className="flex flex-col md:items-end gap-3 mt-16 md:mt-0">
-                {navItems.map(({ href, label }) => (
-                  <a href={href} key={label} onClick={handleClickNavItem}>
-                    <Button variant="secondary" className="text-lg">
-                      {label}
-                    </Button>
-                  </a>
-                ))}
-              </nav>
             </div>
           </div>
         </div>
