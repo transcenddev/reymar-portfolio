@@ -32,7 +32,7 @@ const Intro: FC = () => {
               className="font-display text-2xl md:text-4xl leading-tight tracking-tight font-bold animate-fade-up"
               style={{ animationDelay: "100ms" }}
             >
-              From curiosity about technology to building software.
+              It started with a laptop and a curiosity about how things work.
             </h2>
             <p
               className="text-base md:text-lg leading-relaxed text-stone-600 dark:text-stone-400 mt-4 max-w-xl animate-fade-up"
