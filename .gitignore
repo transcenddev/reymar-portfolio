@@ -51,5 +51,10 @@ notes
 .vscode
 
 # agwasuri files
-public\assets\agwasuri_prod_python_hardware
+public/assets/agwasuri_prod_python_hardware
+
+
+public/assets/images/works/thesis_agwasuri/decision_tree_algorithm_agwasuri/.ipynb_checkpoints
+public/assets/images/works/thesis_agwasuri/decision_tree_algorithm_agwasuri/decision_tree_agwasuri.ipynb
+public/assets/nopilot
 

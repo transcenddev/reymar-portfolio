@@ -111,12 +111,11 @@ const Testimonials: FC = () => {
             <p className="font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 transition-colors duration-200">
               Feedback
             </p>
-            {/* <h2
+            <h2
               className="text-2xl md:text-3xl lg:text-4xl leading-tight tracking-tight mt-3"
-              ref={scope}
             >
               Trusted by founders, builders, and teams.
-            </h2> */}
+            </h2>
           </div>
 
           {/* Left column - 9:16 vertical video testimonial */}

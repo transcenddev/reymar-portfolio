@@ -21,7 +21,7 @@ const Hero: FC = () => {
 
   return (
     <section
-      className="relative min-h-screen flex items-center pt-16 md:pt-0"
+      className="relative min-h-[100svh] flex items-center pt-16 md:pt-0"
       id="hero"
     >
       <div className="grid md:grid-cols-12 md:h-screen items-stretch">
@@ -29,7 +29,7 @@ const Hero: FC = () => {
         <div className="md:col-span-7 flex flex-col justify-center">
           <div className="container !max-w-full">
             <p
-              className="font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-4 animate-fade-up"
+              className="hidden sm:block font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-4 animate-fade-up"
               style={{ animationDelay: "0ms" }}
             >
               Software Development × AI Automation × Multimedia × Design
@@ -41,7 +41,7 @@ const Hero: FC = () => {
               I love building things and helping people.
             </h1>
             <p
-              className="text-lg text-stone-600 dark:text-stone-400 max-w-xl animate-fade-up"
+              className="sm:block text-lg text-stone-600 dark:text-stone-400 max-w-xl animate-fade-up"
               style={{ animationDelay: "200ms" }}
             >
               I&apos;m a software developer and content creator. I help
@@ -50,7 +50,7 @@ const Hero: FC = () => {
             </p>
 
             <div
-              className="flex flex-row items-center mt-10 gap-6 animate-fade-up"
+              className="flex flex-row items-center mt-10 mb-6 md:mb-0 gap-4 sm:gap-6 animate-fade-up"
               style={{ animationDelay: "300ms" }}
             >
               <Button
@@ -202,11 +202,11 @@ const Hero: FC = () => {
         {/* Right Column — Portrait */}
         <div className="md:col-span-5 relative">
           <div className="md:absolute md:top-0 md:right-0 md:max-w-[80%] lg:max-w-[85%]">
-            <div className="border border-stone-200 dark:border-stone-800 overflow-hidden">
+            <div className="border border-stone-200 dark:border-stone-800 overflow-hidden h-[40vh] sm:h-auto">
               <Image
                 src={heroImage}
                 alt="Reymar Mirante portrait"
-                className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-500"
               />
             </div>
           </div>

@@ -3,6 +3,20 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* Offset anchor targets so they aren't hidden under the sticky navbar */
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
 
   /* Light theme (default) */
   :root {

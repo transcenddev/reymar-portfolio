@@ -48,7 +48,7 @@ const HeroSection = () => (
       <div className="max-w-3xl text-base md:text-lg text-black/80 dark:text-stone-300 leading-relaxed text-left space-y-4 transition-colors duration-300">
         <p>
           I enjoy working across code, design, and multimedia to bring ideas to
-          life. Whether I'm building a website, exploring an AI tool, or putting
+          life. Whether I&apos;m building a website, exploring an AI tool, or putting
           together a video, I like figuring things out and learning through the
           process.
         </p>
@@ -61,7 +61,7 @@ const HeroSection = () => (
         </p>
 
         <p>
-          If you want to know what I'm currently into, check out my{" "}
+          If you want to know what I&apos;m currently into, check out my{" "}
           <a
             href="#favourites"
             className="underline underline-offset-4 text-primary"
@@ -808,7 +808,7 @@ const LifeGallery = () => {
         </h2>
       </div>
 
-      <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4">
+      <div className="columns-2 sm:columns-2 md:columns-3 lg:columns-4 gap-4">
         {lifeSnippets.map((item, index) => (
           <motion.div key={index} className="break-inside-avoid mb-4">
             <motion.div

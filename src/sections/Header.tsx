@@ -144,57 +144,33 @@ const Header: FC = () => {
       {/* Mobile Navigation Overlay */}
       <div
         id="mobile-nav"
-        className="fixed top-0 left-0 w-full h-0 overflow-hidden bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-stone-100 z-20 transition-colors duration-200"
+        className={`fixed top-0 left-0 w-full overflow-hidden bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-stone-100 z-20 transition-all duration-500 ease-in-out ${isOpen ? "h-screen" : "h-0"}`}
         ref={navScope}
         aria-hidden={!isOpen}
         style={{ opacity: isOpen ? 1 : 0 }}
       >
         <div className="absolute inset-0 overflow-y-auto">
-          <nav
-            className="flex flex-col pt-20 pb-24 min-h-full"
-            aria-label="Mobile navigation"
-          >
+            <nav
+              className="flex flex-col pt-20 pb-24 min-h-full"
+              aria-label="Mobile navigation"
+            >
             {navItems.map(({ label, href, routeOnly }, index) => (
               <a
                 href={href}
                 key={label}
                 ref={index === 0 ? firstLinkRef : undefined}
                 tabIndex={isOpen ? undefined : -1}
-                className="border-t border-stone-300 dark:border-stone-800 last:border-b py-8 group/nav-item relative transition-colors duration-200"
+                className="flex items-center justify-between px-6 min-h-[56px] py-4 group/nav-item relative transition-colors duration-200"
                 onClick={(e) => handleClickMobileNavItem(e, href, routeOnly)}
               >
                 <div className="container !max-w-full flex items-center justify-between">
-                  <span className="text-3xl text-stone-900 dark:text-stone-200 group-hover/nav-item:pl-4 transition-all duration-200">
+                  <span className="font-display text-xl font-bold tracking-tight text-stone-900 dark:text-stone-200 opacity-80 group-hover/nav-item:opacity-100 transition-opacity duration-200">
                     {label}
                   </span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="size-6 text-stone-400 dark:text-stone-600 group-hover/nav-item:text-white dark:group-hover/nav-item:text-stone-900"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
-                    />
-                  </svg>
+                  <span className="text-2xl text-stone-400 dark:text-stone-600 group-hover/nav-item:text-stone-900 dark:group-hover/nav-item:text-stone-50 opacity-0 group-hover/nav-item:opacity-100 transition-opacity duration-200">›</span>
                 </div>
-                <div className="absolute w-full h-0 bg-stone-800 dark:bg-stone-300 group-hover/nav-item:h-full transition-all duration-500 bottom-0 -z-20"></div>
-              </a>
+                </a>
             ))}
-            {/* Mobile Contact CTA */}
-            <a
-              href="#contact"
-              className="mx-6 mb-8"
-              onClick={(e) => handleClickMobileNavItem(e, "#contact")}
-            >
-              <Button variant="primary" className="w-full">
-                Contact Me
-              </Button>
-            </a>
           </nav>
         </div>
       </div>
@@ -208,9 +184,9 @@ const Header: FC = () => {
         />
 
         <div className="container !max-w-full">
-          <div className="flex justify-between items-center h-20">
+          <div className={`flex items-center h-20 ${isOpen ? "justify-end" : "justify-between"}`}>
             {/* Logo */}
-            <div>
+            <div className={isOpen ? "hidden" : ""}>
               <a
                 href="/"
                 onClick={(e) => {
@@ -269,7 +245,7 @@ const Header: FC = () => {
               aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
               aria-controls="mobile-nav"
-               className="pointer-events-auto md:hidden relative size-11 border border-stone-400 dark:border-stone-600 rounded-none inline-flex items-center justify-center bg-stone-100 dark:bg-stone-900 text-stone-900 dark:text-stone-50 hover:bg-stone-200 dark:hover:bg-stone-800 cursor-pointer transition-colors duration-200"
+               className="pointer-events-auto md:hidden relative size-11 rounded-none inline-flex items-center justify-center text-stone-900 dark:text-stone-50 cursor-pointer transition-colors duration-200"
               onClick={() => setIsOpen(!isOpen)}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
