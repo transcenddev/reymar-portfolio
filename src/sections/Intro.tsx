@@ -32,16 +32,50 @@ const Intro: FC = () => {
               className="font-display text-2xl md:text-4xl leading-tight tracking-tight font-bold animate-fade-up"
               style={{ animationDelay: "100ms" }}
             >
-              Product thinking, architecture, and execution in one practice.
+              From curiosity about technology to building software.
             </h2>
             <p
               className="text-base md:text-lg leading-relaxed text-stone-600 dark:text-stone-400 mt-4 max-w-xl animate-fade-up"
               style={{ animationDelay: "200ms" }}
             >
-              I&apos;ve been building since 2019, working across SaaS, internal
-              tools, commerce, automation, and business websites. The common
-              thread is practical software that makes complicated work easier to
-              understand and operate.
+              When I was a kid, I was fascinated by technology and how things
+              worked. Since we didn&apos;t have a computer at home, I used to
+              hang out at computer shops to explore technology and play Dota.
+              Things changed when my father gave me a laptop, allowing me to
+              explore and learn more on my own.
+              <br />
+              <br />
+              I started exploring hacking, cracking, free internet access, how
+              software and websites were built, open-source software, and free
+              tools. My uncle also influenced my interest in technology through
+              the way he talked about it, making me even more curious at a young
+              age.
+              <br />
+              <br />
+              Eventually, I{" "}
+              <a
+                href="#education"
+                className="text-stone-900 dark:text-stone-100 underline underline-offset-4 decoration-stone-400 dark:decoration-stone-600 hover:decoration-stone-900 dark:hover:decoration-stone-100 transition-colors"
+              >
+                pursued a degree in Computer Science
+              </a>
+              , completed an internship at{" "}
+              <a
+                href="https://spmadrid.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-stone-900 dark:text-stone-100 underline underline-offset-4 decoration-stone-400 dark:decoration-stone-600 hover:decoration-stone-900 dark:hover:decoration-stone-100 transition-colors"
+              >
+                S.P. Madrid
+              </a>{" "}
+              in Manila, Philippines, and gained{" "}
+              <a
+                href="#work"
+                className="text-stone-900 dark:text-stone-100 underline underline-offset-4 decoration-stone-400 dark:decoration-stone-600 hover:decoration-stone-900 dark:hover:decoration-stone-100 transition-colors"
+              >
+                freelance experience
+              </a>{" "}
+              working with them.
             </p>
 
             <Link href="/about" className="inline-block mt-10 md:mt-12">

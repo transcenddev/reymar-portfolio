@@ -32,21 +32,21 @@ const Hero: FC = () => {
               className="font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-4 animate-fade-up"
               style={{ animationDelay: "0ms" }}
             >
-              Software Development × AI Automation × Product Thinking
+              Software Development × AI Automation × Multimedia × Design
             </p>
             <h1
               className="font-display text-statement mb-4 font-bold animate-fade-up"
               style={{ animationDelay: "100ms" }}
             >
-              I build useful software that makes complex workflows simpler.
+              I love building things and helping people.
             </h1>
             <p
               className="text-lg text-stone-600 dark:text-stone-400 max-w-xl animate-fade-up"
               style={{ animationDelay: "200ms" }}
             >
-              I&apos;m a software developer with a Computer Science background,
-              focused on web applications, thoughtful user experiences, and
-              AI-powered automation.
+              I&apos;m a software developer and content creator. I help
+              businesses and individuals build software, automate processes, and
+              create content that engages their audience.
             </p>
 
             <div
@@ -57,40 +57,40 @@ const Hero: FC = () => {
                 variant="primary"
                 data-hash="work"
                 onClick={handleClickNavItem}
-                  iconAfter={
-                    <div className="size-5 overflow-hidden">
-                      <div className="h-5 w-10 flex group-hover/button:-translate-x-1/2 transition-transform duration-200">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          className="size-5"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"
-                          />
-                        </svg>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          className="size-5"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"
-                          />
-                        </svg>
-                      </div>
+                iconAfter={
+                  <div className="size-5 overflow-hidden">
+                    <div className="h-5 w-10 flex group-hover/button:-translate-x-1/2 transition-transform duration-200">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        className="size-5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"
+                        />
+                      </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        className="size-5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"
+                        />
+                      </svg>
                     </div>
-                  }
+                  </div>
+                }
               >
                 View My Work
               </Button>
@@ -120,7 +120,7 @@ const Hero: FC = () => {
                   className="group"
                   aria-label="GitHub"
                 >
-                   <div className="size-10 rounded-none border border-stone-300 dark:border-stone-600 flex items-center justify-center hover:border-primary hover:bg-primary/5 transition-all duration-200">
+                  <div className="size-10 rounded-none border border-stone-300 dark:border-stone-600 flex items-center justify-center hover:border-primary hover:bg-primary/5 transition-all duration-200">
                     <svg
                       className="size-5 text-stone-600 dark:text-stone-400 group-hover:text-primary transition-colors"
                       fill="currentColor"
@@ -139,7 +139,7 @@ const Hero: FC = () => {
                   className="group"
                   aria-label="LinkedIn"
                 >
-                   <div className="size-10 rounded-none border border-stone-300 dark:border-stone-600 flex items-center justify-center hover:border-primary hover:bg-primary/5 transition-all duration-200">
+                  <div className="size-10 rounded-none border border-stone-300 dark:border-stone-600 flex items-center justify-center hover:border-primary hover:bg-primary/5 transition-all duration-200">
                     <svg
                       className="size-5 text-stone-600 dark:text-stone-400 group-hover:text-primary transition-colors"
                       fill="currentColor"
@@ -199,18 +199,18 @@ const Hero: FC = () => {
           </div>
         </div>
 
-          {/* Right Column — Portrait */}
-          <div className="md:col-span-5 relative">
-            <div className="md:absolute md:top-0 md:right-0 md:max-w-[80%] lg:max-w-[85%]">
-              <div className="border border-stone-200 dark:border-stone-800 overflow-hidden">
-                <Image
-                  src={heroImage}
-                  alt="Reymar Mirante portrait"
-                  className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                />
-              </div>
+        {/* Right Column — Portrait */}
+        <div className="md:col-span-5 relative">
+          <div className="md:absolute md:top-0 md:right-0 md:max-w-[80%] lg:max-w-[85%]">
+            <div className="border border-stone-200 dark:border-stone-800 overflow-hidden">
+              <Image
+                src={heroImage}
+                alt="Reymar Mirante portrait"
+                className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-500"
+              />
             </div>
           </div>
+        </div>
       </div>
     </section>
   );

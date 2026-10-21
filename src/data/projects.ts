@@ -864,13 +864,22 @@ export const additionalWork: AdditionalWorkItem[] = [
     href: "https://github.com/transcenddev/fb-auto-unfollow",
     external: true,
   },
-  {
+   {
     id: "employee-management",
     title: "Employee Management System",
     category: "Internal Tools",
     summary:
       "Employee directory and record management system built with PHP and MySQL, with admin and user dashboards.",
     href: "https://github.com/transcenddev/employee-management",
+    external: true,
+  },
+  {
+    id: "ugc-portfolio",
+    title: "UGC Creator Portfolio",
+    category: "Content Creation",
+    summary:
+      "Personal UGC creator portfolio and single-page showcase featuring fitness, lifestyle, men's grooming, skincare, technology, and story-driven content, built with Next.js, React, TypeScript, and Tailwind CSS.",
+    href: "https://reymarmiranteugc.vercel.app/",
     external: true,
   },
   internalWorkItem(

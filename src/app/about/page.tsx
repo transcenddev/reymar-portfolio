@@ -28,38 +28,43 @@ const HeroSection = () => (
           className="block text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-2"
           style={{ letterSpacing: "-0.02em" }}
         >
-          {/* <em className="font-serif italic">I</em>'m passionate about */}
-          I&apos;m passionate about
+          {/* <em className="font-serif italic">I</em>'m passionate about */}I
+          love building things
         </span>
         <span
           className="block text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-2"
           style={{ letterSpacing: "-0.02em" }}
         >
-          transforming complex problems
+          and helping people.
         </span>
-        <span
+        {/* <span
           className="block text-4xl md:text-5xl lg:text-6xl leading-tight"
           style={{ letterSpacing: "-0.02em" }}
         >
           into <em className="font-serif italic">simple</em> solutions.
-        </span>
+        </span> */}
       </h1>
 
       <div className="max-w-3xl text-base md:text-lg text-black/80 dark:text-stone-300 leading-relaxed text-left space-y-4 transition-colors duration-300">
         <p>
-          I&apos;m Reymar, a multidisciplinary Computer Science student at
-          Cavite State University, blending design, code, and storytelling to
-          craft digital experiences.
+          I enjoy working across code, design, and multimedia to bring ideas to
+          life. Whether I'm building a website, exploring an AI tool, or putting
+          together a video, I like figuring things out and learning through the
+          process.
         </p>
 
         <p>
-          I&apos;m currently building my portfolio in web design & development,
-          AI, automation and content creation while seeking opportunities to
-          collaborate and grow as a creative-developer. Outside work, I capture
-          life through photos and videos while enjoying my{" "}
+          Outside of development, I create content around fitness, lifestyle,
+          and self-improvement. I also enjoy photography, reading, and
+          calisthenics. These interests give me ways to explore ideas and
+          express myself beyond the screen.
+        </p>
+
+        <p>
+          If you want to know what I'm currently into, check out my{" "}
           <a
             href="#favourites"
-            className="underline text-primary"
+            className="underline underline-offset-4 text-primary"
             onClick={(e) => {
               e.preventDefault();
               document.getElementById("favourites")?.scrollIntoView({
@@ -92,30 +97,31 @@ const EducationExperience = () => (
             <div className="text-base md:text-lg text-black/70 dark:text-stone-400 mb-2 transition-colors duration-300">
               Bachelor of Science in Computer Science
             </div>
-            <div className="text-sm md:text-base text-black/50 dark:text-stone-500 mb-4 transition-colors duration-300">
+            {/* <div className="text-sm md:text-base text-black/50 dark:text-stone-500 mb-4 transition-colors duration-300">
               GWA: 1.51 / 4.0 scale
-            </div>
+            </div> */}
             <div className="text-sm md:text-base text-black/60 dark:text-stone-400 leading-relaxed space-y-4 transition-colors duration-300">
               <p>
                 <span className="font-semibold text-black/80 dark:text-stone-300">
                   Thesis:
                 </span>{" "}
-                Developed IoT platform for real-time water quality monitoring
-                using predictive analytics with decision tree algorithms (90%+
-                accuracy).
+                A solar-powered IoT and machine-learning system that monitors
+                water quality in real time and recommends suitable aquaculture
+                species for fishpond operators in San Juan I, Ternate, Cavite.
               </p>
               <p>
                 <span className="font-semibold text-black/80 dark:text-stone-300">
-                  Focused coursework:
+                  Relevant Coursework:
                 </span>{" "}
+                Web Development, Database Management Systems, Object-Oriented
                 Programming, Data Structures and Algorithms, Software
                 Engineering, Systems Analysis and Design, Machine Learning
               </p>
-              <p>
+              {/* <p>
                 I built a strong foundation in software development and
                 problem-solving, with a strategic mindset for tackling complex
                 challenges through hands-on projects and emerging technologies.
-              </p>
+              </p> */}
             </div>
           </div>
           <div className="text-black/60 dark:text-stone-500 text-sm md:text-base transition-colors duration-300">
@@ -140,8 +146,9 @@ const EducationExperience = () => (
               </div>
               <div className="text-sm md:text-base text-black/60 dark:text-stone-400 leading-relaxed space-y-4 transition-colors duration-300">
                 <p>
-                  Led an AI-driven multimedia project that successfully
-                  revitalized brand content and helped secure new partnerships.
+                  Lead an AI photo restoration pipeline across 4 structured
+                  prompt engineering stages, coordinating 4 team members to
+                  shorten stakeholder review cycles.
                 </p>
                 <p>
                   Leveraged AI tools to enhance and animate images, creating a
