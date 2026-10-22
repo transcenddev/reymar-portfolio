@@ -389,7 +389,6 @@ export const projects: Project[] = [
       "/assets/images/works/cvsu_find/cvsufind_login.png",
       "/assets/images/works/cvsu_find/cvsufind_register.png",
       "/assets/images/works/cvsu_find/cvsufind_dashboard.png",
-      "/assets/images/works/cvsu_find/cvsufind_lost_item.png",
       "/assets/images/works/cvsu_find/cvsufind_report_lost_item.png",
       "/assets/images/works/cvsu_find/cvsufind_pending_claim.png",
       "/assets/images/works/cvsu_find/cvsufind_claim_verif.png",
