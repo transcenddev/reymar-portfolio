@@ -756,7 +756,7 @@ export const projects: Project[] = [
     image:
       "/assets/images/works/computer_science_tshirt_design/happines_is_when_your_code_runs_without_error_black.png",
     category: "Branding & Visual Identity",
-    bgTheme: "white",
+    bgTheme: "dark",
     client: "BSCS",
     services: "Graphic Design, T-Shirt Design, Vector Art",
     tech: ["Photoshop", "Illustrator"],
