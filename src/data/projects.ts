@@ -268,7 +268,6 @@ export const projects: Project[] = [
       "/assets/images/works/read_ai_ui_ux_design/read_ai_webdesign1.png",
       "/assets/images/works/read_ai_ui_ux_design/read_ai_webdesign2.png",
       "/assets/images/works/read_ai_ui_ux_design/read_ai_webdesign3.png",
-      "/assets/images/works/read_ai_ui_ux_design/read_ai_webdesign4.png",
       "/assets/images/works/read_ai_ui_ux_design/readai_figma1.png",
       "/assets/images/works/read_ai_ui_ux_design/readai_figma2.png",
       "/assets/images/works/read_ai_ui_ux_design/readai_figma3.png",

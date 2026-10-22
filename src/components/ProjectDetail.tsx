@@ -137,7 +137,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
 
   const items = useMemo(() => {
     const arr = Array.isArray(project.images) ? project.images : [];
-    return arr.slice(1).filter(Boolean) as string[];
+    return arr.filter(Boolean) as string[];
   }, [project.images]);
 
   const hasAutoplayVideos = !project.longFormVideo && items.some(isVideoSrc);
