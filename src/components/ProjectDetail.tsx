@@ -285,7 +285,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     });
 
     return (
-      <div className={`bg-stone-200 dark:bg-stone-800 rounded-none mt-6 ${project.heroContain ? "" : "relative aspect-[16/9] overflow-hidden"}`}>
+      <div className="relative aspect-[16/9] overflow-hidden bg-stone-200 dark:bg-stone-800 rounded-none mt-6">
         {isVideoSrc(mediaHero) ? (
           project.longFormVideo ? (
             <CustomVideoPlayer
@@ -307,25 +307,15 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
               aria-label={`${project.name} demo video`}
             />
           )
-        ) : project.heroContain ? (
-          <Image
-            src={mediaHero}
-            alt={project.heroAlt ?? `${project.name} hero`}
-            width={1200}
-            height={800}
-            sizes="100vw"
-            className="w-full h-auto object-contain"
-            priority
-          />
         ) : (
-          <Image
-            src={mediaHero}
-            alt={project.heroAlt ?? `${project.name} hero`}
-            fill
-            sizes="100vw"
-            className="object-cover"
-            priority
-          />
+            <Image
+              src={mediaHero}
+              alt={project.heroAlt ?? `${project.name} hero`}
+              fill
+              sizes="100vw"
+              className={project.containImages ? "object-contain" : "object-cover"}
+              priority
+            />
         )}
       </div>
     );
@@ -401,7 +391,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                 playsInline
                 preload="metadata"
                 autoPlay={effectiveAutoplay}
-                className="w-full h-full object-cover"
+                className={`w-full h-full ${project.containImages ? "object-contain" : "object-cover"}`}
                 aria-label={`${project.name} footage ${index + 2}`}
               />
             ) : (
@@ -413,7 +403,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                 }
                 fill
                 sizes="(max-width: 768px) 50vw, 33vw"
-                className="object-cover"
+                className={project.containImages ? "object-contain" : "object-cover"}
               />
             )}
           </div>

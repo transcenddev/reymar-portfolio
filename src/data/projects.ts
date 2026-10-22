@@ -26,6 +26,8 @@ export type Project = {
   intro?: string;
   image: string;
   category: ProjectCategory;
+  /** When true, hero/gallery images use object-contain instead of object-cover */
+  containImages?: boolean;
   /** Additional categories/tags for display (primary category still drives the filter) */
   tags?: string[];
   /** Show on the curated homepage selection */
@@ -78,9 +80,6 @@ export type Project = {
   longFormVideoTitle?: string;
   /** Optional chapter markers for long-form video: { start: seconds, title: string } */
   videoChapters?: { start: number; title: string }[];
-  /** Optional poster image for long-form video */
-  /** When true, hero media uses object-contain (no crop) */
-  heroContain?: boolean;
   /** Optional poster image for long-form video */
   heroImage?: string;
   relatedProjects?: string[];
@@ -775,6 +774,7 @@ export const projects: Project[] = [
     image:
       "/assets/images/works/butterfly_vector_photoshop/butterfly_vector_photoshop_export.png",
     category: "Branding & Visual Identity",
+    containImages: true,
     client: "Personal Project",
     services: "Vector Art, Illustration, Photoshop",
     tech: ["Photoshop"],
@@ -810,10 +810,10 @@ export const projects: Project[] = [
     image:
       "/assets/images/works/clothing_design_white_arabic_text_girl/clothing_design_white_arabic_text_girl.png",
     category: "Branding & Visual Identity",
+    containImages: true,
     client: "Personal Project",
     services: "Clothing Design, Graphic Design",
     tech: ["Photoshop", "Illustrator"],
-    heroContain: true,
     images: [
       "/assets/images/works/clothing_design_white_arabic_text_girl/clothing_design_white_arabic_text_girl.png",
     ],
