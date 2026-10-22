@@ -796,7 +796,7 @@ export const projects: Project[] = [
       "/assets/images/works/invictus_tshirt_design/invictus_y2k_pastel_pink.png",
       "/assets/images/works/invictus_tshirt_design/invictus_y2k_pastel_blue.png",
       "/assets/images/works/invictus_tshirt_design/invictus_stoic_black_orange_violet_front.png",
-      "/assets/images/works/invictus_tshirt_design/clothing_design_white_arabic_text_girl.png",
+      "/assets/images/works/clothing_design_white_arabic_text_girl/clothing_design_white_arabic_text_girl.png",
     ],
   },
 ];
