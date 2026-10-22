@@ -163,8 +163,7 @@ export const projects: Project[] = [
     tagline: "AI-driven multimedia presentation for SP Madrid's heritage",
     intro:
       "Collaborated directly with SP Madrid's CEO and cross-functional team to pioneer an AI-driven multimedia presentation that breathed new life into historical imagery. By leveraging advanced prompt engineering and cutting-edge AI video generation tools, I transformed static photographs into dynamic, emotionally resonant narratives. The project showcased AI's transformative potential in digital storytelling and archival restoration, creating an immersive experience that connected past and present while demonstrating how AI can preserve cultural heritage and make it accessible for modern audiences.",
-    image:
-      "/assets/images/works/sp_madrid_ai/sp_madrid_ai_media_sample_1.png",
+    image: "/assets/images/works/sp_madrid_ai/sp_madrid_ai_media_sample_1.png",
     category: "Automation & AI",
     featured: true,
     client: "SP Madrid",
@@ -420,12 +419,12 @@ export const projects: Project[] = [
   },
   {
     id: "friskay-website",
-    name: "Friskay Website",
+    name: "Friskay",
     tagline: "Web design recreated from a YouTube tutorial (cat food brand)",
     intro:
       "A web design I recreated from a YouTube tutorial about the world's best-tasting cat food, sourced with only the finest ingredients. Made with love from the heart of Mississippi.",
-     image:
-       "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_ipad.jpg",
+    image:
+      "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_ipad.jpg",
     category: "Web Design",
     client: "Personal Learning Project (2024)",
     services: "UI/UX Design, Web Design, Responsive Design, Component Design",
@@ -455,14 +454,13 @@ export const projects: Project[] = [
       "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_iphone.jpg",
       "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_iphone_sidebar.jpg",
       "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_navbar_component.jpg",
-      "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_button_component.jpg",
     ],
     relatedProjects: ["mobile-attendance-system", "read-ai-website"],
     needsVerification: ["Confirm the YouTube tutorial source/author."],
   },
   {
     id: "mobile-attendance-system",
-    name: "Mobile Attendance System",
+    name: "Mobile Attendance",
     tagline: "Figma mobile UI/UX design from a Gordon College webinar",
     intro:
       "A UI/UX design I recreated during the 'UI/UX Design Using Figma' webinar hosted by Gordon College, Olongapo City, issued Oct 2023.",
@@ -852,7 +850,7 @@ export const additionalWork: AdditionalWorkItem[] = [
     href: "https://github.com/transcenddev/fb-auto-unfollow",
     external: true,
   },
-   {
+  {
     id: "employee-management",
     title: "Employee Management System",
     category: "Internal Tools",
