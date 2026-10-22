@@ -154,9 +154,6 @@ const WorkPage: FC = () => {
 
                     {/* Project Info */}
                     <div className="space-y-2">
-                      <div className="text-xs md:text-sm text-primary font-medium uppercase tracking-wider">
-                        {project.category}
-                      </div>
                       <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-semibold group-hover:text-primary transition-colors">
                         {project.name}
                       </h3>
