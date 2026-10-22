@@ -746,6 +746,58 @@ export const projects: Project[] = [
       "Add screenshots and finalize this case study, or keep it unlisted.",
     ],
   },
+  {
+    id: "bscs-tshirt-design",
+    name: "BSCS T-Shirt Design",
+    tagline: "Coding-themed t-shirt designs for BSCS students",
+    image:
+      "/assets/images/works/bscs_tshirt_design/happines_is_when_your_code_runs_without_error.png",
+    category: "Branding & Visual Identity",
+    client: "BSCS",
+    services: "Graphic Design, T-Shirt Design, Vector Art",
+    tech: ["Photoshop", "Illustrator"],
+    images: [
+      "/assets/images/works/bscs_tshirt_design/happines_is_when_your_code_runs_without_error.png",
+      "/assets/images/works/bscs_tshirt_design/cicada_3301_1.png",
+      "/assets/images/works/bscs_tshirt_design/debugging_meaning.png",
+      "/assets/images/works/bscs_tshirt_design/if_else_ctrl_alt_delete.png",
+      "/assets/images/works/bscs_tshirt_design/import_coder_while_loop.png",
+      "/assets/images/works/bscs_tshirt_design/interlinked_with_ai.png",
+    ],
+  },
+  {
+    id: "butterfly-vector-photoshop",
+    name: "Butterfly Vector Art",
+    tagline: "Butterfly vector illustration created in Photoshop",
+    image:
+      "/assets/images/works/butterfly_vector_photoshop/butterfly_vector_photoshop_export.png",
+    category: "Branding & Visual Identity",
+    client: "Personal Project",
+    services: "Vector Art, Illustration, Photoshop",
+    tech: ["Photoshop"],
+    images: [
+      "/assets/images/works/butterfly_vector_photoshop/butterfly_vector_photoshop_export.png",
+      "/assets/images/works/butterfly_vector_photoshop/butterfly_vector_art_photoshop_screenshot_procress.png",
+    ],
+  },
+  {
+    id: "invictus-tshirt-design",
+    name: "Invictus T-Shirt Design",
+    tagline: "Y2K-inspired t-shirt and logo designs for Invictus",
+    image:
+      "/assets/images/works/invictus_tshirt_design/invictus_y2k_white_violet.png",
+    category: "Branding & Visual Identity",
+    client: "Invictus",
+    services: "T-Shirt Design, Logo Design, Y2K Aesthetic",
+    tech: ["Photoshop", "Illustrator"],
+    images: [
+      "/assets/images/works/invictus_tshirt_design/invictus_y2k_white_violet.png",
+      "/assets/images/works/invictus_tshirt_design/invictus_y2k_black_violet.png",
+      "/assets/images/works/invictus_tshirt_design/invictus_y2k_pastel_pink.png",
+      "/assets/images/works/invictus_tshirt_design/invictus_y2k_pastel_blue.png",
+      "/assets/images/works/invictus_tshirt_design/invictus_stoic_black_orange_violet_front.png",
+    ],
+  },
 ];
 
 /** Curated selection for the homepage (excludes drafts). */
