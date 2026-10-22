@@ -798,6 +798,19 @@ export const projects: Project[] = [
       "/assets/images/works/invictus_tshirt_design/invictus_y2k_pastel_pink.png",
       "/assets/images/works/invictus_tshirt_design/invictus_y2k_pastel_blue.png",
       "/assets/images/works/invictus_tshirt_design/invictus_stoic_black_orange_violet_front.png",
+    ],
+  },
+  {
+    id: "clothing-design-arabic-girl",
+    name: "Clothing Design - Arabic Girl",
+    tagline: "White clothing design with Arabic text and girl illustration",
+    image:
+      "/assets/images/works/clothing_design_white_arabic_text_girl/clothing_design_white_arabic_text_girl.png",
+    category: "Branding & Visual Identity",
+    client: "Personal Project",
+    services: "Clothing Design, Graphic Design",
+    tech: ["Photoshop", "Illustrator"],
+    images: [
       "/assets/images/works/clothing_design_white_arabic_text_girl/clothing_design_white_arabic_text_girl.png",
     ],
   },
