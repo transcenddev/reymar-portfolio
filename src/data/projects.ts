@@ -205,7 +205,6 @@ export const projects: Project[] = [
       "/assets/videos/works/sp_madrid_ai/sp_madrid_ai_media_sample_1.mp4",
       "/assets/images/works/sp_madrid_ai/sp_madrid_ai_photo_plaque.jpg",
       "/assets/videos/works/sp_madrid_ai/sp_madrid_ai_media_sample_2.mp4",
-      "/assets/images/works/sp_madrid_ai/sp_madrid_reymar_with_ceo.jpg",
     ],
     relatedProjects: ["read-ai-website"],
     needsVerification: [
