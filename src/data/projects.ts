@@ -767,6 +767,7 @@ export const projects: Project[] = [
       "/assets/images/works/computer_science_tshirt_design/if_else_ctrl_alt_delete_black.png",
       "/assets/images/works/computer_science_tshirt_design/import_coder_while_loop_black.png",
       "/assets/images/works/computer_science_tshirt_design/interlinked_with_ai_black.png",
+      "/assets/images/works/computer_science_tshirt_design/no_comment_black.png",
     ],
   },
   {
