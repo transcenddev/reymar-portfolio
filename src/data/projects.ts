@@ -205,9 +205,6 @@ export const projects: Project[] = [
       "/assets/videos/works/sp_madrid_ai/sp_madrid_ai_media_sample_1.mp4",
       "/assets/images/works/sp_madrid_ai/sp_madrid_ai_photo_plaque.jpg",
       "/assets/videos/works/sp_madrid_ai/sp_madrid_ai_media_sample_2.mp4",
-      "/assets/images/works/sp_madrid_ai/sp_madrid_ai_photo_exhibition.jpg",
-      "/assets/videos/works/sp_madrid_ai/sp_madrid_ai_media_sample_3.mp4",
-      "/assets/images/works/sp_madrid_ai/sp_madrid_team_reymar_jazrel_senior_dev.jpg",
       "/assets/images/works/sp_madrid_ai/sp_madrid_reymar_with_ceo.jpg",
     ],
     relatedProjects: ["read-ai-website"],
@@ -448,6 +445,7 @@ export const projects: Project[] = [
     githubUrl: undefined,
     liveUrl: undefined,
     images: [
+      "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_ipad_hero_crop.jpg",
       "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_ipad_hero_crop.jpg",
       "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_iphone_sidebar_crop.jpg",
       "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_ipad_cat_button_crop.jpg",
