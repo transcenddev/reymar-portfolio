@@ -244,7 +244,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     if (project.cover) {
       const { video, image, poster } = project.cover;
       return (
-        <div className="relative aspect-[16/9] overflow-hidden bg-stone-200 dark:bg-stone-800 rounded-none mt-6">
+        <div className="relative aspect-[16/9] overflow-hidden bg-white dark:bg-neutral-950 rounded-none mt-6">
           {video ? (
             <video
               src={video}
@@ -336,7 +336,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                   : ""
               }`}
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-stone-200 dark:bg-stone-800">
+              <div className="relative aspect-[4/3] overflow-hidden bg-white dark:bg-neutral-950">
                 {isVideoSrc(item.src) ? (
                   <video
                     src={item.src}
@@ -384,7 +384,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
             : "bg-stone-50 dark:bg-stone-950";
 
     return (
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-stone-200 dark:bg-stone-800">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-white dark:bg-neutral-950">
         {galleryItems.map((src, index) => (
           <div
             key={index}
@@ -531,7 +531,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                       ) : (
                         <div
                           key={mediaIdx}
-                          className="relative aspect-[16/9] overflow-hidden bg-stone-200 dark:bg-stone-800"
+                          className="relative aspect-[16/9] overflow-hidden bg-white dark:bg-neutral-950"
                         >
                           <Image
                             src={src}
@@ -879,7 +879,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
         )}
 
         {project.architecture && (
-          <div className="grid gap-px bg-stone-200 dark:bg-stone-800 md:grid-cols-2">
+          <div className="grid gap-px bg-white dark:bg-neutral-950 md:grid-cols-2">
             <div className="bg-white dark:bg-neutral-950 p-6 md:p-8 border border-stone-200 dark:border-stone-800">
               <h3 className="font-display text-xl font-bold text-stone-900 dark:text-stone-100 mb-4">
                 {project.architecture.left.title}
@@ -929,7 +929,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                 >
                   <div className="flex items-start gap-4">
                     {rp?.image && (
-                      <div className="relative w-20 h-15 flex-shrink-0 overflow-hidden bg-stone-200 dark:bg-stone-800">
+                      <div className="relative w-20 h-15 flex-shrink-0 overflow-hidden bg-white dark:bg-neutral-950">
                         <Image
                           src={rp.image}
                           alt={rp.name}
