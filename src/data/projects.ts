@@ -448,7 +448,6 @@ export const projects: Project[] = [
     images: [
       "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_ipad_hero_crop.jpg",
       "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_ipad_hero_crop.jpg",
-      "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_iphone_sidebar_crop.jpg",
       "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_ipad_cat_button_crop.jpg",
       "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_button_component.png",
     ],
