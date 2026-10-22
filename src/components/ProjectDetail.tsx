@@ -244,7 +244,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     if (project.cover) {
       const { video, image, poster } = project.cover;
       return (
-      <div className={`relative aspect-[16/9] overflow-hidden rounded-none mt-6 ${project.containImages ? "bg-white dark:bg-white" : "bg-stone-200 dark:bg-stone-800"}`}>
+        <div className={`relative aspect-[16/9] overflow-hidden rounded-none mt-6 ${project.containImages ? "bg-white dark:bg-white" : "bg-stone-200 dark:bg-stone-800"}`}>
           {video ? (
             <video
               src={video}
@@ -285,7 +285,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     });
 
     return (
-      <div className="relative aspect-[16/9] overflow-hidden bg-stone-200 dark:bg-stone-800 rounded-none mt-6">
+      <div className={`relative aspect-[16/9] overflow-hidden rounded-none mt-6 ${project.containImages ? "bg-white dark:bg-white" : "bg-stone-200 dark:bg-stone-800"}`}>
         {isVideoSrc(mediaHero) ? (
           project.longFormVideo ? (
             <CustomVideoPlayer
@@ -381,7 +381,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
         {galleryItems.map((src, index) => (
           <div
             key={index}
-            className="relative aspect-[4/3] bg-stone-200 dark:bg-stone-800 overflow-hidden"
+            className={`relative aspect-[4/3] overflow-hidden ${project.containImages ? "bg-white dark:bg-white" : "bg-stone-200 dark:bg-stone-800"}`}
           >
             {isVideoSrc(src) ? (
               <video
