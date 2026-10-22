@@ -486,7 +486,6 @@ export const projects: Project[] = [
     liveUrl: undefined,
     images: [
       "/assets/images/works/mobile_attendance_system_ui_ux/mobile_attendance_system_clockin.png",
-      "/assets/images/works/mobile_attendance_system_ui_ux/mobile_attendance_system_clockin_wireframe.png",
       "/assets/images/works/mobile_attendance_system_ui_ux/mobile_attendance_system_clockout.png",
       "/assets/images/works/mobile_attendance_system_ui_ux/mobile_attendance_system_clockout_wireframe.png",
       "/assets/images/works/mobile_attendance_system_ui_ux/mobile_attendance_system_notes.png",

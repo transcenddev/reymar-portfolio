@@ -279,7 +279,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
         project.bgTheme === "white"
           ? "bg-white"
           : project.bgTheme === "dark"
-            ? "bg-[#050505]"
+            ? "bg-black"
             : project.bgTheme === "transparent"
               ? "bg-transparent"
               : "bg-stone-100 dark:bg-stone-900"
@@ -378,7 +378,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
       project.bgTheme === "white"
         ? "bg-white"
         : project.bgTheme === "dark"
-          ? "bg-[#050505]"
+          ? "bg-black"
           : project.bgTheme === "transparent"
             ? "bg-transparent"
             : "bg-stone-50 dark:bg-stone-950";
