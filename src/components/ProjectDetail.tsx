@@ -326,7 +326,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     if (project.galleryHighlights?.length) {
       const highlights = project.galleryHighlights;
       return (
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 justify-items-center">
           {highlights.map((item, index) => (
             <figure
               key={index}
