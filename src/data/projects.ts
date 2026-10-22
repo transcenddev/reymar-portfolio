@@ -79,6 +79,9 @@ export type Project = {
   /** Optional chapter markers for long-form video: { start: seconds, title: string } */
   videoChapters?: { start: number; title: string }[];
   /** Optional poster image for long-form video */
+  /** When true, hero media uses object-contain (no crop) */
+  heroContain?: boolean;
+  /** Optional poster image for long-form video */
   heroImage?: string;
   relatedProjects?: string[];
   /** Outstanding content items that must not be published until confirmed */
@@ -810,6 +813,7 @@ export const projects: Project[] = [
     client: "Personal Project",
     services: "Clothing Design, Graphic Design",
     tech: ["Photoshop", "Illustrator"],
+    heroContain: true,
     images: [
       "/assets/images/works/clothing_design_white_arabic_text_girl/clothing_design_white_arabic_text_girl.png",
     ],

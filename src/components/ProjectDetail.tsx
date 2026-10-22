@@ -285,7 +285,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     });
 
     return (
-      <div className="relative aspect-[16/9] overflow-hidden bg-stone-200 dark:bg-stone-800 rounded-none mt-6">
+      <div className={`bg-stone-200 dark:bg-stone-800 rounded-none mt-6 ${project.heroContain ? "" : "relative aspect-[16/9] overflow-hidden"}`}>
         {isVideoSrc(mediaHero) ? (
           project.longFormVideo ? (
             <CustomVideoPlayer
@@ -307,6 +307,16 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
               aria-label={`${project.name} demo video`}
             />
           )
+        ) : project.heroContain ? (
+          <Image
+            src={mediaHero}
+            alt={project.heroAlt ?? `${project.name} hero`}
+            width={1200}
+            height={800}
+            sizes="100vw"
+            className="w-full h-auto object-contain"
+            priority
+          />
         ) : (
           <Image
             src={mediaHero}
