@@ -331,7 +331,6 @@ export const projects: Project[] = [
       "/assets/images/works/covid_19_health_declaration_system/covid_add1.png",
       "/assets/images/works/covid_19_health_declaration_system/covid_add2.png",
       "/assets/images/works/covid_19_health_declaration_system/covid_add3.png",
-      "/assets/images/works/covid_19_health_declaration_system/covid_add4.png",
       "/assets/images/works/covid_19_health_declaration_system/covid_dashboard.png",
       "/assets/images/works/covid_19_health_declaration_system/covid_table.png",
     ],
