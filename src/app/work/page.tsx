@@ -137,7 +137,7 @@ const WorkPage: FC = () => {
                           ? "bg-black"
                           : project.bgTheme === "transparent"
                             ? "bg-transparent"
-                            : "bg-stone-100 dark:bg-stone-900"
+                            : "bg-white dark:bg-neutral-950"
                     }`}>
                       {project.image && !failedImages.has(project.id) ? (
                         <Image

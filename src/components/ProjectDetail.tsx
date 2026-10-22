@@ -282,7 +282,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
             ? "bg-black"
             : project.bgTheme === "transparent"
               ? "bg-transparent"
-              : "bg-stone-100 dark:bg-stone-900"
+              : "bg-white dark:bg-neutral-950"
       }`}>
         {isVideoSrc(mediaHero) ? (
           project.longFormVideo ? (
