@@ -871,6 +871,24 @@ export const projects: Project[] = [
       "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_18_credits_qr_code.png",
     ],
   },
+  {
+    id: "agwasuri-poster",
+    name: "Agwasuri Poster",
+    tagline: "Research poster for the Agwasuri fishpond monitoring project",
+    image:
+      "/assets/images/works/thesis_agwasuri/agwasuri_poster/agwasuri_poster.png",
+    category: "Branding & Visual Identity",
+    bgTheme: "white",
+    client: "Municipal Agricultural Office of Ternate",
+    services: "Poster Design, Research Presentation",
+    tech: ["Canva", "Photoshop"],
+    images: [
+      "/assets/images/works/thesis_agwasuri/agwasuri_poster/agwasuri_poster.png",
+      "/assets/images/works/thesis_agwasuri/agwasuri_poster/agwasuri_poster_canva_select_all.png",
+      "/assets/images/works/thesis_agwasuri/agwasuri_poster/agwasuri_poster_canva_layer_1.png",
+      "/assets/images/works/thesis_agwasuri/agwasuri_poster/agwasuri_poster_canva_layer_2.png",
+    ],
+  },
 ];
 
 /** Curated selection for the homepage (excludes drafts). */
