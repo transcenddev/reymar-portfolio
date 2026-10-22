@@ -424,7 +424,7 @@ export const projects: Project[] = [
     intro:
       "A web design I recreated from a YouTube tutorial about the world's best-tasting cat food, sourced with only the finest ingredients. Made with love from the heart of Mississippi.",
     image:
-      "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_ipad.jpg",
+      "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_ipad_hero_crop.jpg",
     category: "Web Design",
     client: "Personal Learning Project (2024)",
     services: "UI/UX Design, Web Design, Responsive Design, Component Design",
@@ -449,11 +449,10 @@ export const projects: Project[] = [
     githubUrl: undefined,
     liveUrl: undefined,
     images: [
-      "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_desktop.jpg",
-      "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_ipad.jpg",
-      "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_iphone.jpg",
-      "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_iphone_sidebar.jpg",
-      "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_navbar_component.jpg",
+      "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_ipad_hero_crop.jpg",
+      "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_iphone_sidebar_crop.jpg",
+      "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_ipad_cat_button_crop.jpg",
+      "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_button_component.png",
     ],
     relatedProjects: ["mobile-attendance-system", "read-ai-website"],
     needsVerification: ["Confirm the YouTube tutorial source/author."],
