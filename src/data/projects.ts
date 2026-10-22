@@ -715,18 +715,6 @@ export const projects: Project[] = [
       ],
       note: "Sensor to dashboard to prediction in under a second. The device logs to microSD when Wi-Fi drops, then syncs automatically when reconnected.",
     },
-    architecture: {
-      left: {
-        title: "Physical Tiers",
-        description:
-          "Solar-powered floating platform: ESP32-WROOM-32 (MicroPython) reads pH-4502C, Galvanic DO, DFRobot EC, and DS18B20 sensors, with offline microSD logging that syncs automatically on reconnect. Fiberglass buoy enclosure, 20,000 mAh LiFePO4 battery, and a 12V solar panel keep it running off-grid.",
-      },
-      right: {
-        title: "Software Tiers",
-        description:
-          "A Laravel 11 API with a Reverb WebSocket pipeline ingests sensor data into MySQL and streams it to the Livewire dashboard. FastAPI hosts the Decision Tree classifier (scikit-learn), benchmarked against SEAFDEC optimal parameters. Decision Tree was chosen over Random Forest for 0.001s edge-deployable inference.",
-      },
-    },
     team: {
       researchers: [
         "Jazrel Dennis P. Mendoza",

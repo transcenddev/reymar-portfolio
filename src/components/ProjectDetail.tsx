@@ -137,7 +137,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
 
   const items = useMemo(() => {
     const arr = Array.isArray(project.images) ? project.images : [];
-    return arr.filter(Boolean) as string[];
+    return arr.slice(1).filter(Boolean) as string[];
   }, [project.images]);
 
   const hasAutoplayVideos = !project.longFormVideo && items.some(isVideoSrc);
@@ -154,10 +154,10 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
   const renderHeader = () => (
     <section className="space-y-8">
       <div className="space-y-4">
-        <h1 className="font-display text-4xl md:text-5xl font-bold text-stone-900 dark:text-stone-100 max-w-3xl">
+        <h1 className="font-display text-4xl md:text-5xl font-bold text-stone-900 dark:text-stone-100 max-w-none">
           {project.name}
         </h1>
-        <p className="font-sans text-stone-600 dark:text-stone-400 max-w-2xl leading-relaxed">
+        <p className="font-sans text-stone-600 dark:text-stone-400 max-w-none leading-relaxed">
           {project.intro ?? project.tagline}
         </p>
         <p className="font-mono text-xs md:text-sm uppercase tracking-widest text-stone-600 dark:text-stone-400">
@@ -419,12 +419,9 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     if (!project.built) return null;
 
     return (
-      <section className="mt-16 md:mt-24 lg:mt-32">
-        <span className="block font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-4">
-          What I Built
-        </span>
+      <section className="mt-12 md:mt-16 lg:mt-20">
         <h2 className="font-display text-2xl md:text-3xl font-bold text-stone-900 dark:text-stone-100 mb-6">
-          {project.builtTitle ?? "Implementation"}
+          {project.builtTitle ?? "What I Built"}
         </h2>
         <div className="prose dark:prose-invert max-w-none">
           {project.built.split("\n\n").map((paragraph: string, i: number) => (
@@ -447,15 +444,12 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     if (!project.solution && !project.features) return null;
 
     return (
-      <section className="mt-16 md:mt-24 lg:mt-32">
-        <span className="block font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-4">
-          The Solution
-        </span>
+      <section className="mt-12 md:mt-16 lg:mt-20">
         <h2 className="font-display text-2xl md:text-3xl font-bold text-stone-900 dark:text-stone-100 mb-6">
-          Solution & approach
+          The Solution
         </h2>
         {project.solution && (
-          <p className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-3xl mb-8">
+          <p className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-none mb-8">
             {project.solution}
           </p>
         )}
@@ -469,7 +463,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                 {feature.title}
               </h3>
               {feature.lead && (
-                <p className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-3xl">
+                <p className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-none">
                   {feature.lead}
                 </p>
               )}
@@ -507,8 +501,8 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                           key={mediaIdx}
                           className={`relative overflow-hidden ${
                             mediaIdx === 0
-                              ? "md:col-span-2 aspect-[4/3]"
-                              : "aspect-square md:aspect-auto"
+                              ? "md:col-span-2 h-auto"
+                              : "h-full flex items-center justify-center bg-white dark:bg-white"
                           }`}
                         >
                           <Image
@@ -517,9 +511,14 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                               altItems[mediaIdx] ||
                               `${project.name} - ${feature.title}`
                             }
-                            fill
+                            width={1200}
+                            height={800}
                             sizes="(max-width: 768px) 100vw, 50vw"
-                            className="object-contain"
+                            className={
+                              mediaIdx === 0
+                                ? "w-full h-auto object-cover"
+                                : "h-full w-auto object-contain"
+                            }
                           />
                         </div>
                       ) : (
@@ -579,7 +578,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                 </div>
               )}
               {feature.description && (
-                <p className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-3xl">
+                <p className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-none">
                   {feature.description}
                 </p>
               )}
@@ -629,7 +628,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                 </div>
               )}
               {feature.note && (
-                <p className="mt-6 font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-3xl">
+                <p className="mt-6 font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-none">
                   {feature.note}
                 </p>
               )}
@@ -650,15 +649,12 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
       project.results?.metrics && project.results.metrics.length > 0;
 
     return (
-      <section className="mt-16 md:mt-24 lg:mt-32">
-        <span className="block font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-4">
-          Results
-        </span>
+      <section className="mt-12 md:mt-16 lg:mt-20">
         <h2 className="font-display text-2xl md:text-3xl font-bold text-stone-900 dark:text-stone-100 mb-6">
-          Measurable outcomes
+          Results
         </h2>
         {project.results?.summary && (
-          <p className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-3xl mb-6">
+          <p className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-none mb-6">
             {project.results.summary}
           </p>
         )}
@@ -708,12 +704,9 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
       project.team;
 
     return (
-      <section className="mt-16 md:mt-24 lg:mt-32">
-        <span className="block font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-4">
-          Team & Credits
-        </span>
+      <section className="mt-12 md:mt-16 lg:mt-20">
         <h2 className="font-display text-2xl md:text-3xl font-bold text-stone-900 dark:text-stone-100 mb-6">
-          People behind the project
+          Team & Credits
         </h2>
         <div className="space-y-4 font-sans text-stone-700 dark:text-stone-300">
           {researchers && researchers.length > 0 && (
@@ -773,10 +766,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
         : [{ title: "Stack", items: project.tech }];
 
     return (
-      <section className="mt-16 md:mt-24 lg:mt-32">
-        <span className="block font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-4">
-          Technical Details
-        </span>
+      <section className="  ">
         <h2 className="font-display text-2xl md:text-3xl font-bold text-stone-900 dark:text-stone-100 mb-6">
           Technologies used
         </h2>
@@ -813,23 +803,20 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     if (!project.problem) return null;
 
     return (
-      <section className="mt-16 md:mt-24 lg:mt-32">
-        <span className="block font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-4">
-          The Problem
-        </span>
+      <section className="mt-12 md:mt-16 lg:mt-20">
         <h2 className="font-display text-2xl md:text-3xl font-bold text-stone-900 dark:text-stone-100 mb-6">
-          Context & stakes
+          The Problem
         </h2>
-        <p className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-3xl">
+        <p className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-none">
           {project.problem}
         </p>
         {project.problemDetail && (
-          <p className="mt-4 font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-3xl">
+          <p className="mt-4 font-sans text-stone-700 dark:text-stone-300 leading-relaxed max-w-none">
             {project.problemDetail}
           </p>
         )}
         {project.problemQuotes && project.problemQuotes.length > 0 && (
-          <div className="mt-10 max-w-3xl space-y-8">
+          <div className="mt-10 max-w-none space-y-8">
             {project.problemQuotes.map((quote, index) => (
               <figure
                 key={index}
@@ -863,12 +850,9 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     if (!project.architecture && !hasFlow) return null;
 
     return (
-      <section className="mt-16 md:mt-24 lg:mt-32">
-        <span className="block font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-4">
-          Architecture
-        </span>
+      <section className="mt-12 md:mt-16 lg:mt-20">
         <h2 className="font-display text-2xl md:text-3xl font-bold text-stone-900 dark:text-stone-100 mb-6">
-          System design overview
+          Architecture
         </h2>
 
         {hasFlow && flow && (
@@ -880,7 +864,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
             />
 
             {flow.note && (
-              <figcaption className="mt-5 max-w-3xl font-sans text-sm md:text-base leading-relaxed text-stone-600 dark:text-stone-400">
+              <figcaption className="mt-5 max-w-none font-sans text-sm md:text-base leading-relaxed text-stone-600 dark:text-stone-400">
                 {flow.note}
               </figcaption>
             )}
@@ -915,7 +899,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
   // F. Navigation & related projects
   // ----------------------------------------------------------------
   const renderNavigation = () => (
-    <section className="mt-16 md:mt-24 lg:mt-32 border-t border-stone-200 dark:border-stone-800 pt-8">
+    <section className="mt-12 md:mt-16 lg:mt-20 border-t border-stone-200 dark:border-stone-800 pt-8">
       {/* Related projects — only when available */}
       {related.length > 0 && (
         <div className="mb-8">

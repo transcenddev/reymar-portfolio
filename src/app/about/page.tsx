@@ -19,7 +19,7 @@ const HeroSection = () => (
           fill
           className="object-cover"
           priority
-        />
+        /
       </figure> */}
 
       {/* Main headline with similar typography treatment */}

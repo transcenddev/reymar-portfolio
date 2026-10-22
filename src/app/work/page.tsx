@@ -54,10 +54,12 @@ const WorkPage: FC = () => {
               {categories.map((category) => (
                 <button
                   key={category}
+                  aria-pressed={activeCategory === category}
                   onClick={() => setActiveCategory(category)}
                   className={`
                     px-4 md:px-6 py-2 md:py-3 rounded-none text-sm md:text-base font-medium
-                    transition-all duration-300 relative
+                    transition-colors duration-200 relative
+                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2
                     ${
                       activeCategory === category
                         ? "bg-primary text-white shadow-lg scale-105"
@@ -124,7 +126,7 @@ const WorkPage: FC = () => {
                 >
                   <Link
                     href={`/projects/${project.id}`}
-                    className="group block h-full"
+                    className="group block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-none"
                   >
                     {/* Project Image */}
                     <div className="relative aspect-[4/3] rounded-none overflow-hidden bg-stone-200 dark:bg-stone-800 mb-4 transition-colors duration-300">
