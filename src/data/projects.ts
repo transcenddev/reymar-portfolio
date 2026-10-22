@@ -26,6 +26,8 @@ export type Project = {
   intro?: string;
   image: string;
   category: ProjectCategory;
+  /** Additional categories/tags for display (primary category still drives the filter) */
+  tags?: string[];
   /** Show on the curated homepage selection */
   featured?: boolean;
   /** Keep the detail route reachable but hide from the homepage and Works list */
@@ -497,6 +499,7 @@ export const projects: Project[] = [
     image:
       "/assets/images/works/thesis_agwasuri/agwasuri_website_photos/agwasuri_dashboard.png",
     category: "Automation & AI",
+    tags: ["Web Development", "Automation & AI"],
     featured: true,
     client: "Municipal Agricultural Office of Ternate",
     services:
