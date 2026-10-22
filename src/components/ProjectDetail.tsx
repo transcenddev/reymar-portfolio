@@ -244,7 +244,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     if (project.cover) {
       const { video, image, poster } = project.cover;
       return (
-        <div className="relative aspect-[16/9] overflow-hidden bg-white dark:bg-white rounded-none mt-6">
+        <div className="relative aspect-[16/9] overflow-hidden bg-stone-200 dark:bg-stone-800 rounded-none mt-6">
           {video ? (
             <video
               src={video}
@@ -263,7 +263,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
               alt={project.heroAlt ?? `${project.name} cover`}
               fill
               sizes="100vw"
-              className="object-cover"
+              className="object-contain"
               priority
             />
           ) : null}
@@ -285,7 +285,15 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     });
 
     return (
-      <div className="relative aspect-[16/9] overflow-hidden bg-stone-200 dark:bg-stone-800 rounded-none mt-6">
+      <div className={`relative aspect-[16/9] overflow-hidden rounded-none mt-6 p-4 sm:p-6 ${
+        project.bgTheme === "white"
+          ? "bg-white"
+          : project.bgTheme === "dark"
+            ? "bg-[#050505]"
+            : project.bgTheme === "transparent"
+              ? "bg-transparent"
+              : "bg-stone-100 dark:bg-stone-900"
+      }`}>
         {isVideoSrc(mediaHero) ? (
           project.longFormVideo ? (
             <CustomVideoPlayer
@@ -313,7 +321,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
             alt={project.heroAlt ?? `${project.name} hero`}
             fill
             sizes="100vw"
-            className="object-contain"
+            className="object-cover"
             priority
           />
         )}
@@ -376,12 +384,21 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     const galleryItems = items.slice(1);
     if (galleryItems.length === 0) return null;
 
+    const bgClass =
+      project.bgTheme === "white"
+        ? "bg-white"
+        : project.bgTheme === "dark"
+          ? "bg-[#050505]"
+          : project.bgTheme === "transparent"
+            ? "bg-transparent"
+            : "bg-stone-50 dark:bg-stone-950";
+
     return (
       <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-stone-200 dark:bg-stone-800">
         {galleryItems.map((src, index) => (
           <div
             key={index}
-            className="relative aspect-[4/3] bg-stone-200 dark:bg-stone-800 overflow-hidden"
+            className={`relative aspect-[4/3] ${bgClass} overflow-hidden p-4 sm:p-6`}
           >
             {isVideoSrc(src) ? (
               <video
@@ -391,7 +408,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                 playsInline
                 preload="metadata"
                 autoPlay={effectiveAutoplay}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
                 aria-label={`${project.name} footage ${index + 2}`}
               />
             ) : (
@@ -403,7 +420,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                 }
                 fill
                 sizes="(max-width: 768px) 50vw, 33vw"
-                className="object-cover"
+                className="object-contain"
               />
             )}
           </div>
@@ -524,7 +541,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                       ) : (
                         <div
                           key={mediaIdx}
-                          className="relative aspect-[16/9] overflow-hidden bg-white dark:bg-white"
+                          className="relative aspect-[16/9] overflow-hidden bg-stone-200 dark:bg-stone-800"
                         >
                           <Image
                             src={src}
@@ -534,7 +551,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                             }
                             fill
                             sizes="100vw"
-                            className="object-contain"
+                            className="object-cover"
                           />
                         </div>
                       ),

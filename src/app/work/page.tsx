@@ -130,26 +130,32 @@ const WorkPage: FC = () => {
                     className="group block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-none transition-transform duration-300 hover:-translate-y-1"
                   >
                     {/* Project Image */}
-                    <div className="relative aspect-[4/3] rounded-none overflow-hidden bg-stone-200 dark:bg-stone-800 mb-4 transition-colors duration-300">
+                    <div className={`relative aspect-[4/3] rounded-none overflow-hidden mb-4 transition-colors duration-300 p-4 sm:p-6 ${
+                      project.bgTheme === "white"
+                        ? "bg-white"
+                        : project.bgTheme === "dark"
+                          ? "bg-[#050505]"
+                          : project.bgTheme === "transparent"
+                            ? "bg-transparent"
+                            : "bg-stone-100 dark:bg-stone-900"
+                    }`}>
                       {project.image && !failedImages.has(project.id) ? (
                         <Image
                           src={project.image}
                           alt={project.name}
                           fill
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          className="object-contain transition-transform duration-500 group-hover:scale-105"
                           onError={() =>
                             setFailedImages((prev) => new Set(prev).add(project.id))
                           }
                         />
                       ) : (
-                        <div className="size-full bg-stone-100 dark:bg-stone-900 flex items-center justify-center p-4">
+                        <div className="size-full flex items-center justify-center">
                           <span className="font-display text-lg font-bold text-stone-400 dark:text-stone-600 text-center line-clamp-2">
                             {project.name}
                           </span>
                         </div>
                       )}
-                      {/* Overlay on hover */}
-                      <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-300" />
                     </div>
 
                     {/* Project Info */}

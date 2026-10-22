@@ -26,7 +26,8 @@ export type Project = {
   intro?: string;
   image: string;
   category: ProjectCategory;
-  /** Additional categories/tags for display (primary category still drives the filter) */
+  /** Background tone for media containers: white, dark, or transparent (defaults to page canvas) */
+  bgTheme?: "white" | "dark" | "transparent";
   tags?: string[];
   /** Show on the curated homepage selection */
   featured?: boolean;
@@ -421,6 +422,7 @@ export const projects: Project[] = [
     image:
       "/assets/images/works/ui_ux_design_crash_course/ui_ux_design_crashcourse_ipad_hero_crop.jpg",
     category: "Web Design",
+    bgTheme: "white",
     client: "Personal Learning Project (2024)",
     services: "UI/UX Design, Web Design, Responsive Design, Component Design",
     timeline: "1 week",
@@ -462,6 +464,7 @@ export const projects: Project[] = [
     image:
       "/assets/images/works/mobile_attendance_system_ui_ux/mobile_attendance_system_clockin.png",
     category: "Web Design",
+    bgTheme: "white",
     client: "Gordon College Webinar Project (Oct 2023)",
     services: "UI/UX Design, Mobile App Design, Wireframing, Figma Prototyping",
     timeline: "Webinar Duration",
@@ -753,6 +756,7 @@ export const projects: Project[] = [
     image:
       "/assets/images/works/bscs_tshirt_design/happines_is_when_your_code_runs_without_error.png",
     category: "Branding & Visual Identity",
+    bgTheme: "white",
     client: "BSCS",
     services: "Graphic Design, T-Shirt Design, Vector Art",
     tech: ["Photoshop", "Illustrator"],
@@ -772,6 +776,7 @@ export const projects: Project[] = [
     image:
       "/assets/images/works/butterfly_vector_photoshop/butterfly_vector_photoshop_export.png",
     category: "Branding & Visual Identity",
+    bgTheme: "white",
     client: "Personal Project",
     services: "Vector Art, Illustration, Photoshop",
     tech: ["Photoshop"],
@@ -789,6 +794,7 @@ export const projects: Project[] = [
     image:
       "/assets/images/works/invictus_tshirt_design/invictus_y2k_white_violet.png",
     category: "Branding & Visual Identity",
+    bgTheme: "white",
     client: "Invictus",
     services: "T-Shirt Design, Logo Design, Y2K Aesthetic",
     tech: ["Photoshop", "Illustrator"],
@@ -802,11 +808,12 @@ export const projects: Project[] = [
   },
   {
     id: "clothing-design-arabic-girl",
-    name: "Clothing Design - Arabic Girl",
+    name: "Arabic Girl Clothing Design",
     tagline: "White clothing design with Arabic text and girl illustration",
     image:
       "/assets/images/works/clothing_design_white_arabic_text_girl/clothing_design_white_arabic_text_girl.png",
     category: "Branding & Visual Identity",
+    bgTheme: "white",
     client: "Personal Project",
     services: "Clothing Design, Graphic Design",
     tech: ["Photoshop", "Illustrator"],
