@@ -777,8 +777,9 @@ export const projects: Project[] = [
     tech: ["Photoshop"],
     images: [
       "/assets/images/works/butterfly_vector_photoshop/butterfly_vector_photoshop_export.png",
-      "/assets/images/works/butterfly_vector_photoshop/butterfly_vector_art_photoshop_screenshot_procress.png",
-      "/assets/images/works/butterfly_vector_photoshop/butterfly_vector_art_photoshop_screenshot_procress - Copy.png",
+      "/assets/images/works/butterfly_vector_photoshop/butterfly_vector_art_photoshop_screenshot_process.png",
+      "/assets/images/works/butterfly_vector_photoshop/butterfly_vector_art_photoshop_screenshot_layers.png",
+      "/assets/images/works/butterfly_vector_photoshop/butterfly_reference.png",
     ],
   },
   {
