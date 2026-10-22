@@ -670,6 +670,7 @@ export const projects: Project[] = [
       "/assets/images/works/thesis_agwasuri/agwasuri_municipal_agricultural_office_clients_talk_prototype_reymar_jazrel_landscape.png",
       "/assets/images/works/thesis_agwasuri/agwasuri_fishpond_fishpond_owner_interview_reymar.png",
       "/assets/images/works/thesis_agwasuri/agwasuri_fishpond_prototype_fishpond_owner_reymar_interview_write_paper.jpg",
+      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_1_cover.png",
     ],
     longFormVideo: true,
     longFormVideoTitle: "Video Presentation",
