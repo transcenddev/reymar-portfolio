@@ -11,6 +11,7 @@ export const categories = [
   "Branding & Visual Identity",
   "Content Creation",
   "Automation & AI",
+  "Documentation",
 ] as const;
 
 export type Category = (typeof categories)[number];
@@ -670,7 +671,6 @@ export const projects: Project[] = [
       "/assets/images/works/thesis_agwasuri/agwasuri_municipal_agricultural_office_clients_talk_prototype_reymar_jazrel_landscape.png",
       "/assets/images/works/thesis_agwasuri/agwasuri_fishpond_fishpond_owner_interview_reymar.png",
       "/assets/images/works/thesis_agwasuri/agwasuri_fishpond_prototype_fishpond_owner_reymar_interview_write_paper.jpg",
-      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_1_cover.png",
     ],
     longFormVideo: true,
     longFormVideoTitle: "Video Presentation",
@@ -839,6 +839,38 @@ export const projects: Project[] = [
       "/assets/images/works/white_arabic_text_girl_clothing_design/clothing_design_white_arabic_text_girl.png",
     ],
   },
+  {
+    id: "agwasuri-user-manual",
+    name: "Agwasuri User Manual",
+    tagline: "User manual documentation for the Agwasuri system (light mode)",
+    image:
+      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_1_cover.png",
+    category: "Documentation",
+    bgTheme: "white",
+    client: "Municipal Agricultural Office of Ternate",
+    services: "Technical Documentation, UI Documentation",
+    tech: ["Markdown", "Figma"],
+    images: [
+      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_1_cover.png",
+      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_2_introduction.png",
+      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_3_quick_setup_guide.png",
+      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_4_system_architecture.png",
+      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_5_hardware_overview.png",
+      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_6_hardware_overview.png",
+      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_7_hardware_setup.png",
+      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_8_website_section.png",
+      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_9_website_section.png",
+      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_10_website_section.png",
+      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_11_website_section.png",
+      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_12_website_section.png",
+      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_13_website_section.png",
+      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_14_website_section.png",
+      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_15_website_section.png",
+      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_16_troubleshooting.png",
+      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_17_maintenance.png",
+      "/assets/images/works/thesis_agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_18_credits_qr_code.png",
+    ],
+  },
 ];
 
 /** Curated selection for the homepage (excludes drafts). */
@@ -870,6 +902,8 @@ export const categoryCounts: Record<Category, number> = {
   "Automation & AI": listedProjects.filter(
     (p) => p.category === "Automation & AI",
   ).length,
+  Documentation: listedProjects.filter((p) => p.category === "Documentation")
+    .length,
 };
 
 /**
