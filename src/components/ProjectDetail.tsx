@@ -274,16 +274,6 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     if (!items.length) return null;
     const mediaHero = items[0];
 
-    // DEBUG: log what we're rendering
-    console.log("[DEBUG ProjectDetail] renderHeroMedia", {
-      projectId: project.id,
-      hasLiveTelemetry: project.hasLiveTelemetry,
-      longFormVideo: project.longFormVideo,
-      mediaHero,
-      videoChapters: project.videoChapters?.length,
-      heroImage: project.heroImage,
-    });
-
     return (
       <div className={`relative aspect-[16/9] overflow-hidden rounded-none mt-6 p-4 sm:p-6 ${
         project.bgTheme === "white"
@@ -310,9 +300,9 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
               loop
               playsInline
               preload="metadata"
-              autoPlay={effectiveAutoplay}
-              className="w-full h-full object-cover"
-              aria-label={`${project.name} demo video`}
+                autoPlay={effectiveAutoplay}
+                className="w-full h-full object-contain"
+                aria-label={`${project.name} demo video`}
             />
           )
         ) : (
@@ -321,7 +311,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
             alt={project.heroAlt ?? `${project.name} hero`}
             fill
             sizes="100vw"
-            className="object-cover"
+            className="object-contain"
             priority
           />
         )}
