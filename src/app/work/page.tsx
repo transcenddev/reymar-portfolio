@@ -50,7 +50,7 @@ const WorkPage: FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-12 md:mb-16"
           >
-            <div className="flex flex-wrap gap-3 md:gap-4">
+            <div className="flex flex-wrap gap-3 md:gap-4 sticky top-20 z-10 bg-white/80 dark:bg-stone-950/80 backdrop-blur-md py-3 -mx-4 px-4">
               {categories.map((category) => (
                 <button
                   key={category}
@@ -126,7 +126,7 @@ const WorkPage: FC = () => {
                 >
                   <Link
                     href={`/projects/${project.id}`}
-                    className="group block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-none"
+                    className="group block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-none transition-transform duration-300 hover:-translate-y-1"
                   >
                     {/* Project Image */}
                     <div className="relative aspect-[4/3] rounded-none overflow-hidden bg-stone-200 dark:bg-stone-800 mb-4 transition-colors duration-300">
