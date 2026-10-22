@@ -803,7 +803,6 @@ export const projects: Project[] = [
       "/assets/images/works/invictus_tshirt_design/invictus_y2k_black_sky_blue_black.png",
       "/assets/images/works/invictus_tshirt_design/invictus_y2k_cashin_inspired_black.png",
       "/assets/images/works/invictus_tshirt_design/invictus_stoic_black_orange_violet_front_black.png",
-      "/assets/images/works/invictus_tshirt_design/invictus_stoic_black_orange_violet_back_black.png",
     ],
   },
   {
@@ -842,7 +841,7 @@ export const projects: Project[] = [
   {
     id: "agwasuri-user-manual",
     name: "Agwasuri User Manual",
-    tagline: "User manual documentation for the Agwasuri system (light mode)",
+    tagline: "User manual documentation for the Agwasuri system",
     image:
       "/assets/images/works/agwasuri/agwasuri_user_manual/user_manual_agwasuri_light_mode/page_1_cover.png",
     category: "Documentation",
@@ -875,8 +874,7 @@ export const projects: Project[] = [
     id: "agwasuri-poster",
     name: "Agwasuri Poster",
     tagline: "Research poster for the Agwasuri fishpond monitoring project",
-    image:
-      "/assets/images/works/agwasuri/agwasuri_poster/agwasuri_poster.png",
+    image: "/assets/images/works/agwasuri/agwasuri_poster/agwasuri_poster.png",
     category: "Branding & Visual Identity",
     bgTheme: "white",
     client: "Municipal Agricultural Office of Ternate",
