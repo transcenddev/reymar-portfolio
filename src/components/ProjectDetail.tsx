@@ -961,6 +961,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
             variant="primary"
             onClick={() => setAutoplayEnabled((v) => !v)}
             aria-pressed={autoplayEnabled}
+            suppressHydrationWarning
           >
             {prefersReducedMotion
               ? "Reduced motion active"
