@@ -111,7 +111,7 @@ const WorkPage: FC = () => {
           </motion.div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 min-h-[400px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 min-h-[400px]">
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project) => (
                 <motion.div
@@ -160,63 +160,15 @@ const WorkPage: FC = () => {
                       <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-semibold group-hover:text-primary transition-colors">
                         {project.name}
                       </h3>
-                      <p className="text-sm md:text-base text-stone-600 dark:text-stone-400 line-clamp-2 transition-colors duration-300">
+                      <p className="hidden sm:block text-sm md:text-base text-stone-600 dark:text-stone-400 line-clamp-2 transition-colors duration-300">
                         {project.tagline}
                       </p>
-                    </div>
-
-                    {/* View Project Arrow */}
-                    <div className="mt-4 flex items-center gap-2 text-sm font-medium text-stone-700 dark:text-stone-300 group-hover:text-primary transition-colors">
-                      <span>View Project</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="2"
-                        stroke="currentColor"
-                        className="size-4 group-hover:translate-x-1 transition-transform"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-                        />
-                      </svg>
                     </div>
                   </Link>
                 </motion.div>
               ))}
             </AnimatePresence>
           </div>
-
-          {/* Back to Home Button */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-20 text-center"
-          >
-             <Link
-               href="/#work"
-              className="inline-flex items-center gap-2 text-stone-600 dark:text-stone-400 hover:text-primary transition-colors"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                className="size-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
-                />
-              </svg>
-              <span>Back to Home</span>
-            </Link>
-          </motion.div>
         </div>
       </main>
       <Footer />
