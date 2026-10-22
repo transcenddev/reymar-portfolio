@@ -751,7 +751,7 @@ export const projects: Project[] = [
   },
   {
     id: "bscs-tshirt-design",
-    name: "BSCS T-Shirt Design",
+    name: "Computer Science T-Shirt Design",
     tagline: "Coding-themed t-shirt designs for BSCS students",
     image:
       "/assets/images/works/computer_science_tshirt_design/happines_is_when_your_code_runs_without_error_black.png",
@@ -789,8 +789,27 @@ export const projects: Project[] = [
   },
   {
     id: "invictus-tshirt-design",
-    name: "Invictus T-Shirt Design",
-    tagline: "Y2K-inspired t-shirt and logo designs for Invictus",
+    name: "Invictus T-Shirt Design (Black)",
+    tagline: "Y2K-inspired black t-shirt and logo designs for Invictus",
+    image:
+      "/assets/images/works/invictus_tshirt_design/invictus_y2k_black_violet_black.png",
+    category: "Branding & Visual Identity",
+    bgTheme: "dark",
+    client: "Invictus",
+    services: "T-Shirt Design, Logo Design, Y2K Aesthetic",
+    tech: ["Photoshop", "Illustrator"],
+    images: [
+      "/assets/images/works/invictus_tshirt_design/invictus_y2k_black_violet_black.png",
+      "/assets/images/works/invictus_tshirt_design/invictus_y2k_black_sky_blue_black.png",
+      "/assets/images/works/invictus_tshirt_design/invictus_y2k_cashin_inspired_black.png",
+      "/assets/images/works/invictus_tshirt_design/invictus_stoic_black_orange_violet_front_black.png",
+      "/assets/images/works/invictus_tshirt_design/invictus_stoic_black_orange_violet_back_black.png",
+    ],
+  },
+  {
+    id: "invictus-tshirt-design-white",
+    name: "Invictus T-Shirt Design (White)",
+    tagline: "Y2K-inspired white t-shirt designs for Invictus",
     image:
       "/assets/images/works/invictus_tshirt_design/invictus_y2k_white_violet_white.png",
     category: "Branding & Visual Identity",
@@ -800,15 +819,14 @@ export const projects: Project[] = [
     tech: ["Photoshop", "Illustrator"],
     images: [
       "/assets/images/works/invictus_tshirt_design/invictus_y2k_white_violet_white.png",
-      "/assets/images/works/invictus_tshirt_design/invictus_y2k_black_violet_black.png",
+      "/assets/images/works/invictus_tshirt_design/invictus_y2k_white_sky_blue_white.png",
       "/assets/images/works/invictus_tshirt_design/invictus_y2k_pastel_pink_white.png",
       "/assets/images/works/invictus_tshirt_design/invictus_y2k_pastel_blue_white.png",
-      "/assets/images/works/invictus_tshirt_design/invictus_stoic_black_orange_violet_front_black.png",
     ],
   },
   {
     id: "clothing-design-arabic-girl",
-    name: "Arabic Girl Clothing Design",
+    name: "Arabic Girl T-Shirt Design",
     tagline: "White clothing design with Arabic text and girl illustration",
     image:
       "/assets/images/works/white_arabic_text_girl_clothing_design/clothing_design_white_arabic_text_girl.png",
