@@ -244,7 +244,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     if (project.cover) {
       const { video, image, poster } = project.cover;
       return (
-        <div className="relative aspect-[16/9] overflow-hidden bg-stone-200 dark:bg-stone-800 rounded-none mt-6">
+      <div className={`relative aspect-[16/9] overflow-hidden rounded-none mt-6 ${project.containImages ? "bg-white dark:bg-white" : "bg-stone-200 dark:bg-stone-800"}`}>
           {video ? (
             <video
               src={video}
@@ -328,7 +328,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     if (project.galleryHighlights?.length) {
       const highlights = project.galleryHighlights;
       return (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-stone-200 dark:bg-stone-800">
+      <div className={`grid grid-cols-2 md:grid-cols-3 gap-px ${project.containImages ? "bg-white dark:bg-white" : "bg-stone-200 dark:bg-stone-800"}`}>
           {highlights.map((item, index) => (
             <figure
               key={index}

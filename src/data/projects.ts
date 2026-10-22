@@ -805,7 +805,7 @@ export const projects: Project[] = [
   },
   {
     id: "clothing-design-arabic-girl",
-    name: "Clothing Design - Arabic Girl",
+    name: "Arabic Girl",
     tagline: "White clothing design with Arabic text and girl illustration",
     image:
       "/assets/images/works/clothing_design_white_arabic_text_girl/clothing_design_white_arabic_text_girl.png",
