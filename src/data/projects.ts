@@ -68,12 +68,6 @@ export type Project = {
   };
   /** Curated cover gallery with captions (replaces the auto gallery when present) */
   galleryHighlights?: Array<{ src: string; caption?: string }>;
-  /**
-   * 3-item zoomed/cropped process-breakdown strip shown directly below the hero.
-   * Each item is a filled crop (object-cover) inside a 1px hairline frame.
-   * Canvas background is matched to the asset color via `bgTheme`.
-   */
-  mediaStrip?: Array<{ src: string; caption?: string }>;
   /** Optional alt text for hero image */
   heroAlt?: string;
   /** Optional alt texts for gallery images (indexed by position) */
@@ -216,20 +210,6 @@ export const projects: Project[] = [
       "/assets/images/works/sp_madrid_ai/sp_madrid_ai_photo_plaque.jpg",
       "/assets/videos/works/sp_madrid_ai/sp_madrid_ai_media_sample_2.mp4",
     ],
-    mediaStrip: [
-      {
-        src: "/assets/images/works/sp_madrid_ai/sp_madrid_ai_photo_process_reymar.jpg",
-        caption: "01 / Creative pipeline",
-      },
-      {
-        src: "/assets/videos/works/sp_madrid_ai/sp_madrid_ai_media_sample_1.mp4",
-        caption: "02 / AI video generation",
-      },
-      {
-        src: "/assets/images/works/sp_madrid_ai/sp_madrid_ai_photo_plaque.jpg",
-        caption: "03 / Final presentation",
-      },
-    ],
     relatedProjects: ["read-ai-website"],
     needsVerification: [
       "Confirm the specific AI video tools used (Runway, Pika, Kaiber, etc.).",
@@ -292,20 +272,6 @@ export const projects: Project[] = [
       "/assets/images/works/read_ai_ui_ux_design/readai_figma2.png",
       "/assets/images/works/read_ai_ui_ux_design/readai_figma3.png",
       "/assets/images/works/read_ai_ui_ux_design/read_ai_prototype1.png",
-    ],
-    mediaStrip: [
-      {
-        src: "/assets/images/works/read_ai_ui_ux_design/read_ai_webdesign1.png",
-        caption: "01 / Landing page",
-      },
-      {
-        src: "/assets/images/works/read_ai_ui_ux_design/readai_figma1.png",
-        caption: "02 / Design system",
-      },
-      {
-        src: "/assets/images/works/read_ai_ui_ux_design/read_ai_webdesign3.png",
-        caption: "03 / Feature section",
-      },
     ],
     relatedProjects: ["sp-madrid-ai-multimedia", "covid-health-declaration"],
     needsVerification: [
@@ -443,20 +409,6 @@ export const projects: Project[] = [
       "/assets/images/works/cvsu_find/cvsufind_admin_profile.png",
       "/assets/images/works/cvsu_find/cvsufind_prototype.png",
     ],
-    mediaStrip: [
-      {
-        src: "/assets/images/works/cvsu_find/cvsufind_login.png",
-        caption: "01 / User login",
-      },
-      {
-        src: "/assets/images/works/cvsu_find/cvsufind_dashboard.png",
-        caption: "02 / User dashboard",
-      },
-      {
-        src: "/assets/images/works/cvsu_find/cvsufind_admin_dashboard.png",
-        caption: "03 / Admin dashboard",
-      },
-    ],
     relatedProjects: ["covid-health-declaration", "read-ai-website"],
     needsVerification: [
       "Confirm whether a public live demo or repository exists.",
@@ -573,20 +525,6 @@ export const projects: Project[] = [
       {
         src: "/assets/images/works/agwasuri/agwasuri_sensor_controller_components.jpg",
         caption: "Sensor & controller hardware",
-      },
-    ],
-    mediaStrip: [
-      {
-        src: "/assets/images/works/agwasuri/agwasuri_prototype_fishpond.jpg",
-        caption: "01 / Device in the pond",
-      },
-      {
-        src: "/assets/images/works/agwasuri/agwasuri_website_photos/agwasuri_prediction.png",
-        caption: "02 / Species prediction page",
-      },
-      {
-        src: "/assets/images/works/agwasuri/agwasuri_sensor_controller_components.jpg",
-        caption: "03 / Sensor & controller hardware",
       },
     ],
     problem:

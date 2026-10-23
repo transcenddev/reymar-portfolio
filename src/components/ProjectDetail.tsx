@@ -152,18 +152,8 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
 
     if (project.cover) {
       const { video, image, poster } = project.cover;
-      const bgClass =
-        project.bgTheme === "white"
-          ? "bg-white"
-          : project.bgTheme === "dark"
-            ? "bg-black"
-            : project.bgTheme === "transparent"
-              ? "bg-transparent"
-              : "bg-white dark:bg-neutral-950";
       return (
-        <div
-          className={`relative aspect-[16/9] overflow-hidden rounded-none mt-6 p-4 sm:p-6 border border-stone-200 dark:border-stone-800 ${bgClass}`}
-        >
+        <div className="relative aspect-[16/9] overflow-hidden bg-white dark:bg-neutral-950 rounded-none mt-6">
           {video ? (
             <video
               src={video}
@@ -173,7 +163,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
               preload="metadata"
               autoPlay={effectiveAutoplay}
               poster={poster}
-              className="w-full h-full object-contain"
+              className="w-full h-full object-cover"
               aria-label={`${project.name} cover video`}
             />
           ) : image ? (
@@ -239,29 +229,23 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
   };
 
   // ----------------------------------------------------------------
-  // B. Media strip (3-item zoomed/cropped process breakdown)
+  // B. Gallery grid
   // ----------------------------------------------------------------
-  const renderMediaStrip = () => {
-    if (!project.mediaStrip || project.mediaStrip.length === 0) return null;
-
-    const bgClass =
-      project.bgTheme === "white"
-        ? "bg-white"
-        : project.bgTheme === "dark"
-          ? "bg-black"
-          : project.bgTheme === "transparent"
-            ? "bg-transparent"
-            : "bg-white dark:bg-neutral-950";
-
-    return (
-      <section className="mt-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-stone-200 dark:bg-stone-800">
-          {project.mediaStrip.map((item, index) => (
+  const renderGallery = () => {
+    if (project.galleryHighlights?.length) {
+      const highlights = project.galleryHighlights;
+      return (
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 justify-items-center">
+          {highlights.map((item, index) => (
             <figure
               key={index}
-              className={`relative overflow-hidden ${bgClass} border border-stone-200 dark:border-stone-800 rounded-none`}
+              className={`bg-white dark:bg-neutral-950 ${
+                index === highlights.length - 1 && highlights.length % 2 === 1
+                  ? "col-span-2 md:col-span-1"
+                  : ""
+              }`}
             >
-              <div className="relative aspect-[4/3]">
+              <div className="relative aspect-[4/3] overflow-hidden bg-white dark:bg-neutral-950">
                 {isVideoSrc(item.src) ? (
                   <video
                     src={item.src}
@@ -271,27 +255,76 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                     preload="metadata"
                     autoPlay={effectiveAutoplay}
                     className="w-full h-full object-cover"
-                    aria-label={`${project.name} strip ${index + 1}`}
+                    aria-label={`${project.name} highlight ${index + 1}`}
                   />
                 ) : (
                   <Image
                     src={item.src}
-                    alt={item.caption ?? `${project.name} strip ${index + 1}`}
+                    alt={
+                      item.caption ?? `${project.name} highlight ${index + 1}`
+                    }
                     fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    sizes="(max-width: 768px) 50vw, 33vw"
                     className="object-cover"
                   />
                 )}
               </div>
               {item.caption && (
-                <figcaption className="px-3 py-2 font-mono text-[11px] uppercase tracking-wider text-stone-500 dark:text-stone-400 border-t border-stone-200 dark:border-stone-800">
+                <figcaption className="px-3 py-2 font-mono text-[11px] uppercase tracking-wider text-stone-500 dark:text-stone-400">
                   {item.caption}
                 </figcaption>
               )}
             </figure>
           ))}
         </div>
-      </section>
+      );
+    }
+
+    const galleryItems = items.slice(1);
+    if (galleryItems.length === 0) return null;
+
+    const bgClass =
+      project.bgTheme === "white"
+        ? "bg-white"
+        : project.bgTheme === "dark"
+          ? "bg-black"
+          : project.bgTheme === "transparent"
+            ? "bg-transparent"
+            : "bg-stone-50 dark:bg-stone-950";
+
+    return (
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-white dark:bg-neutral-950">
+        {galleryItems.map((src, index) => (
+          <div
+            key={index}
+            className={`relative aspect-[4/3] ${bgClass} overflow-hidden p-4 sm:p-6`}
+          >
+            {isVideoSrc(src) ? (
+              <video
+                src={src}
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                autoPlay={effectiveAutoplay}
+                className="w-full h-full object-contain"
+                aria-label={`${project.name} footage ${index + 2}`}
+              />
+            ) : (
+              <Image
+                src={src}
+                alt={
+                  project.galleryAlts?.[index] ??
+                  `${project.name} screenshot ${index + 2}`
+                }
+                fill
+                sizes="(max-width: 768px) 50vw, 33vw"
+                className="object-contain"
+              />
+            )}
+          </div>
+        ))}
+      </div>
     );
   };
 
@@ -865,7 +898,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
 
         {/* B. Visuals (telemetry or media) */}
         {renderHeroMedia()}
-        {renderMediaStrip()}
+        {renderGallery()}
 
         {/* C. What I Built */}
         {renderBuilt()}

@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState, useMemo } from "react";
+import { FC, useState, useMemo, Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/sections/Header";
@@ -30,14 +30,14 @@ const WorkPage: FC = () => {
   return (
     <>
       <Header />
-      <main className="section pt-32 md:pt-40">
+      <main className="section pt-24 md:pt-32">
         <div className="container">
           {/* Page Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-12 md:mb-16"
+            className="mb-8 md:mb-10"
           >
             <h1 className="font-display text-statement font-bold mb-6">
               Projects
@@ -49,17 +49,17 @@ const WorkPage: FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-12 md:mb-16"
+            className="mb-8 md:mb-10"
           >
-            <div className="flex flex-wrap gap-3 md:gap-4 sticky top-20 z-10 bg-white/80 dark:bg-stone-950/80 backdrop-blur-md py-3 -mx-4 px-4">
+            <div className="flex flex-wrap gap-2 md:gap-3 sticky top-20 z-10 bg-white/80 dark:bg-stone-950/80 backdrop-blur-md py-2 -mx-4 px-4">
               {categories.map((category) => (
                 <button
                   key={category}
                   aria-pressed={activeCategory === category}
                   onClick={() => setActiveCategory(category)}
                   className={`
-                    px-4 md:px-6 py-2 md:py-3 rounded-none text-sm md:text-base font-medium
-                    transition-colors duration-200 relative whitespace-nowrap
+                    px-3 md:px-4 py-1.5 md:py-2 rounded-none text-sm md:text-base font-medium
+                    transition-colors duration-200 relative
                     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2
                     ${
                       activeCategory === category
@@ -74,7 +74,7 @@ const WorkPage: FC = () => {
                   <span
                     className={`ml-2 font-mono text-xs tracking-wider ${
                       activeCategory === category
-                        ? "text-primary"
+                        ? "text-white/70"
                         : "text-stone-500 dark:text-stone-400"
                     }`}
                   >
@@ -92,79 +92,32 @@ const WorkPage: FC = () => {
                       }}
                     />
                   )}
-</button>
+                </button>
               ))}
             </div>
           </motion.div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 min-h-[400px] justify-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 min-h-[400px]">
             <AnimatePresence mode="popLayout">
-              {filteredProjects.map((project, cardIndex) => (
+              {filteredProjects.length === 0 ? (
                 <motion.div
-                  key={project.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{
-                    duration: 0.4,
-                    layout: { duration: 0.3 },
-                  }}
-                  className="relative"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="col-span-full text-center py-16 text-stone-500 dark:text-stone-400"
                 >
-                  <span className="absolute top-3 left-3 z-10 font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 bg-white/70 dark:bg-neutral-900/70 px-2 py-1 rounded-none">
-                    {String(cardIndex + 1).padStart(2, "0")}
-                  </span>
-                  <Link
-                    href={`/projects/${project.id}`}
-                    className="group block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-none transition-transform duration-300 hover:-translate-y-1"
-                  >
-                    {/* Project Image */}
-                    <div
-                      className={`relative aspect-[16/10] sm:aspect-[4/3] md:aspect-[3/2] rounded-none overflow-hidden mb-4 transition-colors duration-300 p-4 sm:p-6 ${
-                        project.bgTheme === "white"
-                          ? "bg-white"
-                          : project.bgTheme === "dark"
-                            ? "bg-black"
-                            : project.bgTheme === "transparent"
-                              ? "bg-transparent"
-                              : "bg-white dark:bg-neutral-950"
-                      }`}
-                    >
-                      {project.image && !failedImages.has(project.id) ? (
-                        <Image
-                          src={project.image}
-                          alt={project.name}
-                          fill
-                          className="object-contain transition-transform duration-500 group-hover:scale-105"
-                          onError={() =>
-                            setFailedImages((prev) =>
-                              new Set(prev).add(project.id),
-                            )
-                          }
-                        />
-                      ) : (
-                        <div className="size-full flex items-center justify-center">
-                          <span className="font-display text-lg font-bold text-stone-400 dark:text-stone-600 text-center line-clamp-2">
-                            {project.name}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Project Info */}
-                    <div className="space-y-2">
-                      <h3 className="font-display text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold group-hover:text-primary transition-colors">
-                        {project.name}
-                      </h3>
-                      <p className="hidden sm:block text-sm md:text-base text-stone-600 dark:text-stone-400 line-clamp-1 md:line-clamp-2 transition-colors duration-300">
-                        {project.tagline}
-                      </p>
-                    </div>
-                  </Link>
+                  No projects match this filter.
                 </motion.div>
-              ))}
+              ) : (
+                filteredProjects.map((project) => (
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    onFailedImage={setFailedImages}
+                    failedImages={failedImages}
+                  />
+                ))
+              )}
             </AnimatePresence>
           </div>
         </div>
@@ -175,3 +128,68 @@ const WorkPage: FC = () => {
 };
 
 export default WorkPage;
+
+// ----------------------------------------------------------------
+// Project Card
+// ----------------------------------------------------------------
+const ProjectCard: FC<{
+  project: (typeof listedProjects)[number];
+  onFailedImage: Dispatch<SetStateAction<Set<string>>>;
+  failedImages: Set<string>;
+}> = ({ project, onFailedImage, failedImages }) => {
+  const bgClass =
+    project.bgTheme === "white"
+      ? "bg-white dark:bg-white"
+      : project.bgTheme === "dark"
+        ? "bg-black dark:bg-black"
+        : project.bgTheme === "transparent"
+          ? "bg-transparent"
+          : "bg-white dark:bg-neutral-950";
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.8 }}
+      transition={{
+        duration: 0.4,
+        layout: { duration: 0.3 },
+      }}
+    >
+      <Link
+        href={`/projects/${project.id}`}
+        className="group block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-none transition-transform duration-300 hover:-translate-y-1"
+      >
+        <div
+          className={`relative aspect-[4/3] rounded-none overflow-hidden mb-4 transition-colors duration-300 p-4 sm:p-6 ${bgClass}`}
+        >
+          {project.image && !failedImages.has(project.id) ? (
+            <Image
+              src={project.image}
+              alt={project.name}
+              fill
+              className="object-contain transition-transform duration-500 group-hover:scale-105"
+              onError={() => onFailedImage(new Set(failedImages).add(project.id))}
+            />
+          ) : (
+            <div className="size-full flex items-center justify-center">
+              <span className="font-display text-lg font-bold text-stone-400 dark:text-stone-600 text-center line-clamp-2">
+                {project.name}
+              </span>
+            </div>
+          )}
+        </div>
+
+        <div className="space-y-2 min-w-0">
+          <h2 className="font-display text-xl md:text-2xl lg:text-3xl font-semibold group-hover:text-primary transition-colors">
+            {project.name}
+          </h2>
+          <p className="hidden sm:block text-sm md:text-base text-stone-600 dark:text-stone-400 line-clamp-2 transition-colors duration-300">
+            {project.tagline}
+          </p>
+        </div>
+      </Link>
+    </motion.div>
+  );
+};
