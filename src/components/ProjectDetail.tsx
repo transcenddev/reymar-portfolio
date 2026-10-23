@@ -235,7 +235,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     if (project.galleryHighlights?.length) {
       const highlights = project.galleryHighlights;
       return (
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 justify-items-center">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-white dark:bg-neutral-950">
           {highlights.map((item, index) => (
             <figure
               key={index}
@@ -297,7 +297,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
         {galleryItems.map((src, index) => (
           <div
             key={index}
-            className={`relative ${index === 0 ? "col-span-2 aspect-[16/9]" : "aspect-[4/3]"} ${bgClass} overflow-hidden p-4 sm:p-6`}
+            className={`relative aspect-[4/3] ${bgClass} overflow-hidden p-4 sm:p-6`}
           >
             {isVideoSrc(src) ? (
               <video
