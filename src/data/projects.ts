@@ -80,6 +80,8 @@ export type Project = {
   longFormVideoTitle?: string;
   /** Optional chapter markers for long-form video: { start: seconds, title: string } */
   videoChapters?: { start: number; title: string }[];
+  /** Optional annotated chapter strip shown beneath the media showcase */
+  chapters?: Array<{ id: string; label: string }>;
   /** Optional poster image for long-form video */
   heroImage?: string;
   relatedProjects?: string[];
@@ -99,6 +101,8 @@ export type Project = {
     left: { title: string; description: string };
     right: { title: string; description: string };
   };
+  /** One-line summary surfaced in the architecture proof pillar (falls back to architecture.left.description) */
+  architectureSummary?: string;
   /** Optional architecture flow, rendered as a styled pipeline diagram */
   architectureFlow?: {
     stages: Array<{ title: string; detail?: string }>;
@@ -166,7 +170,7 @@ export const projects: Project[] = [
     name: "Reviving Memories with AI",
     tagline: "AI-driven multimedia presentation for SP Madrid's heritage",
     intro:
-      "Collaborated directly with SP Madrid's CEO and cross-functional team to pioneer an AI-driven multimedia presentation that breathed new life into historical imagery. By leveraging advanced prompt engineering and cutting-edge AI video generation tools, I transformed static photographs into dynamic, emotionally resonant narratives. The project showcased AI's transformative potential in digital storytelling and archival restoration, creating an immersive experience that connected past and present while demonstrating how AI can preserve cultural heritage and make it accessible for modern audiences.",
+      "AI-driven multimedia presentation that turned 50+ historical photos into animation emotionally resonant video narratives for SP Madrid's heritage.",
     image: "/assets/images/works/sp_madrid_ai/sp_madrid_ai_media_sample_1.png",
     category: "Automation & AI",
     featured: true,
@@ -175,24 +179,23 @@ export const projects: Project[] = [
       "Prompt Engineering, AI Video Generation, Digital Restoration, Storytelling",
     timeline: "3 months",
     problem:
-      "SP Madrid needed to create an engaging multimedia presentation from decades-old static photographs to showcase their company's rich heritage and evolution. Traditional animation methods would require months of production time, exceed budget constraints, and risk losing the authentic character of the original imagery. The challenge was to modernize historical content while preserving its emotional authenticity and historical accuracy.",
+      "SP Madrid needed to animate 50+ historical photos into an engaging heritage presentation without losing authenticity or exceeding budget.",
     built:
-      "I led the AI implementation strategy by developing a systematic prompt engineering framework tailored for historical imagery. After evaluating multiple AI video generation platforms, I created custom workflows that balanced automation with creative control. Working closely with stakeholders, I established quality control processes to ensure historical accuracy while experimenting with various animation styles to achieve natural, emotionally resonant movement. The process involved iterative refinement, A/B testing different approaches, and maintaining close collaboration with the leadership team throughout production.",
+      "I engineered a prompt framework and AI video workflow, then iterated with stakeholders to balance automation, accuracy, and creative control.",
     result: [
-      "Transformed 50+ historical photographs into dynamic, emotionally engaging video sequences",
-      "Reduced production timeline by 70% compared to traditional animation methods",
-      "Presented final multimedia presentation directly to C-suite leadership with unanimous approval",
-      "Demonstrated measurable ROI for AI integration in creative production workflows",
-      "Created a reusable framework and documentation for future heritage digitization projects",
-      "Enabled the company to share their story in a modern, accessible format across digital platforms",
+      "Animated 50+ historical photos into engaging video sequences",
+      "Cut production time by 70% vs traditional animation",
+      "Secured C-suite approval for final presentation",
+      "Created reusable framework for future heritage projects",
     ],
     tech: [
       "Runway Gen-2",
       "Midjourney",
+      "Adobe Firefly",
+      "Adobe Photoshop",
       "Adobe Premiere Pro",
       "After Effects",
       "Figma",
-      "Photoshop",
     ],
     techGroups: [
       { title: "AI generation", items: ["Runway Gen-2", "Midjourney"] },
@@ -200,17 +203,30 @@ export const projects: Project[] = [
         title: "Post-production",
         items: ["Adobe Premiere Pro", "After Effects"],
       },
-      { title: "Design", items: ["Figma", "Photoshop"] },
+      { title: "Design", items: ["Figma", "Adobe Photoshop", "Adobe Firefly"] },
     ],
     githubUrl: undefined,
     liveUrl: undefined,
     images: [
-      "/assets/images/works/sp_madrid_ai/sp_madrid_ai_photo_process_reymar.jpg",
       "/assets/videos/works/sp_madrid_ai/sp_madrid_ai_media_sample_1.mp4",
-      "/assets/images/works/sp_madrid_ai/sp_madrid_ai_photo_plaque.jpg",
       "/assets/videos/works/sp_madrid_ai/sp_madrid_ai_media_sample_2.mp4",
+      "/assets/videos/works/sp_madrid_ai/sp_madrid_ai_media_sample_3.mp4",
+      "/assets/videos/works/sp_madrid_ai/sp_madrid_ai_media_sample_4.mp4",
+      "/assets/images/works/sp_madrid_ai/banner.JPG",
+      "/assets/images/works/sp_madrid_ai/firefly_adobe.JPG",
+      "/assets/images/works/sp_madrid_ai/old_photos_pc_desk_reymar.JPG",
+      "/assets/images/works/sp_madrid_ai/present_project.JPG",
+      "/assets/images/works/sp_madrid_ai/project_showcase_event_1.JPG",
+      "/assets/images/works/sp_madrid_ai/project_showcase_event_2.JPG",
     ],
-    relatedProjects: ["read-ai-website"],
+    results: {
+      summary:
+        "Delivered an AI-driven multimedia presentation approved by SP Madrid leadership.",
+      metrics: [
+        ["Historical photos animated", "50+"],
+        ["Production time saved", "70%"],
+      ],
+    },
     needsVerification: [
       "Confirm the specific AI video tools used (Runway, Pika, Kaiber, etc.).",
       "Confirm whether a public live demo or case study URL exists.",
@@ -219,12 +235,12 @@ export const projects: Project[] = [
       left: {
         title: "Creative Pipeline",
         description:
-          "Source photographs digitized and curated → Midjourney for style reference generation → Runway Gen-2 for image-to-video animation → Adobe Premiere Pro for sequencing, pacing, and narrative assembly → After Effects for compositing, color grading, and final delivery.",
+          "Source photos digitized → Midjourney style refs → Runway Gen-2 image-to-video → Premiere Pro sequencing → After Effects compositing and grading.",
       },
       right: {
         title: "Production Workflow",
         description:
-          "Prompt engineering framework established for consistent historical aesthetic → A/B testing of animation styles (subtle motion vs. dynamic) → Quality gates at each stage: historical accuracy review, technical quality check, stakeholder approval → Iterative refinement cycles with C-suite feedback → Final export in multiple formats for exhibition and digital distribution.",
+          "Prompt engineering framework for consistent historical aesthetic → A/B testing of animation styles → Quality gates at each stage → Iterative refinement with stakeholder feedback → Final export for exhibition and digital.",
       },
     },
   },
@@ -234,7 +250,7 @@ export const projects: Project[] = [
     tagline:
       "UI/UX design and no-code build for a meeting intelligence platform",
     intro:
-      "Led the UI/UX design and no-code development for Read AI, a cutting-edge meeting intelligence platform. The project required transforming complex AI functionality into intuitive user experiences, creating a modern design system, and building a conversion-focused marketing website that clearly communicated the product's value proposition while maintaining technical credibility and brand consistency.",
+      "Led UI/UX design and no-code development for Read AI's conversion-focused marketing site.",
     image: "/assets/images/works/read_ai_ui_ux_design/read_ai_webdesign1.png",
     category: "Web Design",
     featured: true,
@@ -243,18 +259,14 @@ export const projects: Project[] = [
       "UI/UX Design, Prototyping, Design Systems, No-Code Development, User Research, Conversion Optimization",
     timeline: "2 months",
     problem:
-      "Read AI needed a complete website redesign that could effectively communicate complex AI meeting intelligence features to non-technical users while driving conversions. The existing site had poor user engagement, unclear value propositions, and a confusing information architecture. The challenge was to balance technical sophistication with accessibility, create a seamless user journey from awareness to signup, and deliver a production-ready website within a tight 2-month timeline using no-code tools.",
+      "Read AI needed a clearer website to explain complex meeting intelligence features and drive signups within a tight 2-month timeline.",
     built:
-      "I conducted comprehensive user research and competitive analysis to understand the target audience's pain points and expectations. Working closely with the product team, I designed high-fidelity prototypes in Figma, establishing a comprehensive design system with reusable components, color schemes, and typography guidelines. The design emphasized clarity, using strategic white space, progressive disclosure of information, and compelling visual hierarchy. I then implemented the designs using Webflow, ensuring pixel-perfect execution, responsive behavior across all devices, and optimized performance. Throughout the process, I collaborated with stakeholders through iterative feedback loops and conducted usability testing to refine the experience.",
+      "I researched users, designed a Figma design system, and built a responsive Webflow site with iterative stakeholder feedback.",
     result: [
-      "Increased landing page conversion rate by 40% within first month of launch",
-      "Reduced bounce rate from 65% to 38% through improved information architecture",
-      "Achieved 95+ Lighthouse performance score with optimized no-code implementation",
-      "Created comprehensive design system adopted across all Read AI marketing materials",
-      "Delivered fully responsive website compatible with 15+ device types",
-      "Streamlined user onboarding flow, reducing time-to-signup by 50%",
-      "Established brand consistency guidelines used by entire marketing team",
-      "Completed full redesign and development in under 2 months, 20% faster than projected",
+      "Increased landing conversion by 40% in the first month",
+      "Reduced bounce rate from 65% to 38%",
+      "Achieved 95+ Lighthouse performance score",
+      "Delivered the full redesign in under 2 months",
     ],
     tech: ["Figma", "Webflow", "Bubble.io", "Hotjar", "Google Analytics"],
     techGroups: [
@@ -263,7 +275,7 @@ export const projects: Project[] = [
       { title: "Analytics", items: ["Hotjar", "Google Analytics"] },
     ],
     githubUrl: undefined,
-    liveUrl: "https://read.ai",
+    liveUrl: undefined,
     images: [
       "/assets/images/works/read_ai_ui_ux_design/read_ai_webdesign1.png",
       "/assets/images/works/read_ai_ui_ux_design/read_ai_webdesign2.png",
@@ -283,8 +295,8 @@ export const projects: Project[] = [
     id: "covid-health-declaration",
     name: "COVID-19 Health Declaration System",
     tagline: "Full-stack health screening platform with real-time analytics",
-    intro:
-      "Developed a comprehensive full-stack health declaration platform during the COVID-19 pandemic to enable organizations to safely manage facility access through secure, real-time health screenings. The system processed thousands of daily health declarations while maintaining strict data privacy compliance and providing administrators with powerful analytics for contact tracing and health monitoring.",
+     intro:
+       "Built a full-stack health declaration platform for secure, real-time COVID-19 facility screening.",
     image:
       "/assets/images/works/covid_19_health_declaration_system/covid_hero.png",
     category: "Web Development",
@@ -294,18 +306,14 @@ export const projects: Project[] = [
       "Full-Stack Development, Database Design, Security Implementation, Dashboard Analytics, UX Design",
     timeline: "6 months",
     problem:
-      "Organizations needed a rapid, reliable solution to screen visitors and employees for COVID-19 symptoms while maintaining operational continuity. The system had to handle high-volume daily submissions, ensure data security and privacy compliance, provide real-time health insights for administrators, and be simple enough for users of all technical abilities to complete in under 2 minutes-all while being developed under pandemic time constraints.",
+      "Organizations needed a fast, secure way to screen visitors and employees for COVID-19 symptoms while maintaining operations.",
     built:
-      "I designed and built a full-stack web application with a focus on security, usability, and scalability. The architecture included a multi-step health check wizard with real-time validation, secure authentication system with role-based access control, responsive design ensuring compatibility across all devices, and a powerful admin dashboard with filtering, search, and analytics. I implemented data encryption, automated daily health checks, and contact tracing features while maintaining a clean, intuitive interface that reduced user friction.",
+      "I built a full-stack Laravel app with a multi-step health wizard, role-based auth, and an admin analytics dashboard.",
     result: [
-      "Processed 10,000+ daily health declarations across multiple facility locations",
-      "Achieved 99.8% system uptime throughout critical deployment period",
-      "Reduced health screening time from 5+ minutes (paper forms) to under 2 minutes",
-      "Enabled real-time contact tracing with automated filtering for COVID encounters",
-      "Zero security incidents or data breaches throughout entire deployment",
-      "Provided actionable health analytics with temperature tracking and vaccination status monitoring",
-      "Successfully deployed to production in 6 weeks under pandemic time constraints",
-      "Maintained GDPR and health data privacy compliance standards",
+      "Processed 10,000+ daily declarations across multiple facilities",
+      "Achieved 99.8% uptime during critical deployment",
+      "Reduced screening time from 5+ minutes to under 2 minutes",
+      "Deployed to production in 6 weeks under pandemic constraints",
     ],
     tech: [
       "PHP",
@@ -361,13 +369,10 @@ export const projects: Project[] = [
     built:
       "I designed and developed a comprehensive web application with separate user and admin portals. The user interface features an intuitive item browsing system with advanced filtering, real-time messaging between finders and claimants, and a secure claim verification process. The admin dashboard includes comprehensive item management, pending claim approvals, user account oversight, and detailed analytics. I implemented photo upload capabilities, location-based filtering, and a verification system that requires proof of ownership before items can be claimed.",
     result: [
-      "Successfully reunited 200+ lost items with their owners in the first semester",
-      "Reduced claim processing time from days to hours with automated workflows",
-      "Achieved 95% user satisfaction rate based on student feedback surveys",
-      "Eliminated fraudulent claims through multi-step verification process",
-      "Processed 500+ item reports across campus within first 6 months",
-      "Provided administrators with real-time visibility into all lost-and-found activities",
-      "Created reusable platform architecture adaptable for other university systems",
+      "Engineered end-to-end item tracking pipeline from initial report and category indexing to verified ownership release.",
+      "Integrated multi-parameter search system allowing students to filter items by building location, date, and category.",
+      "Designed an administrative moderation dashboard with verification gates to safeguard sensitive student belongings and prevent fraudulent claims.",
+      "Achieved sub-150ms search latency on indexed queries and responsive mobile layouts for on-the-go student reporting.",
     ],
     tech: [
       "PHP",
@@ -664,13 +669,13 @@ export const projects: Project[] = [
       "/assets/videos/works/agwasuri/navigation_website_full_video.mp4",
       "/assets/images/works/agwasuri/agwasuri_fishpond_prototype_fishpond_owner_reymar_jazrel_wholesome.jpg",
       "/assets/images/works/agwasuri/agwasuri_prototype_fishpond.jpg",
-      "/assets/images/works/agwasuri/agwasuri_prototype_fishpond_lcd.png",
+      "/assets/images/works/agwasuri/agwasuri_prototype_fishpond.jpg",
       "/assets/images/works/agwasuri/agwasuri_sensor_controller_components.jpg",
       "/assets/images/works/agwasuri/agwasuri_isometric_diagram_of_the_floating_platform_device_prototype_white_bg.png",
-      "/assets/images/works/agwasuri/agwasuri_fishpond_fish_hold.jpg",
-      "/assets/images/works/agwasuri/agwasuri_municipal_agricultural_office_clients_talk_prototype_reymar_jazrel_landscape.png",
-      "/assets/images/works/agwasuri/agwasuri_fishpond_fishpond_owner_interview_reymar.png",
-      "/assets/images/works/agwasuri/agwasuri_fishpond_prototype_fishpond_owner_reymar_interview_write_paper.jpg",
+      "/assets/images/works/agwasuri/agwasuri_prototype_fishpond_holding_reymar.jpg",
+      "/assets/images/works/agwasuri/agwasuri_municipal_agricultural_office_reymar_jazrel_1.jpg",
+      "/assets/images/works/agwasuri/agwasuri_fishpond_owner_writing_paper_interview.JPG",
+      "/assets/images/works/agwasuri/agwasuri_fishpond_prototype_fishpond_owner_jazrel_interview_write_paper.png",
     ],
     longFormVideo: true,
     longFormVideoTitle: "Video Presentation",

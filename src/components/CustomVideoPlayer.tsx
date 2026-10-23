@@ -14,6 +14,8 @@ type CustomVideoPlayerProps = {
   chapters?: { start: number; title: string }[];
   poster?: string;
   className?: string;
+  autoPlay?: boolean;
+  hidePlayButton?: boolean;
 };
 
 export const CustomVideoPlayer: React.FC<CustomVideoPlayerProps> = ({
@@ -22,6 +24,8 @@ export const CustomVideoPlayer: React.FC<CustomVideoPlayerProps> = ({
   chapters = [],
   poster,
   className = "",
+  autoPlay = false,
+  hidePlayButton = false,
 }) => {
   // DEBUG
   console.log("[DEBUG CustomVideoPlayer] props", { src, title, chapters: chapters.length, poster });
@@ -34,7 +38,7 @@ export const CustomVideoPlayer: React.FC<CustomVideoPlayerProps> = ({
   const [duration, setDuration] = useState(0);
   const [showControls, setShowControls] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [hoveredTime, setHoveredTime] = useState<number | null>(null);
   const [hoveredChapter, setHoveredChapter] = useState<string | null>(null);
@@ -78,6 +82,13 @@ export const CustomVideoPlayer: React.FC<CustomVideoPlayerProps> = ({
       document.removeEventListener("fullscreenchange", onFullscreenChange);
     };
   }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !autoPlay) return;
+    video.muted = true;
+    video.play().catch(() => {});
+  }, [autoPlay, src]);
 
   const formatTime = useCallback((seconds: number) => {
     const h = Math.floor(seconds / 3600);
@@ -328,18 +339,20 @@ export const CustomVideoPlayer: React.FC<CustomVideoPlayerProps> = ({
       {/* Floating controls pill */}
       {showControls && (
         <div className="absolute bottom-14 left-1/2 -translate-x-1/2 flex items-center gap-3 px-4 py-2 bg-white/5 backdrop-blur-sm border border-stone-800 rounded-none shadow-lg z-10 animate-in fade-in-0 duration-150">
-          <button
-            onClick={handleTogglePlay}
-            className="p-1 text-stone-100 hover:text-teal-400 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-500"
-            aria-label={isPlaying ? "Pause" : "Play"}
-            aria-pressed={isPlaying}
-          >
-            {isPlaying ? (
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6V4zm12 0h4v16h-4V4z"/></svg>
-            ) : (
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7-11-7z"/></svg>
-            )}
-          </button>
+          {!hidePlayButton && (
+            <button
+              onClick={handleTogglePlay}
+              className="p-1 text-stone-100 hover:text-teal-400 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-500"
+              aria-label={isPlaying ? "Pause" : "Play"}
+              aria-pressed={isPlaying}
+            >
+              {isPlaying ? (
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6V4zm12 0h4v16h-4V4z"/></svg>
+              ) : (
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7-11-7z"/></svg>
+              )}
+            </button>
+          )}
 
           <span className="font-mono text-xs text-stone-400 tabular-nums w-24 text-right">
             {formatTime(currentTime)}

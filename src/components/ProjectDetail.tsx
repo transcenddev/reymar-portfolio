@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button";
 import TelemetryHero from "@/components/TelemetryHero";
-import CustomVideoPlayer from "@/components/CustomVideoPlayer";
 import FlowDiagram from "@/components/project-detail/FlowDiagram";
+import MediaCarousel from "@/components/project-detail/MediaCarousel";
 import { projectsById, type Project } from "@/data/projects";
 
 const isVideoSrc = (src: string) => /\.(mp4|mov|webm|m4v)$/i.test(src);
@@ -24,11 +24,8 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
 }) => {
   const [isSwitching, setIsSwitching] = useState(false);
   const [autoplayEnabled, setAutoplayEnabled] = useState(true);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() =>
-    typeof window !== "undefined"
-      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      : false,
-  );
+  const [activeChapter, setActiveChapter] = useState(0);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -46,8 +43,11 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
 
   const items = useMemo(() => {
     const arr = Array.isArray(project.images) ? project.images : [];
-    return arr.filter(Boolean) as string[];
-  }, [project.images]);
+    const base = arr.filter(Boolean) as string[];
+    if (project.cover?.video) return [project.cover.video, ...base];
+    if (project.cover?.image) return [project.cover.image, ...base];
+    return base;
+  }, [project.images, project.cover]);
 
   const hasAutoplayVideos = !project.longFormVideo && items.some(isVideoSrc);
 
@@ -58,271 +58,117 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
   }, [project.relatedProjects]);
 
   // ----------------------------------------------------------------
-  // A. Header
+  // A. Header (sticky meta rail)
   // ----------------------------------------------------------------
   const renderHeader = () => (
-    <section className="space-y-8">
-      <div className="space-y-4">
-        <h1 className="font-display text-4xl md:text-5xl font-bold text-stone-900 dark:text-stone-100 max-w-none">
+    <div className="space-y-6">
+      <div className="space-y-3">
+        <h1 className="font-display text-4xl md:text-5xl font-bold text-stone-900 dark:text-stone-100 leading-tight">
           {project.name}
         </h1>
-        <p className="font-sans text-stone-600 dark:text-stone-400 max-w-none leading-relaxed">
+        <p className="font-sans text-stone-600 dark:text-stone-400 leading-relaxed">
           {project.intro ?? project.tagline}
-        </p>
-        <p className="font-mono text-xs md:text-sm uppercase tracking-widest text-stone-600 dark:text-stone-400">
-          {[project.category, project.year, project.client]
-            .filter(Boolean)
-            .join(" · ")}
         </p>
       </div>
 
-      {/* External links — only when URLs exist */}
-      {(project.githubUrl || project.liveUrl) && (
-        <div className="flex flex-wrap gap-3">
-          {project.githubUrl && (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-stone-700 dark:text-stone-300 hover:text-primary transition-colors group"
+      {/* Category / tech pills */}
+      <div className="flex flex-wrap gap-2">
+        <span className="font-mono text-[11px] uppercase tracking-wider text-stone-500 dark:text-stone-400 border border-stone-200 dark:border-stone-800 px-2.5 py-1">
+          {project.category}
+        </span>
+        {project.tech?.slice(0, 3).map((t) => (
+          <span
+            key={t}
+            className="font-mono text-[11px] uppercase tracking-wider text-stone-500 dark:text-stone-400 border border-stone-200 dark:border-stone-800 px-2.5 py-1"
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+
+      {/* Action links */}
+      <div className="flex flex-col gap-2">
+        {project.liveUrl && (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-stone-700 dark:text-stone-300 hover:text-primary transition-colors group"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-4 group-hover:translate-x-0.5 transition-transform"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="size-4 group-hover:translate-x-0.5 transition-transform"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12.75 15l3-3m-3-3l3 3m0 0L12 12m3 3l-3 3"
-                />
-              </svg>
-              GitHub
-            </a>
-          )}
-          {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-stone-700 dark:text-stone-300 hover:text-primary transition-colors group"
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13.5 6H5.25a2.25 2.25 0 00-2.25 2.25v12.5A2.25 2.25 0 005.25 23h13.5A2.25 2.25 0 0021 20.75V9a2.25 2.25 0 00-2.25-2.25H13.5"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13.5 6l3-3m0 0v8.25M16.5 3l-3 3"
+              />
+            </svg>
+            Live demo ↗
+          </a>
+        )}
+        {project.githubUrl && (
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-stone-700 dark:text-stone-300 hover:text-primary transition-colors group"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-4 group-hover:translate-x-0.5 transition-transform"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="size-4 group-hover:translate-x-0.5 transition-transform"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M13.5 6H5.25a2.25 2.25 0 00-2.25 2.25v12.5A2.25 2.25 0 005.25 23h13.5A2.25 2.25 0 0021 20.75V9a2.25 2.25 0 00-2.25-2.25H13.5"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M13.5 6l3-3m0 0v8.25M16.5 3l-3 3"
-                />
-              </svg>
-              Live demo
-            </a>
-          )}
-        </div>
-      )}
-    </section>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12.75 15l3-3m-3-3l3 3m0 0L12 12m3 3l-3 3"
+              />
+            </svg>
+            Source ↗
+          </a>
+        )}
+      </div>
+    </div>
   );
 
   // ----------------------------------------------------------------
-  // B. Hero media (telemetry or image/video)
+  // B. Chapter strip (annotated, interactive)
   // ----------------------------------------------------------------
-  const renderHeroMedia = () => {
-    if (project.hasLiveTelemetry) {
-      return (
-        <TelemetryHero
-          prefersReducedMotion={prefersReducedMotion}
-          className="my-6"
-        />
-      );
-    }
-
-    if (project.cover) {
-      const { video, image, poster } = project.cover;
-      return (
-        <div className="relative aspect-[16/9] overflow-hidden bg-white dark:bg-neutral-950 rounded-none mt-6">
-          {video ? (
-            <video
-              src={video}
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              autoPlay={effectiveAutoplay}
-              poster={poster}
-              className="w-full h-full object-cover"
-              aria-label={`${project.name} cover video`}
-            />
-          ) : image ? (
-            <Image
-              src={image}
-              alt={project.heroAlt ?? `${project.name} cover`}
-              fill
-              sizes="100vw"
-              className="object-contain"
-              priority
-            />
-          ) : null}
-        </div>
-      );
-    }
-
-    if (!items.length) return null;
-    const mediaHero = items[0];
+  const renderChapters = () => {
+    const chapters = project.chapters;
+    if (!chapters || chapters.length === 0) return null;
 
     return (
-      <div className={`relative aspect-[16/9] overflow-hidden rounded-none mt-6 p-4 sm:p-6 ${
-        project.bgTheme === "white"
-          ? "bg-white"
-          : project.bgTheme === "dark"
-            ? "bg-black"
-            : project.bgTheme === "transparent"
-              ? "bg-transparent"
-              : "bg-white dark:bg-neutral-950"
-      }`}>
-        {isVideoSrc(mediaHero) ? (
-          project.longFormVideo ? (
-            <CustomVideoPlayer
-              src={mediaHero}
-              title={project.longFormVideoTitle ?? `${project.name} video`}
-              chapters={project.videoChapters}
-              poster={project.heroImage}
-              className="w-full h-full"
-            />
-          ) : (
-            <video
-              src={mediaHero}
-              muted
-              loop
-              playsInline
-              preload="metadata"
-                autoPlay={effectiveAutoplay}
-                className="w-full h-full object-contain"
-                aria-label={`${project.name} demo video`}
-            />
-          )
-        ) : (
-          <Image
-            src={mediaHero}
-            alt={project.heroAlt ?? `${project.name} hero`}
-            fill
-            sizes="100vw"
-            className="object-contain"
-            priority
-          />
-        )}
-      </div>
-    );
-  };
-
-  // ----------------------------------------------------------------
-  // B. Gallery grid
-  // ----------------------------------------------------------------
-  const renderGallery = () => {
-    if (project.galleryHighlights?.length) {
-      const highlights = project.galleryHighlights;
-      return (
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 justify-items-center">
-          {highlights.map((item, index) => (
-            <figure
-              key={index}
-              className={`bg-white dark:bg-neutral-950 ${
-                index === highlights.length - 1 && highlights.length % 2 === 1
-                  ? "col-span-2 md:col-span-1"
-                  : ""
-              }`}
-            >
-              <div className="relative aspect-[4/3] overflow-hidden bg-white dark:bg-neutral-950">
-                {isVideoSrc(item.src) ? (
-                  <video
-                    src={item.src}
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
-                    autoPlay={effectiveAutoplay}
-                    className="w-full h-full object-cover"
-                    aria-label={`${project.name} highlight ${index + 1}`}
-                  />
-                ) : (
-                  <Image
-                    src={item.src}
-                    alt={
-                      item.caption ?? `${project.name} highlight ${index + 1}`
-                    }
-                    fill
-                    sizes="(max-width: 768px) 50vw, 33vw"
-                    className="object-cover"
-                  />
-                )}
-              </div>
-              {item.caption && (
-                <figcaption className="px-3 py-2 font-mono text-[11px] uppercase tracking-wider text-stone-500 dark:text-stone-400">
-                  {item.caption}
-                </figcaption>
-              )}
-            </figure>
-          ))}
-        </div>
-      );
-    }
-
-    const galleryItems = items.slice(1);
-    if (galleryItems.length === 0) return null;
-
-    const bgClass =
-      project.bgTheme === "white"
-        ? "bg-white"
-        : project.bgTheme === "dark"
-          ? "bg-black"
-          : project.bgTheme === "transparent"
-            ? "bg-transparent"
-            : "bg-stone-50 dark:bg-stone-950";
-
-    return (
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-white dark:bg-neutral-950">
-        {galleryItems.map((src, index) => (
-          <div
-            key={index}
-            className={`relative aspect-[4/3] ${bgClass} overflow-hidden p-4 sm:p-6`}
+      <div className="flex border-b border-stone-200 dark:border-stone-800">
+        {chapters.map((chapter, index) => (
+          <button
+            key={chapter.id}
+            onClick={() => setActiveChapter(index)}
+            className={`
+              flex-1 px-4 py-3 font-mono text-xs uppercase tracking-wider
+              border-b-2 transition-colors
+              ${activeChapter === index
+                ? "border-primary text-stone-900 dark:text-stone-100"
+                : "border-transparent text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100"
+              }
+            `}
           >
-            {isVideoSrc(src) ? (
-              <video
-                src={src}
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                autoPlay={effectiveAutoplay}
-                className="w-full h-full object-contain"
-                aria-label={`${project.name} footage ${index + 2}`}
-              />
-            ) : (
-              <Image
-                src={src}
-                alt={
-                  project.galleryAlts?.[index] ??
-                  `${project.name} screenshot ${index + 2}`
-                }
-                fill
-                sizes="(max-width: 768px) 50vw, 33vw"
-                className="object-contain"
-              />
-            )}
-          </div>
+            {chapter.label}
+          </button>
         ))}
       </div>
     );
@@ -408,7 +254,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                           playsInline
                           preload="metadata"
                           autoPlay={effectiveAutoplay}
-                          className="w-full aspect-[16/9] object-cover"
+                          className="w-full aspect-[16/9] object-contain"
                           aria-label={`${project.name} - ${feature.title}`}
                         />
                       ) : Array.isArray(feature.media) &&
@@ -450,7 +296,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                             }
                             fill
                             sizes="100vw"
-                            className="object-cover"
+className="object-contain"
                           />
                         </div>
                       ),
@@ -574,6 +420,15 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
             {project.results.summary}
           </p>
         )}
+        {project.result && project.result.length > 0 && (
+          <ul className="space-y-2 mb-6">
+            {project.result.map((r, i) => (
+              <li key={i} className="font-sans text-stone-700 dark:text-stone-300 leading-relaxed">
+                {r}
+              </li>
+            ))}
+          </ul>
+        )}
         {hasMetrics && (
           <div className="mt-6 overflow-x-auto">
             <table className="w-full text-left border-collapse">
@@ -671,7 +526,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
   };
 
   // ----------------------------------------------------------------
-  // E. Technical Details
+  // G. Technical Details
   // ----------------------------------------------------------------
   const renderTech = () => {
     if (!project.tech || project.tech.length === 0) return null;
@@ -682,7 +537,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
         : [{ title: "Stack", items: project.tech }];
 
     return (
-      <section className="  ">
+      <section className="mt-12 md:mt-16 lg:mt-20">
         <h2 className="font-display text-2xl md:text-3xl font-bold text-stone-900 dark:text-stone-100 mb-6">
           Technologies used
         </h2>
@@ -812,7 +667,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
   };
 
   // ----------------------------------------------------------------
-  // F. Navigation & related projects
+  // H. Navigation & related projects
   // ----------------------------------------------------------------
   const renderNavigation = () => (
     <section className="mt-12 md:mt-16 lg:mt-20 border-t border-stone-200 dark:border-stone-800 pt-8">
@@ -872,18 +727,14 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
         <Button variant="secondary" onClick={onBack}>
           See all projects
         </Button>
-        {hasAutoplayVideos && (
+        {hasAutoplayVideos && !prefersReducedMotion && (
           <Button
             variant="primary"
             onClick={() => setAutoplayEnabled((v) => !v)}
             aria-pressed={autoplayEnabled}
             suppressHydrationWarning
           >
-            {prefersReducedMotion
-              ? "Reduced motion active"
-              : autoplayEnabled
-                ? "Disable autoplay"
-                : "Enable autoplay"}
+            {autoplayEnabled ? "Disable autoplay" : "Enable autoplay"}
           </Button>
         )}
       </div>
@@ -893,36 +744,46 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
   return (
     <section className="section">
       <div className="container">
-        {/* A. Header */}
-        {renderHeader()}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+          {/* A. Left — Sticky Meta Rail */}
+          <aside className="lg:col-span-4">
+            <div className="sticky top-24 self-start space-y-8">
+              {renderHeader()}
+            </div>
+          </aside>
 
-        {/* B. Visuals (telemetry or media) */}
-        {renderHeroMedia()}
-        {renderGallery()}
+          {/* B. Right — Media & Deep Dive */}
+          <main className="lg:col-span-8 space-y-12">
+            {/* B1. Media Showcase */}
+            {project.hasLiveTelemetry && (
+              <TelemetryHero
+                prefersReducedMotion={prefersReducedMotion}
+                className="my-6"
+              />
+            )}
+            {items.length > 0 && (
+              <MediaCarousel
+                items={items}
+                bgTheme={project.bgTheme}
+                projectName={project.name}
+                heroAlt={project.heroAlt}
+                effectiveAutoplay={effectiveAutoplay}
+                prefersReducedMotion={prefersReducedMotion}
+              />
+            )}
+            {renderChapters()}
 
-        {/* C. What I Built */}
-        {renderBuilt()}
-
-        {/* Optional: The Problem */}
-        {renderProblem()}
-
-        {/* Optional: Solution (with features) */}
-        {renderSolution()}
-
-        {/* Optional: Architecture */}
-        {renderArchitecture()}
-
-        {/* E. Results (with metrics table) */}
-        {renderResults()}
-
-        {/* F. Team & Credits */}
-        {renderTeam()}
-
-        {/* E. Technical Details */}
-        {renderTech()}
-
-        {/* F. Navigation */}
-        {renderNavigation()}
+            {/* B2. Content Sections */}
+            {renderBuilt()}
+            {renderProblem()}
+            {renderSolution()}
+            {renderArchitecture()}
+            {renderResults()}
+            {renderTeam()}
+            {renderTech()}
+            {renderNavigation()}
+          </main>
+        </div>
 
         {/* Loading overlay while switching projects */}
         {isSwitching && (
