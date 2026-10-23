@@ -23,7 +23,7 @@ const WorkPage: FC = () => {
       return listedProjects;
     }
     return listedProjects.filter(
-      (project) => project.category === activeCategory
+      (project) => project.category === activeCategory,
     );
   }, [activeCategory]);
 
@@ -40,7 +40,7 @@ const WorkPage: FC = () => {
             className="mb-12 md:mb-16"
           >
             <h1 className="font-display text-statement font-bold mb-6">
-              Creating next level <br /> digital products
+              Projects
             </h1>
           </motion.div>
 
@@ -70,16 +70,16 @@ const WorkPage: FC = () => {
                 >
                   {category}
 
-                    {/* Count */}
-                    <span
-                      className={`ml-2 font-mono text-xs tracking-wider ${
-                        activeCategory === category
-                          ? "text-primary"
-                          : "text-stone-500 dark:text-stone-400"
-                      }`}
-                    >
-                      {categoryCounts[category]}
-                    </span>
+                  {/* Count */}
+                  <span
+                    className={`ml-2 font-mono text-xs tracking-wider ${
+                      activeCategory === category
+                        ? "text-primary"
+                        : "text-stone-500 dark:text-stone-400"
+                    }`}
+                  >
+                    {categoryCounts[category]}
+                  </span>
 
                   {activeCategory === category && (
                     <motion.div
@@ -92,28 +92,15 @@ const WorkPage: FC = () => {
                       }}
                     />
                   )}
-                </button>
+</button>
               ))}
             </div>
-
-            {/* Project count */}
-            <motion.p
-              key={activeCategory}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="mt-4 text-sm md:text-base text-stone-600 dark:text-stone-400 transition-colors duration-300"
-            >
-              Showing {filteredProjects.length}{" "}
-              {filteredProjects.length === 1 ? "project" : "projects"}
-              {activeCategory !== "All" && ` in ${activeCategory}`}
-            </motion.p>
           </motion.div>
 
           {/* Projects Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 min-h-[400px] justify-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 min-h-[400px] justify-items-center">
             <AnimatePresence mode="popLayout">
-              {filteredProjects.map((project) => (
+              {filteredProjects.map((project, cardIndex) => (
                 <motion.div
                   key={project.id}
                   layout
@@ -124,21 +111,27 @@ const WorkPage: FC = () => {
                     duration: 0.4,
                     layout: { duration: 0.3 },
                   }}
+                  className="relative"
                 >
+                  <span className="absolute top-3 left-3 z-10 font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 bg-white/70 dark:bg-neutral-900/70 px-2 py-1 rounded-none">
+                    {String(cardIndex + 1).padStart(2, "0")}
+                  </span>
                   <Link
                     href={`/projects/${project.id}`}
                     className="group block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-none transition-transform duration-300 hover:-translate-y-1"
                   >
                     {/* Project Image */}
-                    <div className={`relative aspect-[16/10] sm:aspect-[4/3] md:aspect-[3/2] rounded-none overflow-hidden mb-4 transition-colors duration-300 p-4 sm:p-6 ${
-                      project.bgTheme === "white"
-                        ? "bg-white"
-                        : project.bgTheme === "dark"
-                          ? "bg-black"
-                          : project.bgTheme === "transparent"
-                            ? "bg-transparent"
-                            : "bg-white dark:bg-neutral-950"
-                    }`}>
+                    <div
+                      className={`relative aspect-[16/10] sm:aspect-[4/3] md:aspect-[3/2] rounded-none overflow-hidden mb-4 transition-colors duration-300 p-4 sm:p-6 ${
+                        project.bgTheme === "white"
+                          ? "bg-white"
+                          : project.bgTheme === "dark"
+                            ? "bg-black"
+                            : project.bgTheme === "transparent"
+                              ? "bg-transparent"
+                              : "bg-white dark:bg-neutral-950"
+                      }`}
+                    >
                       {project.image && !failedImages.has(project.id) ? (
                         <Image
                           src={project.image}
@@ -146,7 +139,9 @@ const WorkPage: FC = () => {
                           fill
                           className="object-contain transition-transform duration-500 group-hover:scale-105"
                           onError={() =>
-                            setFailedImages((prev) => new Set(prev).add(project.id))
+                            setFailedImages((prev) =>
+                              new Set(prev).add(project.id),
+                            )
                           }
                         />
                       ) : (
