@@ -111,7 +111,7 @@ const WorkPage: FC = () => {
           </motion.div>
 
           {/* Projects Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 min-h-[400px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 min-h-[400px] justify-items-center">
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project) => (
                 <motion.div
@@ -130,7 +130,7 @@ const WorkPage: FC = () => {
                     className="group block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-none transition-transform duration-300 hover:-translate-y-1"
                   >
                     {/* Project Image */}
-                    <div className={`relative aspect-[4/3] rounded-none overflow-hidden mb-4 transition-colors duration-300 p-4 sm:p-6 ${
+                    <div className={`relative aspect-[16/10] sm:aspect-[4/3] md:aspect-[3/2] rounded-none overflow-hidden mb-4 transition-colors duration-300 p-4 sm:p-6 ${
                       project.bgTheme === "white"
                         ? "bg-white"
                         : project.bgTheme === "dark"
@@ -160,10 +160,10 @@ const WorkPage: FC = () => {
 
                     {/* Project Info */}
                     <div className="space-y-2">
-                      <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-semibold group-hover:text-primary transition-colors">
+                      <h3 className="font-display text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold group-hover:text-primary transition-colors">
                         {project.name}
                       </h3>
-                      <p className="hidden sm:block text-sm md:text-base text-stone-600 dark:text-stone-400 line-clamp-2 transition-colors duration-300">
+                      <p className="hidden sm:block text-sm md:text-base text-stone-600 dark:text-stone-400 line-clamp-1 md:line-clamp-2 transition-colors duration-300">
                         {project.tagline}
                       </p>
                     </div>
