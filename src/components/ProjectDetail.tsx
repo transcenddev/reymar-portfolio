@@ -44,12 +44,25 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
 
   const effectiveAutoplay = autoplayEnabled && !prefersReducedMotion;
 
+  // Projects that get the centered-uncropped hero + 3-item breakdown strip
+  const showcaseIds = new Set([
+    "agwasuri",
+    "read-ai-website",
+    "cvsufind",
+    "sp-madrid-ai-multimedia",
+  ]);
+  const isShowcase = showcaseIds.has(project.id);
+
   const items = useMemo(() => {
     const arr = Array.isArray(project.images) ? project.images : [];
     return arr.filter(Boolean) as string[];
   }, [project.images]);
 
   const hasAutoplayVideos = !project.longFormVideo && items.some(isVideoSrc);
+
+  // Canvas background for showcase assets
+  const canvasBg =
+    project.bgTheme === "dark" ? "bg-[#050505]" : "bg-white";
 
   // Deduplicated related projects (must exist in projectsById)
   const related = useMemo(() => {
@@ -137,7 +150,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     </section>
   );
 
-  // ----------------------------------------------------------------
+// ----------------------------------------------------------------
   // B. Hero media (telemetry or image/video)
   // ----------------------------------------------------------------
   const renderHeroMedia = () => {
@@ -183,6 +196,73 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     if (!items.length) return null;
     const mediaHero = items[0];
 
+    if (isShowcase) {
+      return (
+        <div className="mt-6">
+          {/* Centered cropped hero asset that fills the frame */}
+          <div
+            className={`relative w-full aspect-[16/9] overflow-hidden rounded-none border border-stone-200 dark:border-stone-800 ${canvasBg}`}
+          >
+            {isVideoSrc(mediaHero) ? (
+              project.longFormVideo ? (
+                <CustomVideoPlayer
+                  src={mediaHero}
+                  title={project.longFormVideoTitle ?? `${project.name} video`}
+                  chapters={project.videoChapters}
+                  poster={project.heroImage}
+                  className="w-full h-full"
+                />
+              ) : (
+                <video
+                  src={mediaHero}
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  autoPlay={effectiveAutoplay}
+                  className="w-full h-full object-cover"
+                  aria-label={`${project.name} demo video`}
+                />
+              )
+            ) : (
+              <Image
+                src={mediaHero}
+                alt={project.heroAlt ?? `${project.name} hero`}
+                fill
+                sizes="100vw"
+                className="object-cover"
+                priority
+              />
+            )}
+          </div>
+
+          {/* 3-item process/breakdown strip directly below */}
+          {project.features && project.features.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-stone-200 dark:bg-stone-800 mt-px">
+              {project.features.slice(0, 3).map((feature, index) => (
+                <div
+                  key={index}
+                  className={`p-6 md:p-8 ${canvasBg} border border-stone-200 dark:border-stone-800`}
+                >
+                  <span className="block font-mono text-xs uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-3">
+                    {`0${index + 1}`}
+                  </span>
+                  <h3 className="font-display text-lg md:text-xl font-bold text-stone-900 dark:text-stone-100 mb-2">
+                    {feature.title}
+                  </h3>
+                  {feature.lead && (
+                    <p className="font-sans text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+                      {feature.lead}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      );
+    }
+
     return (
       <div className={`relative aspect-[16/9] overflow-hidden rounded-none mt-6 p-4 sm:p-6 ${
         project.bgTheme === "white"
@@ -209,9 +289,9 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
               loop
               playsInline
               preload="metadata"
-                autoPlay={effectiveAutoplay}
-                className="w-full h-full object-contain"
-                aria-label={`${project.name} demo video`}
+              autoPlay={effectiveAutoplay}
+              className="w-full h-full object-contain"
+              aria-label={`${project.name} demo video`}
             />
           )
         ) : (
@@ -245,7 +325,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
                   : ""
               }`}
             >
-              <div className="relative aspect-square overflow-hidden bg-white dark:bg-neutral-950">
+              <div className="relative aspect-[4/3] overflow-hidden bg-white dark:bg-neutral-950">
                 {isVideoSrc(item.src) ? (
                   <video
                     src={item.src}
@@ -283,8 +363,9 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     const galleryItems = items.slice(1);
     if (galleryItems.length === 0) return null;
 
-    const bgClass =
-      project.bgTheme === "white"
+    const bgClass = isShowcase
+      ? canvasBg
+      : project.bgTheme === "white"
         ? "bg-white"
         : project.bgTheme === "dark"
           ? "bg-black"
@@ -293,11 +374,11 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
             : "bg-stone-50 dark:bg-stone-950";
 
     return (
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-white dark:bg-neutral-950">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-stone-200 dark:bg-stone-800">
         {galleryItems.map((src, index) => (
           <div
             key={index}
-            className={`relative aspect-square ${bgClass} overflow-hidden p-4 sm:p-6`}
+            className={`relative aspect-[4/3] ${bgClass} overflow-hidden rounded-none border border-stone-200 dark:border-stone-800`}
           >
             {isVideoSrc(src) ? (
               <video
