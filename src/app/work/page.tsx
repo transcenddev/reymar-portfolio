@@ -59,7 +59,7 @@ const WorkPage: FC = () => {
                   onClick={() => setActiveCategory(category)}
                   className={`
                     px-4 md:px-6 py-2 md:py-3 rounded-none text-sm md:text-base font-medium
-                    transition-colors duration-200 relative
+                    transition-colors duration-200 relative whitespace-nowrap
                     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2
                     ${
                       activeCategory === category
@@ -68,7 +68,7 @@ const WorkPage: FC = () => {
                     }
                   `}
                 >
-{category === "All" ? "00 / All" : category}
+                  {category}
 
                   {/* Count */}
                   <span
