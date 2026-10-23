@@ -68,7 +68,7 @@ const WorkPage: FC = () => {
                     }
                   `}
                 >
-                  {category}
+{category === "All" ? "00 / All" : category}
 
                   {/* Count */}
                   <span
