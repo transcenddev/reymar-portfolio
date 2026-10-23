@@ -297,7 +297,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
         {galleryItems.map((src, index) => (
           <div
             key={index}
-            className={`relative aspect-[4/3] ${bgClass} overflow-hidden p-4 sm:p-6`}
+            className={`relative ${index === 0 ? "col-span-2 aspect-[16/9]" : "aspect-[4/3]"} ${bgClass} overflow-hidden p-4 sm:p-6`}
           >
             {isVideoSrc(src) ? (
               <video
