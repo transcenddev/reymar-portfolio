@@ -44,9 +44,13 @@ const Hero: FC = () => {
               className="sm:block text-lg text-stone-600 dark:text-stone-400 max-w-xl animate-fade-up"
               style={{ animationDelay: "200ms" }}
             >
-              I&apos;m a software developer and content creator. I help
-              businesses and individuals build software, automate processes, and
-              create content that engages their audience.
+              {/* I&apos;m a creative software developer. I help businesses and
+              individuals build software, automate processes to save time and
+              money */}
+
+              I build software and practical automations that help businesses
+              simplify operations, improve customer experiences, and scale more
+              efficiently.
             </p>
 
             <div

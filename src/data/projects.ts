@@ -6,12 +6,13 @@
 
 export const categories = [
   "All",
+  "AI",
+  "Automation",
+  "Branding",
+  "Content Creation",
+  "Documentation",
   "Web Design",
   "Web Development",
-  "Branding & Visual Identity",
-  "Content Creation",
-  "Automation & AI",
-  "Documentation",
 ] as const;
 
 export type Category = (typeof categories)[number];
@@ -171,8 +172,9 @@ export const projects: Project[] = [
     tagline: "AI-driven multimedia presentation for SP Madrid's heritage",
     intro:
       "AI-driven multimedia presentation that turned 50+ historical photos into animation emotionally resonant video narratives for SP Madrid's heritage.",
-    image: "/assets/images/works/sp_madrid_ai/sp_madrid_ai_media_sample_1.png",
-    category: "Automation & AI",
+    image:
+      "/assets/images/works/sp_madrid_ai/sp_madrid_ai_media_sample_1_thumbnail.png",
+    category: "AI",
     featured: true,
     client: "SP Madrid",
     services:
@@ -295,8 +297,8 @@ export const projects: Project[] = [
     id: "covid-health-declaration",
     name: "COVID-19 Health Declaration System",
     tagline: "Full-stack health screening platform with real-time analytics",
-     intro:
-       "Built a full-stack health declaration platform for secure, real-time COVID-19 facility screening.",
+    intro:
+      "Built a full-stack health declaration platform for secure, real-time COVID-19 facility screening.",
     image:
       "/assets/images/works/covid_19_health_declaration_system/covid_hero.png",
     category: "Web Development",
@@ -505,8 +507,8 @@ export const projects: Project[] = [
       "A solar-powered IoT and machine-learning system that monitors water quality in real time and recommends suitable aquaculture species for fishpond operators in San Juan I, Ternate, Cavite.",
     image:
       "/assets/images/works/agwasuri/agwasuri_website_photos/agwasuri_dashboard.png",
-    category: "Automation & AI",
-    tags: ["Web Development", "Automation & AI"],
+    category: "Automation",
+    tags: ["Web Development", "Automation"],
     featured: true,
     client: "Municipal Agricultural Office of Ternate",
     services:
@@ -673,7 +675,6 @@ export const projects: Project[] = [
       "/assets/images/works/agwasuri/agwasuri_sensor_controller_components.jpg",
       "/assets/images/works/agwasuri/agwasuri_isometric_diagram_of_the_floating_platform_device_prototype_white_bg.png",
       "/assets/images/works/agwasuri/agwasuri_prototype_fishpond_holding_reymar.jpg",
-      "/assets/images/works/agwasuri/agwasuri_municipal_agricultural_office_reymar_jazrel_1.jpg",
       "/assets/images/works/agwasuri/agwasuri_fishpond_owner_writing_paper_interview.JPG",
       "/assets/images/works/agwasuri/agwasuri_fishpond_prototype_fishpond_owner_jazrel_interview_write_paper.png",
     ],
@@ -759,7 +760,7 @@ export const projects: Project[] = [
     tagline: "Coding-themed t-shirt designs for BSCS students",
     image:
       "/assets/images/works/computer_science_tshirt_design/happines_is_when_your_code_runs_without_error_black.png",
-    category: "Branding & Visual Identity",
+    category: "Branding",
     bgTheme: "dark",
     client: "BSCS",
     services: "Graphic Design, T-Shirt Design, Vector Art",
@@ -780,7 +781,7 @@ export const projects: Project[] = [
     tagline: "Butterfly vector illustration created in Photoshop",
     image:
       "/assets/images/works/butterfly_vector_photoshop/butterfly_vector_photoshop_export.png",
-    category: "Branding & Visual Identity",
+    category: "Branding",
     bgTheme: "white",
     client: "Personal Project",
     services: "Vector Art, Illustration, Photoshop",
@@ -798,7 +799,7 @@ export const projects: Project[] = [
     tagline: "Y2K-inspired black t-shirt and logo designs for Invictus",
     image:
       "/assets/images/works/invictus_tshirt_design/invictus_y2k_black_violet_black.png",
-    category: "Branding & Visual Identity",
+    category: "Branding",
     bgTheme: "dark",
     client: "Invictus",
     services: "T-Shirt Design, Logo Design, Y2K Aesthetic",
@@ -816,7 +817,7 @@ export const projects: Project[] = [
     tagline: "Y2K-inspired white t-shirt designs for Invictus",
     image:
       "/assets/images/works/invictus_tshirt_design/invictus_y2k_white_violet_white.png",
-    category: "Branding & Visual Identity",
+    category: "Branding",
     bgTheme: "white",
     client: "Invictus",
     services: "T-Shirt Design, Logo Design, Y2K Aesthetic",
@@ -834,7 +835,7 @@ export const projects: Project[] = [
     tagline: "White clothing design with Arabic text and girl illustration",
     image:
       "/assets/images/works/white_arabic_text_girl_clothing_design/clothing_design_white_arabic_text_girl.png",
-    category: "Branding & Visual Identity",
+    category: "Branding",
     bgTheme: "white",
     client: "Personal Project",
     services: "Clothing Design, Graphic Design",
@@ -876,21 +877,23 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "agwasuri-poster",
-    name: "Agwasuri Poster",
-    tagline: "Research poster for the Agwasuri fishpond monitoring project",
-    image: "/assets/images/works/agwasuri/agwasuri_poster/agwasuri_poster.png",
-    category: "Branding & Visual Identity",
-    bgTheme: "white",
-    client: "Municipal Agricultural Office of Ternate",
-    services: "Poster Design, Research Presentation",
-    tech: ["Canva", "Photoshop"],
-    images: [
-      "/assets/images/works/agwasuri/agwasuri_poster/agwasuri_poster.png",
-      "/assets/images/works/agwasuri/agwasuri_poster/agwasuri_poster_canva_select_all.png",
-      "/assets/images/works/agwasuri/agwasuri_poster/agwasuri_poster_canva_layer_1.png",
-      "/assets/images/works/agwasuri/agwasuri_poster/agwasuri_poster_canva_layer_2.png",
+    id: "auto-file-sort",
+    name: "Auto File Sort",
+    tagline: "Automated file sorting with Zapier and Google Drive",
+    intro: "Automated file sorting workflow using Zapier and Google Drive.",
+    problem: "Manual file sorting and folder organization wasted time.",
+    built: "Built a Zapier workflow to auto-sort files into Google Drive folders.",
+    result: ["Reduced manual sorting time", "Organized files automatically"],
+    image: "/assets/images/works/auto_sort_file_google_drive/auto_sort_file_google_drive.png",
+    category: "Automation",
+    client: "Self",
+    services: "Automation, Workflow Design",
+    timeline: "Ongoing",
+    tech: ["Zapier", "Google Drive"],
+    techGroups: [
+      { title: "Automation", items: ["Zapier", "Google Drive"] },
     ],
+    images: ["/assets/images/works/auto_sort_file_google_drive/auto_sort_file_google_drive.png"],
   },
 ];
 
@@ -909,22 +912,19 @@ export const projectsById: Record<string, Project> = Object.fromEntries(
 /** Category counts for the Works page filters (based on listed projects). */
 export const categoryCounts: Record<Category, number> = {
   All: listedProjects.length,
+  AI: listedProjects.filter((p) => p.category === "AI").length,
+  Automation: listedProjects.filter((p) => p.category === "Automation").length,
+  "Branding": listedProjects.filter((p) => p.category === "Branding").length,
+  "Content Creation": listedProjects.filter(
+    (p) => p.category === "Content Creation",
+  ).length,
+  Documentation: listedProjects.filter((p) => p.category === "Documentation")
+    .length,
   "Web Design": listedProjects.filter((p) => p.category === "Web Design")
     .length,
   "Web Development": listedProjects.filter(
     (p) => p.category === "Web Development",
   ).length,
-  "Branding & Visual Identity": listedProjects.filter(
-    (p) => p.category === "Branding & Visual Identity",
-  ).length,
-  "Content Creation": listedProjects.filter(
-    (p) => p.category === "Content Creation",
-  ).length,
-  "Automation & AI": listedProjects.filter(
-    (p) => p.category === "Automation & AI",
-  ).length,
-  Documentation: listedProjects.filter((p) => p.category === "Documentation")
-    .length,
 };
 
 /**

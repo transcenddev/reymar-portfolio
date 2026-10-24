@@ -23,7 +23,6 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
   onBack,
 }) => {
   const [isSwitching, setIsSwitching] = useState(false);
-  const [autoplayEnabled, setAutoplayEnabled] = useState(true);
   const [activeChapter, setActiveChapter] = useState(0);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
@@ -39,7 +38,7 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
-  const effectiveAutoplay = autoplayEnabled && !prefersReducedMotion;
+  const effectiveAutoplay = !prefersReducedMotion;
 
   const items = useMemo(() => {
     const arr = Array.isArray(project.images) ? project.images : [];
@@ -48,8 +47,6 @@ const ProjectDetail: FC<ProjectDetailProps> = ({
     if (project.cover?.image) return [project.cover.image, ...base];
     return base;
   }, [project.images, project.cover]);
-
-  const hasAutoplayVideos = !project.longFormVideo && items.some(isVideoSrc);
 
   // Deduplicated related projects (must exist in projectsById)
   const related = useMemo(() => {
@@ -688,32 +685,35 @@ className="object-contain"
                     setIsSwitching(true);
                     onProjectChange(relatedId);
                   }}
-                  className="group block p-4 border border-stone-200 dark:border-stone-800 hover:bg-stone-50 dark:hover:bg-neutral-900 transition-colors"
+                  className="group block p-4 border border-stone-200 dark:border-stone-800 hover:bg-stone-50 dark:hover:bg-neutral-900 transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                   aria-label={`View ${rp ? rp.name : relatedId}`}
                 >
                   <div className="flex items-start gap-4">
                     {rp?.image && (
-                      <div className="relative w-20 h-15 flex-shrink-0 overflow-hidden bg-white dark:bg-neutral-950">
+                      <div className="relative w-24 aspect-[4/3] flex-shrink-0 overflow-hidden bg-white dark:bg-neutral-950">
                         <Image
                           src={rp.image}
                           alt={rp.name}
                           fill
-                          sizes="80px"
-                          className="object-cover"
+                          sizes="96px"
+                          className="object-cover transition-transform duration-200 group-hover:scale-105"
                         />
                       </div>
                     )}
-                    <div className="space-y-1">
+                    <div className="space-y-1 flex-1 min-w-0">
                       <span className="block font-mono text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400">
                         {rp?.category}
                       </span>
-                      <h3 className="font-display text-lg font-bold text-stone-900 dark:text-stone-100 group-hover:text-primary transition-colors">
+                      <h3 className="font-display text-lg font-bold text-stone-900 dark:text-stone-100 group-hover:text-primary transition-colors truncate">
                         {rp ? rp.name : relatedId}
                       </h3>
                       <p className="font-sans text-sm text-stone-600 dark:text-stone-400 line-clamp-2">
                         {rp ? rp.tagline : ""}
                       </p>
                     </div>
+                    <span className="self-center text-stone-400 group-hover:text-primary transition-colors" aria-hidden="true">
+                      →
+                    </span>
                   </div>
                 </Link>
               );
@@ -727,16 +727,6 @@ className="object-contain"
         <Button variant="secondary" onClick={onBack}>
           See all projects
         </Button>
-        {hasAutoplayVideos && !prefersReducedMotion && (
-          <Button
-            variant="primary"
-            onClick={() => setAutoplayEnabled((v) => !v)}
-            aria-pressed={autoplayEnabled}
-            suppressHydrationWarning
-          >
-            {autoplayEnabled ? "Disable autoplay" : "Enable autoplay"}
-          </Button>
-        )}
       </div>
     </section>
   );
